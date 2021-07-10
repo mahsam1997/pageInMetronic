@@ -15,7 +15,7 @@ const languages = [
   {
     lang: "fa",
     name: "فارسی",
-    flag: toAbsoluteUrl("/media/svg/flags/263-iran.svg"),
+    flag: toAbsoluteUrl("/media/svg/flags/136-iran.svg"),
   },
 ];
 
