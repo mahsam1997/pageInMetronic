@@ -6,7 +6,9 @@ import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
-
+import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
+import googleLogo from "../../../Assets/images/google-logo-removebg.png";
+import eysIcon from "../../../Assets/svg/eys.svg";
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -95,12 +97,14 @@ function Login(props) {
   return (
     <div className="login-form login-signin" id="kt_login_signin_form">
       {/* begin::Head */}
-      <div className="text-center mb-10 mb-lg-20">
-        <h3 className="font-size-h1">
-          <FormattedMessage id="AUTH.LOGIN.TITLE" />
+      <div className=" mb-10 mb-lg-10 login-title">
+        <h3 className="font-size-h1 ">
+          {/* <FormattedMessage id="AUTH.LOGIN.TITLE" /> */}
+          به استارتاپ اکادمی خوش آمدید!
         </h3>
-        <p className="text-muted font-weight-bold">
-          Enter your username and password
+        <p className="text-muted ">
+          حساب کاربری ندارید؟
+          <Link to="/login">حساب جدید ایجاد کنید</Link>
         </p>
       </div>
       {/* end::Head */}
@@ -110,22 +114,10 @@ function Login(props) {
         onSubmit={formik.handleSubmit}
         className="form fv-plugins-bootstrap fv-plugins-framework"
       >
-        {formik.status ? (
-          <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-            <div className="alert-text font-weight-bold">{formik.status}</div>
-          </div>
-        ) : (
-          <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
-            <div className="alert-text ">
-              Use account <strong>admin@demo.com</strong> and password{" "}
-              <strong>demo</strong> to continue.
-            </div>
-          </div>
-        )}
-
         <div className="form-group fv-plugins-icon-container">
+          <label>ایمیل</label>
           <input
-            placeholder="Email"
+            placeholder="ایمیل خود را وارد کنید"
             type="email"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
               "email"
@@ -140,41 +132,78 @@ function Login(props) {
           ) : null}
         </div>
         <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Password"
-            type="password"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "password"
-            )}`}
-            name="password"
-            {...formik.getFieldProps("password")}
-          />
+          <label>رمزعبور</label>
+          <div className="input-group">
+            <input
+              placeholder="رمزعبور را وارد کنید"
+              type="password"
+              className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                "password"
+              )}`}
+              name="password"
+              {...formik.getFieldProps("password")}
+            />
+            <span className="input-group-text showPass">
+              <img src={eysIcon} alt="eys icon" />
+            </span>
+          </div>
           {formik.touched.password && formik.errors.password ? (
             <div className="fv-plugins-message-container">
               <div className="fv-help-block">{formik.errors.password}</div>
             </div>
           ) : null}
         </div>
+        <Link
+          to="/auth/forgot-password"
+          // className="text-dark-50 text-hover-primary my-3 mr-2"
+          className="forget-pass"
+          // id="kt_login_forgot"
+        >
+          {/* <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" /> */}
+          رمزعبور را فراموش کرده ام
+        </Link>
+        <br />
+        <br />
+        <div className="d-flex">
+          <Checkbox id="remember-me" />
+          <label className="remember-me" htmlFor="remember-me">
+            مرا به خاطر بسپار
+          </label>
+        </div>
         <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
-          <Link
-            to="/auth/forgot-password"
-            className="text-dark-50 text-hover-primary my-3 mr-2"
-            id="kt_login_forgot"
-          >
-            <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
-          </Link>
           <button
             id="kt_login_signin_submit"
             type="submit"
             disabled={formik.isSubmitting}
             className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
           >
-            <span>Sign In</span>
+            <span>ورود</span>
+            {loading && <span className="ml-3 spinner spinner-white"></span>}
+          </button>
+          <button
+            type="button"
+            className={`btn font-weight-bold px-9 py-4 my-3 login-with-google`}
+          >
+            <img src={googleLogo} alt="google logo" />
+            <span>ورود با گوگل</span>
             {loading && <span className="ml-3 spinner spinner-white"></span>}
           </button>
         </div>
       </form>
       {/*end::Form*/}
+      <div className="login-bottom">
+        <ul>
+          <li className="text-muted">
+            <a href="/contact">ارتباط با ما</a>
+          </li>
+          <li className="text-muted">
+            <a href="/plans">پلن ها</a>
+          </li>
+          <li className="text-muted">
+            <a href="/rules">قوانین</a>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
