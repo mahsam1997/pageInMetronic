@@ -52,17 +52,11 @@ const language =
   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
 const body = document.getElementById("kt_body");
 
-if (language === "en") {
-  require("./index.scss");
-  body.direction = "ltr";
-  body.dir = "ltr";
-  body.style.direction = "ltr";
-} else {
-  require("./sass/style.react.rtl.css");
-  body.direction = "rtl";
-  body.dir = "rtl";
-  body.style.direction = "rtl";
-}
+const isEnglish = language === "en";
+isEnglish ? require("./index.scss") : require("./sass/style.react.rtl.css");
+body.direction = isEnglish ? "ltr" : "rtl";
+body.dir = isEnglish ? "ltr" : "rtl";
+body.style.direction = isEnglish ? "ltr" : "rtl";
 
 ReactDOM.render(
   <MetronicI18nProvider>
