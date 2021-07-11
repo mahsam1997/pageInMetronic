@@ -1,157 +1,152 @@
 .login {
-  background-color: #f3f5f9 !important;
-  font-family: Vazir;
+   background-color: $login_BackColor !important;
 }
 
 .login-aside {
-  color: black;
+   .aside-top {
+      margin-top: 65px;
+      text-align: center;
+   }
 
-  .aside-top {
-    margin-top: 65px;
-    text-align: center;
-  }
+   .aside-logo {
+      width: 98px;
+      height: 69px;
+      object-fit: contain;
+      background-position: center;
+      background-size: cover;
+   }
 
-  .aside-logo {
-    width: 98px;
-    height: 69px;
-    object-fit: contain;
-    background-position: center;
-    background-size: cover;
-  }
+   .aside-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 48px;
+      text-align: center;
+      letter-spacing: -0.03em;
+      color: $login_AsideColor;
+   }
 
-  .aside-title {
-    font-family: Vazir;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 48px;
-    text-align: center;
-    letter-spacing: -0.03em;
-    color: #2f3044;
-  }
-
-  .aside-pic {
-    // width: 20px;
-    // height: 100px;
-    object-fit: contain;
-    background-size: cover;
-    background-position: center;
-  }
+   .aside-pic {
+      object-fit: contain;
+      background-size: cover;
+      background-position: center;
+   }
 }
 
 .login-form {
-  direction: rtl !important;
-  text-align: right;
+   direction: rtl !important;
+   text-align: right;
 
-  h3 {
-    color: #2f3044;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 30px;
-    line-height: 47px;
-    letter-spacing: -0.02em;
-  }
-  p {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 28px;
-  }
-  input {
-    background-color: #ffffff !important;
-    border-radius: 12px;
-  }
-  input[type="password"] {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 12px !important;
-    border-bottom-right-radius: 12px !important;
-  }
-  .showPass {
-    background-color: #ffffff !important;
-    border: none;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-  }
-  label {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 22px;
-  }
+   h3 {
+      color: $login_Title;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 30px;
+      line-height: 47px;
+      letter-spacing: -0.02em;
+   }
+   p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 28px;
+   }
+   input {
+      background-color: $login_InputBack !important;
+      border-radius: 12px;
+   }
+   input.password-input {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 12px !important;
+      border-bottom-right-radius: 12px !important;
+   }
+   .showPass {
+      background-color: $login_InputBack !important;
+      border: none;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+      cursor: pointer;
+   }
+   label {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+   }
 
-  label.remember-me {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 22px;
-    color: rgba(47, 48, 68, 0.8);
-    margin-right: 5px;
-  }
+   label.remember-me {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      color: $login_RememberMeColor;
+      margin-right: 5px;
+   }
 
-  button {
-    width: 100%;
-  }
+   button {
+      width: 100%;
+   }
 
-  .forget-pass {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 22px;
-  }
+   .forget-pass {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+   }
 
-  button[type="button"] {
-    background-color: rgba(27, 197, 189, 0.09);
-    img {
-      width: 25px;
-      height: 25px;
-      background-position: center;
-      background-size: cover;
-      object-fit: contain;
-      margin-left: 5px;
-    }
-    &:hover {
-      background-color: rgba(27, 197, 189, 0.2);
-    }
-  }
-
-  button.login-with-google {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 28px;
-    text-align: center;
-    color: #1bc5bd;
-  }
-
-  button#kt_login_signin_submit {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 28px;
-    color: #ffffff;
-  }
-
-  .login-bottom {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    ul {
-      display: flex;
-      position: absolute;
-      bottom: 5px;
-      li {
-        padding-left: 15px;
-        padding-right: 15px;
-        list-style: none;
-        a {
-          color: rgba(167, 168, 187, 0.9);
-          font-style: normal;
-          font-weight: bold;
-          font-size: 16px;
-          line-height: 25px;
-        }
+   button[type="button"] {
+      background-color: $login_WithGoogleBack;
+      img {
+         width: 25px;
+         height: 25px;
+         background-position: center;
+         background-size: cover;
+         object-fit: contain;
+         margin-left: 5px;
       }
-    }
-  }
+      &:hover {
+         background-color: $login_WithGoogleBackHover;
+      }
+   }
+
+   button.login-with-google {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: center;
+      color: $login_WithGoogleColor;
+   }
+
+   button#kt_login_signin_submit {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: $login_SubmitButtonColor;
+   }
+
+   .login-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      ul {
+         display: flex;
+         position: absolute;
+         bottom: 5px;
+         li {
+            padding-left: 15px;
+            padding-right: 15px;
+            list-style: none;
+            a {
+               color: $login_bottomList;
+               font-style: normal;
+               font-weight: bold;
+               font-size: 16px;
+               line-height: 25px;
+            }
+         }
+      }
+   }
 }
