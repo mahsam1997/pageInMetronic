@@ -26,10 +26,12 @@ const initialValues = {
 };
 
 function Login(props) {
+   const [loading, setLoading] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
+
    const { intl } = props;
    console.log(intl);
 
-   const [loading, setLoading] = useState(false);
    const LoginSchema = Yup.object().shape({
       email: Yup.string()
          .email("Wrong email format")
@@ -96,8 +98,6 @@ function Login(props) {
          }, 1000);
       },
    });
-
-   const [showPassword, setShowPassword] = useState(false);
 
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
