@@ -8,7 +8,6 @@ import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
 import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
 import googleLogo from "../../../Assets/images/google-logo-removebg.png";
-import eysIcon from "../../../Assets/svg/eys.svg";
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -96,6 +95,8 @@ function Login(props) {
       },
    });
 
+   const [showPassword, setShowPassword] = useState(false);
+
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
@@ -118,9 +119,13 @@ function Login(props) {
             className="form fv-plugins-bootstrap fv-plugins-framework"
          >
             <div className="form-group fv-plugins-icon-container">
-               <label>ایمیل</label>
+               <label>
+                  <FormattedMessage id="AUTH.INPUT.EMAIL" />
+               </label>
                <input
-                  placeholder="ایمیل خود را وارد کنید"
+                  placeholder={intl.formatMessage({
+                     id: "AUTH.INPUT.EMAIL.PLACE",
+                  })}
                   type="email"
                   className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                      "email"
@@ -135,19 +140,28 @@ function Login(props) {
                ) : null}
             </div>
             <div className="form-group fv-plugins-icon-container">
-               <label>رمزعبور</label>
+               <label>
+                  <FormattedMessage id="AUTH.INPUT.PASSWORD" />
+               </label>
                <div className="input-group">
                   <input
-                     placeholder="رمزعبور را وارد کنید"
-                     type="password"
-                     className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                     placeholder={intl.formatMessage({
+                        id: "AUTH.INPUT.PASSWORD.PLACE",
+                     })}
+                     type={showPassword ? "text" : "password"}
+                     className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                         "password"
                      )}`}
                      name="password"
                      {...formik.getFieldProps("password")}
                   />
                   <span className="input-group-text showPass">
-                     <i className="fas fa-eye" />
+                     <i
+                        className={`fas ${
+                           showPassword ? "fa-eye-slash" : "fa-eye"
+                        }`}
+                        onClick={e => setShowPassword(prev => !prev)}
+                     />
                   </span>
                </div>
                {formik.touched.password && formik.errors.password ? (
@@ -164,15 +178,14 @@ function Login(props) {
                className="forget-pass"
                // id="kt_login_forgot"
             >
-               {/* <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" /> */}
-               رمزعبور را فراموش کرده ام
+               <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
             </Link>
             <br />
             <br />
-            <div className="d-flex">
+            <div className="d-flex align-items-baseline">
                <Checkbox id="remember-me" />
                <label className="remember-me" htmlFor="remember-me">
-                  مرا به خاطر بسپار
+                  <FormattedMessage id="AUTH.LABEL.REMEMBER.ME" />
                </label>
             </div>
             <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
@@ -182,7 +195,7 @@ function Login(props) {
                   disabled={formik.isSubmitting}
                   className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
                >
-                  <span>ورود</span>
+                  <FormattedMessage id="AUTH.LOGIN.BUTTON" tagName="span" />
                   {loading && (
                      <span className="ml-3 spinner spinner-white"></span>
                   )}
@@ -192,7 +205,7 @@ function Login(props) {
                   className={`btn font-weight-bold px-9 py-4 my-3 login-with-google`}
                >
                   <img src={googleLogo} alt="google logo" />
-                  <span>ورود با گوگل</span>
+                  <FormattedMessage id="AUTH.LOGIN.GOOGLE" tagName="span" />
                   {loading && (
                      <span className="ml-3 spinner spinner-white"></span>
                   )}
@@ -203,13 +216,19 @@ function Login(props) {
          <div className="login-bottom">
             <ul>
                <li className="text-muted">
-                  <a href="/contact">ارتباط با ما</a>
+                  <a href="/contact">
+                     <FormattedMessage id="AUTH.GENERAL.CONTACT" />
+                  </a>
                </li>
                <li className="text-muted">
-                  <a href="/plans">پلن ها</a>
+                  <a href="/plans">
+                     <FormattedMessage id="AUTH.GENERAL.PLANS" />
+                  </a>
                </li>
                <li className="text-muted">
-                  <a href="/rules">قوانین</a>
+                  <a href="/rules">
+                     <FormattedMessage id="AUTH.GENERAL.RULES" />
+                  </a>
                </li>
             </ul>
          </div>
