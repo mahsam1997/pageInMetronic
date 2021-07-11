@@ -30,21 +30,50 @@ function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const { intl } = props;
-   console.log(intl);
+   console.log(
+      intl,
+      intl.formatMessage({
+         id: "TEST.FOR.EXAMPLE.Nouns",
+      })
+   );
 
    const LoginSchema = Yup.object().shape({
       email: Yup.string()
-         .email("Wrong email format")
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .email(
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.EMAIL",
+            })
+         )
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
             })
          ),
       password: Yup.string()
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
