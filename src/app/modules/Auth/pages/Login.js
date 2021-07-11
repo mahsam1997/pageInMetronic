@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../_redux/authRedux";
 import { login } from "../_redux/authCrud";
+
+import routes from "../../../router/routes.json";
 import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
 import googleLogo from "../../../Assets/images/google-logo-removebg.png";
 /*
@@ -106,7 +108,7 @@ function Login(props) {
             </h3>
             <p className="text-muted ">
                <FormattedMessage id="AUTH.GENERAL.NO_ACCOUNT" />
-               <Link to="/login">
+               <Link to={routes.REGISTER}>
                   <FormattedMessage id="AUTH.LOGIN.NEW_ACCOUNT" />
                </Link>
             </p>
@@ -173,7 +175,7 @@ function Login(props) {
                ) : null}
             </div>
             <Link
-               to="/auth/forgot-password"
+               to={routes.FORGETPASS}
                // className="text-dark-50 text-hover-primary my-3 mr-2"
                className="forget-pass"
                // id="kt_login_forgot"
