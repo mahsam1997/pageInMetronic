@@ -150,3 +150,12 @@
       }
    }
 }
+
+.form-control.is-valid {
+   background-position: left calc(0.375em + 0.325rem) center;
+   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+}
+.form-control.is-invalid {
+   background-position: left calc(0.375em + 0.325rem) center;
+   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+}
