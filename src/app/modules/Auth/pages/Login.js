@@ -195,7 +195,7 @@ function Login(props) {
                   id="kt_login_signin_submit"
                   type="submit"
                   disabled={formik.isSubmitting}
-                  className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
+                  className={`btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth`}
                >
                   <FormattedMessage id="AUTH.LOGIN.BUTTON" tagName="span" />
                   {loading && (
@@ -204,7 +204,7 @@ function Login(props) {
                </button>
                <button
                   type="button"
-                  className={`btn font-weight-bold px-9 py-4 my-3 login-with-google`}
+                  className={`btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth`}
                >
                   <img src={googleLogo} alt="google logo" />
                   <FormattedMessage id="AUTH.LOGIN.GOOGLE" tagName="span" />
