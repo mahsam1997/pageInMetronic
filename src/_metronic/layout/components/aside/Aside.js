@@ -426,11 +426,11 @@ export function Aside() {
             {/* end::Quick Panel */}
 
             {/* begin::Languages*/}
-            {layoutProps.extrasLanguagesDisplay && <LanguageSelectorDropdown />}
+            {layoutProps.extrasLanguagesDisplay && <LanguageSelectorDropdown overlayPlacement={placement} />}
             {/* end::Languages */}
 
             {/* begin::User*/}
-            {layoutProps.extrasUserDisplay && <QuickUserToggler />}
+            {layoutProps.extrasUserDisplay && <QuickUserToggler overlayPlacement={placement} />}
             {/* end::User */}
           </div>
           {/* end::Footer */}
