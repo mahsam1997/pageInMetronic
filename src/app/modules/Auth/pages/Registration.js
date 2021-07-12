@@ -10,6 +10,8 @@ import { register } from "../_redux/authCrud";
 import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
 import googleLogo from "../../../Assets/images/google-logo-removebg.png";
 
+import useFormatMessage from "../../../hooks/useFormatMessage";
+
 const initialValues = {
    fullName: "",
    email: "",
@@ -29,99 +31,67 @@ function Registration(props) {
       fullName: Yup.string()
          .min(
             3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            useFormatMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: useFormatMessage("AUTH.INPUT.FULLNAME"),
             })
          )
          .max(
             50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            useFormatMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: useFormatMessage("AUTH.INPUT.FULLNAME"),
             })
          )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
       email: Yup.string()
-         .email(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.EMAIL",
-            })
-         )
+         .email(useFormatMessage("AUTH.VALIDATION.EMAIL"))
          .min(
             3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            useFormatMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: useFormatMessage("AUTH.INPUT.PHONE"),
             })
          )
          .max(
             50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            useFormatMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: useFormatMessage("AUTH.INPUT.PHONE"),
             })
          )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
       username: Yup.string()
          .min(
             3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            useFormatMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: useFormatMessage("AUTH.INPUT.EMAIL"),
             })
          )
          .max(
             50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            useFormatMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: useFormatMessage("AUTH.INPUT.EMAIL"),
             })
          )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
       password: Yup.string()
-         .min(
-            3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
-            })
-         )
-         .max(
-            50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
-            })
-         )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .min(3, useFormatMessage("AUTH.VALIDATION.MIN_LENGTH_FIELD"))
+         .max(50, useFormatMessage("AUTH.VALIDATION.MAX_LENGTH_FIELD"))
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
       changePassword: Yup.string()
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         )
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD"))
          .when("password", {
             is: val => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
                [Yup.ref("password")],
-               intl.formatMessage({
-                  id: "AUTH.VALIDATION.CONFIRM_PASS",
-               })
+               useFormatMessage("AUTH.VALIDATION.CONFIRM_PASS")
             ),
          }),
       acceptTerms: Yup.bool().required(
-         intl.formatMessage({
-            id: "AUTH.VALIDATION.AGREEMENT_REQUIRED",
-         })
+         useFormatMessage("AUTH.VALIDATION.AGREEMENT_REQUIRED")
       ),
    });
 
@@ -246,9 +216,7 @@ function Registration(props) {
                   <FormattedMessage id="AUTH.INPUT.FULLNAME" />
                </label>
                <input
-                  placeholder={intl.formatMessage({
-                     id: "AUTH.INPUT.FULLNAME.PLACE",
-                  })}
+                  placeholder={useFormatMessage("AUTH.INPUT.FULLNAME.PLACE")}
                   type="text"
                   className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                      "fullName"
@@ -275,9 +243,7 @@ function Registration(props) {
                <div className="d-flex">
                   <div style={{ width: "80%" }}>
                      <input
-                        placeholder={intl.formatMessage({
-                           id: "AUTH.INPUT.PHONE.PLACE",
-                        })}
+                        placeholder={useFormatMessage("AUTH.INPUT.PHONE.PLACE")}
                         type="text"
                         className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                            "fullName"
@@ -311,9 +277,7 @@ function Registration(props) {
                   <FormattedMessage id="AUTH.INPUT.EMAIL" />
                </label>
                <input
-                  placeholder={intl.formatMessage({
-                     id: "AUTH.INPUT.EMAIL.PLACE",
-                  })}
+                  placeholder={useFormatMessage("AUTH.INPUT.EMAIL.PLACE")}
                   type="email"
                   className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                      "email"
@@ -337,9 +301,9 @@ function Registration(props) {
                </label>
                <div className="input-group">
                   <input
-                     placeholder={intl.formatMessage({
-                        id: "AUTH.REGISTER.PASSWORD.PLACE",
-                     })}
+                     placeholder={useFormatMessage(
+                        "AUTH.REGISTER.PASSWORD.PLACE"
+                     )}
                      type={showPassword ? "text" : "password"}
                      className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                         "password"
