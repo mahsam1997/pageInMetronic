@@ -12,13 +12,14 @@ import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 
+import { useIntl } from "react-intl";
+
 export function Aside() {
   const uiService = useHtmlClassService();
 
-  const language =
-    JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
-  const isEnglish = language === "en";
+  const language = useIntl().locale;
 
+  const isEnglish = language === "en";
   const placement = isEnglish ? "right" : "left";
 
   const layoutProps = useMemo(() => {
@@ -426,11 +427,15 @@ export function Aside() {
             {/* end::Quick Panel */}
 
             {/* begin::Languages*/}
-            {layoutProps.extrasLanguagesDisplay && <LanguageSelectorDropdown overlayPlacement={placement} />}
+            {layoutProps.extrasLanguagesDisplay && (
+              <LanguageSelectorDropdown overlayPlacement={placement} />
+            )}
             {/* end::Languages */}
 
             {/* begin::User*/}
-            {layoutProps.extrasUserDisplay && <QuickUserToggler overlayPlacement={placement} />}
+            {layoutProps.extrasUserDisplay && (
+              <QuickUserToggler overlayPlacement={placement} />
+            )}
             {/* end::User */}
           </div>
           {/* end::Footer */}
