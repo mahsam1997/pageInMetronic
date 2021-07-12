@@ -1,5 +1,5 @@
 .login {
-   background-color: $login_BackColor !important;
+   background-color: $login-back-color !important;
 }
 
 .login-aside {
@@ -23,7 +23,7 @@
       line-height: 48px;
       text-align: center;
       letter-spacing: -0.03em;
-      color: $login_AsideColor;
+      color: $login-aside-color;
    }
 
    .aside-pic {
@@ -38,7 +38,7 @@
    text-align: right;
 
    h3 {
-      color: $login_Title;
+      color: $login-title;
       font-weight: 500;
       font-style: normal;
       font-size: 30px;
@@ -52,7 +52,7 @@
       line-height: 28px;
    }
    input {
-      background-color: $login_InputBack !important;
+      background-color: $login-input-back !important;
       border-radius: 12px;
    }
    input.password-input {
@@ -62,7 +62,7 @@
       border-bottom-right-radius: 12px !important;
    }
    .showPass {
-      background-color: $login_InputBack !important;
+      background-color: $login-input-back !important;
       border: none;
       border-top-left-radius: 12px;
       border-bottom-left-radius: 12px;
@@ -80,7 +80,7 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 22px;
-      color: $login_RememberMeColor;
+      color: $login-remember-me-color;
       margin-right: 5px;
    }
 
@@ -96,7 +96,7 @@
    }
 
    button[type="button"] {
-      background-color: $login_WithGoogleBack;
+      background-color: $login-with-google-back;
       img {
          width: 25px;
          height: 25px;
@@ -106,7 +106,7 @@
          margin-left: 5px;
       }
       &:hover {
-         background-color: $login_WithGoogleBackHover;
+         background-color: $login-with-google-back-hover;
       }
    }
 
@@ -116,7 +116,7 @@
       font-size: 18px;
       line-height: 28px;
       text-align: center;
-      color: $login_WithGoogleColor;
+      color: $login-with-google-color;
    }
 
    button#kt_login_signin_submit {
@@ -124,7 +124,7 @@
       font-weight: bold;
       font-size: 18px;
       line-height: 28px;
-      color: $login_SubmitButtonColor;
+      color: $login-submit-button-color;
    }
 
    .login-bottom {
@@ -140,7 +140,7 @@
             padding-right: 15px;
             list-style: none;
             a {
-               color: $login_bottomList;
+               color: $login-bottom-list;
                font-style: normal;
                font-weight: bold;
                font-size: 16px;

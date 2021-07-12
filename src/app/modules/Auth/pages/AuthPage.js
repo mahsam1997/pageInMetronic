@@ -63,7 +63,11 @@ export function AuthPage() {
                            path={routes.FORGETPASS}
                            component={ForgotPassword}
                         />
-                        <Redirect from="/auth" exact={true} to={routes.LOGIN} />
+                        <Redirect
+                           from={routes.AUTH}
+                           exact={true}
+                           to={routes.LOGIN}
+                        />
                         <Redirect to={routes.LOGIN} />
                      </Switch>
                   </div>

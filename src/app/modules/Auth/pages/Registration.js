@@ -11,52 +11,99 @@ import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbo
 import googleLogo from "../../../Assets/images/google-logo-removebg.png";
 
 const initialValues = {
-   fullname: "",
+   fullName: "",
    email: "",
    username: "",
    password: "",
-   changepassword: "",
+   changePassword: "",
    acceptTerms: false,
 };
 
 function Registration(props) {
-   const { intl } = props;
    const [loading, setLoading] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
+
+   const { intl } = props;
+
    const RegistrationSchema = Yup.object().shape({
-      fullname: Yup.string()
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+      fullName: Yup.string()
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
             })
          ),
       email: Yup.string()
-         .email("Wrong email format")
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .email(
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.EMAIL",
+            })
+         )
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
             })
          ),
       username: Yup.string()
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
             })
          ),
       password: Yup.string()
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .min(
+            3,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            })
+         )
+         .max(
+            50,
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
             })
          ),
-      changepassword: Yup.string()
+      changePassword: Yup.string()
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
@@ -66,11 +113,15 @@ function Registration(props) {
             is: val => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
                [Yup.ref("password")],
-               "Password and Confirm Password didn't match"
+               intl.formatMessage({
+                  id: "AUTH.VALIDATION.CONFIRM_PASS",
+               })
             ),
          }),
       acceptTerms: Yup.bool().required(
-         "You must accept the terms and conditions"
+         intl.formatMessage({
+            id: "AUTH.VALIDATION.AGREEMENT_REQUIRED",
+         })
       ),
    });
 
@@ -102,7 +153,7 @@ function Registration(props) {
          enableLoading();
          register(
             values.email,
-            values.fullname,
+            values.fullName,
             values.username,
             values.password
          )
@@ -122,8 +173,6 @@ function Registration(props) {
             });
       },
    });
-
-   const [showPassword, setShowPassword] = useState(false);
 
    const options = [
       { value: 1, label: "+98" },
@@ -193,7 +242,7 @@ function Registration(props) {
 
             {/* begin: Fullname */}
             <div className="form-group fv-plugins-icon-container">
-               <label htmlFor="fullname">
+               <label htmlFor="fullName">
                   <FormattedMessage id="AUTH.INPUT.FULLNAME" />
                </label>
                <input
@@ -202,16 +251,16 @@ function Registration(props) {
                   })}
                   type="text"
                   className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                     "fullname"
+                     "fullName"
                   )}`}
-                  name="fullname"
-                  id="fullname"
-                  {...formik.getFieldProps("fullname")}
+                  name="fullName"
+                  id="fullName"
+                  {...formik.getFieldProps("fullName")}
                />
-               {formik.touched.fullname && formik.errors.fullname ? (
+               {formik.touched.fullName && formik.errors.fullName ? (
                   <div className="fv-plugins-message-container">
                      <div className="fv-help-block">
-                        {formik.errors.fullname}
+                        {formik.errors.fullName}
                      </div>
                   </div>
                ) : null}
@@ -231,15 +280,15 @@ function Registration(props) {
                         })}
                         type="text"
                         className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                           "fullname"
+                           "fullName"
                         )}`}
-                        name="fullname"
-                        {...formik.getFieldProps("fullname")}
+                        name="fullName"
+                        {...formik.getFieldProps("fullName")}
                      />
-                     {formik.touched.fullname && formik.errors.fullname ? (
+                     {formik.touched.fullName && formik.errors.fullName ? (
                         <div className="fv-plugins-message-container">
                            <div className="fv-help-block">
-                              {formik.errors.fullname}
+                              {formik.errors.fullName}
                            </div>
                         </div>
                      ) : null}
