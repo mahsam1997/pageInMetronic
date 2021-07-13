@@ -16,8 +16,9 @@ import { register } from "../../../../services/auth.service";
 // utils
 import { setAuthenticate } from "../../../../utils/authenticate";
 import formatMessage from "../../../../utils/formatMessage";
+import getInputClasses from "../../../../utils/getInputClasses";
 
-import schema from "./schema";
+import schema from "./registerSchema";
 import phonePrefixOptions from "../../../../enums/phonePrefixOptions";
 
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
@@ -47,18 +48,6 @@ function Registration(props) {
 
    const disableLoading = () => {
       setLoading(false);
-   };
-
-   const getInputClasses = (formik, fieldname) => {
-      if (formik.touched[fieldname] && formik.errors[fieldname]) {
-         return "is-invalid";
-      }
-
-      if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-         return "is-valid";
-      }
-
-      return "";
    };
 
    const onSubmit = (
