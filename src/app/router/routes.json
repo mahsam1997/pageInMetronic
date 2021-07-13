@@ -1,8 +1,8 @@
 {
    "AUTH": "/auth",
-   "LOGIN": "/api/auth/login",
-   "REGISTER": "/api/auth/registration",
-   "FORGETPASS": "/api/auth/forgot-password",
+   "LOGIN": "/auth/login",
+   "REGISTER": "/auth/registration",
+   "FORGETPASS": "/auth/forgot-password",
    "LOGOUT": "/logout",
    "ROOT": "/"
 }

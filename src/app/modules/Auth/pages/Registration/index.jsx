@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useHistory } from "react-router-dom";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 // components
@@ -32,22 +31,12 @@ const initialValues = {
 };
 
 function Registration(props) {
-   const [loading, setLoading] = useState(false);
    const [showPassword, setShowPassword] = useState(false);
 
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
-   const history = useHistory();
 
    const registrationSchema = schema(useFormatMessage);
-
-   const enableLoading = () => {
-      setLoading(true);
-   };
-
-   const disableLoading = () => {
-      setLoading(false);
-   };
 
    const getInputClasses = (formik, fieldname) => {
       if (formik.touched[fieldname] && formik.errors[fieldname]) {
@@ -61,12 +50,13 @@ function Registration(props) {
       return "";
    };
 
-   const onSubmit = async (
-      { email, password, subPhoneNumber, phoneNumber, fullName },
-      { setStatus, setSubmitting }
-   ) => {
-      setSubmitting(true);
-      enableLoading();
+   const onSubmit = async ({
+      email,
+      password,
+      subPhoneNumber,
+      phoneNumber,
+      fullName,
+   }) => {
       const newUser = {
          email,
          password,
@@ -77,16 +67,10 @@ function Registration(props) {
       };
       console.log(newUser);
       const { data } = await register(newUser);
-      if (data.success) {
+      if (data?.success) {
          const { id, refresh, role, token } = data.data;
          setAuthenticate(id, refresh, role, token);
-         disableLoading();
-         setSubmitting(false);
          setIsAuth(true);
-         history.push("/");
-      } else {
-         setSubmitting(false);
-         disableLoading();
       }
    };
 
@@ -263,9 +247,6 @@ function Registration(props) {
                               id="AUTH.GENERAL.REGISTER_BUTTON"
                               tagName="span"
                            />
-                           {loading && (
-                              <span className="ml-3 spinner spinner-white"></span>
-                           )}
                         </button>
 
                         <button
