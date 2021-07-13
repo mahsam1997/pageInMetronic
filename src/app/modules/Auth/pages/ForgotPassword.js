@@ -22,18 +22,6 @@ function ForgotPassword(props) {
                id: "AUTH.VALIDATION.EMAIL",
             })
          )
-         .min(
-            3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
-            })
-         )
-         .max(
-            50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
-            })
-         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
