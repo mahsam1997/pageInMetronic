@@ -59,26 +59,19 @@ function Login(props) {
       setLoading(false);
    };
 
-   const onSubmit = (values, { setStatus, setSubmitting }) => {
+   const onSubmit = async (values, { setSubmitting }) => {
       enableLoading();
-      login(values)
-         .then(({ data }) => {
-            if (data.success) {
-               const { id, refresh, role, token } = data.data;
-               setAuthenticate(id, refresh, role, token);
-               disableLoading();
-               setSubmitting(false);
-               setIsAuth(true);
-               history.push("/");
-            }
-         })
-         .catch(() => {
-            setStatus(formatMessage(intl, "AUTH.VALIDATION.INVALID_LOGIN"));
-         })
-         .finally(() => {
-            disableLoading();
-            setSubmitting(false);
-         });
+      const { data } = await login(values);
+      if (data?.success) {
+         const { id, refresh, role, token } = data.data;
+         setAuthenticate(id, refresh, role, token);
+         disableLoading();
+         setSubmitting(false);
+         setIsAuth(true);
+         history.push("/");
+      }
+      disableLoading();
+      setSubmitting(false);
    };
 
    return (
