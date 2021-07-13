@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -42,36 +42,20 @@ const initialValues = {
 };
 
 function Login(props) {
-   const [loading, setLoading] = useState(false);
    const [showPassword, setShowPassword] = useState(false);
 
    const intl = useIntl();
-   const history = useHistory();
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
 
-   const enableLoading = () => {
-      setLoading(true);
-   };
-
-   const disableLoading = () => {
-      setLoading(false);
-   };
-
    const onSubmit = async (values, { setSubmitting }) => {
-      enableLoading();
       const { data } = await login(values);
       if (data?.success) {
          const { id, refresh, role, token } = data.data;
          setAuthenticate(id, refresh, role, token);
-         disableLoading();
-         setSubmitting(false);
          setIsAuth(true);
-         history.push("/");
       }
-      disableLoading();
-      setSubmitting(false);
    };
 
    return (
@@ -98,7 +82,6 @@ function Login(props) {
             validationSchema={loginSchema}
          >
             {formik => {
-               console.log(formik);
                return (
                   <Form className="form fv-plugins-bootstrap fv-plugins-framework">
                      <div className="form-group fv-plugins-icon-container">
@@ -173,9 +156,6 @@ function Login(props) {
                               id="AUTH.LOGIN.BUTTON"
                               tagName="span"
                            />
-                           {loading && (
-                              <span className="ml-3 spinner spinner-white"></span>
-                           )}
                         </button>
                         <button
                            type="button"
@@ -186,9 +166,6 @@ function Login(props) {
                               id="AUTH.LOGIN.GOOGLE"
                               tagName="span"
                            />
-                           {loading && (
-                              <span className="ml-3 spinner spinner-white"></span>
-                           )}
                         </button>
                      </div>
                   </Form>
