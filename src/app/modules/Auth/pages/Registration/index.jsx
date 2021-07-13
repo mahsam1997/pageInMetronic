@@ -61,7 +61,7 @@ function Registration(props) {
       return "";
    };
 
-   const onSubmit = (
+   const onSubmit = async (
       { email, password, subPhoneNumber, phoneNumber, fullName },
       { setStatus, setSubmitting }
    ) => {
@@ -76,22 +76,18 @@ function Registration(props) {
          },
       };
       console.log(newUser);
-      register(newUser)
-         .then(({ data }) => {
-            if (data.success) {
-               const { id, refresh, role, token } = data.data;
-               setAuthenticate(id, refresh, role, token);
-               disableLoading();
-               setSubmitting(false);
-               setIsAuth(true);
-               history.push("/");
-            }
-         })
-         .catch(() => {
-            setSubmitting(false);
-            setStatus(formatMessage(intl, "AUTH.VALIDATION.INVALID_LOGIN"));
-            disableLoading();
-         });
+      const { data } = await register(newUser);
+      if (data.success) {
+         const { id, refresh, role, token } = data.data;
+         setAuthenticate(id, refresh, role, token);
+         disableLoading();
+         setSubmitting(false);
+         setIsAuth(true);
+         history.push("/");
+      } else {
+         setSubmitting(false);
+         disableLoading();
+      }
    };
 
    return (
@@ -125,16 +121,6 @@ function Registration(props) {
                      id="kt_login_signin_form"
                      className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
                   >
-                     {/* begin: Alert */}
-                     {formik?.status && (
-                        <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-                           <div className="alert-text font-weight-bold">
-                              {formik.status}
-                           </div>
-                        </div>
-                     )}
-                     {/* end: Alert */}
-
                      {/* begin: FullName */}
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="fullName">
