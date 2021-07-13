@@ -1,16 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Switch, Redirect } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-
-// import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
-import { ContentRoute } from "../../../../_metronic/layout";
 import Login from "./Login";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
 
-import routes from "../../../router/routes.json";
+import routes from "../../../router/routes";
 
 import logo from "../../../Assets/images/logo.jpg";
 import pic from "../../../Assets/images/pic-aside.jpg";
@@ -54,12 +51,12 @@ export function AuthPage() {
                   {/* begin::Content body */}
                   <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
                      <Switch>
-                        <ContentRoute path={routes.LOGIN} component={Login} />
-                        <ContentRoute
+                        <Route path={routes.LOGIN} component={Login} />
+                        <Route
                            path={routes.REGISTER}
                            component={Registration}
                         />
-                        <ContentRoute
+                        <Route
                            path={routes.FORGETPASS}
                            component={ForgotPassword}
                         />

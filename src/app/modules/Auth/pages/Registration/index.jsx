@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
-import { connect } from "react-redux";
-import { FormattedMessage, injectIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useHistory } from "react-router-dom";
 
-import * as auth from "../../modules/Auth/_redux/authRedux";
-import { register } from "../../modules/Auth/_redux/authCrud";
-import { Checkbox } from "../../../_metronic/_partials/controls/forms/Checkbox";
-import googleLogo from "../../Assets/images/google-logo-removebg.png";
-
-import useFormatMessage from "../../hooks/useFormatMessage";
-import PhoneSelect from "../PhoneSelect";
-import TextError from "../TextError";
+import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
+// components
+import PhoneSelect from "../../../../components/PhoneSelect";
+import TextError from "../../../../components/common/TextError";
+// hooks
+import useFormatMessage from "../../../../hooks/useFormatMessage";
+// context
+import { AuthenticationContext } from "../../../../context/AuthenticationContext";
+// service
+import { register } from "../../../../services/auth.service";
+// utils
+import { setAuthenticate } from "../../../../utils/authenticate";
+import formatMessage from "../../../../utils/formatMessage";
 
 import schema from "./schema";
+import phonePrefixOptions from "../../../../enums/phonePrefixOptions";
+
+import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 
 const initialValues = {
    fullName: "",
@@ -27,15 +35,9 @@ function Registration(props) {
    const [loading, setLoading] = useState(false);
    const [showPassword, setShowPassword] = useState(false);
 
-   const { intl } = props;
-
-   const formatMessage = (id, enums) =>
-      intl.formatMessage(
-         {
-            id,
-         },
-         enums
-      );
+   const { setIsAuth } = useContext(AuthenticationContext);
+   const intl = useIntl();
+   const history = useHistory();
 
    const registrationSchema = schema(useFormatMessage);
 
@@ -59,28 +61,35 @@ function Registration(props) {
       return "";
    };
 
-   const phoneOptions = [
-      { value: "+98", label: "+98" },
-      { value: "+99", label: "+99" },
-      { value: "+97", label: "+97" },
-   ];
-
-   const onSubmit = (values, { setStatus, setSubmitting }) => {
+   const onSubmit = (
+      { email, password, subPhoneNumber, phoneNumber, fullName },
+      { setStatus, setSubmitting }
+   ) => {
       setSubmitting(true);
       enableLoading();
-      register(values.email, values.fullName, values.username, values.password)
-         .then(({ data: { authToken } }) => {
-            props.register(authToken);
-            disableLoading();
-            setSubmitting(false);
+      const newUser = {
+         email,
+         password,
+         mobile: `${subPhoneNumber}${phoneNumber}`,
+         profile: {
+            fullName,
+         },
+      };
+      console.log(newUser);
+      register(newUser)
+         .then(({ data }) => {
+            if (data.success) {
+               const { id, refresh, role, token } = data.data;
+               setAuthenticate(id, refresh, role, token);
+               disableLoading();
+               setSubmitting(false);
+               setIsAuth(true);
+               history.push("/");
+            }
          })
          .catch(() => {
             setSubmitting(false);
-            setStatus(
-               intl.formatMessage({
-                  id: "AUTH.VALIDATION.INVALID_LOGIN",
-               })
-            );
+            setStatus(formatMessage(intl, "AUTH.VALIDATION.INVALID_LOGIN"));
             disableLoading();
          });
    };
@@ -133,6 +142,7 @@ function Registration(props) {
                         </label>
                         <Field
                            placeholder={formatMessage(
+                              intl,
                               "AUTH.INPUT.FULLNAME.PLACE"
                            )}
                            type="text"
@@ -156,6 +166,7 @@ function Registration(props) {
                            <div style={{ width: "80%" }}>
                               <Field
                                  placeholder={formatMessage(
+                                    intl,
                                     "AUTH.INPUT.PHONE.PLACE"
                                  )}
                                  type="number"
@@ -171,7 +182,7 @@ function Registration(props) {
                               />
                            </div>
                            <PhoneSelect
-                              options={phoneOptions}
+                              options={phonePrefixOptions}
                               value={subPhoneNumber}
                               onChange={value =>
                                  setFieldValue("subPhoneNumber", value.value)
@@ -191,7 +202,10 @@ function Registration(props) {
                            <FormattedMessage id="AUTH.INPUT.EMAIL" />
                         </label>
                         <Field
-                           placeholder={formatMessage("AUTH.INPUT.EMAIL.PLACE")}
+                           placeholder={formatMessage(
+                              intl,
+                              "AUTH.INPUT.EMAIL.PLACE"
+                           )}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -210,6 +224,7 @@ function Registration(props) {
                         <div className="input-group">
                            <Field
                               placeholder={formatMessage(
+                                 intl,
                                  "AUTH.REGISTER.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
@@ -234,10 +249,6 @@ function Registration(props) {
                      {/* end: Password */}
 
                      <div className="d-flex align-items-baseline">
-                        {/* <Checkbox id="accept-rules" />
-                        <label className="remember-me" htmlFor="accept-rules">
-                           <FormattedMessage id="AUTH.GENERAL.ACCEPT.RULES" />
-                        </label> */}
                         <Checkbox
                            id="accept-rules"
                            isSelected={acceptTerms}
@@ -310,4 +321,4 @@ function Registration(props) {
    );
 }
 
-export default injectIntl(connect(null, auth.actions)(Registration));
+export default Registration;
