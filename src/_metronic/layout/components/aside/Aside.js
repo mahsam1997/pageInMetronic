@@ -12,8 +12,15 @@ import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 
+import { useIntl } from "react-intl";
+
 export function Aside() {
   const uiService = useHtmlClassService();
+
+  const language = useIntl().locale;
+
+  const isEnglish = language === "en";
+  const placement = isEnglish ? "right" : "left";
 
   const layoutProps = useMemo(() => {
     return {
@@ -93,7 +100,7 @@ export function Aside() {
                 title="Latest Project"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="latest-project">Latest Project</Tooltip>
                   }
@@ -129,7 +136,7 @@ export function Aside() {
                 title="Metronic Features"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="metronic-features">Metronic Features</Tooltip>
                   }
@@ -165,7 +172,7 @@ export function Aside() {
                 title="Latest Reports"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="latest-reports">Latest Reports</Tooltip>
                   }
@@ -199,7 +206,7 @@ export function Aside() {
                 title="Project Management"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="project-management">
                       Project Management
@@ -235,7 +242,7 @@ export function Aside() {
                 title="User Management"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="user-management">User Management</Tooltip>
                   }
@@ -267,7 +274,7 @@ export function Aside() {
                 title="Finance & Accounting"
               >
                 <OverlayTrigger
-                  placement="right"
+                  placement={placement}
                   overlay={
                     <Tooltip id="finance-accounting">
                       Finance & Accounting
@@ -304,7 +311,7 @@ export function Aside() {
               layoutProps.asideSelfMinimizeToggle && (
                 <>
                   <OverlayTrigger
-                    placement="right"
+                    placement={placement}
                     overlay={<Tooltip id="toggle-aside">Toggle Aside</Tooltip>}
                   >
                     <span
@@ -321,7 +328,7 @@ export function Aside() {
             {/* begin::Search */}
             {layoutProps.extrasSearchDisplay && (
               <OverlayTrigger
-                placement="right"
+                placement={placement}
                 overlay={<Tooltip id="toggle-search">Quick Search</Tooltip>}
               >
                 <a
@@ -342,7 +349,7 @@ export function Aside() {
             {/* begin::Notifications */}
             {layoutProps.extrasNotificationsDisplay && (
               <OverlayTrigger
-                placement="right"
+                placement={placement}
                 overlay={
                   <Tooltip id="toggle-notifications">Notifications</Tooltip>
                 }
@@ -368,7 +375,7 @@ export function Aside() {
             {/* begin::Quick Actions */}
             {layoutProps.extrasQuickActionsDisplay && (
               <OverlayTrigger
-                placement="right"
+                placement={placement}
                 overlay={
                   <Tooltip id="toggle-quick-actions">Quick Actions</Tooltip>
                 }
@@ -393,7 +400,7 @@ export function Aside() {
             {/* begin::Quick Panel */}
             {layoutProps.extrasQuickPanelDisplay && (
               <OverlayTrigger
-                placement="right"
+                placement={placement}
                 overlay={<Tooltip id="toggle-quick-panel">Quick Panel</Tooltip>}
               >
                 <a
@@ -420,11 +427,15 @@ export function Aside() {
             {/* end::Quick Panel */}
 
             {/* begin::Languages*/}
-            {layoutProps.extrasLanguagesDisplay && <LanguageSelectorDropdown />}
+            {layoutProps.extrasLanguagesDisplay && (
+              <LanguageSelectorDropdown overlayPlacement={placement} />
+            )}
             {/* end::Languages */}
 
             {/* begin::User*/}
-            {layoutProps.extrasUserDisplay && <QuickUserToggler />}
+            {layoutProps.extrasUserDisplay && (
+              <QuickUserToggler overlayPlacement={placement} />
+            )}
             {/* end::User */}
           </div>
           {/* end::Footer */}

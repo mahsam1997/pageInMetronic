@@ -78,7 +78,7 @@ export function getInitLayoutConfig() {
         fixed: {
           mobile: true,
         },
-      }
+      },
     },
     subheader: {
       display: true,
@@ -102,11 +102,11 @@ export function getInitLayoutConfig() {
         fixed: true,
         minimize: {
           toggle: true,
-          default: false
-        }
+          default: false,
+        },
       },
       secondary: {
-        display: true
+        display: true,
       },
       menu: {
         dropdown: false, // ok
@@ -119,7 +119,7 @@ export function getInitLayoutConfig() {
     },
     footer: {
       width: "fixed", // fixed|fluid
-      fixed: false
+      fixed: false,
     },
     extras: {
       search: {
@@ -170,7 +170,7 @@ export function getInitLayoutConfig() {
         },
       },
       languages: {
-        display: false,
+        display: true,
       },
       "quick-panel": {
         display: true,
