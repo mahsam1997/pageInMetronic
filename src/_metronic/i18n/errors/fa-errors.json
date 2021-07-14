@@ -10,7 +10,7 @@
    "AUTH.VALIDATION.MIN_LENGTH_FIELD": "حداقل طول فیلد: 3",
    "AUTH.VALIDATION.MAX_LENGTH_FIELD": "حداکثر طول فیلد: 50",
    "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست",
-   "AUTH.VALIDATION.CONFIRM_PASS": "پسورد مطابقت ندارد",
+   "AUTH.VALIDATION.CONFIRM_PASS": "رمز عبور مطابقت ندارد",
    "REQUIRED": "این فیلد لازم است.",
    "NETWORK_ERROR": "خطا در اتصال به اینترنت ",
    "SEND_EMAIL_FAILED": "ایمیل ارسال نشد.",
