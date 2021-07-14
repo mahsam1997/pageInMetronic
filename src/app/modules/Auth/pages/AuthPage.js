@@ -21,31 +21,6 @@ export function AuthPage() {
                className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white"
                id="kt_login"
             >
-               {/*begin::Aside*/}
-               <div
-                  className="login-aside d-flex flex-column justify-content-between"
-                  style={{
-                     backgroundColor: "#ffffff",
-                  }}
-               >
-                  {/*begin: Aside Container*/}
-                  <div className="d-flex flex-row-fluid flex-column align-items-center">
-                     <div className="aside-top">
-                        <img src={logo} alt="logo" className="aside-logo" />
-
-                        <div className="aside-title">
-                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.1" />
-                           <br />
-                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.2" />
-                        </div>
-                     </div>
-                  </div>
-                  {/*end: Aside Container*/}
-
-                  <img src={pic} alt="aside pic" className="aside-pic" />
-               </div>
-               {/*begin::Aside*/}
-
                {/*begin::Content*/}
                <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
                   {/* begin::Content body */}
@@ -71,6 +46,31 @@ export function AuthPage() {
                   {/*end::Content body*/}
                </div>
                {/*end::Content*/}
+
+               {/*begin::Aside*/}
+               <div
+                  className="login-aside d-flex flex-column justify-content-between"
+                  style={{
+                     backgroundColor: "#ffffff",
+                  }}
+               >
+                  {/*begin: Aside Container*/}
+                  <div className="d-flex flex-row-fluid flex-column align-items-center">
+                     <div className="aside-top">
+                        <img src={logo} alt="logo" className="aside-logo" />
+
+                        <div className="aside-title">
+                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.1" />
+                           <br />
+                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.2" />
+                        </div>
+                     </div>
+                  </div>
+                  {/*end: Aside Container*/}
+
+                  <img src={pic} alt="aside pic" className="aside-pic" />
+               </div>
+               {/*begin::Aside*/}
             </div>
             {/*end::Login*/}
          </div>
