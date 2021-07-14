@@ -12,7 +12,6 @@ import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
-
 import routes from "./router/routes.json";
 
 export function Routes() {
