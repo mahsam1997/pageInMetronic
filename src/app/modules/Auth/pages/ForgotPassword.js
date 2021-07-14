@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Link, Redirect } from "react-router-dom";
-import { useIntl } from "react-intl";
 import * as Yup from "yup";
+import { FormattedMessage } from "react-intl";
+import { requestPassword } from "../_redux/authCrud";
+import routes from "../../../router/routes.json";
 
 const initialValues = {
    email: "",
 };
 
 function ForgotPassword(props) {
-   const intl = useIntl();
+   const { intl } = props;
    const [isRequested, setIsRequested] = useState(false);
    const ForgotPasswordSchema = Yup.object().shape({
       email: Yup.string()
-         .email("Wrong email format")
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
+         .email(
+            intl.formatMessage({
+               id: "AUTH.VALIDATION.EMAIL",
+            })
+         )
          .required(
             intl.formatMessage({
                id: "AUTH.VALIDATION.REQUIRED_FIELD",
@@ -39,33 +43,35 @@ function ForgotPassword(props) {
       initialValues,
       validationSchema: ForgotPasswordSchema,
       onSubmit: (values, { setStatus, setSubmitting }) => {
-         //  requestPassword(values.email)
-         //     .then(() => setIsRequested(true))
-         //     .catch(() => {
-         //        setIsRequested(false);
-         //        setSubmitting(false);
-         //        setStatus(
-         //           intl.formatMessage(
-         //              { id: "AUTH.VALIDATION.NOT_FOUND" },
-         //              { name: values.email }
-         //           )
-         //        );
-         //     });
+         requestPassword(values.email)
+            .then(() => setIsRequested(true))
+            .catch(() => {
+               setIsRequested(false);
+               setSubmitting(false);
+               setStatus(
+                  intl.formatMessage(
+                     { id: "AUTH.VALIDATION.NOT_FOUND" },
+                     { name: values.email }
+                  )
+               );
+            });
       },
    });
 
    return (
       <>
-         {isRequested && <Redirect to="/auth" />}
+         {isRequested && <Redirect to={routes.AUTH} />}
          {!isRequested && (
             <div
                className="login-form login-forgot"
                style={{ display: "block" }}
             >
-               <div className="text-center mb-10 mb-lg-20">
-                  <h3 className="font-size-h1">Forgotten Password ?</h3>
+               <div className="mb-5 mb-lg-10">
+                  <h3 className="font-size-h1">
+                     <FormattedMessage id="AUTH.FORGOT.TITLE" />
+                  </h3>
                   <div className="text-muted font-weight-bold">
-                     Enter your email to reset your password
+                     <FormattedMessage id="AUTH.FORGOT.DESC" />
                   </div>
                </div>
                <form
@@ -80,12 +86,19 @@ function ForgotPassword(props) {
                      </div>
                   )}
                   <div className="form-group fv-plugins-icon-container">
+                     <label htmlFor="email">
+                        <FormattedMessage id="AUTH.INPUT.EMAIL" />
+                     </label>
                      <input
                         type="email"
                         className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                            "email"
                         )}`}
+                        placeholder={intl.formatMessage({
+                           id: "AUTH.INPUT.EMAIL.PLACE",
+                        })}
                         name="email"
+                        id="email"
                         {...formik.getFieldProps("email")}
                      />
                      {formik.touched.email && formik.errors.email ? (
@@ -96,22 +109,22 @@ function ForgotPassword(props) {
                         </div>
                      ) : null}
                   </div>
-                  <div className="form-group d-flex flex-wrap flex-center">
+                  <div className="form-group d-flex ">
                      <button
                         id="kt_login_forgot_submit"
                         type="submit"
-                        className="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
+                        className="btn btn-primary font-weight-bold px-11 py-3 my-3"
                         disabled={formik.isSubmitting}
                      >
-                        Submit
+                        <FormattedMessage id="AUTH.FORGOT.SEND" />
                      </button>
-                     <Link to="/auth">
+                     <Link to={routes.AUTH}>
                         <button
                            type="button"
                            id="kt_login_forgot_cancel"
-                           className="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-4"
+                           className="btn btn-light-primary font-weight-bold px-13 py-3 my-3 mx-4"
                         >
-                           Cancel
+                           <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                         </button>
                      </Link>
                   </div>
