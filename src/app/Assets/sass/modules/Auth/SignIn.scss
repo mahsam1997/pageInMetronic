@@ -1,0 +1,161 @@
+.login {
+   background-color: $login-back-color !important;
+}
+
+.login-aside {
+   .aside-top {
+      margin-top: 65px;
+      text-align: center;
+   }
+
+   .aside-logo {
+      width: 98px;
+      height: 69px;
+      object-fit: contain;
+      background-position: center;
+      background-size: cover;
+   }
+
+   .aside-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 48px;
+      text-align: center;
+      letter-spacing: -0.03em;
+      color: $login-aside-color;
+   }
+
+   .aside-pic {
+      object-fit: contain;
+      background-size: cover;
+      background-position: center;
+   }
+}
+
+.login-form {
+   direction: rtl !important;
+   text-align: right;
+
+   h3 {
+      color: $login-title;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 30px;
+      line-height: 47px;
+      letter-spacing: -0.02em;
+   }
+   p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 28px;
+   }
+   input {
+      background-color: $login-input-back !important;
+      border-radius: 12px;
+   }
+   input.password-input {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 12px !important;
+      border-bottom-right-radius: 12px !important;
+   }
+   .showPass {
+      background-color: $login-input-back !important;
+      border: none;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+      cursor: pointer;
+   }
+   label {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+   }
+
+   label.remember-me {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      color: $login-remember-me-color;
+      margin-right: 5px;
+   }
+
+   button {
+      width: 100%;
+   }
+
+   .forget-pass {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+   }
+
+   button[type="button"] {
+      background-color: $login-with-google-back;
+      img {
+         width: 25px;
+         height: 25px;
+         background-position: center;
+         background-size: cover;
+         object-fit: contain;
+         margin-left: 5px;
+      }
+      &:hover {
+         background-color: $login-with-google-back-hover;
+      }
+   }
+
+   button.login-with-google {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: center;
+      color: $login-with-google-color;
+   }
+
+   button#kt_login_signin_submit {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: $login-submit-button-color;
+   }
+
+   .login-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      ul {
+         display: flex;
+         position: absolute;
+         bottom: 5px;
+         li {
+            padding-left: 15px;
+            padding-right: 15px;
+            list-style: none;
+            a {
+               color: $login-bottom-list;
+               font-style: normal;
+               font-weight: bold;
+               font-size: 16px;
+               line-height: 25px;
+            }
+         }
+      }
+   }
+}
+
+.form-control.is-valid {
+   background-position: left calc(0.375em + 0.325rem) center;
+   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+}
+.form-control.is-invalid {
+   background-position: left calc(0.375em + 0.325rem) center;
+   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+}

@@ -1,0 +1,7 @@
+{
+   "AUTH": "/auth",
+   "LOGIN": "/auth/login",
+   "REGISTER": "/auth/registration",
+   "FORGETPASS": "/auth/forgot-password",
+   "LOGOUT": "/logout"
+}

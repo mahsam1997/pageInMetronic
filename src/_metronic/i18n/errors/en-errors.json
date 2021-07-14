@@ -1,0 +1,13 @@
+{
+   "AUTH.VALIDATION.INVALID": "{name} not valid",
+   "AUTH.VALIDATION.EMAIL": "Wrong email format",
+   "AUTH.VALIDATION.REQUIRED": "{name} is required",
+   "AUTH.VALIDATION.MIN_LENGTH": "{name}} minimum symbols {{min}",
+   "AUTH.VALIDATION.AGREEMENT_REQUIRED": "accepted Terms and Conditions is required",
+   "AUTH.VALIDATION.NOT_FOUND": " {name} not found",
+   "AUTH.VALIDATION.INVALID_LOGIN": "Details is Incorrect",
+   "AUTH.VALIDATION.REQUIRED_FIELD": "this field is required",
+   "AUTH.VALIDATION.MIN_LENGTH_FIELD": "Minimum 3 symbols",
+   "AUTH.VALIDATION.MAX_LENGTH_FIELD": "Maximum 50 symbols",
+   "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست"
+}
