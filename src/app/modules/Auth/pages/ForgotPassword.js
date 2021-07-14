@@ -1,8 +1,27 @@
 import React, { useState } from "react";
-import { useFormik } from "formik";
+import { Form, Formik, ErrorMessage, Field } from "formik";
 import { Link, Redirect } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import { useIntl, FormattedMessage } from "react-intl";
+>>>>>>> forgetpass-api
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
+import routes from "../../../router/routes.json";
+
+// components
+import TextError from "../../../components/common/TextError";
+
+// hooks
+import useFormatMessage from "../../../hooks/useFormatMessage";
+
+// servise
+import { forgotPassword } from "../../../services/auth.service";
+
+// utils
+import getInputClasses from "../../../utils/getInputClasses";
+import formatMessage from "../../../utils/formatMessage";
+
 import routes from "../../../router/routes.json";
 
 const initialValues = {
@@ -12,50 +31,16 @@ const initialValues = {
 function ForgotPassword(props) {
    const { intl } = props;
    const [isRequested, setIsRequested] = useState(false);
-   const ForgotPasswordSchema = Yup.object().shape({
+   const forgotPasswordSchema = Yup.object().shape({
       email: Yup.string()
-         .email(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.EMAIL",
-            })
-         )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .email(useFormatMessage("AUTH.VALIDATION.EMAIL"))
+         .required(useFormatMessage("REQUIRED")),
    });
 
-   const getInputClasses = fieldname => {
-      if (formik.touched[fieldname] && formik.errors[fieldname]) {
-         return "is-invalid";
-      }
-
-      if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-         return "is-valid";
-      }
-
-      return "";
+   const onSubmit = async values => {
+      const { data } = await forgotPassword(values);
+      if (data.success) setIsRequested(true);
    };
-
-   const formik = useFormik({
-      initialValues,
-      validationSchema: ForgotPasswordSchema,
-      onSubmit: (values, { setStatus, setSubmitting }) => {
-         // requestPassword(values.email)
-         //    .then(() => setIsRequested(true))
-         //    .catch(() => {
-         //       setIsRequested(false);
-         //       setSubmitting(false);
-         //       setStatus(
-         //          intl.formatMessage(
-         //             { id: "AUTH.VALIDATION.NOT_FOUND" },
-         //             { name: values.email }
-         //          )
-         //       );
-         //    });
-      },
-   });
 
    return (
       <>
@@ -73,61 +58,61 @@ function ForgotPassword(props) {
                      <FormattedMessage id="AUTH.FORGOT.DESC" />
                   </div>
                </div>
-               <form
-                  onSubmit={formik.handleSubmit}
-                  className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
+               <Formik
+                  initialValues={initialValues}
+                  onSubmit={onSubmit}
+                  validationSchema={forgotPasswordSchema}
                >
-                  {formik.status && (
-                     <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-                        <div className="alert-text font-weight-bold">
-                           {formik.status}
-                        </div>
-                     </div>
-                  )}
-                  <div className="form-group fv-plugins-icon-container">
-                     <label htmlFor="email">
-                        <FormattedMessage id="AUTH.INPUT.EMAIL" />
-                     </label>
-                     <input
-                        type="email"
-                        className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                           "email"
-                        )}`}
-                        placeholder={intl.formatMessage({
-                           id: "AUTH.INPUT.EMAIL.PLACE",
-                        })}
-                        name="email"
-                        id="email"
-                        {...formik.getFieldProps("email")}
-                     />
-                     {formik.touched.email && formik.errors.email ? (
-                        <div className="fv-plugins-message-container">
-                           <div className="fv-help-block">
-                              {formik.errors.email}
+                  {formik => (
+                     <Form className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp">
+                        {formik?.status && (
+                           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
+                              <div className="alert-text font-weight-bold">
+                                 {formik.status}
+                              </div>
                            </div>
+                        )}
+                        <div className="form-group fv-plugins-icon-container">
+                           <label htmlFor="email">
+                              <FormattedMessage id="AUTH.INPUT.EMAIL" />
+                           </label>
+                           <Field
+                              type="email"
+                              className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                 formik,
+                                 "email"
+                              )}`}
+                              placeholder={formatMessage(
+                                 intl,
+                                 "AUTH.INPUT.EMAIL.PLACE"
+                              )}
+                              name="email"
+                              id="email"
+                           />
+                           <ErrorMessage name="email" children={TextError} />
                         </div>
-                     ) : null}
-                  </div>
-                  <div className="form-group d-flex ">
-                     <button
-                        id="kt_login_forgot_submit"
-                        type="submit"
-                        className="btn btn-primary font-weight-bold px-11 py-3 my-3"
-                        disabled={formik.isSubmitting}
-                     >
-                        <FormattedMessage id="AUTH.FORGOT.SEND" />
-                     </button>
-                     <Link to={routes.AUTH}>
-                        <button
-                           type="button"
-                           id="kt_login_forgot_cancel"
-                           className="btn btn-light-primary font-weight-bold px-13 py-3 my-3 mx-4"
-                        >
-                           <FormattedMessage id="AUTH.GENERAL.CANCEL" />
-                        </button>
-                     </Link>
-                  </div>
-               </form>
+                        <div className="form-group d-flex ">
+                           <button
+                              id="kt_login_forgot_submit"
+                              type="submit"
+                              className="btn btn-primary font-weight-bold px-11 py-3 my-3"
+                              disabled={formik.isSubmitting}
+                           >
+                              <FormattedMessage id="AUTH.FORGOT.SEND" />
+                           </button>
+                           <Link to={routes.AUTH}>
+                              <button
+                                 type="button"
+                                 id="kt_login_forgot_cancel"
+                                 className="btn btn-light-primary font-weight-bold px-13 py-3 my-3 mx-4"
+                              >
+                                 <FormattedMessage id="AUTH.GENERAL.CANCEL" />
+                              </button>
+                           </Link>
+                        </div>
+                     </Form>
+                  )}
+               </Formik>
             </div>
          )}
       </>

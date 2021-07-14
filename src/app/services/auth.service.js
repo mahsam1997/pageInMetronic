@@ -9,12 +9,12 @@ const register = newUser => {
    }
 };
 
-const login = user => {
+const forgotPassword = email => {
    try {
-      return http.post(urls.LOGIN, user);
+      return http.post(urls["FORGET.PASSWORD"], email);
    } catch (e) {
       return false;
    }
 };
 
-export { register, login };
+export { register, forgotPassword };
