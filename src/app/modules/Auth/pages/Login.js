@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { connect } from "react-redux";
-import { FormattedMessage, injectIntl } from "react-intl";
-import * as auth from "../_redux/authRedux";
-import { login } from "../_redux/authCrud";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import routes from "../../../router/routes.json";
 import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
@@ -26,16 +23,10 @@ const initialValues = {
 };
 
 function Login(props) {
+   const intl = useIntl();
+
    const [loading, setLoading] = useState(false);
    const [showPassword, setShowPassword] = useState(false);
-
-   const { intl } = props;
-   console.log(
-      intl,
-      intl.formatMessage({
-         id: "TEST.FOR.EXAMPLE.Nouns",
-      })
-   );
 
    const LoginSchema = Yup.object().shape({
       email: Yup.string()
@@ -85,10 +76,6 @@ function Login(props) {
       setLoading(true);
    };
 
-   const disableLoading = () => {
-      setLoading(false);
-   };
-
    const getInputClasses = fieldname => {
       if (formik.touched[fieldname] && formik.errors[fieldname]) {
          return "is-invalid";
@@ -106,25 +93,6 @@ function Login(props) {
       validationSchema: LoginSchema,
       onSubmit: (values, { setStatus, setSubmitting }) => {
          enableLoading();
-         setTimeout(() => {
-            login(values.email, values.password)
-               .then(({ data: { authToken } }) => {
-                  disableLoading();
-
-                  props.login(authToken);
-               })
-               .catch(() => {
-                  setStatus(
-                     intl.formatMessage({
-                        id: "AUTH.VALIDATION.INVALID_LOGIN",
-                     })
-                  );
-               })
-               .finally(() => {
-                  disableLoading();
-                  setSubmitting(false);
-               });
-         }, 1000);
       },
    });
 
@@ -224,7 +192,7 @@ function Login(props) {
                   id="kt_login_signin_submit"
                   type="submit"
                   disabled={formik.isSubmitting}
-                  className={`btn btn-primary font-weight-bold px-9 py-4 my-3`}
+                  className={`btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth`}
                >
                   <FormattedMessage id="AUTH.LOGIN.BUTTON" tagName="span" />
                   {loading && (
@@ -233,7 +201,7 @@ function Login(props) {
                </button>
                <button
                   type="button"
-                  className={`btn font-weight-bold px-9 py-4 my-3 login-with-google`}
+                  className={`btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth`}
                >
                   <img src={googleLogo} alt="google logo" />
                   <FormattedMessage id="AUTH.LOGIN.GOOGLE" tagName="span" />
@@ -267,4 +235,4 @@ function Login(props) {
    );
 }
 
-export default injectIntl(connect(null, auth.actions)(Login));
+export default Login;

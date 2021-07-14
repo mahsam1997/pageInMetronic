@@ -5,39 +5,35 @@
  * components (e.g: `src/app/modules/Auth/pages/AuthPage`, `src/app/BasePage`).
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import routes from "./router/routes.json";
 
+import { AuthenticationContext } from "./context/AuthenticationContext";
+
 export function Routes() {
-   const { isAuthorized } = useSelector(
-      ({ auth }) => ({
-         isAuthorized: auth.user != null,
-      }),
-      shallowEqual
-   );
+   const { isAuth } = useContext(AuthenticationContext);
 
    return (
       <Switch>
-         {!isAuthorized ? (
+         {!isAuth ? (
             /*Render auth page when user at `/auth` and not authorized.*/
             <Route>
                <AuthPage />
             </Route>
          ) : (
             /*Otherwise redirect to root page (`/`)*/
-            <Redirect from={routes.AUTH} to="/" />
+            <Redirect from={routes.AUTH} to={routes.ROOT} />
          )}
 
          <Route path="/error" component={ErrorsPage} />
          <Route path={routes.LOGOUT} component={Logout} />
 
-         {!isAuthorized ? (
+         {!isAuth ? (
             /*Redirect to `/auth` when user is not authorized*/
             <Redirect to={routes.LOGIN} />
          ) : (
