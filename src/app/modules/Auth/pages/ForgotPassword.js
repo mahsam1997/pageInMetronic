@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { FormattedMessage } from "react-intl";
-import { requestPassword } from "../_redux/authCrud";
 import routes from "../../../router/routes.json";
 
 const initialValues = {
@@ -43,18 +42,18 @@ function ForgotPassword(props) {
       initialValues,
       validationSchema: ForgotPasswordSchema,
       onSubmit: (values, { setStatus, setSubmitting }) => {
-         requestPassword(values.email)
-            .then(() => setIsRequested(true))
-            .catch(() => {
-               setIsRequested(false);
-               setSubmitting(false);
-               setStatus(
-                  intl.formatMessage(
-                     { id: "AUTH.VALIDATION.NOT_FOUND" },
-                     { name: values.email }
-                  )
-               );
-            });
+         // requestPassword(values.email)
+         //    .then(() => setIsRequested(true))
+         //    .catch(() => {
+         //       setIsRequested(false);
+         //       setSubmitting(false);
+         //       setStatus(
+         //          intl.formatMessage(
+         //             { id: "AUTH.VALIDATION.NOT_FOUND" },
+         //             { name: values.email }
+         //          )
+         //       );
+         //    });
       },
    });
 

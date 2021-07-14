@@ -1,3 +1,4 @@
 {
-   "REGISTER": "/api/users/register"
+   "REGISTER": "/api/users/register",
+   "LOGIN": "/api/users/login"
 }

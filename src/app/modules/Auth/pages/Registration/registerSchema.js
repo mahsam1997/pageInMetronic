@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const schema = formatMessage => {
+const registerSchema = formatMessage => {
    return Yup.object().shape({
       fullName: Yup.string()
          .min(
@@ -81,4 +81,4 @@ const schema = formatMessage => {
    });
 };
 
-export default schema;
+export default registerSchema;
