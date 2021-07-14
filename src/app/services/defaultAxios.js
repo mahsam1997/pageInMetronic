@@ -1,8 +1,6 @@
 import axios from "axios";
 import errorHandler from "../utils/errorHandler";
 
-import errorHandler from "../utils/errorHandler";
-
 const instance = axios.create();
 const instanceWithAuthorization = axios.create();
 

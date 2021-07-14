@@ -17,4 +17,12 @@ const forgotPassword = email => {
    }
 };
 
-export { register, forgotPassword };
+const login = user => {
+   try {
+      return http.post(urls.LOGIN, user);
+   } catch (e) {
+      return false;
+   }
+};
+
+export { register, forgotPassword, login };

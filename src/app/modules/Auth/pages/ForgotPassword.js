@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import { Link, Redirect } from "react-router-dom";
-<<<<<<< HEAD
-=======
-import { useIntl, FormattedMessage } from "react-intl";
->>>>>>> forgetpass-api
 import * as Yup from "yup";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import routes from "../../../router/routes.json";
 
 // components
@@ -22,14 +18,12 @@ import { forgotPassword } from "../../../services/auth.service";
 import getInputClasses from "../../../utils/getInputClasses";
 import formatMessage from "../../../utils/formatMessage";
 
-import routes from "../../../router/routes.json";
-
 const initialValues = {
    email: "",
 };
 
 function ForgotPassword(props) {
-   const { intl } = props;
+   const intl = useIntl();
    const [isRequested, setIsRequested] = useState(false);
    const forgotPasswordSchema = Yup.object().shape({
       email: Yup.string()

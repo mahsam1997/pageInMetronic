@@ -39,67 +39,67 @@
 //   padding: 0rem 1.5rem 1.75rem !important;
 // }
 .example-highlight > pre {
-  background: none transparent !important;
-  margin: 0 !important;
-  padding-top: 0.5rem;
-  code {
-    overflow-y: auto;
-    display: block;
+   background: none transparent !important;
+   margin: 0 !important;
+   padding-top: 0.5rem;
+   code {
+      overflow-y: auto;
+      display: block;
 
-    span {
-      background: none transparent !important;
-    }
-  }
+      span {
+         background: none transparent !important;
+      }
+   }
 }
 
 .json > pre {
-  background: none #fff !important;
+   background: none #fff !important;
 }
 
 .example-code > .json {
-  background: none #fff !important;
+   background: none #fff !important;
 }
 
 .symbol.symbol-45 > svg {
-  width: 100%;
-  max-width: 45px;
-  height: 45px;
+   width: 100%;
+   max-width: 45px;
+   height: 45px;
 }
 
 .react-bootstrap-table {
-  overflow-x: auto;
+   overflow-x: auto;
 }
 
 .react-bootstrap-table {
-  th {
-    outline: none;
+   th {
+      outline: none;
 
-    &.sortable {
-      .svg-icon-sort {
-        opacity: 0;
+      &.sortable {
+         .svg-icon-sort {
+            opacity: 0;
+         }
+
+         &:hover {
+            cursor: pointer;
+
+            .svg-icon-sort {
+               opacity: 1;
+            }
+         }
       }
+   }
 
-      &:hover {
-        cursor: pointer;
-
-        .svg-icon-sort {
-          opacity: 1;
-        }
+   .table.table-head-custom thead tr {
+      .sortable-active {
+         color: #1bc5bd !important;
       }
-    }
-  }
-
-  .table.table-head-custom thead tr {
-    .sortable-active {
-      color: #1bc5bd !important;
-    }
-  }
+   }
 }
 
 .cursor-default {
-  cursor: default !important;
+   cursor: default !important;
 }
 
 .display-block {
-  display: block;
+   display: block;
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
-import Login from "./Login";
+import Login from "./Login/index";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
