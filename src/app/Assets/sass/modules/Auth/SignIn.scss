@@ -55,14 +55,14 @@
    input.password-input {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-top-right-radius: 12px !important;
-      border-bottom-right-radius: 12px !important;
+      border-top-left-radius: 12px !important;
+      border-bottom-left-radius: 12px !important;
    }
    .showPass {
       background-color: $login-input-back !important;
       border: none;
-      border-top-left-radius: 12px;
-      border-bottom-left-radius: 12px;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
       cursor: pointer;
    }
    label {
@@ -101,6 +101,7 @@
          background-size: cover;
          object-fit: contain;
          margin-left: 5px;
+         margin-right: 5px;
       }
       &:hover {
          background-color: $login-with-google-back-hover;
@@ -149,10 +150,8 @@
 }
 
 .form-control.is-valid {
-   background-position: left calc(0.375em + 0.325rem) center;
-   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+   background-position: right calc(0.375em + 0.325rem) center;
 }
 .form-control.is-invalid {
-   background-position: left calc(0.375em + 0.325rem) center;
-   // background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
+   background-position: right calc(0.375em + 0.325rem) center;
 }
