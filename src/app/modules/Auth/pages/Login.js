@@ -10,6 +10,9 @@ import { login } from "../_redux/authCrud";
 import routes from "../../../router/routes.json";
 import { Checkbox } from "../../../../_metronic/_partials/controls/forms/Checkbox";
 import googleLogo from "../../../Assets/images/google-logo-removebg.png";
+
+import useFormatMessage from "../../../hooks/useFormatMessage";
+
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -32,53 +35,47 @@ function Login(props) {
    const { intl } = props;
    console.log(
       intl,
-      intl.formatMessage({
-         id: "TEST.FOR.EXAMPLE.Nouns",
+      useFormatMessage("INVALID", {
+         x: "Mahdi",
       })
    );
 
+   console.log(useFormatMessage("INVALID", { x: "Mahdi" }));
+
    const LoginSchema = Yup.object().shape({
       email: Yup.string()
-         .email(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.EMAIL",
-            })
-         )
+         .email(useFormatMessage("AUTH.VALIDATION.EMAIL"))
          .min(
             3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            useFormatMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: useFormatMessage("AUTH.LOGIN.TITLE"),
             })
          )
          .max(
             50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            useFormatMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: useFormatMessage("AUTH.LOGIN.TITLE"),
             })
          )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
       password: Yup.string()
          .min(
             3,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MIN_LENGTH_FIELD",
+            useFormatMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: useFormatMessage("AUTH.INPUT.PASSWORD"),
             })
          )
          .max(
             50,
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.MAX_LENGTH_FIELD",
+            useFormatMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: "formik.values.email",
             })
          )
-         .required(
-            intl.formatMessage({
-               id: "AUTH.VALIDATION.REQUIRED_FIELD",
-            })
-         ),
+         .required(useFormatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
    });
 
    const enableLoading = () => {
