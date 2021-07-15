@@ -239,7 +239,7 @@ function Registration(props) {
                               !formik.isValid ||
                               !acceptTerms
                            }
-                           className="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                           className="btn btn-primary font-weight-bold px-10 my-3 "
                         >
                            <FormattedMessage
                               id="AUTH.GENERAL.REGISTER_BUTTON"
