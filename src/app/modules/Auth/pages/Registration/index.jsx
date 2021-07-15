@@ -37,6 +37,8 @@ function Registration(props) {
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
 
+   const isEnglish = intl.locale === "en";
+
    const registrationSchema = schema(useFormatMessage);
 
    const onSubmit = async ({
@@ -191,15 +193,17 @@ function Registration(props) {
                                  "AUTH.REGISTER.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
-                              className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                                 intl,
-                                 formik,
-                                 "password"
-                              )}`}
+                              className={`password-input form-control form-control-solid h-auto py-5 px-6 ${
+                                 isEnglish ? "right" : "left"
+                              } ${getInputClasses(intl, formik, "password")}`}
                               id="password"
                               name="password"
                            />
-                           <span className="input-group-text showPass">
+                           <span
+                              className={`input-group-text showPass ${
+                                 isEnglish ? "right" : "left"
+                              }`}
+                           >
                               <i
                                  className={`fas ${
                                     showPassword ? "fa-eye-slash" : "fa-eye"
