@@ -67,6 +67,8 @@
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
       cursor: pointer;
+      width: 45px;
+      height: 53px;
    }
    label {
       font-style: normal;
@@ -93,6 +95,7 @@
       font-weight: bold;
       font-size: 14px;
       line-height: 22px;
+      user-select: none;
    }
 
    button[type="button"] {

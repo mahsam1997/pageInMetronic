@@ -48,6 +48,7 @@ export function Layout({ children }) {
             {/*begin::Content*/}
             <div
               id="kt_content"
+              style={{minWidth:"160%"}}
               className={`content ${layoutProps.contentCssClasses} d-flex flex-column flex-column-fluid`}
             >
               <AnimateLoading />

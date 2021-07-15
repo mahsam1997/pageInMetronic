@@ -37,3 +37,8 @@ body {
    /*rtl:ignore*/
    background-position: left calc(0.375em + 0.325rem) center;
 }
+
+.fas.fa-eye,
+.fas.fa-eye-slash {
+   user-select: none;
+}
