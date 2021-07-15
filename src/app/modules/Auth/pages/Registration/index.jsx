@@ -146,7 +146,7 @@ function Registration(props) {
                               />
                            </div>
                            <PhoneSelect
-                              options={phonePrefixOptions}
+                              options={phonePrefixOptions(isEnglish)}
                               value={subPhoneNumber}
                               onChange={value =>
                                  setFieldValue("subPhoneNumber", value.value)
