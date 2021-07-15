@@ -1,5 +1,7 @@
 {
    "REGISTER": "/api/users/register",
    "LOGIN": "/api/users/login",
-   "FORGET.PASSWORD": "/api/users/forget-password"
+   "FORGET.PASSWORD": "/api/users/forget-password",
+   "GET_USERS": "/api/users",
+   "DELETE_USERS": "/api/users"
 }
