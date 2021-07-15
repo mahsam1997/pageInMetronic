@@ -46,7 +46,7 @@ const { PUBLIC_URL } = process.env;
  */
 
 const language =
-  JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
+   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
 const body = document.getElementById("kt_body");
 
 const isEnglish = language === "en";
@@ -54,6 +54,7 @@ isEnglish ? require("./index.scss") : require("./sass/style.react.rtl.css");
 body.direction = isEnglish ? "ltr" : "rtl";
 body.dir = isEnglish ? "ltr" : "rtl";
 body.style.direction = isEnglish ? "ltr" : "rtl";
+body.style.textAlign = isEnglish ? "left" : "right";
 
 ReactDOM.render(
    <MetronicI18nProvider>
