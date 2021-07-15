@@ -44,7 +44,7 @@
    "AUTH.VALIDATION.AGREEMENT_REQUIRED": "پذیرش شرایط و ضوابط لازم است",
    "AUTH.VALIDATION.NOT_FOUND": "درخواستی {name} یافت نشد",
    "AUTH.VALIDATION.INVALID_LOGIN": "جزئیات ورود به سیستم نادرست است",
-   "AUTH.VALIDATION.REQUIRED_FIELD": "این قسمت مورد نیاز",
+   "AUTH.VALIDATION.REQUIRED_FIELD": "این فیلد لازم است",
    "AUTH.VALIDATION.MIN_LENGTH_FIELD": "حداقل طول فیلد:",
    "AUTH.VALIDATION.MAX_LENGTH_FIELD": "حداکثر طول فیلد:",
    "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست",
