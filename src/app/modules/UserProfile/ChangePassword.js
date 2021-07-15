@@ -17,9 +17,6 @@ function ChangePassword(props) {
    const saveUser = (values, setStatus, setSubmitting) => {
       setloading(true);
       setisError(false);
-      const updatedUser = Object.assign(user, {
-         password: values.password,
-      });
       // user for update preparation
       // dispatch(props.setUser(updatedUser));
       setTimeout(() => {

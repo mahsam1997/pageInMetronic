@@ -18,7 +18,6 @@ function PersonaInformation(props) {
    // Methods
    const saveUser = (values, setStatus, setSubmitting) => {
       setloading(true);
-      const updatedUser = Object.assign(user, values);
       // user for update preparation
       // dispatch(props.setUser(updatedUser));
       setTimeout(() => {
