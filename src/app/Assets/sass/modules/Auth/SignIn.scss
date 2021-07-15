@@ -56,6 +56,8 @@
       border-radius: 12px;
    }
    input.password-input {
+      /*rtl:ignore*/
+      border-radius: 12px !important;
 
       &.right {
          /*rtl:ignore*/
@@ -90,7 +92,6 @@
 
       cursor: pointer;
       width: 45px;
-      height: 53px;
    }
    label {
       font-style: normal;

@@ -48,6 +48,7 @@
    "AUTH.VALIDATION.MIN_LENGTH_FIELD": "حداقل طول فیلد:",
    "AUTH.VALIDATION.MAX_LENGTH_FIELD": "حداکثر طول فیلد:",
    "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست",
+   "SELECT.LANGUAGE": "زبان خود را انتخاب کنید",
    "ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT": "تعداد سوابق انتخاب شده: ",
    "ECOMMERCE.COMMON.ALL": "همه",
    "ECOMMERCE.COMMON.SUSPENDED": "معلق",
