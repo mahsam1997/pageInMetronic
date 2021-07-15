@@ -10,6 +10,7 @@ const PhoneSelect = ({ options, value, ...props }) => {
          padding: "7px 0",
          borderRadius: "12px",
          marginRight: "10px",
+         marginLeft: "10px",
          border: "none",
          direction: "ltr",
          paddingLeft: 5,
