@@ -19,3 +19,21 @@ body {
    margin-right: 5px;
    margin-left: 5px;
 }
+
+.form-control.is-valid.right {
+   /*rtl:ignore*/
+   background-position: right calc(0.375em + 0.325rem) center;
+}
+.form-control.is-valid.left {
+   /*rtl:ignore*/
+   background-position: left calc(0.375em + 0.325rem) center;
+}
+
+.form-control.is-invalid.right {
+   /*rtl:ignore*/
+   background-position: right calc(0.375em + 0.325rem) center;
+}
+.form-control.is-invalid.left {
+   /*rtl:ignore*/
+   background-position: left calc(0.375em + 0.325rem) center;
+}

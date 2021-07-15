@@ -1,10 +1,12 @@
-const getInputClasses = (formik, fieldname) => {
+const getInputClasses = (intl, formik, fieldname) => {
+   const isEnglish = intl.locale === "en";
+
    if (formik.touched[fieldname] && formik.errors[fieldname]) {
-      return "is-invalid";
+      return `is-invalid ${isEnglish ? "right" : "left"}`;
    }
 
    if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-      return "is-valid";
+      return `is-valid ${isEnglish ? "right" : "left"}`;
    }
 
    return "";

@@ -106,6 +106,7 @@ function Registration(props) {
                            )}
                            type="text"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                              intl,
                               formik,
                               "fullName"
                            )}`}
@@ -130,6 +131,7 @@ function Registration(props) {
                                  )}
                                  type="number"
                                  className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                    intl,
                                     formik,
                                     "phoneNumber"
                                  )}`}
@@ -167,6 +169,7 @@ function Registration(props) {
                            )}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                              intl,
                               formik,
                               "email"
                            )}`}
@@ -188,6 +191,7 @@ function Registration(props) {
                               )}
                               type={showPassword ? "text" : "password"}
                               className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                 intl,
                                  formik,
                                  "password"
                               )}`}

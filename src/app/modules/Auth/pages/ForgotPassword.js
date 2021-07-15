@@ -59,13 +59,6 @@ function ForgotPassword(props) {
                >
                   {formik => (
                      <Form className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp">
-                        {formik?.status && (
-                           <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-                              <div className="alert-text font-weight-bold">
-                                 {formik.status}
-                              </div>
-                           </div>
-                        )}
                         <div className="form-group fv-plugins-icon-container">
                            <label htmlFor="email">
                               <FormattedMessage id="AUTH.INPUT.EMAIL" />
@@ -73,6 +66,7 @@ function ForgotPassword(props) {
                            <Field
                               type="email"
                               className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                 intl,
                                  formik,
                                  "email"
                               )}`}
