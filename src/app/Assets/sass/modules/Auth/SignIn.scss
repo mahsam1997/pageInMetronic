@@ -47,6 +47,9 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 28px;
+      a {
+         margin-left: 4px;
+      }
    }
    input {
       background-color: $login-input-back !important;
