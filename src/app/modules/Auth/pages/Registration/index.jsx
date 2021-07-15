@@ -91,6 +91,7 @@ function Registration(props) {
 
                return (
                   <Form
+                     noValidate="noValidate"
                      id="kt_login_signin_form"
                      className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
                   >

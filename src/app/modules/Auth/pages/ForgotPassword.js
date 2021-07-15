@@ -58,7 +58,10 @@ function ForgotPassword(props) {
                   validationSchema={forgotPasswordSchema}
                >
                   {formik => (
-                     <Form className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp">
+                     <Form
+                        noValidate="noValidate"
+                        className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
+                     >
                         <div className="form-group fv-plugins-icon-container">
                            <label htmlFor="email">
                               <FormattedMessage id="AUTH.INPUT.EMAIL" />

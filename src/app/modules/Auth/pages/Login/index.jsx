@@ -83,7 +83,10 @@ function Login(props) {
          >
             {formik => {
                return (
-                  <Form className="form fv-plugins-bootstrap fv-plugins-framework">
+                  <Form
+                     noValidate="noValidate"
+                     className="form fv-plugins-bootstrap fv-plugins-framework"
+                  >
                      <div className="form-group fv-plugins-icon-container">
                         <label>
                            <FormattedMessage id="AUTH.INPUT.EMAIL" />
