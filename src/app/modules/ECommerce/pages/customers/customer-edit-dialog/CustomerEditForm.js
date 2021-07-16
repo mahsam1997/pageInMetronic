@@ -14,15 +14,17 @@ import {
 
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-   fullName: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required("Firstname is required"),
+   profile: Yup.object().shape({
+      fullName: Yup.string()
+         .min(3, "Minimum 3 symbols")
+         .max(50, "Maximum 50 symbols")
+         .required("Firstname is required"),
+   }),
    email: Yup.string()
       .email("Invalid email")
       .required("Email is required"),
    mobile: Yup.string().required("Username is required"),
-   // role:Yup.string(),
+   subMobile: Yup.string().required("Username is required"),
 });
 
 export function CustomerEditForm({
@@ -31,17 +33,29 @@ export function CustomerEditForm({
    actionsLoading,
    onHide,
 }) {
+   const mobile = customer.mobile.slice(3);
+   const subMobile = customer.mobile.substr(0, 3);
+
+   const initialValues = {
+      mobile,
+      subMobile,
+      profile: {
+         fullName: customer.profile.fullName,
+      },
+      email: customer.email,
+   };
+
    return (
       <>
          <Formik
             enableReinitialize={true}
-            initialValues={customer}
+            initialValues={initialValues}
             validationSchema={CustomerEditSchema}
             onSubmit={values => {
                saveCustomer(values);
             }}
          >
-            {({ handleSubmit }) => (
+            {({ handleSubmit, setFieldValue, setFieldTouched, values }) => (
                <>
                   <Modal.Body className="overlay overlay-block cursor-default">
                      {actionsLoading && (
@@ -54,50 +68,41 @@ export function CustomerEditForm({
                            {/* Full Name */}
                            <div className="col-lg-4">
                               <Field
-                                 name="fullName"
+                                 name="profile.fullName"
                                  component={Input}
                                  placeholder="Full Name"
                                  label="Full Name"
                               />
                            </div>
-                        </div>
-                        <div className="form-group row">
                            {/* Email */}
                            <div className="col-lg-4">
                               <Field
-                                 type="email"
+                                 type="text"
                                  name="email"
                                  component={Input}
                                  placeholder="Email"
                                  label="Email"
                               />
                            </div>
+                        </div>
+                        <div className="form-group row">
+                           {/* Sub Mobile */}
+                           <div className="col-lg-4 ">
+                              <Select name="subMobile" label="sub phone">
+                                 <option>+98</option>
+                                 <option>+97</option>
+                              </Select>
+                           </div>
                            {/* Mobile */}
                            <div className="col-lg-4">
                               <Field
-                                 type="text"
+                                 type="number"
                                  name="mobile"
                                  component={Input}
                                  placeholder="mobile"
                                  label="mobile"
                               />
                            </div>
-                        </div>
-                        <div className="form-group row">
-                           {/* Role */}
-                           <div className="col-lg-4">
-                              <Select name="Role" label="Role">
-                                 <option value="admin">Admin</option>
-                                 <option value="user">User</option>
-                              </Select>
-                           </div>
-                           {/* Type */}
-                           {/* <div className="col-lg-4">
-                         <Select name="type" label="Type">
-                            <option value="0">Business</option>
-                            <option value="1">Individual</option>
-                         </Select>
-                      </div> */}
                         </div>
                      </Form>
                   </Modal.Body>

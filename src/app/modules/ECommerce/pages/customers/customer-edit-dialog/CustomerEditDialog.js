@@ -5,14 +5,20 @@ import { CustomerEditDialogHeader } from "./CustomerEditDialogHeader";
 import { CustomerEditForm } from "./CustomerEditForm";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
-import { getUser } from "../../../../../services/users.service";
+import { getUser, editUser } from "../../../../../services/users.service";
+
+const customerForEditInitialValue = {
+   email: "",
+   mobile: "",
+   profile: {
+      fullName: "",
+   },
+};
 
 export function CustomerEditDialog({ id, show, onHide }) {
-   const [customerForEdit, setCustomerForEdit] = useState({
-      fullName: "Mahdi zoraghi",
-      email: "mahdi@gmail.com",
-      mobile: "+9893302520",
-   });
+   const [customerForEdit, setCustomerForEdit] = useState(
+      customerForEditInitialValue
+   );
    const [loading, setLoading] = useState(false);
 
    // Customers UI Context
@@ -25,24 +31,39 @@ export function CustomerEditDialog({ id, show, onHide }) {
 
    useEffect(() => {
       // server call for getting Customer by id
-      // server call for getting Customer by id
       const getCustomer = async () => {
          const response = await getUser(id);
-         console.log(response);
+         if (response.data.success) {
+            setCustomerForEdit(response.data.data);
+         }
       };
       if (id) {
          getCustomer();
       }
+
+      return () => setCustomerForEdit(customerForEditInitialValue);
    }, [id]);
 
    // server request for saving customer
-   const saveCustomer = customer => {
+   const saveCustomer = async customer => {
+      const user = {
+         profile: {
+            fullName: customer.profile.fullName,
+         },
+         mobile: `${customer.subMobile}${customer.mobile}`,
+         email: customer.email,
+      };
       if (!id) {
          // server request for creating customer
          //  dispatch(actions.createCustomer(customer)).then(() => onHide());
       } else {
          // server request for updating customer
-         //  dispatch(actions.updateCustomer(customer)).then(() => onHide());
+         setLoading(true);
+         const response = await editUser(id, user);
+         setLoading(false);
+         if (response?.data.success) {
+            onHide();
+         }
       }
    };
 
