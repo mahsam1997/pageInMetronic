@@ -1,20 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import { useCustomersUIContext } from "../CustomersUIContext";
-import { deleteUsers } from "../../../../../services/users.service";
+
+import { deleteUser } from "../../../../../services/users.service";
 
 export function CustomerDeleteDialog({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
-
-   // Customers UI Context
-   const customersUIContext = useCustomersUIContext();
-   const customersUIProps = useMemo(() => {
-      return {
-         setIds: customersUIContext.setIds,
-         queryParams: customersUIContext.queryParams,
-      };
-   }, [customersUIContext]);
 
    // if !id we should close modal
    useEffect(() => {
@@ -27,7 +18,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
    const deleteCustomer = async () => {
       // server request for deleting customer by id
       setLoading(true);
-      const response = await deleteUsers(id);
+      const response = await deleteUser(id);
       response?.data?.success && onHide();
       setLoading(false);
    };
