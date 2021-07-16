@@ -6,11 +6,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-   Input,
-   Select,
-   DatePickerField,
-} from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
@@ -55,7 +51,7 @@ export function CustomerEditForm({
                saveCustomer(values);
             }}
          >
-            {({ handleSubmit, setFieldValue, setFieldTouched, values }) => (
+            {({ handleSubmit, values }) => (
                <>
                   <Modal.Body className="overlay overlay-block cursor-default">
                      {actionsLoading && (

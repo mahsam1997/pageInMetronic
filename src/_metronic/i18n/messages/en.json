@@ -71,6 +71,7 @@
    "ECOMMERCE.CUSTOMERS.CUSTOMERS": "Customers",
    "ECOMMERCE.CUSTOMERS.CUSTOMERS_LIST": "Customers list",
    "ECOMMERCE.CUSTOMERS.NEW_CUSTOMER": "New Customer",
+   "ECOMMERCE.CUSTOMERS.EDIT_CUSTOMER": "Edit Customer",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE": "Customer Delete",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.DESCRIPTION": "Are you sure to permanently delete this customer?",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.WAIT_DESCRIPTION": "Customer is deleting...",
@@ -82,5 +83,6 @@
    "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
    "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
    "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+   "ECOMMERCE.CUSTOMERS.DELETE": "Delete"
 }

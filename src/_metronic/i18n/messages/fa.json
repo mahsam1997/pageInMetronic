@@ -63,6 +63,7 @@
    "ECOMMERCE.CUSTOMERS.CUSTOMERS": "مشتری ها",
    "ECOMMERCE.CUSTOMERS.CUSTOMERS_LIST": "لیست مشتریان",
    "ECOMMERCE.CUSTOMERS.NEW_CUSTOMER": "مشتری جدید",
+   "ECOMMERCE.CUSTOMERS.EDIT_CUSTOMER": "ویرایش مشتری",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE": "حذف مشتری",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.DESCRIPTION": "آیا مطمئن هستید که این مشتری را برای همیشه حذف می کنید؟",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.WAIT_DESCRIPTION": "مشتری در حال حذف است...",
@@ -75,6 +76,8 @@
    "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "وضعیت مشتریان انتخاب شده با موفقیت به روز شده است",
    "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "مشتری به روز شده است",
    "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "مشتری ایجاد شده است",
+   "ECOMMERCE.CUSTOMERS.DELETE": "حذف",
+
    "MENU.NEW": "جدید",
    "MENU.ACTIONS": "اقدامات",
    "MENU.CREATE_POST": "ایجاد پست جدید",

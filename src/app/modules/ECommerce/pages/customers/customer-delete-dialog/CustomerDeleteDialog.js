@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-
+import { FormattedMessage } from "react-intl";
 import { deleteUser } from "../../../../../services/users.service";
 
 export function CustomerDeleteDialog({ id, show, onHide }) {
@@ -34,14 +34,20 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
          {/*end::Loading*/}
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               Customer Delete
+               <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE" />
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
             {!loading && (
-               <span>Are you sure to permanently delete this customer?</span>
+               <span>
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.DESCRIPTION" />
+               </span>
             )}
-            {loading && <span>Customer is deleting...</span>}
+            {loading && (
+               <span>
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.WAIT_DESCRIPTION" />
+               </span>
+            )}
          </Modal.Body>
          <Modal.Footer>
             <div>
@@ -50,7 +56,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
                   onClick={onHide}
                   className="btn btn-light btn-elevate"
                >
-                  Cancel
+                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                </button>
                <> </>
                <button
@@ -58,7 +64,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
                   onClick={deleteCustomer}
                   className="btn btn-primary btn-elevate"
                >
-                  Delete
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
                </button>
             </div>
          </Modal.Footer>

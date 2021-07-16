@@ -55,7 +55,6 @@ export function CustomerEditDialog({ id, show, onHide }) {
       };
       if (!id) {
          // server request for creating customer
-         //  dispatch(actions.createCustomer(customer)).then(() => onHide());
       } else {
          // server request for updating customer
          setLoading(true);

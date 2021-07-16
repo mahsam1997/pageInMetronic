@@ -13,6 +13,8 @@ export const CustomersUIConsumer = CustomersUIContext.Consumer;
 export function CustomersUIProvider({ customersUIEvents, children }) {
    const [queryParams, setQueryParamsBase] = useState(initialFilter);
    const [ids, setIds] = useState([]);
+   const [isLoading, setIsLoading] = useState(false);
+
    const setQueryParams = useCallback(nextQueryParams => {
       setQueryParamsBase(prevQueryParams => {
          if (isFunction(nextQueryParams)) {
@@ -28,15 +30,20 @@ export function CustomersUIProvider({ customersUIEvents, children }) {
    }, []);
 
    const initCustomer = {
-      id: undefined,
-      fullName: "",
+      _id: undefined,
+      profile: {
+         fullName: "",
+      },
       email: "",
       mobile: "",
       role: "",
-      status: 0,
+      status: "",
    };
 
    const value = {
+      isLoading,
+      setIsLoading,
+      //
       queryParams,
       setQueryParamsBase,
       ids,
