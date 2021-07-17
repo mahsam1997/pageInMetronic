@@ -3,6 +3,10 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
+import { FormattedMessage, useIntl } from "react-intl";
+
+import formatMessage from "../../../../../utils/formatMessage";
+
 const prepareFilter = (queryParams, values) => {
    const { status, roll, searchText, searchBy } = values;
    const newQueryParams = { ...queryParams };
@@ -21,7 +25,15 @@ const prepareFilter = (queryParams, values) => {
    return newQueryParams;
 };
 
+const fieldsIds = {
+   fullName: "AUTH.INPUT.FULLNAME",
+   mobile: "ECOMMERCE.COMMON.Mobile",
+   email: "ECOMMERCE.COMMON.EMAIL",
+};
+
 export function CustomersFilter({ listLoading }) {
+   const intl = useIntl();
+
    // Customers UI Context
    const customersUIContext = useCustomersUIContext();
    const customersUIProps = useMemo(() => {
@@ -70,7 +82,7 @@ export function CustomersFilter({ listLoading }) {
                         <select
                            className="form-control"
                            name="status"
-                           placeholder="Filter by Status"
+                           // placeholder="Filter by Status"
                            // TODO: Change this code
                            onChange={e => {
                               setFieldValue("status", e.target.value);
@@ -79,18 +91,30 @@ export function CustomersFilter({ listLoading }) {
                            onBlur={handleBlur}
                            value={values.status}
                         >
-                           <option value="">All</option>
-                           <option value="active">Active</option>
-                           <option value="removed">Removed</option>
+                           <option value="">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.ALL")}
+                           </option>
+
+                           <option value="active">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.ACTIVE")}
+                           </option>
+
+                           <option value="removed">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.REMOVED")}
+                           </option>
                         </select>
                         <small className="form-text text-muted">
-                           <b>Filter</b> by Status
+                           <FormattedMessage
+                              id="ECOMMERCE.COMMON.FILTER"
+                              tagName="b"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.BY_STATUS" />
                         </small>
                      </div>
                      <div className="col-lg-2">
                         <select
                            className="form-control"
-                           placeholder="Filter by Roll"
+                           // placeholder="Filter by Roll"
                            name="roll"
                            onBlur={handleBlur}
                            onChange={e => {
@@ -99,12 +123,22 @@ export function CustomersFilter({ listLoading }) {
                            }}
                            value={values.roll}
                         >
-                           <option value="">All</option>
-                           <option value="admin">Admin</option>
-                           <option value="user">User</option>
+                           <option value="">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.ALL")}
+                           </option>
+                           <option value="admin">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.ADMIN")}
+                           </option>
+                           <option value="user">
+                              {formatMessage(intl, "ECOMMERCE.COMMON.USER")}
+                           </option>
                         </select>
                         <small className="form-text text-muted">
-                           <b>Filter</b> by Roll
+                           <FormattedMessage
+                              id="ECOMMERCE.COMMON.FILTER"
+                              tagName="b"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.BY_ROLE" />
                         </small>
                      </div>
                      <div className="col-lg-2">
@@ -112,7 +146,10 @@ export function CustomersFilter({ listLoading }) {
                            type="text"
                            className="form-control"
                            name="searchText"
-                           placeholder="Search"
+                           placeholder={formatMessage(
+                              intl,
+                              "ECOMMERCE.COMMON.SEARCH"
+                           )}
                            onBlur={handleBlur}
                            value={values.searchText}
                            onChange={e => {
@@ -121,7 +158,12 @@ export function CustomersFilter({ listLoading }) {
                            }}
                         />
                         <small className="form-text text-muted">
-                           <b>Search</b> in all fields
+                           <FormattedMessage
+                              tagName="b"
+                              id="ECOMMERCE.COMMON.SEARCH"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.IN" />
+                           <FormattedMessage id={fieldsIds[values.searchBy]} />
                         </small>
                      </div>
                      <div className="col-lg-2">
@@ -136,12 +178,23 @@ export function CustomersFilter({ listLoading }) {
                            }}
                            value={values.searchBy}
                         >
-                           <option value="fullName">Full Name</option>
-                           <option value="email">Email</option>
-                           <option value="mobile">Mobile</option>
+                           <option value="fullName">
+                              {formatMessage(intl, fieldsIds.fullName)}
+                           </option>
+                           <option value="email">
+                              {formatMessage(intl, fieldsIds.email)}
+                           </option>
+                           <option value="mobile">
+                              {formatMessage(intl, fieldsIds.mobile)}
+                           </option>
                         </select>
                         <small className="form-text text-muted">
-                           <b>Search</b> by {values.searchBy}
+                           <FormattedMessage
+                              tagName="b"
+                              id="ECOMMERCE.COMMON.SEARCH"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.BY" />
+                           <FormattedMessage id={fieldsIds[values.searchBy]} />
                         </small>
                      </div>
                   </div>

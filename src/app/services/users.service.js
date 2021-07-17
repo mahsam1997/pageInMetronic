@@ -4,19 +4,12 @@ import generateCustomerFilter from "../utils/generateCustomerFilter";
 
 import urls from "./urls.json";
 
-const getUsers = (limit, pageNumber, filter) => {
-   console.log(
+const getUsers = (limit, pageNumber, filter) =>
+   http.get(
       `${
          urls.GET_USERS
       }?limit=${limit}&page=${pageNumber}${generateCustomerFilter(filter)}`
    );
-
-   return http.get(
-      `${
-         urls.GET_USERS
-      }?limit=${limit}&page=${pageNumber}${generateCustomerFilter(filter)}`
-   );
-};
 
 const getUser = id => http.get(`${urls.GET_USERS}/${id}`);
 

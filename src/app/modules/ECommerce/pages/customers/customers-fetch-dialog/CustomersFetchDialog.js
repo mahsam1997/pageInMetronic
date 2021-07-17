@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
+import { FormattedMessage } from "react-intl";
+
 import { getUser } from "../../../../../services/users.service";
 
 export function CustomersFetchDialog({ show, onHide }) {
@@ -43,7 +45,7 @@ export function CustomersFetchDialog({ show, onHide }) {
       >
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               Fetch selected elements
+               <FormattedMessage id="ECOMMERCE.CUSTOMERS.FETCH_CUSTOMERS" />
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
@@ -57,9 +59,15 @@ export function CustomersFetchDialog({ show, onHide }) {
             <table className="table table table-head-custom table-vertical-center overflow-hidden">
                <thead>
                   <tr>
-                     <th>Role</th>
-                     <th>STATUS</th>
-                     <th>Full Name</th>
+                     <FormattedMessage
+                        tagName="th"
+                        id="ECOMMERCE.CUSTOMERS.ROLE"
+                     />
+                     <FormattedMessage
+                        tagName="th"
+                        id="ECOMMERCE.CUSTOMERS.STATUS"
+                     />
+                     <FormattedMessage tagName="th" id="AUTH.INPUT.FULLNAME" />
                   </tr>
                </thead>
                <tbody>
@@ -92,7 +100,7 @@ export function CustomersFetchDialog({ show, onHide }) {
                   onClick={onHide}
                   className="btn btn-light btn-elevate"
                >
-                  Cancel
+                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                </button>
                <> </>
                <button
@@ -100,7 +108,7 @@ export function CustomersFetchDialog({ show, onHide }) {
                   onClick={onHide}
                   className="btn btn-primary btn-elevate"
                >
-                  Ok
+                  <FormattedMessage id="ECOMMERCE.COMMON.OK" />
                </button>
             </div>
          </Modal.Footer>

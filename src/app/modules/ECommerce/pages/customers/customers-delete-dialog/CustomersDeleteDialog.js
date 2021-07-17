@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import { useCustomersUIContext } from "../CustomersUIContext";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 
+import { FormattedMessage } from "react-intl";
+
 import { deleteUser } from "../../../../../services/users.service";
 
 export function CustomersDeleteDialog({ show, onHide }) {
@@ -49,16 +51,22 @@ export function CustomersDeleteDialog({ show, onHide }) {
          {/*end::Loading*/}
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               Customers Delete
+               <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMERS_SIMPLE.TITLE" />
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
             {!loading && (
-               <span>
-                  Are you sure to permanently delete selected customers?
-               </span>
+               <FormattedMessage
+                  id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.DESCRIPTION"
+                  tagName="span"
+               />
             )}
-            {loading && <span>Customer are deleting...</span>}
+            {loading && (
+               <FormattedMessage
+                  id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.WAIT_DESCRIPTION"
+                  tagName="span"
+               />
+            )}
          </Modal.Body>
          <Modal.Footer>
             <div>
@@ -67,7 +75,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
                   onClick={onHide}
                   className="btn btn-light btn-elevate"
                >
-                  Cancel
+                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                </button>
                <> </>
                <button
@@ -75,7 +83,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
                   onClick={deleteCustomers}
                   className="btn btn-primary btn-elevate"
                >
-                  Delete
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
                </button>
             </div>
          </Modal.Footer>

@@ -19,6 +19,8 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
+import useFormatMessage from "../../../../../hooks/useFormatMessage";
+
 import { getUsers } from "../../../../../services/users.service";
 
 export function CustomersTable() {
@@ -41,36 +43,34 @@ export function CustomersTable() {
       };
    }, [customersUIContext]);
 
-   console.log(customersUIProps.queryParams);
-
    // Table columns
    const columns = [
       {
          dataField: "profile.fullName",
-         text: "Fullname",
+         text: useFormatMessage("AUTH.INPUT.FULLNAME"),
          // sort: true,
          // sortCaret: sortCaret,
          // headerSortingClasses,
       },
       {
          dataField: "email",
-         text: "Email",
+         text: useFormatMessage("AUTH.INPUT.EMAIL"),
       },
       {
          dataField: "mobile",
-         text: "Mobile",
+         text: useFormatMessage("ECOMMERCE.COMMON.Mobile"),
       },
       {
          dataField: "role",
-         text: "role",
+         text: useFormatMessage("ECOMMERCE.CUSTOMERS.ROLE"),
       },
       {
          dataField: "status",
-         text: "status",
+         text: useFormatMessage("ECOMMERCE.CUSTOMERS.STATUS"),
       },
       {
          dataField: "action",
-         text: "Actions",
+         text: useFormatMessage("ECOMMERCE.CUSTOMERS.ACTIONS"),
          formatter: columnFormatters.ActionsColumnFormatter,
          formatExtraData: {
             openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
@@ -101,7 +101,6 @@ export function CustomersTable() {
             customersUIProps.queryParams.filter
          );
          if (users.data.success) {
-            console.log("customer table: ", users.data.data);
             setEntities({
                customers: users.data.data,
                total: users.data.total,

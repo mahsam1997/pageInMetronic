@@ -25,7 +25,6 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
          onHide();
       } else {
          setLoading(true);
-         console.log("<CustomersFetchDialog /> ids: ", customersUIProps.ids);
          customersUIProps.ids.forEach(async id => {
             const response = await getUser(id);
             if (response?.data.success) {
@@ -40,28 +39,18 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
    }, [customersUIProps.ids]);
 
    const updateStatus = async () => {
-      console.log("updateStatus: ", customers[0]);
       const editedUser = {
          ...customers[0],
          status: "active",
       };
-      console.log("edited user: ", editedUser);
-      const response = await editUser(customers[0]._id, editedUser);
-      console.log("response edited user: ", response.data);
+      alert("this feat not invalid");
       // server request for update customers status by selected ids
-      // dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
-      // () => {
-      // refresh list after deletion
-      // dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
-      // () => {
+      const response = await editUser(customers[0]._id, editedUser);
+      if (response.data.success) onHide();
       // clear selections list
       // customersUIProps.setIds([]);
       // closing delete modal
-      onHide();
-      // }
-      // );
-      // }
-      // );
+      // onHide();
    };
 
    return (
