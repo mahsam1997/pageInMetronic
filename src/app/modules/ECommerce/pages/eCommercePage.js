@@ -7,6 +7,8 @@ import { LayoutSplashScreen } from "../../../../_metronic/layout";
 
 import ProtectedRoute from "../../../components/common/ProtectedRoute";
 
+import routes from "../../../router/routes.json";
+
 export default function eCommercePage() {
    return (
       <Suspense fallback={<LayoutSplashScreen />}>
@@ -15,12 +17,12 @@ export default function eCommercePage() {
                /* Redirect from eCommerce root URL to /customers */
                <Redirect
                   exact={true}
-                  from="/e-commerce"
-                  to="/e-commerce/customers"
+                  from={routes.ECOMMERCE}
+                  to={routes.ECOMMERCE_CUSTOMERS}
                />
             }
             <ProtectedRoute
-               path="/e-commerce/customers"
+               path={routes.ECOMMERCE_CUSTOMERS}
                component={CustomersPage}
             />
             {/* <ContentRoute path="/e-commerce/products/new" component={ProductEdit} /> */}

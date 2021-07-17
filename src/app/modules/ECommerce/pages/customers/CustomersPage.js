@@ -9,6 +9,8 @@ import { CustomersUpdateStateDialog } from "./customers-update-status-dialog/Cus
 import { CustomersUIProvider } from "./CustomersUIContext";
 import { CustomersCard } from "./CustomersCard";
 
+import routes from "../../../../router/routes.json";
+
 export function CustomersPage({ history }) {
    const customersUIEvents = {
       newCustomerButtonClick: () => {
