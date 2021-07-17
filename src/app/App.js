@@ -12,8 +12,8 @@ import { Integrations } from "@sentry/apm";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 
-const Rtl = React.lazy(() => import("../Rtl"));
-const Ltr = React.lazy(() => import("../Ltr"));
+const RtlStyles = React.lazy(() => import("./components/RtlStyles"));
+const LtrStyles = React.lazy(() => import("./components/LtrStyles"));
 
 Sentry.init({
    dsn: "https://bc196634740145339f746fdfdc7b10e9@sentry.dropp.ir/19",
@@ -35,7 +35,7 @@ export default function App({ basename }) {
 
    return (
       <React.Suspense fallback={<LayoutSplashScreen />}>
-         {isEnglish ? <Ltr /> : <Rtl />}
+         {isEnglish ? <LtrStyles /> : <RtlStyles />}
          <BrowserRouter basename={basename}>
             <MaterialThemeProvider>
                <I18nProvider>
