@@ -21,25 +21,24 @@ body {
    user-select: none;
 }
 
-.form-control.is-valid.right {
-   /*rtl:ignore*/
+.form-control.is-valid {
    background-position: right calc(0.375em + 0.325rem) center;
 }
-.form-control.is-valid.left {
-   /*rtl:ignore*/
-   background-position: left calc(0.375em + 0.325rem) center;
-}
-
-.form-control.is-invalid.right {
-   /*rtl:ignore*/
+.form-control.is-valid {
    background-position: right calc(0.375em + 0.325rem) center;
-}
-.form-control.is-invalid.left {
-   /*rtl:ignore*/
-   background-position: left calc(0.375em + 0.325rem) center;
 }
 
 .fas.fa-eye,
 .fas.fa-eye-slash {
    user-select: none;
+}
+
+input[type="number"] {
+   &::-webkit-outer-spin-button,
+   &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+   }
+   -moz-appearance: textfield;
+   appearance: none;
 }

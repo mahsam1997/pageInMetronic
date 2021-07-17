@@ -54,7 +54,7 @@ isEnglish ? require("./index.scss") : require("./sass/style.react.rtl.css");
 body.direction = isEnglish ? "ltr" : "rtl";
 body.dir = isEnglish ? "ltr" : "rtl";
 body.style.direction = isEnglish ? "ltr" : "rtl";
-body.style.textAlign = isEnglish ? "left" : "right";
+// body.style.textAlign = isEnglish ? "left" : "right";
 // body.classList.add("aside-minimize");
 
 ReactDOM.render(

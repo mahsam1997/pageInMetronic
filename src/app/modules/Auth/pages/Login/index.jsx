@@ -46,8 +46,6 @@ function Login(props) {
 
    const intl = useIntl();
 
-   const isEnglish = intl.locale === "en";
-
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
@@ -101,7 +99,6 @@ function Login(props) {
                            )}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                              intl,
                               formik,
                               "email"
                            )}`}
@@ -120,16 +117,13 @@ function Login(props) {
                                  "AUTH.INPUT.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
-                              className={`password-input form-control form-control-solid h-auto py-5 px-6 ${
-                                 isEnglish ? "right" : "left"
-                              } ${getInputClasses(intl, formik, "password")}`}
+                              className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                                 formik,
+                                 "password"
+                              )}`}
                               name="password"
                            />
-                           <span
-                              className={`input-group-text showPass ${
-                                 isEnglish ? "right" : "left"
-                              }`}
-                           >
+                           <span className="input-group-text showPass">
                               <i
                                  className={`fas ${
                                     showPassword ? "fa-eye-slash" : "fa-eye"

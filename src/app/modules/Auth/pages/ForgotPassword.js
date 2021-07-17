@@ -69,7 +69,6 @@ function ForgotPassword(props) {
                            <Field
                               type="email"
                               className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-                                 intl,
                                  formik,
                                  "email"
                               )}`}

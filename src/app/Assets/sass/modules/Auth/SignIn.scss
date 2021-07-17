@@ -56,39 +56,17 @@
       border-radius: 12px;
    }
    input.password-input {
-      /*rtl:ignore*/
-      border-radius: 12px !important;
-
-      &.right {
-         /*rtl:ignore*/
-         border-top-right-radius: 0 !important;
-         /*rtl:ignore*/
-         border-bottom-right-radius: 0 !important;
-      }
-      &.left {
-         /*rtl:ignore*/
-         border-top-left-radius: 0 !important;
-         /*rtl:ignore*/
-         border-bottom-left-radius: 0 !important;
-      }
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 12px !important;
+      border-bottom-left-radius: 12px !important;
    }
    .showPass {
       background-color: $login-input-back !important;
       border: none !important;
-      border-radius: 0 !important;
-
-      &.right {
-         /*rtl:ignore*/
-         border-top-right-radius: 12px !important;
-         /*rtl:ignore*/
-         border-bottom-right-radius: 12px !important;
-      }
-      &.left {
-         /*rtl:ignore*/
-         border-top-left-radius: 12px !important;
-         /*rtl:ignore*/
-         border-bottom-left-radius: 12px !important;
-      }
+      border-radius: 0;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
 
       cursor: pointer;
       width: 45px;
