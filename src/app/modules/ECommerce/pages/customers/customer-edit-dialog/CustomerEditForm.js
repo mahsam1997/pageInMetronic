@@ -8,20 +8,57 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
+import { FormattedMessage, useIntl } from "react-intl";
+import useFormatMessage from "../../../../../hooks/useFormatMessage";
+import formatMessage from "../../../../../utils/formatMessage";
+
 // Validation schema
-const CustomerEditSchema = Yup.object().shape({
-   profile: Yup.object().shape({
-      fullName: Yup.string()
-         .min(3, "Minimum 3 symbols")
-         .max(50, "Maximum 50 symbols")
-         .required("Firstname is required"),
-   }),
-   email: Yup.string()
-      .email("Invalid email")
-      .required("Email is required"),
-   mobile: Yup.string().required("Username is required"),
-   subMobile: Yup.string().required("Username is required"),
-});
+const CustomerEditSchema = formatedMessage =>
+   Yup.object().shape({
+      profile: Yup.object().shape({
+         fullName: Yup.string()
+            .min(
+               3,
+               formatedMessage("MIN_X_CHARACTERS", {
+                  x: 3,
+                  noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+               })
+            )
+            .max(
+               50,
+               formatedMessage("MAX_X_CHARACTERS", {
+                  x: 50,
+                  noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+               })
+            )
+            .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+      }),
+
+      email: Yup.string()
+         .email(formatedMessage("AUTH.VALIDATION.EMAIL"))
+         .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+
+      mobile: Yup.string()
+         .min(
+            3,
+            formatedMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: formatedMessage("AUTH.INPUT.PHONE"),
+            })
+         )
+         .max(
+            50,
+            formatedMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: formatedMessage("AUTH.INPUT.PHONE"),
+            })
+         )
+         .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+
+      subMobile: Yup.string().required(
+         formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")
+      ),
+   });
 
 export function CustomerEditForm({
    saveCustomer,
@@ -29,6 +66,8 @@ export function CustomerEditForm({
    actionsLoading,
    onHide,
 }) {
+   const intl = useIntl();
+
    const mobile = customer.mobile.slice(3);
    const subMobile = customer.mobile.substr(0, 3);
 
@@ -46,7 +85,7 @@ export function CustomerEditForm({
          <Formik
             enableReinitialize={true}
             initialValues={initialValues}
-            validationSchema={CustomerEditSchema}
+            validationSchema={CustomerEditSchema(useFormatMessage)}
             onSubmit={values => {
                saveCustomer(values);
             }}
@@ -66,8 +105,14 @@ export function CustomerEditForm({
                               <Field
                                  name="profile.fullName"
                                  component={Input}
-                                 placeholder="Full Name"
-                                 label="Full Name"
+                                 placeholder={formatMessage(
+                                    intl,
+                                    "AUTH.INPUT.FULLNAME"
+                                 )}
+                                 label={formatMessage(
+                                    intl,
+                                    "AUTH.INPUT.FULLNAME"
+                                 )}
                               />
                            </div>
                            {/* Email */}
@@ -76,7 +121,10 @@ export function CustomerEditForm({
                                  type="text"
                                  name="email"
                                  component={Input}
-                                 placeholder="Email"
+                                 placeholder={formatMessage(
+                                    intl,
+                                    "AUTH.INPUT.EMAIL"
+                                 )}
                                  label="Email"
                               />
                            </div>
@@ -95,8 +143,11 @@ export function CustomerEditForm({
                                  type="number"
                                  name="mobile"
                                  component={Input}
-                                 placeholder="mobile"
-                                 label="mobile"
+                                 placeholder={formatMessage(
+                                    intl,
+                                    "AUTH.INPUT.PHONE"
+                                 )}
+                                 label={formatMessage(intl, "AUTH.INPUT.PHONE")}
                               />
                            </div>
                         </div>
@@ -108,7 +159,7 @@ export function CustomerEditForm({
                         onClick={onHide}
                         className="btn btn-light btn-elevate"
                      >
-                        Cancel
+                        <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                      </button>
                      <> </>
                      <button
@@ -116,7 +167,7 @@ export function CustomerEditForm({
                         onClick={() => handleSubmit()}
                         className="btn btn-primary btn-elevate"
                      >
-                        Save
+                        <FormattedMessage id="ECOMMERCE.CUSTOMERS.SAVA" />
                      </button>
                   </Modal.Footer>
                </>
