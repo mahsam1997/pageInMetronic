@@ -1,16 +1,14 @@
 const generateCustomerFilter = filter => {
    const roll = filter.roll ? filter.roll : "";
    const status = filter.status ? filter.status : "";
-   const fullName = filter.fullName ? filter.fullName : "";
-   const email = filter.email ? filter.email : "";
-   const mobile = filter.mobile ? filter.mobile : "";
-   //   return `${roll && `&search[roll]=${roll}`}${status &&
-   //      `&search[status]=${status}`}${fullName &&
-   //      `search[profile.fullName]=${fullName}`}${email &&
-   //      `&search[email]=${email}`}${mobile && `&search[mobile]=${mobile}`}`;
+   const filterText = filter[filter.searchKey] ? filter[filter.searchKey] : "";
 
-   return `${roll && `&search[roll]=${roll}`}${status &&
-      `&search[status]=${status}`}`;
+   const getRollQuery = () => roll && `&search[roll]=${roll}`;
+   const getStatusQuery = () => status && `&search[status]=${status}`;
+   const getFilterTextQuery = () =>
+      filterText && `&search[${filter.searchKey}]=${filterText}`;
+
+   return `${getRollQuery()}${getStatusQuery()}${getFilterTextQuery()}`;
 };
 
 export default generateCustomerFilter;

@@ -14,86 +14,86 @@ import routes from "../../../../router/routes.json";
 export function CustomersPage({ history }) {
    const customersUIEvents = {
       newCustomerButtonClick: () => {
-         history.push("/e-commerce/customers/new");
+         history.push(routes.ECOMMERCE_CUSTOMERS_NEW);
       },
       openEditCustomerDialog: id => {
-         history.push(`/e-commerce/customers/${id}/edit`);
+         history.push(`${routes.ECOMMERCE_CUSTOMERS}/${id}/edit`);
       },
       openDeleteCustomerDialog: id => {
-         history.push(`/e-commerce/customers/${id}/delete`);
+         history.push(`${routes.ECOMMERCE_CUSTOMERS}/${id}/delete`);
       },
       openDeleteCustomersDialog: () => {
-         history.push(`/e-commerce/customers/deleteCustomers`);
+         history.push(routes.ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS);
       },
       openFetchCustomersDialog: () => {
-         history.push(`/e-commerce/customers/fetch`);
+         history.push(routes.ECOMMERCE_CUSTOMERS_FETCH);
       },
       openUpdateCustomersStatusDialog: () => {
-         history.push("/e-commerce/customers/updateStatus");
+         history.push(routes.ECOMMERCE_CUSTOMERS_UPDATE_STATUS);
       },
    };
 
    return (
       <CustomersUIProvider customersUIEvents={customersUIEvents}>
          <CustomersLoadingDialog />
-         <Route path="/e-commerce/customers/new">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_NEW}>
             {({ match }) => (
                <CustomerEditDialog
                   show={match != null}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}
          </Route>
-         <Route path="/e-commerce/customers/:id/edit">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_EDIT}>
             {({ match }) => (
                <CustomerEditDialog
                   show={match != null}
                   id={match && match.params.id}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}
          </Route>
-         <Route path="/e-commerce/customers/deleteCustomers">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS}>
             {({ match }) => (
                <CustomersDeleteDialog
                   show={match != null}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}
          </Route>
-         <Route path="/e-commerce/customers/:id/delete">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_DELETE}>
             {({ match }) => (
                <CustomerDeleteDialog
                   show={match != null}
                   id={match && match.params.id}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}
          </Route>
-         <Route path="/e-commerce/customers/fetch">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_FETCH}>
             {({ match }) => (
                <CustomersFetchDialog
                   show={match != null}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}
          </Route>
-         <Route path="/e-commerce/customers/updateStatus">
+         <Route path={routes.ECOMMERCE_CUSTOMERS_UPDATE_STATUS}>
             {({ match }) => (
                <CustomersUpdateStateDialog
                   show={match != null}
                   onHide={() => {
-                     history.push("/e-commerce/customers");
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
                   }}
                />
             )}

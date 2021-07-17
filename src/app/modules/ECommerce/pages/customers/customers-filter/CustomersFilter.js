@@ -4,21 +4,18 @@ import { isEqual } from "lodash";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 const prepareFilter = (queryParams, values) => {
-   const { status, roll, searchText } = values;
+   const { status, roll, searchText, searchBy } = values;
    const newQueryParams = { ...queryParams };
    const filter = {};
    // Filter by status
-   //  filter.status = status !== "" ? status : undefined;
    filter.status = status;
    // Filter by roll
-   //  filter.roll = roll !== "" ? roll : undefined;
    filter.roll = roll;
 
    // Filter by all fields
    if (searchText) {
-      filter.fullName = searchText;
-      filter.email = searchText;
-      filter.mobile = searchText;
+      filter.searchKey = searchBy;
+      filter[searchBy] = searchText;
    }
    newQueryParams.filter = filter;
    return newQueryParams;
@@ -54,6 +51,7 @@ export function CustomersFilter({ listLoading }) {
                status: "",
                roll: "",
                searchText: "",
+               searchBy: "fullName",
             }}
             onSubmit={values => {
                applyFilter(values);
@@ -124,6 +122,26 @@ export function CustomersFilter({ listLoading }) {
                         />
                         <small className="form-text text-muted">
                            <b>Search</b> in all fields
+                        </small>
+                     </div>
+                     <div className="col-lg-2">
+                        <select
+                           className="form-control"
+                           placeholder="Filter by "
+                           name="searchBy"
+                           onBlur={handleBlur}
+                           onChange={e => {
+                              setFieldValue("searchBy", e.target.value);
+                              handleSubmit();
+                           }}
+                           value={values.searchBy}
+                        >
+                           <option value="fullName">Full Name</option>
+                           <option value="email">Email</option>
+                           <option value="mobile">Mobile</option>
+                        </select>
+                        <small className="form-text text-muted">
+                           <b>Search</b> by {values.searchBy}
                         </small>
                      </div>
                   </div>
