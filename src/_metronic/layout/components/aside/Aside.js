@@ -315,7 +315,10 @@ export function Aside() {
                {/* end::Nav Wrapper */}
 
                {/* begin::Footer */}
-               <div className="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10">
+               <div
+                  className="aside-footer d-flex flex-column align-items-center flex-column-auto py-4 py-lg-10"
+                  style={{ height: "245px" }}
+               >
                   {/* begin::Aside Toggle */}
                   {layoutProps.asideSecondaryDisplay &&
                      layoutProps.asideSelfMinimizeToggle && (

@@ -8,6 +8,7 @@ export function Brand() {
          {/* begin::Brand */}
          <div
             className={`aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-12`}
+            style={{ height: "108px" }}
          >
             {/* begin::Logo */}
             <Link to="" className="brand-logo">
