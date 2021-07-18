@@ -96,25 +96,28 @@ export function getHandlerTableChange(setQueryParams) {
    };
 }
 
-export function PleaseWaitMessage({ entities }) {
+export function PleaseWaitMessage({ entities, id = "DEFAULT.PLEASE_WAIT" }) {
    return (
       <>
          {entities === null && (
             <div>
-               <FormattedMessage id="ECOMMERCE.CUSTOMERS.PLEASE_WAIT" />
+               <FormattedMessage id={id} />
             </div>
          )}
       </>
    );
 }
 
-export function NoRecordsFoundMessage({ entities }) {
+export function NoRecordsFoundMessage({
+   entities,
+   id = "DEFAULT.NOT_RECORDS",
+}) {
    const customersList = entities === null ? [] : entities;
    return (
       <>
          {customersList.length === 0 && entities !== null && (
             <div>
-               <FormattedMessage id="ECOMMERCE.CUSTOMERS.NOT_RECORDS" />
+               <FormattedMessage id={id} />
             </div>
          )}
       </>

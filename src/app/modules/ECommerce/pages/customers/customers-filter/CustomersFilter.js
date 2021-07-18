@@ -27,7 +27,7 @@ const prepareFilter = (queryParams, values) => {
 
 const fieldsIds = {
    fullName: "AUTH.INPUT.FULLNAME",
-   mobile: "ECOMMERCE.COMMON.Mobile",
+   mobile: "ECOMMERCE.COMMON.MOBILE",
    email: "ECOMMERCE.COMMON.EMAIL",
 };
 

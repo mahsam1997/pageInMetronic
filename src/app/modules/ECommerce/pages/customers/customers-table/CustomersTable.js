@@ -58,7 +58,7 @@ export function CustomersTable() {
       },
       {
          dataField: "mobile",
-         text: useFormatMessage("ECOMMERCE.COMMON.Mobile"),
+         text: useFormatMessage("ECOMMERCE.COMMON.MOBILE"),
       },
       {
          dataField: "role",

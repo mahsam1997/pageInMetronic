@@ -48,7 +48,7 @@ export function CustomerEditDialog({ id, show, onHide }) {
    const saveCustomer = async customer => {
       const user = {
          profile: {
-            fullName: customer.profile.fullName,
+            fullName: customer.fullName,
          },
          mobile: `${customer.subMobile}${customer.mobile}`,
          email: customer.email,

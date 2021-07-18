@@ -58,13 +58,12 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
                >
                   <FormattedMessage id="AUTH.GENERAL.CANCEL" />
                </button>
-               <> </>
                <button
                   type="button"
                   onClick={deleteCustomer}
                   className="btn btn-primary btn-elevate"
                >
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
+                  <FormattedMessage id="DEFAULT.DELETE" />
                </button>
             </div>
          </Modal.Footer>

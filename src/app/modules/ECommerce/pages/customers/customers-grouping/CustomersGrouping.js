@@ -38,7 +38,7 @@ export function CustomersGrouping() {
                         onClick={customersUIProps.openDeleteCustomersDialog}
                      >
                         <i className="fa fa-trash"></i>{" "}
-                        <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />{" "}
+                        <FormattedMessage id="DEFAULT.DELETE" />{" "}
                         <FormattedMessage id="ECOMMERCE.COMMON.ALL" />
                      </button>
                      &nbsp;
