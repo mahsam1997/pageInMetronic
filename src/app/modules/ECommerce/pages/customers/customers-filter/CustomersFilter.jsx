@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 import { FormattedMessage, useIntl } from "react-intl";
-
+import CustomDebounceInput from "../../../../../components/common/CustomDebounceInput";
 import formatMessage from "../../../../../utils/formatMessage";
 
 const prepareFilter = (queryParams, values) => {
@@ -29,6 +29,14 @@ const fieldsIds = {
    fullName: "AUTH.INPUT.FULLNAME",
    mobile: "ECOMMERCE.COMMON.MOBILE",
    email: "ECOMMERCE.COMMON.EMAIL",
+};
+
+const mobileRemoveFirstChar = value => {
+   if (value[0] === "+" || value[0] === "0") {
+      console.log(value.slice(1));
+      return value.slice(1);
+   }
+   return value;
 };
 
 export function CustomersFilter({ listLoading }) {
@@ -173,7 +181,7 @@ export function CustomersFilter({ listLoading }) {
                         </small>
                      </div>
                      <div className="col-lg-2">
-                        <input
+                        {/* <input
                            type="text"
                            className="form-control"
                            name="searchText"
@@ -185,6 +193,25 @@ export function CustomersFilter({ listLoading }) {
                            value={values.searchText}
                            onChange={e => {
                               setFieldValue("searchText", e.target.value);
+                              handleSubmit();
+                           }}
+                        /> */}
+                        <CustomDebounceInput
+                           type="text"
+                           className="form-control"
+                           name="searchText"
+                           placeholder={formatMessage(
+                              intl,
+                              "ECOMMERCE.COMMON.SEARCH"
+                           )}
+                           onBlur={handleBlur}
+                           value={values.searchText}
+                           onChange={e => {
+                              const value =
+                                 values.searchBy === "mobile"
+                                    ? mobileRemoveFirstChar(e.target.value)
+                                    : e.target.value;
+                              setFieldValue("searchText", value);
                               handleSubmit();
                            }}
                         />
