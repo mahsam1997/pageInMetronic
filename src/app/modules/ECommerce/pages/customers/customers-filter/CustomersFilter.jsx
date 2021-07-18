@@ -8,13 +8,13 @@ import { FormattedMessage, useIntl } from "react-intl";
 import formatMessage from "../../../../../utils/formatMessage";
 
 const prepareFilter = (queryParams, values) => {
-   const { status, roll, searchText, searchBy } = values;
+   const { status, role, searchText, searchBy } = values;
    const newQueryParams = { ...queryParams };
    const filter = {};
    // Filter by status
    filter.status = status;
    // Filter by roll
-   filter.roll = roll;
+   filter.role = role;
 
    // Filter by all fields
    if (searchText) {
@@ -61,7 +61,7 @@ export function CustomersFilter({ listLoading }) {
          <Formik
             initialValues={{
                status: "",
-               roll: "",
+               role: "",
                searchText: "",
                searchBy: "fullName",
             }}
@@ -118,10 +118,10 @@ export function CustomersFilter({ listLoading }) {
                            name="roll"
                            onBlur={handleBlur}
                            onChange={e => {
-                              setFieldValue("roll", e.target.value);
+                              setFieldValue("role", e.target.value);
                               handleSubmit();
                            }}
-                           value={values.roll}
+                           value={values.role}
                         >
                            <option value="">
                               {formatMessage(intl, "ECOMMERCE.COMMON.ALL")}
@@ -139,31 +139,6 @@ export function CustomersFilter({ listLoading }) {
                               tagName="b"
                            />
                            <FormattedMessage id="ECOMMERCE.COMMON.BY_ROLE" />
-                        </small>
-                     </div>
-                     <div className="col-lg-2">
-                        <input
-                           type="text"
-                           className="form-control"
-                           name="searchText"
-                           placeholder={formatMessage(
-                              intl,
-                              "ECOMMERCE.COMMON.SEARCH"
-                           )}
-                           onBlur={handleBlur}
-                           value={values.searchText}
-                           onChange={e => {
-                              setFieldValue("searchText", e.target.value);
-                              handleSubmit();
-                           }}
-                        />
-                        <small className="form-text text-muted">
-                           <FormattedMessage
-                              tagName="b"
-                              id="ECOMMERCE.COMMON.SEARCH"
-                           />
-                           <FormattedMessage id="ECOMMERCE.COMMON.IN" />
-                           <FormattedMessage id={fieldsIds[values.searchBy]} />
                         </small>
                      </div>
                      <div className="col-lg-2">
@@ -194,6 +169,31 @@ export function CustomersFilter({ listLoading }) {
                               id="ECOMMERCE.COMMON.SEARCH"
                            />
                            <FormattedMessage id="ECOMMERCE.COMMON.BY" />
+                           <FormattedMessage id={fieldsIds[values.searchBy]} />
+                        </small>
+                     </div>
+                     <div className="col-lg-2">
+                        <input
+                           type="text"
+                           className="form-control"
+                           name="searchText"
+                           placeholder={formatMessage(
+                              intl,
+                              "ECOMMERCE.COMMON.SEARCH"
+                           )}
+                           onBlur={handleBlur}
+                           value={values.searchText}
+                           onChange={e => {
+                              setFieldValue("searchText", e.target.value);
+                              handleSubmit();
+                           }}
+                        />
+                        <small className="form-text text-muted">
+                           <FormattedMessage
+                              tagName="b"
+                              id="ECOMMERCE.COMMON.SEARCH"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.IN" />
                            <FormattedMessage id={fieldsIds[values.searchBy]} />
                         </small>
                      </div>

@@ -14,8 +14,6 @@ export const addAuthorization = () => {
    if (token)
       instanceWithAuthorization.defaults.headers.common["Authorization"] =
          "Bearer " + token;
-
-   console.log("Bearer " + token);
 };
 
 export const axiosSetup = axiosInstance => {
