@@ -100,7 +100,7 @@ export function CustomersTable() {
             customersUIProps.queryParams.pageNumber,
             customersUIProps.queryParams.filter
          );
-         if (users.data.success) {
+         if (users?.data?.success) {
             setEntities({
                customers: users.data.data,
                total: users.data.total,
