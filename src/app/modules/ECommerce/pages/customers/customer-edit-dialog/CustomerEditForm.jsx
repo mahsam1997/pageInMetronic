@@ -8,7 +8,9 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
-import { FormattedMessage, useIntl } from "react-intl";
+import CustomButton from "../../../../../components/common/CustomButton";
+
+import { useIntl } from "react-intl";
 import useFormatMessage from "../../../../../hooks/useFormatMessage";
 import formatMessage from "../../../../../utils/formatMessage";
 
@@ -162,21 +164,17 @@ export function CustomerEditForm({
                      </Form>
                   </Modal.Body>
                   <Modal.Footer>
-                     <button
-                        type="button"
+                     <CustomButton
+                        title="AUTH.GENERAL.CANCEL"
                         onClick={onHide}
-                        className="btn btn-light btn-elevate"
-                     >
-                        <FormattedMessage id="AUTH.GENERAL.CANCEL" />
-                     </button>
-                     <> </>
-                     <button
+                        classNames="btn btn-light btn-elevate"
+                     />
+                     <CustomButton
                         type="submit"
+                        title="DEFAULT.SAVE"
                         onClick={() => handleSubmit()}
-                        className="btn btn-primary btn-elevate"
-                     >
-                        <FormattedMessage id="DEFAULT.SAVE" />
-                     </button>
+                        classNames="btn btn-primary btn-elevate"
+                     />
                   </Modal.Footer>
                </>
             )}

@@ -53,6 +53,7 @@
    "DEFAULT.DELETE": "حذف",
    "DEFAULT.SELECT": "انتخاب",
    "DEFAULT.SUB_PHONE": "پیش شماره",
+   "DEFAULT.DELETE_ALL": "حذف همه",
    "DEFAULT.LOADING": "در حال بارگذاری ...",
    "DEFAULT.NOT_RECORDS": "هیچ سوابقی یافت نشد",
    "DEFAULT.PLEASE_WAIT": "لطفا صبر کنید...",

@@ -61,6 +61,7 @@
    "DEFAULT.DELETE": "Delete",
    "DEFAULT.SELECT": "Select",
    "DEFAULT.SUB_PHONE": "Sub phone",
+   "DEFAULT.DELETE_ALL": "Delete all",
    "DEFAULT.LOADING": "Loading ...",
    "DEFAULT.NOT_RECORDS": "No records found",
    "DEFAULT.PLEASE_WAIT": "Please wait...",

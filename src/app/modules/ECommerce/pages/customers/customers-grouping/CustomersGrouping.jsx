@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 import { FormattedMessage } from "react-intl";
+import CustomButton from "../../../../../components/common/CustomButton";
 
 export function CustomersGrouping() {
    // Customers UI Context
@@ -32,35 +33,13 @@ export function CustomersGrouping() {
                      </label>
                   </div>
                   <div>
-                     <button
-                        type="button"
-                        className="btn btn-danger font-weight-bolder font-size-sm"
+                     <CustomButton
+                        title="DEFAULT.DELETE_ALL"
                         onClick={customersUIProps.openDeleteCustomersDialog}
+                        classNames="btn btn-danger font-weight-bolder font-size-sm"
                      >
-                        <i className="fa fa-trash"></i>{" "}
-                        <FormattedMessage id="DEFAULT.DELETE" />{" "}
-                        <FormattedMessage id="ECOMMERCE.COMMON.ALL" />
-                     </button>
-                     &nbsp;
-                     <button
-                        type="button"
-                        className="btn btn-light-primary font-weight-bolder font-size-sm"
-                        onClick={customersUIProps.openFetchCustomersDialog}
-                     >
-                        <i className="fa fa-stream"></i>{" "}
-                        <FormattedMessage id="ECOMMERCE.CUSTOMERS.FETCH_SELECTED" />
-                     </button>
-                     &nbsp;
-                     <button
-                        type="button"
-                        className="btn btn-light-primary font-weight-bolder font-size-sm"
-                        onClick={
-                           customersUIProps.openUpdateCustomersStatusDialog
-                        }
-                     >
-                        <i className="fa fa-sync-alt"></i>{" "}
-                        <FormattedMessage id="ECOMMERCE.CUSTOMERS.UPDATE_STATUS" />
-                     </button>
+                        <i className="fa fa-trash"></i>
+                     </CustomButton>
                   </div>
                </div>
             </div>
