@@ -1,7 +1,7 @@
 // React bootstrap table next =>
 // DOCS: https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/
 // STORYBOOK: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useLayoutEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
    PaginationProvider,
@@ -91,6 +91,13 @@ export function CustomersTable() {
       sizePerPage: customersUIProps.queryParams.pageSize,
       page: customersUIProps.queryParams.pageNumber,
    };
+
+   useLayoutEffect(() => {
+      setEntities(prevCustomers => ({
+         customers: [],
+         total: prevCustomers.total,
+      }));
+   }, [customersUIProps.queryParams]);
 
    useEffect(() => {
       const getCustomers = async () => {
