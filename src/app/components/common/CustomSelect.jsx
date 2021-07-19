@@ -9,18 +9,12 @@ const CustomSelect = ({ options, value, customStyles, ...props }) => {
       control: styles => ({
          ...styles,
          backgroundColor: "#ffffff",
-         //  width: "90px",
          width: "100%",
-         //  padding: "7px 0",
          padding: "0",
-         //  borderRadius: "12px",
          borderRadius: "4px",
-         //  marginRight: "10px",
-         //  border: "none",
          border: "1px solid rgba(0,0,0,.1)",
          direction: isEnglish ? "ltr" : "rtl",
          paddingLeft: 5,
-         //  color: "#A7A8BB",
          fontStyle: "normal",
          fontWeight: 500,
          fontSize: "14px",
@@ -34,12 +28,8 @@ const CustomSelect = ({ options, value, customStyles, ...props }) => {
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "24px",
-            // color: "#A7A8BB",
          };
       },
-      // input: styles => ({ ...styles, ...dot() }),
-      // placeholder: styles => ({ ...styles, ...dot() }),
-      // singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
    };
 
    const defaultValue = options.filter(option => option.value === value)[0];
@@ -52,7 +42,6 @@ const CustomSelect = ({ options, value, customStyles, ...props }) => {
          components={{
             IndicatorSeparator: () => null,
          }}
-         // value={defaultValue}
          {...props}
       />
    );

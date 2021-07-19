@@ -99,17 +99,13 @@
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.DESCRIPTION": "Are you sure to permanently delete selected customers?",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.WAIT_DESCRIPTION": "Customers are deleting...",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.MESSAGE": "Selected customers have been deleted",
-   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
    "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
    "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
    "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
    "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMERS_SIMPLE.TITLE": "Customers Delete",
-   "ECOMMERCE.CUSTOMERS.FETCH_CUSTOMERS": "Fetch selected elements",
    "ECOMMERCE.CUSTOMERS.ROLE": "Role",
    "ECOMMERCE.CUSTOMERS.STATUS": "Status",
    "ECOMMERCE.CUSTOMERS.ACTIONS": "Actions",
-   "ECOMMERCE.CUSTOMERS.FETCH_SELECTED": "Fetch Selected",
-   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS": "Update Status",
    "ECOMMERCE.CUSTOMERS.PLEASE_ENTER": "Please enter",
-   "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "was entered correct"
+   "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "valid input"
 }
