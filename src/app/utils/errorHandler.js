@@ -9,7 +9,6 @@ const errorHandler = error => {
       error.errorMessage = true;
       return error;
    } else {
-      console.log("toast error: ", errorRes);
       const toastMessage = {
          type: "error",
          text: errorRes.error,

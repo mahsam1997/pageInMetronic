@@ -39,7 +39,6 @@ function Registration(props) {
    const intl = useIntl();
    const isEnglish = intl.locale === "en";
    const placement = isEnglish ? "right" : "left";
-   const alignRight = isEnglish ? false : true;
 
    const registrationSchema = schema(useFormatMessage);
 
@@ -55,7 +54,6 @@ function Registration(props) {
             fullName,
          },
       };
-      console.log(newUser);
       const response = await register(newUser);
       if (response?.data?.success) {
          const { id, refresh, role, token } = response.data.data;
@@ -87,7 +85,7 @@ function Registration(props) {
 
          <LanguageSelectorDropdown
             overlayPlacement={placement}
-            alignRight={alignRight}
+            alignRight={!isEnglish}
          />
 
          <br />

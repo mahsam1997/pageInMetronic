@@ -47,7 +47,6 @@ function Login(props) {
    const intl = useIntl();
    const isEnglish = intl.locale === "en";
    const placement = isEnglish ? "right" : "left";
-   const alignRight = isEnglish ? false : true;
 
    const { setIsAuth } = useContext(AuthenticationContext);
 
@@ -87,7 +86,7 @@ function Login(props) {
 
          <LanguageSelectorDropdown
             overlayPlacement={placement}
-            alignRight={alignRight}
+            alignRight={!isEnglish}
          />
 
          <br />
