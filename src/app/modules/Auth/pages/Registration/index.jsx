@@ -6,6 +6,7 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
 // hooks
 import useFormatMessage from "../../../../hooks/useFormatMessage";
 // context
@@ -36,6 +37,9 @@ function Registration(props) {
 
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
+   const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
+   const alignRight = isEnglish ? false : true;
 
    const registrationSchema = schema(useFormatMessage);
 
@@ -80,6 +84,13 @@ function Registration(props) {
                <FormattedMessage id="AUTH.REGISTER.DESC" />
             </p>
          </div>
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={alignRight}
+         />
+
+         <br />
 
          <Formik
             initialValues={initialValues}

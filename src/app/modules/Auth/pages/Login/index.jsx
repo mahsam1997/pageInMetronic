@@ -7,7 +7,7 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 
 // components
 import TextError from "../../../../components/common/TextError";
-
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
 // context
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
 
@@ -45,6 +45,10 @@ function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const intl = useIntl();
+   const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
+   const alignRight = isEnglish ? false : true;
+
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
@@ -80,6 +84,13 @@ function Login(props) {
             </p>
          </div>
          {/* end::Head */}
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={alignRight}
+         />
+
+         <br />
 
          {/*begin::Form*/}
 
