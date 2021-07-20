@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 
@@ -58,12 +59,17 @@ function Login(props) {
       }
    };
 
+   const { t } = useTranslation();
+
+   console.log(t("hello"));
+
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
          <div className=" mb-10 mb-lg-10 login-title">
             <h3 className="font-size-h1 ">
-               <FormattedMessage id="AUTH.LOGIN.TITLE" />
+               {/* <FormattedMessage id="AUTH.LOGIN.TITLE" /> */}
+               {t("hello")}
             </h3>
             <p className="text-muted ">
                <FormattedMessage id="AUTH.GENERAL.NO_ACCOUNT" />

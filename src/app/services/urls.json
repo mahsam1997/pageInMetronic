@@ -1,5 +1,7 @@
 {
    "REGISTER": "/api/users/register",
    "LOGIN": "/api/users/login",
-   "FORGET.PASSWORD": "/api/users/forget-password"
+   "FORGET.PASSWORD": "/api/users/forget-password",
+   "LANGUAGE_LIST": "/api/translations",
+   "GET_LANGUAGE": "/api/translations"
 }

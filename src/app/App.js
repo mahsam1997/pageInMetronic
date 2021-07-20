@@ -12,6 +12,8 @@ import { Integrations } from "@sentry/apm";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 
+import "./utils/i18next";
+
 const RtlStyles = React.lazy(() => import("./components/RtlStyles"));
 const LtrStyles = React.lazy(() => import("./components/LtrStyles"));
 
