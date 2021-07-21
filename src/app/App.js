@@ -2,7 +2,7 @@
  * Entry application component used to compose providers and render Routes.
  * */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "../app/Routes";
 import { I18nProvider } from "../_metronic/i18n";
@@ -12,7 +12,7 @@ import { Integrations } from "@sentry/apm";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 
-import "./utils/i18next";
+import getList from "./utils/i18next";
 
 const RtlStyles = React.lazy(() => import("./components/RtlStyles"));
 const LtrStyles = React.lazy(() => import("./components/LtrStyles"));
@@ -34,17 +34,28 @@ body.style.direction = isEnglish ? "ltr" : "rtl";
 
 export default function App({ basename }) {
    const [isAuth, setIsAuth] = useState(isAuthenticate());
+   const [isLanguageReady, setIsLanguageReady] = useState(false);
+
+   useEffect(() => {
+      const setupLanguage = async () => {
+         setIsLanguageReady(await getList());
+      };
+
+      setupLanguage();
+   }, []);
 
    return (
       <React.Suspense fallback={<LayoutSplashScreen />}>
          {isEnglish ? <LtrStyles /> : <RtlStyles />}
          <BrowserRouter basename={basename}>
             <MaterialThemeProvider>
-               <I18nProvider>
-                  <AuthenticationProvider value={{ isAuth, setIsAuth }}>
-                     <Routes />
-                  </AuthenticationProvider>
-               </I18nProvider>
+               {isLanguageReady && (
+                  <I18nProvider>
+                     <AuthenticationProvider value={{ isAuth, setIsAuth }}>
+                        <Routes />
+                     </AuthenticationProvider>
+                  </I18nProvider>
+               )}
             </MaterialThemeProvider>
          </BrowserRouter>
       </React.Suspense>

@@ -97,8 +97,9 @@ const getList = async () => {
             },
          });
    }
+   return true;
 };
-getList();
+export default getList;
 
 // i18next
 //    .use(ChainedBackend)
