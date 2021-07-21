@@ -1,18 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+// import { FormattedMessage } from "react-intl";
 import Login from "./Login/index";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
-
+import { useTranslation } from "react-i18next";
 import routes from "../../../router/routes";
 
 import logo from "../../../Assets/images/logo.jpg";
 import pic from "../../../Assets/images/pic-aside.jpg";
 
 export function AuthPage() {
+   const { t } = useTranslation();
+
    return (
       <>
          <div className="d-flex flex-column flex-root">
@@ -60,9 +62,11 @@ export function AuthPage() {
                         <img src={logo} alt="logo" className="aside-logo" />
 
                         <div className="aside-title">
-                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.1" />
+                           {/* <FormattedMessage id="AUTH.AUTHPAGE.TITLE.1" /> */}
+                           {t("AUTH.AUTHPAGE.TITLE.1")}
                            <br />
-                           <FormattedMessage id="AUTH.AUTHPAGE.TITLE.2" />
+                           {/* <FormattedMessage id="AUTH.AUTHPAGE.TITLE.2" /> */}
+                           {t("AUTH.AUTHPAGE.TITLE.2")}
                         </div>
                      </div>
                   </div>

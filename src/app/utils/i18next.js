@@ -12,11 +12,8 @@ import { getLanguageList } from "../services/language.service";
 
 import urls from "../services/urls.json";
 
-const fallbackLng = ["en"];
-const availableLanguages = ["fa", "en"];
-
-// const fallbackLng = [];
-// const availableLanguages = [];
+const fallbackLng = [];
+const availableLanguages = [];
 
 const detectionOptions = {
    // order and from where user language should be detected
@@ -62,7 +59,6 @@ const getList = async () => {
    if (response?.data?.success) {
       response.data.data.forEach((lang, i) => {
          if (lang.isDefault) fallbackLng.push(lang.language);
-
          availableLanguages.push(lang.language);
       });
 
@@ -74,6 +70,13 @@ const getList = async () => {
             fallbackLng,
             debug: true,
 
+            //
+            // keySeparator: false,
+            // react: {
+            //    wait: true,
+            //    useSuspense: true,
+            // },
+            //
             backend: {
                backends: [LocalStorageBackend, HttpBackend],
                backendOptions: [
@@ -82,10 +85,15 @@ const getList = async () => {
                      defaultVersion: version,
                   },
                   {
-                     loadPath: `${process.env.REACT_APP_BASE_URL}${urls.GET_LANGUAGE}/get?language={{lng}}&platform=adminPanel`,
+                     loadPath: `${process.env.REACT_APP_BASE_URL}${urls.LANGUAGE}/get?language={{lng}}&platform=adminPanel`,
 
-                     parse: data =>
-                        convertLang(JSON.parse(data).data.translations),
+                     parse: data => {
+                        console.log(
+                           "parsee: ",
+                           convertLang(JSON.parse(data).data.translations)
+                        );
+                        return convertLang(JSON.parse(data).data.translations);
+                     },
                   },
                ],
             },
@@ -99,34 +107,5 @@ const getList = async () => {
    }
    return true;
 };
+
 export default getList;
-
-// i18next
-//    .use(ChainedBackend)
-//    .use(LanguageDetector)
-//    .use(initReactI18next)
-//    .init({
-//       fallbackLng,
-//       debug: true,
-
-//       backend: {
-//          backends: [LocalStorageBackend, HttpBackend],
-//          backendOptions: [
-//             {
-//                expirationTime: 7 * 24 * 60 * 60 * 1000, // 7 days
-//                defaultVersion: version,
-//             },
-//             {
-//                loadPath: `${process.env.REACT_APP_BASE_URL}${urls.GET_LANGUAGE}/get?language={{lng}}&platform=adminPanel`,
-
-//                parse: data => convertLang(JSON.parse(data).data.translations),
-//             },
-//          ],
-//       },
-//       whitelist: availableLanguages,
-//       detection: detectionOptions,
-
-//       interpolation: {
-//          escapeValue: false,
-//       },
-//    });

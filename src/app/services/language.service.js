@@ -3,9 +3,11 @@ import http from "./http.service";
 import urls from "./urls.json";
 
 const getLanguageList = () =>
-   http.get(`${urls.LANGUAGE_LIST}/get-list?platform=adminPanel`);
+   http.get(`${urls.LANGUAGE}/get-list?platform=adminPanel`);
 
-// const getLanguage = () =>
-//    http.get(`${urls.LANGUAGE_LIST}/get-list?platform=adminPanel`);
+const createLanguage = newLang => http.post(urls.LANGUAGE, newLang);
 
-export { getLanguageList };
+const editLanguage = (langId, editLang) =>
+   http.put(`${urls.LANGUAGE}/${langId}`, editLang);
+
+export { getLanguageList, createLanguage, editLanguage };
