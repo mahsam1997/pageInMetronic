@@ -57,7 +57,7 @@ function Registration(props) {
             fullName,
          },
       };
-      console.log(newUser);
+
       const { data } = await register(newUser);
       if (data?.success) {
          const { id, refresh, role, token } = data.data;
