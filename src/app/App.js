@@ -12,17 +12,30 @@ import { Integrations } from "@sentry/apm";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 
+const RtlStyles = React.lazy(() => import("./components/RtlStyles"));
+const LtrStyles = React.lazy(() => import("./components/LtrStyles"));
+
 Sentry.init({
    dsn: "https://bc196634740145339f746fdfdc7b10e9@sentry.dropp.ir/19",
    integrations: [new Integrations.Tracing()],
    tracesSampleRate: 1.0,
 });
 
+const language =
+   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
+const body = document.getElementById("kt_body");
+
+const isEnglish = language === "en";
+body.direction = isEnglish ? "ltr" : "rtl";
+body.dir = isEnglish ? "ltr" : "rtl";
+body.style.direction = isEnglish ? "ltr" : "rtl";
+
 export default function App({ basename }) {
    const [isAuth, setIsAuth] = useState(isAuthenticate());
 
    return (
       <React.Suspense fallback={<LayoutSplashScreen />}>
+         {isEnglish ? <LtrStyles /> : <RtlStyles />}
          <BrowserRouter basename={basename}>
             <MaterialThemeProvider>
                <I18nProvider>
