@@ -67,7 +67,7 @@
         "react-bootstrap-table-next": "4.0.2",
         "react-bootstrap-table2-paginator": "2.1.2",
         "react-datepicker": "2.16.0",
-        "react-debounce-input": "^3.2.3",
+        "react-debounce-input": "^3.2.4",
         "react-dom": "16.12.0",
         "react-draggable": "4.4.2",
         "react-inlinesvg": "1.2.0",
