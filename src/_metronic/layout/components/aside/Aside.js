@@ -11,7 +11,7 @@ import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDr
 import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
-
+import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
 
 export function Aside() {
@@ -141,7 +141,7 @@ export function Aside() {
                            placement={placement}
                            overlay={
                               <Tooltip id="metronic-features">
-                                 Metronic Features
+                                 Latest Reports
                               </Tooltip>
                            }
                         >
@@ -152,42 +152,6 @@ export function Aside() {
                               data-toggle="tab"
                               data-target={`#${tabs.tabId2}`}
                               onClick={() => handleTabChange(tabs.tabId2)}
-                              role="tab"
-                           >
-                              <span className="svg-icon svg-icon-lg">
-                                 <SVG
-                                    src={toAbsoluteUrl(
-                                       "/media/svg/icons/Communication/Group.svg"
-                                    )}
-                                 />
-                              </span>
-                           </a>
-                        </OverlayTrigger>
-                     </li>
-                     {/* end::Item */}
-
-                     {/* begin::Item */}
-                     <li
-                        className="nav-item mb-3"
-                        data-toggle="tooltip"
-                        data-placement="rigth"
-                        data-container="body"
-                        data-boundary="window"
-                        title="Latest Reports"
-                     >
-                        <OverlayTrigger
-                           placement={placement}
-                           overlay={
-                              <Tooltip id="latest-reports">
-                                 Latest Reports
-                              </Tooltip>
-                           }
-                        >
-                           <a
-                              href="#"
-                              className="nav-link btn btn-icon btn-clean btn-lg"
-                              data-toggle="tab"
-                              data-target="#kt_aside_tab_3"
                               role="tab"
                            >
                               <span className="svg-icon svg-icon-lg">
@@ -204,6 +168,42 @@ export function Aside() {
 
                      {/* begin::Item */}
                      <li
+                        className="nav-item mb-3"
+                        data-toggle="tooltip"
+                        data-placement="rigth"
+                        data-container="body"
+                        data-boundary="window"
+                        title="User Management"
+                     >
+                        <OverlayTrigger
+                           placement={placement}
+                           overlay={
+                              <Tooltip id="latest-reports">
+                                 User Management
+                              </Tooltip>
+                           }
+                        >
+                           <Link
+                              to="/e-commerce/customers"
+                              className="nav-link btn btn-icon btn-clean btn-lg"
+                              data-toggle="tab"
+                              data-target="#kt_aside_tab_3"
+                              role="tab"
+                           >
+                              <span className="svg-icon svg-icon-lg">
+                                 <SVG
+                                    src={toAbsoluteUrl(
+                                       "/media/svg/icons/Communication/Group.svg"
+                                    )}
+                                 />
+                              </span>
+                           </Link>
+                        </OverlayTrigger>
+                     </li>
+                     {/* end::Item */}
+
+                     {/* begin::Item */}
+                     {/* <li
                         className="nav-item mb-3"
                         data-toggle="tooltip"
                         data-placement="rigth"
@@ -235,11 +235,11 @@ export function Aside() {
                               </span>
                            </a>
                         </OverlayTrigger>
-                     </li>
+                     </li> */}
                      {/* end::Item */}
 
                      {/* begin::Item */}
-                     <li
+                     {/* <li
                         className="nav-item mb-3"
                         data-toggle="tooltip"
                         data-placement="rigth"
@@ -271,11 +271,11 @@ export function Aside() {
                               </span>
                            </a>
                         </OverlayTrigger>
-                     </li>
+                     </li> */}
                      {/* end::Item */}
 
                      {/* begin::Item */}
-                     <li
+                     {/* <li
                         className="nav-item mb-3"
                         data-toggle="tooltip"
                         data-placement="rigth"
@@ -307,7 +307,7 @@ export function Aside() {
                               </span>
                            </a>
                         </OverlayTrigger>
-                     </li>
+                     </li> */}
                      {/* end::Item */}
                   </ul>
                   {/* end::Nav */}
