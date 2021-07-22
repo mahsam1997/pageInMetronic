@@ -37,6 +37,8 @@ function Registration(props) {
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
 
+   const isEnglish = intl.locale === "en";
+
    const registrationSchema = schema(useFormatMessage);
 
    const onSubmit = async ({
@@ -91,6 +93,7 @@ function Registration(props) {
 
                return (
                   <Form
+                     noValidate="noValidate"
                      id="kt_login_signin_form"
                      className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
                   >
@@ -141,7 +144,7 @@ function Registration(props) {
                               />
                            </div>
                            <PhoneSelect
-                              options={phonePrefixOptions}
+                              options={phonePrefixOptions(isEnglish)}
                               value={subPhoneNumber}
                               onChange={value =>
                                  setFieldValue("subPhoneNumber", value.value)
@@ -230,7 +233,7 @@ function Registration(props) {
                               !formik.isValid ||
                               !acceptTerms
                            }
-                           className="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                           className="btn btn-primary font-weight-bold px-10 my-3 "
                         >
                            <FormattedMessage
                               id="AUTH.GENERAL.REGISTER_BUTTON"
