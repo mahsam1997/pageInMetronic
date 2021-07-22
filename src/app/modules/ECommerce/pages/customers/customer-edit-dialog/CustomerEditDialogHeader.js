@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import { useIntl } from "react-intl";
 
-export function CustomerEditDialogHeader({ id }) {
-  // Customers Redux state
-  const { customerForEdit, actionsLoading } = useSelector(
-    (state) => ({
-      customerForEdit: state.customers.customerForEdit,
-      actionsLoading: state.customers.actionsLoading,
-    }),
-    shallowEqual
-  );
+import formatMessage from "../../../../../utils/formatMessage";
 
-  const [title, setTitle] = useState("");
-  // Title couting
-  useEffect(() => {
-    let _title = id ? "" : "New Customer";
-    if (customerForEdit && id) {
-      _title = `Edit customer '${customerForEdit.firstName} ${customerForEdit.lastName}'`;
-    }
+export function CustomerEditDialogHeader({ id, customerForEdit, loading }) {
+   const [title, setTitle] = useState("");
 
-    setTitle(_title);
-    // eslint-disable-next-line
-  }, [customerForEdit, actionsLoading]);
+   const intl = useIntl();
 
-  return (
-    <>
-      {actionsLoading && <ModalProgressBar />}
-      <Modal.Header closeButton>
-        <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
-      </Modal.Header>
-    </>
-  );
+   // Title Form
+   useEffect(() => {
+      let _title = id
+         ? ""
+         : formatMessage(intl, "ECOMMERCE.CUSTOMERS.NEW_CUSTOMER");
+      if (customerForEdit && id) {
+         _title = `${formatMessage(
+            intl,
+            "ECOMMERCE.CUSTOMERS.EDIT_CUSTOMER"
+         )} '${customerForEdit.profile.fullName}'`;
+      }
+
+      setTitle(_title);
+      // eslint-disable-next-line
+   }, [customerForEdit, loading]);
+
+   return (
+      <>
+         {loading && <ModalProgressBar />}
+         <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
+         </Modal.Header>
+      </>
+   );
 }

@@ -1,89 +1,73 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {ModalProgressBar} from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/customers/customersActions";
-import {useCustomersUIContext} from "../CustomersUIContext";
+import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
+import { FormattedMessage } from "react-intl";
+import { deleteUser } from "../../../../../services/users.service";
 
 export function CustomerDeleteDialog({ id, show, onHide }) {
-  // Customers UI Context
-  const customersUIContext = useCustomersUIContext();
-  const customersUIProps = useMemo(() => {
-    return {
-      setIds: customersUIContext.setIds,
-      queryParams: customersUIContext.queryParams
-    };
-  }, [customersUIContext]);
+   const [loading, setLoading] = useState(false);
 
-  // Customers Redux state
-  const dispatch = useDispatch();
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.customers.actionsLoading }),
-    shallowEqual
-  );
+   // if !id we should close modal
+   useEffect(() => {
+      if (!id) {
+         onHide();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [id]);
 
-  // if !id we should close modal
-  useEffect(() => {
-    if (!id) {
-      onHide();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+   const deleteCustomer = async () => {
+      // server request for deleting customer by id
+      setLoading(true);
+      const response = await deleteUser(id);
+      response?.data?.success && onHide();
+      setLoading(false);
+   };
 
-  // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
-
-  const deleteCustomer = () => {
-    // server request for deleting customer by id
-    dispatch(actions.deleteCustomer(id)).then(() => {
-      // refresh list after deletion
-      dispatch(actions.fetchCustomers(customersUIProps.queryParams));
-      // clear selections list
-      customersUIProps.setIds([]);
-      // closing delete modal
-      onHide();
-    });
-  };
-
-  return (
-    <Modal
-      show={show}
-      onHide={onHide}
-      aria-labelledby="example-modal-sizes-title-lg"
-    >
-      {/*begin::Loading*/}
-      {isLoading && <ModalProgressBar />}
-      {/*end::Loading*/}
-      <Modal.Header closeButton>
-        <Modal.Title id="example-modal-sizes-title-lg">
-          Customer Delete
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {!isLoading && (
-          <span>Are you sure to permanently delete this customer?</span>
-        )}
-        {isLoading && <span>Customer is deleting...</span>}
-      </Modal.Body>
-      <Modal.Footer>
-        <div>
-          <button
-            type="button"
-            onClick={onHide}
-            className="btn btn-light btn-elevate"
-          >
-            Cancel
-          </button>
-          <> </>
-          <button
-            type="button"
-            onClick={deleteCustomer}
-            className="btn btn-primary btn-elevate"
-          >
-            Delete
-          </button>
-        </div>
-      </Modal.Footer>
-    </Modal>
-  );
+   return (
+      <Modal
+         show={show}
+         onHide={onHide}
+         aria-labelledby="example-modal-sizes-title-lg"
+      >
+         {/*begin::Loading*/}
+         {loading && <ModalProgressBar />}
+         {/*end::Loading*/}
+         <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+               <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE" />
+            </Modal.Title>
+         </Modal.Header>
+         <Modal.Body>
+            {!loading && (
+               <span>
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.DESCRIPTION" />
+               </span>
+            )}
+            {loading && (
+               <span>
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_MULTY.WAIT_DESCRIPTION" />
+               </span>
+            )}
+         </Modal.Body>
+         <Modal.Footer>
+            <div>
+               <button
+                  type="button"
+                  onClick={onHide}
+                  className="btn btn-light btn-elevate"
+               >
+                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
+               </button>
+               <> </>
+               <button
+                  type="button"
+                  onClick={deleteCustomer}
+                  className="btn btn-primary btn-elevate"
+               >
+                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
+               </button>
+            </div>
+         </Modal.Footer>
+      </Modal>
+   );
 }

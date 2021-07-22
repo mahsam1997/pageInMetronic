@@ -1,14 +1,27 @@
-import React, { useEffect } from "react";
-import { shallowEqual, useSelector } from "react-redux";
+import React, { useMemo } from "react";
 import { LoadingDialog } from "../../../../../../_metronic/_partials/controls";
 
+import { useIntl } from "react-intl";
+
+import { useCustomersUIContext } from "../CustomersUIContext";
+
+import formatMessage from "../../../../../utils/formatMessage";
+
 export function CustomersLoadingDialog() {
-  // Customers Redux state
-  const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.customers.listLoading }),
-    shallowEqual
-  );
-  // looking for loading/dispatch
-  useEffect(() => {}, [isLoading]);
-  return <LoadingDialog isLoading={isLoading} text="Loading ..." />;
+   const intl = useIntl();
+
+   // Customers UI Context
+   const customersUIContext = useCustomersUIContext();
+   const customersUIProps = useMemo(() => {
+      return {
+         isLoading: customersUIContext.isLoading,
+      };
+   }, [customersUIContext]);
+
+   return (
+      <LoadingDialog
+         isLoading={customersUIProps.isLoading}
+         text={formatMessage(intl, "ECOMMERCE.CUSTOMERS.LOADING")}
+      />
+   );
 }

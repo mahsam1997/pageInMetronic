@@ -9,94 +9,96 @@ import { CustomersUpdateStateDialog } from "./customers-update-status-dialog/Cus
 import { CustomersUIProvider } from "./CustomersUIContext";
 import { CustomersCard } from "./CustomersCard";
 
-export function CustomersPage({ history }) {
-  const customersUIEvents = {
-    newCustomerButtonClick: () => {
-      history.push("/e-commerce/customers/new");
-    },
-    openEditCustomerDialog: (id) => {
-      history.push(`/e-commerce/customers/${id}/edit`);
-    },
-    openDeleteCustomerDialog: (id) => {
-      history.push(`/e-commerce/customers/${id}/delete`);
-    },
-    openDeleteCustomersDialog: () => {
-      history.push(`/e-commerce/customers/deleteCustomers`);
-    },
-    openFetchCustomersDialog: () => {
-      history.push(`/e-commerce/customers/fetch`);
-    },
-    openUpdateCustomersStatusDialog: () => {
-      history.push("/e-commerce/customers/updateStatus");
-    }
-  }
+import routes from "../../../../router/routes.json";
 
-  return (
-    <CustomersUIProvider customersUIEvents={customersUIEvents}>
-      <CustomersLoadingDialog />
-      <Route path="/e-commerce/customers/new">
-        {({ history, match }) => (
-          <CustomerEditDialog
-            show={match != null}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <Route path="/e-commerce/customers/:id/edit">
-        {({ history, match }) => (
-          <CustomerEditDialog
-            show={match != null}
-            id={match && match.params.id}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <Route path="/e-commerce/customers/deleteCustomers">
-        {({ history, match }) => (
-          <CustomersDeleteDialog
-            show={match != null}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <Route path="/e-commerce/customers/:id/delete">
-        {({ history, match }) => (
-          <CustomerDeleteDialog
-            show={match != null}
-            id={match && match.params.id}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <Route path="/e-commerce/customers/fetch">
-        {({ history, match }) => (
-          <CustomersFetchDialog
-            show={match != null}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <Route path="/e-commerce/customers/updateStatus">
-        {({ history, match }) => (
-          <CustomersUpdateStateDialog
-            show={match != null}
-            onHide={() => {
-              history.push("/e-commerce/customers");
-            }}
-          />
-        )}
-      </Route>
-      <CustomersCard />
-    </CustomersUIProvider>
-  );
+export function CustomersPage({ history }) {
+   const customersUIEvents = {
+      newCustomerButtonClick: () => {
+         history.push(routes.ECOMMERCE_CUSTOMERS_NEW);
+      },
+      openEditCustomerDialog: id => {
+         history.push(`${routes.ECOMMERCE_CUSTOMERS}/${id}/edit`);
+      },
+      openDeleteCustomerDialog: id => {
+         history.push(`${routes.ECOMMERCE_CUSTOMERS}/${id}/delete`);
+      },
+      openDeleteCustomersDialog: () => {
+         history.push(routes.ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS);
+      },
+      openFetchCustomersDialog: () => {
+         history.push(routes.ECOMMERCE_CUSTOMERS_FETCH);
+      },
+      openUpdateCustomersStatusDialog: () => {
+         history.push(routes.ECOMMERCE_CUSTOMERS_UPDATE_STATUS);
+      },
+   };
+
+   return (
+      <CustomersUIProvider customersUIEvents={customersUIEvents}>
+         <CustomersLoadingDialog />
+         <Route path={routes.ECOMMERCE_CUSTOMERS_NEW}>
+            {({ match }) => (
+               <CustomerEditDialog
+                  show={match != null}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <Route path={routes.ECOMMERCE_CUSTOMERS_EDIT}>
+            {({ match }) => (
+               <CustomerEditDialog
+                  show={match != null}
+                  id={match && match.params.id}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <Route path={routes.ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS}>
+            {({ match }) => (
+               <CustomersDeleteDialog
+                  show={match != null}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <Route path={routes.ECOMMERCE_CUSTOMERS_DELETE}>
+            {({ match }) => (
+               <CustomerDeleteDialog
+                  show={match != null}
+                  id={match && match.params.id}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <Route path={routes.ECOMMERCE_CUSTOMERS_FETCH}>
+            {({ match }) => (
+               <CustomersFetchDialog
+                  show={match != null}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <Route path={routes.ECOMMERCE_CUSTOMERS_UPDATE_STATUS}>
+            {({ match }) => (
+               <CustomersUpdateStateDialog
+                  show={match != null}
+                  onHide={() => {
+                     history.push(routes.ECOMMERCE_CUSTOMERS);
+                  }}
+               />
+            )}
+         </Route>
+         <CustomersCard />
+      </CustomersUIProvider>
+   );
 }
