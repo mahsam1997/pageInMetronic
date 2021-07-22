@@ -8,31 +8,31 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 
-import { FormattedMessage, useIntl } from "react-intl";
+import CustomButton from "../../../../../components/common/CustomButton";
+
+import { useIntl } from "react-intl";
 import useFormatMessage from "../../../../../hooks/useFormatMessage";
 import formatMessage from "../../../../../utils/formatMessage";
 
 // Validation schema
 const CustomerEditSchema = formatedMessage =>
    Yup.object().shape({
-      profile: Yup.object().shape({
-         fullName: Yup.string()
-            .min(
-               3,
-               formatedMessage("MIN_X_CHARACTERS", {
-                  x: 3,
-                  noun: formatedMessage("AUTH.INPUT.FULLNAME"),
-               })
-            )
-            .max(
-               50,
-               formatedMessage("MAX_X_CHARACTERS", {
-                  x: 50,
-                  noun: formatedMessage("AUTH.INPUT.FULLNAME"),
-               })
-            )
-            .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
-      }),
+      fullName: Yup.string()
+         .min(
+            3,
+            formatedMessage("MIN_X_CHARACTERS", {
+               x: 3,
+               noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+            })
+         )
+         .max(
+            50,
+            formatedMessage("MAX_X_CHARACTERS", {
+               x: 50,
+               noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+            })
+         )
+         .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
 
       email: Yup.string()
          .email(formatedMessage("AUTH.VALIDATION.EMAIL"))
@@ -74,9 +74,7 @@ export function CustomerEditForm({
    const initialValues = {
       mobile,
       subMobile,
-      profile: {
-         fullName: customer.profile.fullName,
-      },
+      fullName: customer.profile.fullName,
       email: customer.email,
    };
 
@@ -103,7 +101,7 @@ export function CustomerEditForm({
                            {/* Full Name */}
                            <div className="col-lg-4">
                               <Field
-                                 name="profile.fullName"
+                                 name="fullName"
                                  component={Input}
                                  placeholder={formatMessage(
                                     intl,
@@ -123,16 +121,25 @@ export function CustomerEditForm({
                                  component={Input}
                                  placeholder={formatMessage(
                                     intl,
-                                    "AUTH.INPUT.EMAIL"
+                                    "ECOMMERCE.COMMON.EMAIL"
                                  )}
-                                 label="Email"
+                                 label={formatMessage(
+                                    intl,
+                                    "ECOMMERCE.COMMON.EMAIL"
+                                 )}
                               />
                            </div>
                         </div>
                         <div className="form-group row">
                            {/* Sub Mobile */}
                            <div className="col-lg-4 ">
-                              <Select name="subMobile" label="sub phone">
+                              <Select
+                                 name="subMobile"
+                                 label={formatMessage(
+                                    intl,
+                                    "DEFAULT.SUB_PHONE"
+                                 )}
+                              >
                                  <option>+98</option>
                                  <option>+97</option>
                               </Select>
@@ -145,30 +152,29 @@ export function CustomerEditForm({
                                  component={Input}
                                  placeholder={formatMessage(
                                     intl,
-                                    "AUTH.INPUT.PHONE"
+                                    "ECOMMERCE.COMMON.MOBILE"
                                  )}
-                                 label={formatMessage(intl, "AUTH.INPUT.PHONE")}
+                                 label={formatMessage(
+                                    intl,
+                                    "ECOMMERCE.COMMON.MOBILE"
+                                 )}
                               />
                            </div>
                         </div>
                      </Form>
                   </Modal.Body>
                   <Modal.Footer>
-                     <button
-                        type="button"
+                     <CustomButton
+                        title="AUTH.GENERAL.CANCEL"
                         onClick={onHide}
-                        className="btn btn-light btn-elevate"
-                     >
-                        <FormattedMessage id="AUTH.GENERAL.CANCEL" />
-                     </button>
-                     <> </>
-                     <button
+                        classNames="btn btn-light btn-elevate"
+                     />
+                     <CustomButton
                         type="submit"
+                        title="DEFAULT.SAVE"
                         onClick={() => handleSubmit()}
-                        className="btn btn-primary btn-elevate"
-                     >
-                        <FormattedMessage id="ECOMMERCE.CUSTOMERS.SAVA" />
-                     </button>
+                        classNames="btn btn-primary btn-elevate"
+                     />
                   </Modal.Footer>
                </>
             )}

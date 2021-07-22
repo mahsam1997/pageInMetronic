@@ -4,6 +4,7 @@ import { useCustomersUIContext } from "../CustomersUIContext";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 
 import { FormattedMessage } from "react-intl";
+import CustomButton from "../../../../../components/common/CustomButton";
 
 import { deleteUser } from "../../../../../services/users.service";
 
@@ -69,23 +70,16 @@ export function CustomersDeleteDialog({ show, onHide }) {
             )}
          </Modal.Body>
          <Modal.Footer>
-            <div>
-               <button
-                  type="button"
-                  onClick={onHide}
-                  className="btn btn-light btn-elevate"
-               >
-                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
-               </button>
-               <> </>
-               <button
-                  type="button"
-                  onClick={deleteCustomers}
-                  className="btn btn-primary btn-elevate"
-               >
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
-               </button>
-            </div>
+            <CustomButton
+               title="AUTH.GENERAL.CANCEL"
+               onClick={onHide}
+               classNames="btn btn-light btn-elevate"
+            />
+            <CustomButton
+               title="DEFAULT.DELETE"
+               onClick={deleteCustomers}
+               classNames="btn btn-primary btn-elevate"
+            />
          </Modal.Footer>
       </Modal>
    );

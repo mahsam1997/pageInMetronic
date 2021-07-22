@@ -4,6 +4,8 @@ import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls
 import { FormattedMessage } from "react-intl";
 import { deleteUser } from "../../../../../services/users.service";
 
+import CustomButton from "../../../../../components/common/CustomButton";
+
 export function CustomerDeleteDialog({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
 
@@ -50,23 +52,16 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
             )}
          </Modal.Body>
          <Modal.Footer>
-            <div>
-               <button
-                  type="button"
-                  onClick={onHide}
-                  className="btn btn-light btn-elevate"
-               >
-                  <FormattedMessage id="AUTH.GENERAL.CANCEL" />
-               </button>
-               <> </>
-               <button
-                  type="button"
-                  onClick={deleteCustomer}
-                  className="btn btn-primary btn-elevate"
-               >
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.DELETE" />
-               </button>
-            </div>
+            <CustomButton
+               title="AUTH.GENERAL.CANCEL"
+               onClick={onHide}
+               classNames="btn btn-light btn-elevate"
+            />
+            <CustomButton
+               title="DEFAULT.DELETE"
+               onClick={deleteCustomer}
+               classNames="btn btn-primary btn-elevate"
+            />
          </Modal.Footer>
       </Modal>
    );

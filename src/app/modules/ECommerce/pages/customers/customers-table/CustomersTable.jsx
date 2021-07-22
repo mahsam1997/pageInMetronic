@@ -1,7 +1,7 @@
 // React bootstrap table next =>
 // DOCS: https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/
 // STORYBOOK: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useLayoutEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
    PaginationProvider,
@@ -58,7 +58,7 @@ export function CustomersTable() {
       },
       {
          dataField: "mobile",
-         text: useFormatMessage("ECOMMERCE.COMMON.Mobile"),
+         text: useFormatMessage("ECOMMERCE.COMMON.MOBILE"),
       },
       {
          dataField: "role",
@@ -92,6 +92,13 @@ export function CustomersTable() {
       page: customersUIProps.queryParams.pageNumber,
    };
 
+   useLayoutEffect(() => {
+      setEntities(prevCustomers => ({
+         customers: [],
+         total: prevCustomers.total,
+      }));
+   }, [customersUIProps.queryParams]);
+
    useEffect(() => {
       const getCustomers = async () => {
          setLoading(true);
@@ -100,7 +107,7 @@ export function CustomersTable() {
             customersUIProps.queryParams.pageNumber,
             customersUIProps.queryParams.filter
          );
-         if (users.data.success) {
+         if (users?.data?.success) {
             setEntities({
                customers: users.data.data,
                total: users.data.total,

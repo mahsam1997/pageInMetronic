@@ -2,19 +2,28 @@ import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useCustomersUIContext } from "../CustomersUIContext";
+// import { Select } from "../../../../../../_metronic/_partials/controls";
 
 import { FormattedMessage, useIntl } from "react-intl";
-
+import CustomDebounceInput from "../../../../../components/common/CustomDebounceInput";
+import CustomSelect from "../../../../../components/common/CustomSelect";
 import formatMessage from "../../../../../utils/formatMessage";
 
+import {
+   statusPrefixOptions,
+   rolePrefixOptions,
+   fieldsIds,
+   searchByPrefixOptions,
+} from "../../../../../enums/CustomersPrefixOptions";
+
 const prepareFilter = (queryParams, values) => {
-   const { status, roll, searchText, searchBy } = values;
+   const { status, role, searchText, searchBy } = values;
    const newQueryParams = { ...queryParams };
    const filter = {};
    // Filter by status
    filter.status = status;
    // Filter by roll
-   filter.roll = roll;
+   filter.role = role;
 
    // Filter by all fields
    if (searchText) {
@@ -25,10 +34,12 @@ const prepareFilter = (queryParams, values) => {
    return newQueryParams;
 };
 
-const fieldsIds = {
-   fullName: "AUTH.INPUT.FULLNAME",
-   mobile: "ECOMMERCE.COMMON.Mobile",
-   email: "ECOMMERCE.COMMON.EMAIL",
+const mobileRemoveFirstChar = value => {
+   if (value[0] === "+" || value[0] === "0") {
+      console.log(value.slice(1));
+      return value.slice(1);
+   }
+   return value;
 };
 
 export function CustomersFilter({ listLoading }) {
@@ -61,7 +72,7 @@ export function CustomersFilter({ listLoading }) {
          <Formik
             initialValues={{
                status: "",
-               roll: "",
+               role: "",
                searchText: "",
                searchBy: "fullName",
             }}
@@ -75,21 +86,18 @@ export function CustomersFilter({ listLoading }) {
                handleBlur,
                handleChange,
                setFieldValue,
+               setFieldTouched,
             }) => (
                <form onSubmit={handleSubmit} className="form form-label-right">
                   <div className="form-group row">
                      <div className="col-lg-2">
-                        <select
+                        {/* <Select
                            className="form-control"
                            name="status"
-                           // placeholder="Filter by Status"
-                           // TODO: Change this code
                            onChange={e => {
                               setFieldValue("status", e.target.value);
                               handleSubmit();
                            }}
-                           onBlur={handleBlur}
-                           value={values.status}
                         >
                            <option value="">
                               {formatMessage(intl, "ECOMMERCE.COMMON.ALL")}
@@ -102,7 +110,17 @@ export function CustomersFilter({ listLoading }) {
                            <option value="removed">
                               {formatMessage(intl, "ECOMMERCE.COMMON.REMOVED")}
                            </option>
-                        </select>
+                        </Select> */}
+                        <CustomSelect
+                           options={statusPrefixOptions(intl, formatMessage)}
+                           value={values.status}
+                           onChange={value => {
+                              setFieldValue("status", value.value);
+                              handleSubmit();
+                           }}
+                           onBlur={() => setFieldTouched("status", true)}
+                           name="status"
+                        />
                         <small className="form-text text-muted">
                            <FormattedMessage
                               id="ECOMMERCE.COMMON.FILTER"
@@ -112,16 +130,15 @@ export function CustomersFilter({ listLoading }) {
                         </small>
                      </div>
                      <div className="col-lg-2">
-                        <select
+                        {/* <select
                            className="form-control"
-                           // placeholder="Filter by Roll"
                            name="roll"
                            onBlur={handleBlur}
                            onChange={e => {
-                              setFieldValue("roll", e.target.value);
+                              setFieldValue("role", e.target.value);
                               handleSubmit();
                            }}
-                           value={values.roll}
+                           value={values.role}
                         >
                            <option value="">
                               {formatMessage(intl, "ECOMMERCE.COMMON.ALL")}
@@ -132,7 +149,18 @@ export function CustomersFilter({ listLoading }) {
                            <option value="user">
                               {formatMessage(intl, "ECOMMERCE.COMMON.USER")}
                            </option>
-                        </select>
+                        </select> */}
+
+                        <CustomSelect
+                           options={rolePrefixOptions(intl, formatMessage)}
+                           value={values.role}
+                           onChange={value => {
+                              setFieldValue("role", value.value);
+                              handleSubmit();
+                           }}
+                           onBlur={() => setFieldTouched("role", true)}
+                           name="role"
+                        />
                         <small className="form-text text-muted">
                            <FormattedMessage
                               id="ECOMMERCE.COMMON.FILTER"
@@ -141,33 +169,8 @@ export function CustomersFilter({ listLoading }) {
                            <FormattedMessage id="ECOMMERCE.COMMON.BY_ROLE" />
                         </small>
                      </div>
-                     <div className="col-lg-2">
-                        <input
-                           type="text"
-                           className="form-control"
-                           name="searchText"
-                           placeholder={formatMessage(
-                              intl,
-                              "ECOMMERCE.COMMON.SEARCH"
-                           )}
-                           onBlur={handleBlur}
-                           value={values.searchText}
-                           onChange={e => {
-                              setFieldValue("searchText", e.target.value);
-                              handleSubmit();
-                           }}
-                        />
-                        <small className="form-text text-muted">
-                           <FormattedMessage
-                              tagName="b"
-                              id="ECOMMERCE.COMMON.SEARCH"
-                           />
-                           <FormattedMessage id="ECOMMERCE.COMMON.IN" />
-                           <FormattedMessage id={fieldsIds[values.searchBy]} />
-                        </small>
-                     </div>
-                     <div className="col-lg-2">
-                        <select
+                     <div className="col-lg-3">
+                        {/* <select
                            className="form-control"
                            placeholder="Filter by "
                            name="searchBy"
@@ -187,13 +190,53 @@ export function CustomersFilter({ listLoading }) {
                            <option value="mobile">
                               {formatMessage(intl, fieldsIds.mobile)}
                            </option>
-                        </select>
+                        </select> */}
+
+                        <CustomSelect
+                           options={searchByPrefixOptions(intl, formatMessage)}
+                           value={values.searchBy}
+                           onChange={value => {
+                              setFieldValue("searchBy", value.value);
+                              handleSubmit();
+                           }}
+                           onBlur={() => setFieldTouched("searchBy", true)}
+                           name="searchBy"
+                        />
                         <small className="form-text text-muted">
                            <FormattedMessage
                               tagName="b"
                               id="ECOMMERCE.COMMON.SEARCH"
                            />
                            <FormattedMessage id="ECOMMERCE.COMMON.BY" />
+                           <FormattedMessage id={fieldsIds[values.searchBy]} />
+                        </small>
+                     </div>
+                     <div className="col-lg-3">
+                        <CustomDebounceInput
+                           type="text"
+                           className="form-control"
+                           name="searchText"
+                           placeholder={formatMessage(
+                              intl,
+                              "ECOMMERCE.COMMON.SEARCH"
+                           )}
+                           onBlur={handleBlur}
+                           value={values.searchText}
+                           onChange={e => {
+                              const value =
+                                 values.searchBy === "mobile"
+                                    ? mobileRemoveFirstChar(e.target.value)
+                                    : e.target.value;
+                              setFieldValue("searchText", value);
+                              handleSubmit();
+                           }}
+                        />
+                        <small className="form-text text-muted">
+                           <FormattedMessage
+                              tagName="b"
+                              id="ECOMMERCE.COMMON.SEARCH"
+                           />
+                           <FormattedMessage id="ECOMMERCE.COMMON.IN" />
                            <FormattedMessage id={fieldsIds[values.searchBy]} />
                         </small>
                      </div>

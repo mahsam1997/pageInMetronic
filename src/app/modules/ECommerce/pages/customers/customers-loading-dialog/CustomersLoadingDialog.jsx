@@ -21,7 +21,7 @@ export function CustomersLoadingDialog() {
    return (
       <LoadingDialog
          isLoading={customersUIProps.isLoading}
-         text={formatMessage(intl, "ECOMMERCE.CUSTOMERS.LOADING")}
+         text={formatMessage(intl, "DEFAULT.LOADING")}
       />
    );
 }

@@ -30,7 +30,7 @@ export function PaginationToolbar(props) {
          {isLoading && (
             <div className="d-flex align-items-center">
                <div className="mr-2 text-muted">
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.LOADING" />
+                  <FormattedMessage id={props.id} />
                </div>
                <div className="spinner spinner-primary mr-10"></div>
             </div>
@@ -63,3 +63,7 @@ export function PaginationToolbar(props) {
       </div>
    );
 }
+
+PaginationToolbar.defaultProps = {
+   id: "DEFAULT.LOADING",
+};

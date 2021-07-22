@@ -1,6 +1,6 @@
 import React from "react";
-import Select from "react-select";
 
+<<<<<<< HEAD
 const PhoneSelect = ({ options, value, ...props }) => {
    const selectStyles = {
       control: styles => ({
@@ -36,17 +36,23 @@ const PhoneSelect = ({ options, value, ...props }) => {
    };
 
    const defaultValue = options.filter(option => option.value === value)[0];
+=======
+import CustomSelect from "./common/CustomSelect";
+>>>>>>> user-management-api
 
+const PhoneSelect = ({ options, value }) => {
    return (
-      <Select
+      <CustomSelect
          options={options}
-         defaultValue={defaultValue}
-         styles={selectStyles}
-         components={{
-            IndicatorSeparator: () => null,
+         value={value}
+         customStyles={{
+            width: "90px",
+            padding: "7px 0",
+            borderRadius: "12px",
+            border: "none",
+            marginRight: "10px",
+            marginLeft: "10px",
          }}
-         // value={defaultValue}
-         {...props}
       />
    );
 };
