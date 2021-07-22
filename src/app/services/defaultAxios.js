@@ -9,6 +9,13 @@ export const setConfig = () => {
    instanceWithAuthorization.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 };
 
+export const addAuthorization = () => {
+   const token = localStorage.getItem("token");
+   if (token)
+      instanceWithAuthorization.defaults.headers.common["Authorization"] =
+         "Bearer " + token;
+};
+
 export const axiosSetup = axiosInstance => {
    axiosInstance.interceptors.request.use(
       req => {
@@ -28,10 +35,12 @@ export const axiosSetup = axiosInstance => {
 };
 
 setConfig();
+addAuthorization();
 axiosSetup(instance);
 axiosSetup(instanceWithAuthorization);
 
 const defaultAxios = {
+   // addAuthorization,
    axiosSetup,
    instance,
    instanceWithAuthorization,

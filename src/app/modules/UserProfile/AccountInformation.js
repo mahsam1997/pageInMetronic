@@ -8,23 +8,12 @@ import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 function AccountInformation(props) {
    // Fields
    const [loading, setloading] = useState(false);
-   const [user, setUser] = useState("@mahdi.zoraghi");
+   const [user] = useState("@mahdi.zoraghi");
    useEffect(() => {}, [user]);
 
    // Methods
    const saveUser = (values, setStatus, setSubmitting) => {
       setloading(true);
-      const updatedUser = Object.assign(user, {
-         username: values.username,
-         email: values.email,
-         language: values.language,
-         timeZone: values.timeZone,
-         communication: {
-            email: values.communicationEmail,
-            sms: values.communicationSMS,
-            phone: values.communicationPhone,
-         },
-      });
       // user for update preparation
       // dispatch(props.setUser(updatedUser));
       setTimeout(() => {

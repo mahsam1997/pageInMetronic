@@ -6,6 +6,7 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import CustomButton from "../../../../components/common/CustomButton";
 // hooks
 import useFormatMessage from "../../../../hooks/useFormatMessage";
 // context
@@ -223,7 +224,7 @@ function Registration(props) {
                      </div>
 
                      <div className="form-group d-flex">
-                        <button
+                        {/* <button
                            type="submit"
                            disabled={
                               formik.isSubmitting ||
@@ -236,18 +237,25 @@ function Registration(props) {
                               id="AUTH.GENERAL.REGISTER_BUTTON"
                               tagName="span"
                            />
-                        </button>
-
-                        <button
-                           type="button"
-                           className="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
+                        </button> */}
+                        <CustomButton
+                           type="submit"
+                           disabled={
+                              formik.isSubmitting ||
+                              !formik.isValid ||
+                              !acceptTerms
+                           }
+                           tagName="span"
+                           title="AUTH.GENERAL.REGISTER_BUTTON"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                        />
+                        <CustomButton
+                           title="AUTH.LOGIN.GOOGLE"
+                           tagName="span"
+                           classNames="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
                         >
                            <img src={googleLogo} alt="google logo" />
-                           <FormattedMessage
-                              id="AUTH.LOGIN.GOOGLE"
-                              tagName="span"
-                           />
-                        </button>
+                        </CustomButton>
                      </div>
                   </Form>
                );
