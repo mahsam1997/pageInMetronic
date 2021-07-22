@@ -6,7 +6,6 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
 // hooks
-import useFormatMessage from "../../../../hooks/useFormatMessage";
 import { useTranslation } from "react-i18next";
 // context
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
@@ -16,10 +15,11 @@ import { register } from "../../../../services/auth.service";
 import { setAuthenticate } from "../../../../utils/authenticate";
 import getInputClasses from "../../../../utils/getInputClasses";
 
-import schema from "./registerSchema";
+import registerSchema from "./registerSchema";
 import phonePrefixOptions from "../../../../enums/phonePrefixOptions";
 
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
+import i18next from "i18next";
 
 const initialValues = {
    fullName: "",
@@ -35,8 +35,6 @@ function Registration(props) {
 
    const { setIsAuth } = useContext(AuthenticationContext);
    const { t } = useTranslation();
-
-   const registrationSchema = schema(useFormatMessage);
 
    const onSubmit = async ({
       email,
@@ -62,6 +60,8 @@ function Registration(props) {
       }
    };
 
+   console.log(i18next.t("messages.AUTH.INPUT.PHONE"));
+
    return (
       <div
          className="register login-form login-signin"
@@ -79,7 +79,7 @@ function Registration(props) {
          <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
-            validationSchema={registrationSchema}
+            validationSchema={registerSchema(t)}
          >
             {formik => {
                const {

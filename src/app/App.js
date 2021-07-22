@@ -39,12 +39,12 @@ Sentry.init({
 // const editLng = async () => {
 //    const editedLng = {
 //       translations: objectToArray({
-//          messages: objectToArray(enMessages),
-//          errors: objectToArray(enErrors),
+//          messages: objectToArray(faMessages),
+//          errors: objectToArray(faErrors),
 //       }),
 //    };
 
-//    const response = await editLanguage("60f966ae98d3b600affc8898", editedLng);
+//    const response = await editLanguage("60f968a798d3b600affc88a9", editedLng);
 //    console.log(response);
 // };
 

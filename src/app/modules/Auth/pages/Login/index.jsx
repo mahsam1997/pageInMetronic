@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 
@@ -11,7 +11,6 @@ import TextError from "../../../../components/common/TextError";
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
 
 // hooks
-import useFormatMessage from "../../../../hooks/useFormatMessage";
 import { useTranslation } from "react-i18next";
 // service
 import { login } from "../../../../services/auth.service";
@@ -20,7 +19,7 @@ import { login } from "../../../../services/auth.service";
 import getInputClasses from "../../../../utils/getInputClasses";
 import { setAuthenticate } from "../../../../utils/authenticate";
 
-import schema from "./loginSchema";
+import loginSchema from "./loginSchema";
 import routes from "../../../../router/routes.json";
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 import i18next from "i18next";
@@ -44,8 +43,6 @@ function Login(props) {
 
    const { t } = useTranslation();
    const { setIsAuth } = useContext(AuthenticationContext);
-
-   const loginSchema = schema(useFormatMessage);
 
    const onSubmit = async values => {
       const { data } = await login(values);
@@ -82,7 +79,7 @@ function Login(props) {
          <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
-            validationSchema={loginSchema}
+            validationSchema={loginSchema(t)}
          >
             {formik => {
                return (
