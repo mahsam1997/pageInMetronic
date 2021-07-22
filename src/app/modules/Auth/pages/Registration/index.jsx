@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
-import { FormattedMessage, useIntl } from "react-intl";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 // components
@@ -15,7 +14,6 @@ import { AuthenticationContext } from "../../../../context/AuthenticationContext
 import { register } from "../../../../services/auth.service";
 // utils
 import { setAuthenticate } from "../../../../utils/authenticate";
-import formatMessage from "../../../../utils/formatMessage";
 import getInputClasses from "../../../../utils/getInputClasses";
 
 import schema from "./registerSchema";
@@ -36,7 +34,6 @@ function Registration(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const { setIsAuth } = useContext(AuthenticationContext);
-   const intl = useIntl();
    const { t } = useTranslation();
 
    const registrationSchema = schema(useFormatMessage);
@@ -72,12 +69,10 @@ function Registration(props) {
       >
          <div className=" mb-5 mb-lg-10">
             <h3 className="font-size-h1">
-               {/* <FormattedMessage id="AUTH.REGISTER.TITLE" /> */}
-               {t("AUTH.REGISTER.TITLE")}
+               {t("messages.AUTH.REGISTER.TITLE")}
             </h3>
             <p className="text-muted font-weight-bold">
-               {/* <FormattedMessage id="AUTH.REGISTER.DESC" /> */}
-               {t("AUTH.REGISTER.DESC")}
+               {t("messages.AUTH.REGISTER.DESC")}
             </p>
          </div>
 
@@ -101,15 +96,10 @@ function Registration(props) {
                      {/* begin: FullName */}
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="fullName">
-                           {/* <FormattedMessage id="AUTH.INPUT.FULLNAME" /> */}
-                           {t("AUTH.INPUT.FULLNAME")}
+                           {t("messages.AUTH.INPUT.FULLNAME")}
                         </label>
                         <Field
-                           // placeholder={formatMessage(
-                           //    intl,
-                           //    "AUTH.INPUT.FULLNAME.PLACE"
-                           // )}
-                           placeholder={t("AUTH.INPUT.FULLNAME.PLACE")}
+                           placeholder={t("messages.AUTH.INPUT.FULLNAME.PLACE")}
                            type="text"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -124,18 +114,13 @@ function Registration(props) {
 
                      {/* begin: Phone Number */}
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           {/* <FormattedMessage id="AUTH.INPUT.PHONE" /> */}
-                           {t("AUTH.INPUT.PHONE")}
-                        </label>
+                        <label>{t("messages.AUTH.INPUT.PHONE")}</label>
                         <div className="d-flex">
                            <div style={{ width: "80%" }}>
                               <Field
-                                 // placeholder={formatMessage(
-                                 //    intl,
-                                 //    "AUTH.INPUT.PHONE.PLACE"
-                                 // )}
-                                 placeholder={t("AUTH.INPUT.PHONE.PLACE")}
+                                 placeholder={t(
+                                    "messages.AUTH.INPUT.PHONE.PLACE"
+                                 )}
                                  type="number"
                                  className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                                     formik,
@@ -166,15 +151,10 @@ function Registration(props) {
                      {/* begin: Email */}
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="email">
-                           {/* <FormattedMessage id="AUTH.INPUT.EMAIL" /> */}
-                           {t("AUTH.INPUT.EMAIL")}
+                           {t("messages.AUTH.INPUT.EMAIL")}
                         </label>
                         <Field
-                           // placeholder={formatMessage(
-                           //    intl,
-                           //    "AUTH.INPUT.EMAIL.PLACE"
-                           // )}
-                           placeholder={t("AUTH.INPUT.EMAIL.PLACE")}
+                           placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -188,16 +168,13 @@ function Registration(props) {
 
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="password">
-                           {/* <FormattedMessage id="AUTH.INPUT.PASSWORD" /> */}
-                           {t("AUTH.INPUT.PASSWORD")}
+                           {t("messages.AUTH.INPUT.PASSWORD")}
                         </label>
                         <div className="input-group">
                            <Field
-                              // placeholder={formatMessage(
-                              //    intl,
-                              //    "AUTH.REGISTER.PASSWORD.PLACE"
-                              // )}
-                              placeholder={t("AUTH.REGISTER.PASSWORD.PLACE")}
+                              placeholder={t(
+                                 "messages.AUTH.REGISTER.PASSWORD.PLACE"
+                              )}
                               type={showPassword ? "text" : "password"}
                               className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                                  formik,
@@ -228,11 +205,9 @@ function Registration(props) {
                               setFieldTouched("acceptTerms", true);
                            }}
                         >
-                           {/* <FormattedMessage id="AUTH.GENERAL.ACCEPT.RULES" /> */}
-                           {t("AUTH.GENERAL.ACCEPT.RULES")}
+                           {t("messages.AUTH.GENERAL.ACCEPT.RULES")}
                         </Checkbox>
                         <ErrorMessage name="acceptTerms" children={TextError} />
-                        {/*  */}
                      </div>
 
                      <div className="form-group d-flex">
@@ -245,11 +220,9 @@ function Registration(props) {
                            }
                            className="btn btn-primary font-weight-bold px-10 my-3 mx-4"
                         >
-                           {/* <FormattedMessage
-                              id="AUTH.GENERAL.REGISTER_BUTTON"
-                              tagName="span"
-                           /> */}
-                           <span>{t("AUTH.GENERAL.REGISTER_BUTTON")}</span>
+                           <span>
+                              {t("messages.AUTH.GENERAL.REGISTER_BUTTON")}
+                           </span>
                         </button>
 
                         <button
@@ -257,11 +230,7 @@ function Registration(props) {
                            className="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
                         >
                            <img src={googleLogo} alt="google logo" />
-                           {/* <FormattedMessage
-                              id="AUTH.LOGIN.GOOGLE"
-                              tagName="span"
-                           /> */}
-                           <span>{t("AUTH.LOGIN.GOOGLE")}</span>
+                           <span>{t("messages.AUTH.LOGIN.GOOGLE")}</span>
                         </button>
                      </div>
                   </Form>
@@ -272,22 +241,13 @@ function Registration(props) {
          <div className="login-bottom justify-content-start">
             <ul>
                <li className="text-muted">
-                  <a href="/contact">
-                     {/* <FormattedMessage id="AUTH.GENERAL.CONTACT" /> */}
-                     {t("AUTH.GENERAL.CONTACT")}
-                  </a>
+                  <a href="/contact">{t("messages.AUTH.GENERAL.CONTACT")}</a>
                </li>
                <li className="text-muted">
-                  <a href="/plans">
-                     {/* <FormattedMessage id="AUTH.GENERAL.PLANS" /> */}
-                     {t("AUTH.GENERAL.PLANS")}
-                  </a>
+                  <a href="/plans">{t("messages.AUTH.GENERAL.PLANS")}</a>
                </li>
                <li className="text-muted">
-                  <a href="/rules">
-                     {/* <FormattedMessage id="AUTH.GENERAL.RULES" /> */}
-                     {t("AUTH.GENERAL.RULES")}
-                  </a>
+                  <a href="/rules">{t("messages.AUTH.GENERAL.RULES")}</a>
                </li>
             </ul>
          </div>

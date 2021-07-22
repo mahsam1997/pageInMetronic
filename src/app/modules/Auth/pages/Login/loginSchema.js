@@ -1,14 +1,24 @@
 import * as Yup from "yup";
+import i18next from "i18next";
+
+import translator from "../../../../utils/translator";
 
 const loginSchema = formatMessage => {
+   console.log(
+      translator("errors.MIN_X_CHARACTERS", {
+         x: 3,
+         noun: translator("messages.AUTH.INPUT.EMAIL"),
+      })
+   );
+
    return Yup.object().shape({
       email: Yup.string()
-         .email(formatMessage("AUTH.VALIDATION.EMAIL"))
+         // .email(formatMessage("errors.AUTH.VALIDATION.EMAIL"))
          .min(
             3,
-            formatMessage("MIN_X_CHARACTERS", {
+            i18next.t("errors.MIN_X_CHARACTERS", {
                x: 3,
-               noun: formatMessage("AUTH.INPUT.EMAIL"),
+               noun: i18next.t("messages.AUTH.INPUT.EMAIL"),
             })
          )
          .max(

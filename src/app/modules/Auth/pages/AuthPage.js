@@ -62,11 +62,9 @@ export function AuthPage() {
                         <img src={logo} alt="logo" className="aside-logo" />
 
                         <div className="aside-title">
-                           {/* <FormattedMessage id="AUTH.AUTHPAGE.TITLE.1" /> */}
-                           {t("AUTH.AUTHPAGE.TITLE.1")}
+                           {t("messages.AUTH.AUTHPAGE.TITLE.1")}
                            <br />
-                           {/* <FormattedMessage id="AUTH.AUTHPAGE.TITLE.2" /> */}
-                           {t("AUTH.AUTHPAGE.TITLE.2")}
+                           {t("messages.AUTH.AUTHPAGE.TITLE.2")}
                         </div>
                      </div>
                   </div>

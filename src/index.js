@@ -45,18 +45,15 @@ const { PUBLIC_URL } = process.env;
  * @see https://github.com/axios/axios#interceptors
  */
 
-const Main = () => {
-   return (
-      <MetronicI18nProvider>
-         <MetronicLayoutProvider>
-            <MetronicSubheaderProvider>
-               <MetronicSplashScreenProvider>
-                  <App basename={PUBLIC_URL} />
-               </MetronicSplashScreenProvider>
-            </MetronicSubheaderProvider>
-         </MetronicLayoutProvider>
-      </MetronicI18nProvider>
-   );
-};
-
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.render(
+   <MetronicI18nProvider>
+      <MetronicLayoutProvider>
+         <MetronicSubheaderProvider>
+            <MetronicSplashScreenProvider>
+               <App basename={PUBLIC_URL} />
+            </MetronicSplashScreenProvider>
+         </MetronicSubheaderProvider>
+      </MetronicLayoutProvider>
+   </MetronicI18nProvider>,
+   document.getElementById("root")
+);

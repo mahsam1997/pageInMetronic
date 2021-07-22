@@ -13,14 +13,19 @@ import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 
 import { useIntl } from "react-intl";
+import i18next from "i18next";
 
 export function Aside() {
    const uiService = useHtmlClassService();
 
    const language = useIntl().locale;
 
-   const isEnglish = language === "en";
-   const placement = isEnglish ? "right" : "left";
+   // const isEnglish = language === "en";
+   // const placement = isEnglish ? "right" : "left";
+
+   // const isEnglish = language === "en";
+   const isLtrDirection = i18next.dir() === "ltr";
+   const placement = isLtrDirection ? "right" : "left";
 
    const layoutProps = useMemo(() => {
       return {

@@ -59,6 +59,7 @@ const getList = async () => {
    if (response?.data?.success) {
       response.data.data.forEach((lang, i) => {
          if (lang.isDefault) fallbackLng.push(lang.language);
+
          availableLanguages.push(lang.language);
       });
 
@@ -87,13 +88,8 @@ const getList = async () => {
                   {
                      loadPath: `${process.env.REACT_APP_BASE_URL}${urls.LANGUAGE}/get?language={{lng}}&platform=adminPanel`,
 
-                     parse: data => {
-                        console.log(
-                           "parsee: ",
-                           convertLang(JSON.parse(data).data.translations)
-                        );
-                        return convertLang(JSON.parse(data).data.translations);
-                     },
+                     parse: data =>
+                        convertLang(JSON.parse(data).data.translations),
                   },
                ],
             },

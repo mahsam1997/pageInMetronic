@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { FormattedMessage, useIntl } from "react-intl";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 
@@ -18,14 +17,13 @@ import { useTranslation } from "react-i18next";
 import { login } from "../../../../services/auth.service";
 
 // utils
-import formatMessage from "../../../../utils/formatMessage";
 import getInputClasses from "../../../../utils/getInputClasses";
 import { setAuthenticate } from "../../../../utils/authenticate";
 
 import schema from "./loginSchema";
 import routes from "../../../../router/routes.json";
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
-
+import i18next from "i18next";
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -44,13 +42,12 @@ const initialValues = {
 function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
-   const intl = useIntl();
    const { t } = useTranslation();
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
 
-   const onSubmit = async (values, { setSubmitting }) => {
+   const onSubmit = async values => {
       const { data } = await login(values);
       if (data?.success) {
          const { id, refresh, role, token } = data.data;
@@ -59,20 +56,22 @@ function Login(props) {
       }
    };
 
+   console.log("login log");
+
+   console.log(
+      "translator login file",
+      i18next.t("errors.AUTH.VALIDATION.EMAIL")
+   );
+
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
          <div className=" mb-10 mb-lg-10 login-title">
-            <h3 className="font-size-h1 ">
-               {/* <FormattedMessage id="AUTH.LOGIN.TITLE" /> */}
-               {t("AUTH.LOGIN.TITLE")}
-            </h3>
+            <h3 className="font-size-h1 ">{t("messages.AUTH.LOGIN.TITLE")}</h3>
             <p className="text-muted ">
-               {/* <FormattedMessage id="AUTH.GENERAL.NO_ACCOUNT" /> */}
-               {t("AUTH.GENERAL.NO_ACCOUNT")}
+               {t("messages.AUTH.GENERAL.NO_ACCOUNT")}
                <Link to={routes.REGISTER}>
-                  {/* <FormattedMessage id="AUTH.LOGIN.NEW_ACCOUNT" /> */}
-                  {t("AUTH.LOGIN.NEW_ACCOUNT")}
+                  {t("messages.AUTH.LOGIN.NEW_ACCOUNT")}
                </Link>
             </p>
          </div>
@@ -91,14 +90,10 @@ function Login(props) {
                      <div className="form-group fv-plugins-icon-container">
                         <label>
                            {/* <FormattedMessage id="AUTH.INPUT.EMAIL" /> */}
-                           {t("AUTH.INPUT.EMAIL")}
+                           {t("messages.AUTH.INPUT.EMAIL")}
                         </label>
                         <Field
-                           // placeholder={formatMessage(
-                           //    intl,
-                           //    "AUTH.INPUT.EMAIL.PLACE"
-                           // )}
-                           placeholder={t("AUTH.INPUT.EMAIL.PLACE")}
+                           placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -109,17 +104,12 @@ function Login(props) {
                         <ErrorMessage name="email" children={TextError} />
                      </div>
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           {/* <FormattedMessage id="AUTH.INPUT.PASSWORD" /> */}
-                           {t("AUTH.INPUT.PASSWORD")}
-                        </label>
+                        <label>{t("messages.AUTH.INPUT.PASSWORD")}</label>
                         <div className="input-group">
                            <Field
-                              // placeholder={formatMessage(
-                              //    intl,
-                              //    "AUTH.INPUT.PASSWORD.PLACE"
-                              // )}
-                              placeholder={t("AUTH.INPUT.PASSWORD.PLACE")}
+                              placeholder={t(
+                                 "messages.AUTH.INPUT.PASSWORD.PLACE"
+                              )}
                               type={showPassword ? "text" : "password"}
                               className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                                  formik,
@@ -144,15 +134,13 @@ function Login(props) {
                         className="forget-pass"
                         // id="kt_login_forgot"
                      >
-                        {/* <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" /> */}
-                        {t("AUTH.GENERAL.FORGOT_BUTTON")}
+                        {t("messages.AUTH.GENERAL.FORGOT_BUTTON")}
                      </Link>
                      <br />
                      <br />
                      <div className="d-flex align-items-baseline">
                         <Checkbox id="remember-me">
-                           {/* <FormattedMessage id="AUTH.LABEL.REMEMBER.ME" /> */}
-                           {t("AUTH.LABEL.REMEMBER.ME")}
+                           {t("messages.AUTH.LABEL.REMEMBER.ME")}
                         </Checkbox>
                      </div>
                      <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
@@ -162,22 +150,14 @@ function Login(props) {
                            disabled={formik.isSubmitting}
                            className={`btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth`}
                         >
-                           {/* <FormattedMessage
-                              id="AUTH.LOGIN.BUTTON"
-                              tagName="span"
-                           /> */}
-                           <span>{t("AUTH.LOGIN.BUTTON")}</span>
+                           <span>{t("messages.AUTH.LOGIN.BUTTON")}</span>
                         </button>
                         <button
                            type="button"
                            className={`btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth`}
                         >
                            <img src={googleLogo} alt="google logo" />
-                           {/* <FormattedMessage
-                              id="AUTH.LOGIN.GOOGLE"
-                              tagName="span"
-                           /> */}
-                           <span>{t("AUTH.LOGIN.GOOGLE")}</span>
+                           <span>{t("messages.AUTH.LOGIN.GOOGLE")}</span>
                         </button>
                      </div>
                   </Form>
@@ -189,22 +169,13 @@ function Login(props) {
          <div className="login-bottom">
             <ul>
                <li className="text-muted">
-                  <a href="/contact">
-                     {/* <FormattedMessage id="AUTH.GENERAL.CONTACT" /> */}
-                     {t("AUTH.GENERAL.CONTACT")}
-                  </a>
+                  <a href="/contact">{t("messages.AUTH.GENERAL.CONTACT")}</a>
                </li>
                <li className="text-muted">
-                  <a href="/plans">
-                     {/* <FormattedMessage id="AUTH.GENERAL.PLANS" /> */}
-                     {t("AUTH.GENERAL.PLANS")}
-                  </a>
+                  <a href="/plans">{t("messages.AUTH.GENERAL.PLANS")}</a>
                </li>
                <li className="text-muted">
-                  <a href="/rules">
-                     {/* <FormattedMessage id="AUTH.GENERAL.RULES" /> */}
-                     {t("AUTH.GENERAL.PLANS")}
-                  </a>
+                  <a href="/rules">{t("messages.AUTH.GENERAL.RULES")}</a>
                </li>
             </ul>
          </div>
