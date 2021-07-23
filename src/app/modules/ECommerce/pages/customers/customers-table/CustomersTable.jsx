@@ -48,6 +48,8 @@ export function CustomersTable() {
       {
          dataField: "profile.fullName",
          text: useFormatMessage("AUTH.INPUT.FULLNAME"),
+         // headerAlign: "center",
+         // align:"center"
          // sort: true,
          // sortCaret: sortCaret,
          // headerSortingClasses,
@@ -55,18 +57,22 @@ export function CustomersTable() {
       {
          dataField: "email",
          text: useFormatMessage("AUTH.INPUT.EMAIL"),
+         // headerAlign: "center",
       },
       {
          dataField: "mobile",
          text: useFormatMessage("ECOMMERCE.COMMON.MOBILE"),
+         // headerAlign: "center",
       },
       {
          dataField: "role",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.ROLE"),
+         // headerAlign: "center",
       },
       {
          dataField: "status",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.STATUS"),
+         // headerAlign: "center",
       },
       {
          dataField: "action",

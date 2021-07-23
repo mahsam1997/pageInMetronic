@@ -143,8 +143,8 @@ export function CustomerEditForm({
                                     "DEFAULT.SUB_PHONE"
                                  )}
                               >
-                                 {callingCodeList.map(callCode => (
-                                    <option key={callCode} value={callCode}>
+                                 {callingCodeList.map((callCode, i) => (
+                                    <option key={i} value={callCode}>
                                        {isEnglish
                                           ? callCode
                                           : toFarsiNumber(callCode)}

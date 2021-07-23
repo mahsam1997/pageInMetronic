@@ -2,10 +2,11 @@
 import React from "react";
 import { PaginationTotalStandalone } from "react-bootstrap-table2-paginator";
 
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 export function PaginationToolbar(props) {
    const { isLoading, paginationProps } = props;
+
    const {
       sizePerPageList,
       sizePerPage,

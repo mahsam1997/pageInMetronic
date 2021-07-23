@@ -1,5 +1,3 @@
-const englishDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const toEnglishNumber = s => s.replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
 
-const toFarsiNumber = n => n.toString().replace(/\d/g, x => englishDigits[x]);
-
-export default toFarsiNumber;
+export default toEnglishNumber;
