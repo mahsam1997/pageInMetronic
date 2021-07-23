@@ -4,5 +4,6 @@
    "REGISTER": "/auth/registration",
    "FORGETPASS": "/auth/forgot-password",
    "LOGOUT": "/logout",
-   "ROOT": "/"
+   "ROOT": "/",
+   "CUSTOMERS":"/e-commerce/customers"
 }

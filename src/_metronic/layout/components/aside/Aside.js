@@ -14,6 +14,8 @@ import { KTUtil } from "./../../../_assets/js/components/util";
 import { Link } from "react-router-dom";
 import { useIntl } from "react-intl";
 
+import routes from "../../../../app/router/routes.json";
+
 export function Aside() {
    const uiService = useHtmlClassService();
 
@@ -184,7 +186,7 @@ export function Aside() {
                            }
                         >
                            <Link
-                              to="/e-commerce/customers"
+                              to={routes.CUSTOMERS}
                               className="nav-link btn btn-icon btn-clean btn-lg"
                               data-toggle="tab"
                               data-target="#kt_aside_tab_3"
@@ -201,7 +203,6 @@ export function Aside() {
                         </OverlayTrigger>
                      </li>
                      {/* end::Item */}
-
                   </ul>
                   {/* end::Nav */}
                </div>
