@@ -7,6 +7,8 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 
 // components
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
+
 import CustomButton from "../../../../components/common/CustomButton";
 // context
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
@@ -45,24 +47,33 @@ function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const intl = useIntl();
+   const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
 
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
 
-   const onSubmit = async (values, { setSubmitting }) => {
-      const { data } = await login(values);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+   const onSubmit = async (values, { setFieldError }) => {
+      const response = await login(values);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
-         <div className=" mb-10 mb-lg-10 login-title">
+         <div
+            className="login-title"
+            // mb-10 mb-lg-10
+         >
             <h3 className="font-size-h1 ">
                <FormattedMessage id="AUTH.LOGIN.TITLE" />
             </h3>
@@ -74,6 +85,13 @@ function Login(props) {
             </p>
          </div>
          {/* end::Head */}
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isEnglish}
+         />
+
+         <br />
 
          {/*begin::Form*/}
 

@@ -12,46 +12,9 @@ function EmailSettings(props) {
    // Methods
    const saveUser = (values, setStatus, setSubmitting) => {
       setloading(true);
-      // const updatedUser = Object.assign(user, {
-      //    emailSettings: {
-      //       emailNotification: values.emailNotification,
-      //       sendCopyToPersonalEmail: values.sendCopyToPersonalEmail,
-      //       activityRelatesEmail: {
-      //          youHaveNewNotifications: values.youHaveNewNotifications,
-      //          youAreSentADirectMessage: values.youAreSentADirectMessage,
-      //          someoneAddsYouAsAsAConnection:
-      //             values.someoneAddsYouAsAsAConnection,
-      //          uponNewOrder: values.uponNewOrder,
-      //          newMembershipApproval: values.newMembershipApproval,
-      //          memberRegistration: values.memberRegistration,
-      //       },
-      //       updatesFromKeenthemes: {
-      //          newsAboutKeenthemesProductsAndFeatureUpdates:
-      //             values.newsAboutKeenthemesProductsAndFeatureUpdates,
-      //          tipsOnGettingMoreOutOfKeen: values.tipsOnGettingMoreOutOfKeen,
-      //          thingsYouMissedSindeYouLastLoggedIntoKeen:
-      //             values.thingsYouMissedSindeYouLastLoggedIntoKeen,
-      //          newsAboutMetronicOnPartnerProductsAndOtherServices:
-      //             values.newsAboutMetronicOnPartnerProductsAndOtherServices,
-      //          tipsOnMetronicBusinessProducts:
-      //             values.tipsOnMetronicBusinessProducts,
-      //       },
-      //    },
-      // });
-      // user for update preparation
       setTimeout(() => {
          setloading(false);
          setSubmitting(false);
-         // Do request to your server for user update, we just imitate user update there, For example:
-         // update(updatedUser)
-         //  .then(()) => {
-         //    setloading(false);
-         //  })
-         //  .catch((error) => {
-         //    setloading(false);
-         //    setSubmitting(false);
-         //    setStatus(error);
-         // });
       }, 1000);
    };
    // UI Helpers

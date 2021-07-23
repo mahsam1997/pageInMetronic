@@ -22,6 +22,7 @@ import {
 } from "./_metronic/layout";
 import { MetronicI18nProvider } from "./_metronic/i18n";
 
+import "react-toastify/dist/ReactToastify.css";
 import "./app/Assets/fonts/Vazir/fontVazir.css";
 
 /**

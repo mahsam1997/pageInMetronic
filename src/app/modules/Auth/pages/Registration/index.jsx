@@ -6,6 +6,8 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
+
 import CustomButton from "../../../../components/common/CustomButton";
 // hooks
 import useFormatMessage from "../../../../hooks/useFormatMessage";
@@ -37,18 +39,15 @@ function Registration(props) {
 
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
-
    const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
 
    const registrationSchema = schema(useFormatMessage);
 
-   const onSubmit = async ({
-      email,
-      password,
-      subPhoneNumber,
-      phoneNumber,
-      fullName,
-   }) => {
+   const onSubmit = async (
+      { email, password, subPhoneNumber, phoneNumber, fullName },
+      { setFieldError }
+   ) => {
       const newUser = {
          email,
          password,
@@ -58,11 +57,15 @@ function Registration(props) {
          },
       };
 
-      const { data } = await register(newUser);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+      const response = await register(newUser);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
@@ -71,7 +74,10 @@ function Registration(props) {
          className="register login-form login-signin"
          style={{ display: "block" }}
       >
-         <div className=" mb-5 mb-lg-10">
+         <div
+            className=""
+            // mb-5 mb-lg-10
+         >
             <h3 className="font-size-h1">
                <FormattedMessage id="AUTH.REGISTER.TITLE" />
             </h3>
@@ -79,6 +85,13 @@ function Registration(props) {
                <FormattedMessage id="AUTH.REGISTER.DESC" />
             </p>
          </div>
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isEnglish}
+         />
+
+         <br />
 
          <Formik
             initialValues={initialValues}

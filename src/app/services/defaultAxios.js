@@ -16,6 +16,16 @@ export const addAuthorization = () => {
          "Bearer " + token;
 };
 
+const language =
+   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
+
+export const addLanguage = () => {
+   instance.defaults.headers.common["Accept-Language"] = language;
+   instanceWithAuthorization.defaults.headers.common[
+      "Accept-Language"
+   ] = language;
+};
+
 export const axiosSetup = axiosInstance => {
    axiosInstance.interceptors.request.use(
       req => {
@@ -34,6 +44,8 @@ export const axiosSetup = axiosInstance => {
    );
 };
 
+addLanguage();
+addAuthorization();
 setConfig();
 addAuthorization();
 axiosSetup(instance);
