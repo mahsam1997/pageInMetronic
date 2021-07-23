@@ -1,3 +1,5 @@
+import { addAuthorization } from "../services/defaultAxios";
+
 const isAuthenticate = () => {
    const id = localStorage.getItem("id");
    const refresh = localStorage.getItem("refresh");
@@ -12,6 +14,7 @@ const setAuthenticate = async (id, refresh, role, token) => {
    localStorage.setItem("refresh", refresh);
    localStorage.setItem("role", role);
    localStorage.setItem("token", token);
+   addAuthorization();
 };
 
 const clearAuthenticate = () => {

@@ -1,58 +1,91 @@
 import React from "react";
+import { useIntl } from "react-intl";
 
-const inputLabel = ({ label, touched, error, customFeedbackLabel }) => {
-  if (touched && error) {
-    return <div className="invalid-feedback">{error}</div>;
-  }
+import formatMessage from "../../../../app/utils/formatMessage";
 
-  if (touched && !error && label) {
-    return <div className="valid-feedback">{label} was entered correct</div>;
-  }
+const inputLabel = (
+   { label, touched, error, customFeedbackLabel },
+   intl,
+   isEnglish
+) => {
+   if (touched && error) {
+      return <div className="invalid-feedback">{error}</div>;
+   }
 
-  return (
-    <div className="feedback">
-      {customFeedbackLabel && <>{customFeedbackLabel}</>}
-      {!customFeedbackLabel && (
-        <>
-          Please enter <b>{label}</b>
-        </>
-      )}
-    </div>
-  );
+   if (touched && !error && label) {
+      return (
+         <div className="valid-feedback">
+            {label} {formatMessage(intl, "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT")}
+         </div>
+      );
+   }
+
+   return (
+      <div className="feedback">
+         {customFeedbackLabel && <>{customFeedbackLabel}</>}
+         {!customFeedbackLabel && (
+            <>
+               {isEnglish &&
+                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
+               <b>{label}</b>{" "}
+               {!isEnglish &&
+                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
+            </>
+         )}
+      </div>
+   );
 };
 
-const selectLabel = ({ label, touched, error, customFeedbackLabel }) => {
-  if (touched && error) {
-    return <div className="invalid-feedback">{error}</div>;
-  }
+const selectLabel = (
+   { label, touched, error, customFeedbackLabel },
+   intl,
+   isEnglish
+) => {
+   if (touched && error) {
+      return <div className="invalid-feedback">{error}</div>;
+   }
 
-  return (
-    <div className="feedback">
-      {customFeedbackLabel && <>{customFeedbackLabel}</>}
-      {!customFeedbackLabel && label && (
-        <>
-          Please select <b>{label}</b>
-        </>
-      )}
-    </div>
-  );
+   return (
+      <div className="feedback">
+         {customFeedbackLabel && <>{customFeedbackLabel}</>}
+         {!customFeedbackLabel && label && (
+            <>
+               {isEnglish &&
+                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
+               <b>{label}</b>{" "}
+               {!isEnglish &&
+                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
+            </>
+         )}
+      </div>
+   );
 };
 
 export function FieldFeedbackLabel({
-  label,
-  touched,
-  error,
-  type,
-  customFeedbackLabel
+   label,
+   touched,
+   error,
+   type,
+   customFeedbackLabel,
 }) {
-  switch (type) {
-    case "text":
-      return inputLabel({ label, touched, error, customFeedbackLabel });
-    case "email":
-      return inputLabel({ label, touched, error, customFeedbackLabel });
-    case "password":
-      return inputLabel({ label, touched, error, customFeedbackLabel });
-    default:
-      return selectLabel({ label, touched, error, customFeedbackLabel });
-  }
+   const intl = useIntl();
+   const isEnglish = intl.locale === "en";
+
+   switch (type) {
+      case "text":
+      case "email":
+      case "password":
+      case "number":
+         return inputLabel(
+            { label, touched, error, customFeedbackLabel },
+            intl,
+            isEnglish
+         );
+      default:
+         return selectLabel(
+            { label, touched, error, customFeedbackLabel },
+            intl,
+            isEnglish
+         );
+   }
 }

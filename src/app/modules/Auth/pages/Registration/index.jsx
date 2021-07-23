@@ -6,6 +6,9 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
+
+import CustomButton from "../../../../components/common/CustomButton";
 // hooks
 import useFormatMessage from "../../../../hooks/useFormatMessage";
 // context
@@ -36,18 +39,15 @@ function Registration(props) {
 
    const { setIsAuth } = useContext(AuthenticationContext);
    const intl = useIntl();
-
    const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
 
    const registrationSchema = schema(useFormatMessage);
 
-   const onSubmit = async ({
-      email,
-      password,
-      subPhoneNumber,
-      phoneNumber,
-      fullName,
-   }) => {
+   const onSubmit = async (
+      { email, password, subPhoneNumber, phoneNumber, fullName },
+      { setFieldError }
+   ) => {
       const newUser = {
          email,
          password,
@@ -56,12 +56,16 @@ function Registration(props) {
             fullName,
          },
       };
-      console.log(newUser);
-      const { data } = await register(newUser);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+
+      const response = await register(newUser);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
@@ -78,6 +82,13 @@ function Registration(props) {
                <FormattedMessage id="AUTH.REGISTER.DESC" />
             </p>
          </div>
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isEnglish}
+         />
+
+         <br />
 
          <Formik
             initialValues={initialValues}
@@ -226,7 +237,7 @@ function Registration(props) {
                      </div>
 
                      <div className="form-group d-flex">
-                        <button
+                        {/* <button
                            type="submit"
                            disabled={
                               formik.isSubmitting ||
@@ -239,18 +250,25 @@ function Registration(props) {
                               id="AUTH.GENERAL.REGISTER_BUTTON"
                               tagName="span"
                            />
-                        </button>
-
-                        <button
-                           type="button"
-                           className="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
+                        </button> */}
+                        <CustomButton
+                           type="submit"
+                           disabled={
+                              formik.isSubmitting ||
+                              !formik.isValid ||
+                              !acceptTerms
+                           }
+                           tagName="span"
+                           title="AUTH.GENERAL.REGISTER_BUTTON"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                        />
+                        <CustomButton
+                           title="AUTH.LOGIN.GOOGLE"
+                           tagName="span"
+                           classNames="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
                         >
                            <img src={googleLogo} alt="google logo" />
-                           <FormattedMessage
-                              id="AUTH.LOGIN.GOOGLE"
-                              tagName="span"
-                           />
-                        </button>
+                        </CustomButton>
                      </div>
                   </Form>
                );

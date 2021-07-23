@@ -21,9 +21,9 @@ const loginSchema = formatMessage => {
          .required(formatMessage("REQUIRED")),
       password: Yup.string()
          .min(
-            3,
+            6,
             formatMessage("MIN_X_CHARACTERS", {
-               x: 3,
+               x: 6,
                noun: formatMessage("AUTH.INPUT.PASSWORD"),
             })
          )

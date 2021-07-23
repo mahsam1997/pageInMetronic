@@ -10,3 +10,8 @@ $login-submit-button-color: #ffffff;
 $login-bottom-list: rgba(167, 168, 187, 0.9);
 
 $black: #000;
+$select-color: #a7a8bb;
+
+:export {
+   gray: $select-color;
+}

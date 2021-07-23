@@ -9,6 +9,7 @@ import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/apm";
+import { ToastContainer } from "react-toastify";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 
@@ -41,6 +42,17 @@ export default function App({ basename }) {
                <I18nProvider>
                   <AuthenticationProvider value={{ isAuth, setIsAuth }}>
                      <Routes />
+                     <ToastContainer
+                        position={isEnglish ? "bottom-left" : "bottom-right"}
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={isEnglish ? false : true}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                     />
                   </AuthenticationProvider>
                </I18nProvider>
             </MaterialThemeProvider>

@@ -7,11 +7,6 @@ const myCountryCodes = countryCodes.customList(
    "+{countryCallingCode}"
 );
 
-// const countryCallingCodes = Object.values(myCountryCodes)
-
-// console.log("country codes: ", countryCallingCodes);
-
-// const values = ["+98", "+99", "+97"];
 const values = Object.values(myCountryCodes);
 
 const phonePrefixOptions = isEnglish =>

@@ -7,7 +7,9 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 
 // components
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
 
+import CustomButton from "../../../../components/common/CustomButton";
 // context
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
 
@@ -45,17 +47,23 @@ function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const intl = useIntl();
+   const isEnglish = intl.locale === "en";
+   const placement = isEnglish ? "right" : "left";
 
    const { setIsAuth } = useContext(AuthenticationContext);
 
    const loginSchema = schema(useFormatMessage);
 
-   const onSubmit = async values => {
-      const { data } = await login(values);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+   const onSubmit = async (values, { setFieldError }) => {
+      const response = await login(values);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
@@ -74,6 +82,13 @@ function Login(props) {
             </p>
          </div>
          {/* end::Head */}
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isEnglish}
+         />
+
+         <br />
 
          {/*begin::Form*/}
 
@@ -150,27 +165,21 @@ function Login(props) {
                         </Checkbox>
                      </div>
                      <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
-                        <button
-                           id="kt_login_signin_submit"
+                        <CustomButton
                            type="submit"
+                           id="kt_login_signin_submit"
                            disabled={formik.isSubmitting}
-                           className={`btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth`}
-                        >
-                           <FormattedMessage
-                              id="AUTH.LOGIN.BUTTON"
-                              tagName="span"
-                           />
-                        </button>
-                        <button
-                           type="button"
-                           className={`btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth`}
+                           tagName="span"
+                           title="AUTH.LOGIN.BUTTON"
+                           classNames="btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth"
+                        />
+                        <CustomButton
+                           title="AUTH.LOGIN.GOOGLE"
+                           tagName="span"
+                           classNames="btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth"
                         >
                            <img src={googleLogo} alt="google logo" />
-                           <FormattedMessage
-                              id="AUTH.LOGIN.GOOGLE"
-                              tagName="span"
-                           />
-                        </button>
+                        </CustomButton>
                      </div>
                   </Form>
                );
