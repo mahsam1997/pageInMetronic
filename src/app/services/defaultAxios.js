@@ -47,10 +47,12 @@ export const axiosSetup = axiosInstance => {
 addLanguage();
 addAuthorization();
 setConfig();
+addAuthorization();
 axiosSetup(instance);
 axiosSetup(instanceWithAuthorization);
 
 const defaultAxios = {
+   // addAuthorization,
    axiosSetup,
    instance,
    instanceWithAuthorization,

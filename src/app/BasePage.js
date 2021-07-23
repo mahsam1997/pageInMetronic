@@ -5,7 +5,7 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 
-// import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 const GoogleMaterialPage = lazy(() =>
    import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
@@ -33,12 +33,12 @@ export default function BasePage() {
                /* Redirect from root URL to /dashboard. */
                <Redirect exact from="/" to="/dashboard" />
             }
-            <ContentRoute path="/dashboard" component={DashboardPage} />
+            <ProtectedRoute path="/dashboard" component={DashboardPage} />
             <ContentRoute path="/builder" component={BuilderPage} />
             <ContentRoute path="/my-page" component={MyPage} />
             <Route path="/google-material" component={GoogleMaterialPage} />
             <Route path="/react-bootstrap" component={ReactBootstrapPage} />
-            <Route path="/e-commerce" component={ECommercePage} />
+            <ProtectedRoute path="/e-commerce" component={ECommercePage} />
             <Route path="/user-profile" component={UserProfilepage} />
             <Redirect to="error/error-v1" />
          </Switch>

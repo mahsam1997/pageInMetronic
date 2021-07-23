@@ -1,6 +1,6 @@
 {
    "AUTH.VALIDATION.INVALID": "{name} معتبر نیست",
-   "AUTH.VALIDATION.EMAIL": "ایمیل نامعتبر",
+   "AUTH.VALIDATION.EMAIL": "ایمیل نامعتبر است",
    "AUTH.VALIDATION.REQUIRED": "{name} مورد نیاز است",
    "AUTH.VALIDATION.MIN_LENGTH": "{name}} حداقل طول است {{min}",
    "AUTH.VALIDATION.AGREEMENT_REQUIRED": "پذیرش شرایط و ضوابط لازم است",

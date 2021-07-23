@@ -56,17 +56,20 @@
       border-radius: 12px;
    }
    input.password-input {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       border-top-left-radius: 12px !important;
       border-bottom-left-radius: 12px !important;
    }
    .showPass {
       background-color: $login-input-back !important;
-      border: none;
+      border: none !important;
+      border-radius: 0;
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
+
       cursor: pointer;
+      width: 45px;
    }
    label {
       font-style: normal;
@@ -93,6 +96,7 @@
       font-weight: bold;
       font-size: 14px;
       line-height: 22px;
+      user-select: none;
    }
 
    button[type="button"] {
@@ -150,11 +154,4 @@
          }
       }
    }
-}
-
-.form-control.is-valid {
-   background-position: right calc(0.375em + 0.325rem) center;
-}
-.form-control.is-invalid {
-   background-position: right calc(0.375em + 0.325rem) center;
 }

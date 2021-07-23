@@ -6,6 +6,8 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 import { useLang, setLanguage } from "../../../../i18n";
 import { DropdownItemToggler } from "../../../../_partials/dropdowns";
 
+import { FormattedMessage } from "react-intl";
+
 const languages = [
    {
       lang: "en",
@@ -33,7 +35,12 @@ export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
             <OverlayTrigger
                placement={overlayPlacement}
                overlay={
-                  <Tooltip id="language-panel-tooltip">Select Language</Tooltip>
+                  <Tooltip
+                     id="language-panel-tooltip"
+                     style={{ fontFamily: "Vazir" }}
+                  >
+                     <FormattedMessage id="SELECT.LANGUAGE" />
+                  </Tooltip>
                }
             >
                <div className="btn btn-icon btn-clean btn-lg">
