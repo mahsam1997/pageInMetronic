@@ -13,6 +13,8 @@ import CustomButton from "../../../../../components/common/CustomButton";
 import { useIntl } from "react-intl";
 import useFormatMessage from "../../../../../hooks/useFormatMessage";
 import formatMessage from "../../../../../utils/formatMessage";
+import toFarsiNumber from "../../../../../utils/toFarsiNumber";
+import { callingCodeList } from "../../../../../enums/phonePrefixOptions";
 
 // Validation schema
 const CustomerEditSchema = formatedMessage =>
@@ -67,6 +69,7 @@ export function CustomerEditForm({
    onHide,
 }) {
    const intl = useIntl();
+   const isEnglish = intl.locale === "en";
 
    const mobile = customer.mobile.slice(3);
    const subMobile = customer.mobile.substr(0, 3);
@@ -140,8 +143,13 @@ export function CustomerEditForm({
                                     "DEFAULT.SUB_PHONE"
                                  )}
                               >
-                                 <option>+98</option>
-                                 <option>+97</option>
+                                 {callingCodeList.map(callCode => (
+                                    <option key={callCode} value={callCode}>
+                                       {isEnglish
+                                          ? callCode
+                                          : toFarsiNumber(callCode)}
+                                    </option>
+                                 ))}
                               </Select>
                            </div>
                            {/* Mobile */}

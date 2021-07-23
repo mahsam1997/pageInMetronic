@@ -7,12 +7,14 @@ const myCountryCodes = countryCodes.customList(
    "+{countryCallingCode}"
 );
 
-const values = Object.values(myCountryCodes);
+const callingCodeList = Object.values(myCountryCodes);
 
 const phonePrefixOptions = isEnglish =>
-   values.map(val => ({
+   callingCodeList.map(val => ({
       value: val,
       label: isEnglish ? val : toFarsiNumber(val),
    }));
+
+export { callingCodeList };
 
 export default phonePrefixOptions;
