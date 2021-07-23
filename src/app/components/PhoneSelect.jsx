@@ -14,7 +14,7 @@ const PhoneSelect = ({ options, value, ...props }) => {
          border: "none",
          direction: "ltr",
          paddingLeft: 5,
-         //  color: "#A7A8BB",
+         color: "#A7A8BB",
          fontStyle: "normal",
          fontWeight: 500,
          fontSize: "14px",
@@ -27,12 +27,12 @@ const PhoneSelect = ({ options, value, ...props }) => {
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "24px",
-            // color: "#A7A8BB",
+            color: "#A7A8BB",
          };
       },
-      // input: styles => ({ ...styles, ...dot() }),
+      // input: styles => ({ ...styles, color: "#A7A8BB" }),
       // placeholder: styles => ({ ...styles, ...dot() }),
-      // singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
+      singleValue: (styles, { data }) => ({ ...styles, color: "#A7A8BB" }),
    };
 
    const defaultValue = options.filter(option => option.value === value)[0];
