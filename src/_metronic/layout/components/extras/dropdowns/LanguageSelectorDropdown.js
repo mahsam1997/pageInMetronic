@@ -26,7 +26,7 @@ export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
    const currentLanguage = languages.find(x => x.lang === lang);
 
    return (
-      <Dropdown drop="down" alignRight={alignRight}>
+      <Dropdown drop="up" alignRight={alignRight}>
          <Dropdown.Toggle
             as={DropdownItemToggler}
             id="dropdown-toggle-my-cart"
