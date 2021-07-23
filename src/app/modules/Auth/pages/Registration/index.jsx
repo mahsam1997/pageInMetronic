@@ -71,7 +71,7 @@ function Registration(props) {
          style={{ display: "block" }}
       >
          <div className=" mb-5 mb-lg-10">
-            <h3 className="font-size-h1">
+            <h3>
                <FormattedMessage id="AUTH.REGISTER.TITLE" />
             </h3>
             <p className="text-muted font-weight-bold">
@@ -256,26 +256,6 @@ function Registration(props) {
                );
             }}
          </Formik>
-
-         <div className="login-bottom justify-content-start">
-            <ul>
-               <li className="text-muted">
-                  <a href="/contact">
-                     <FormattedMessage id="AUTH.GENERAL.CONTACT" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/plans">
-                     <FormattedMessage id="AUTH.GENERAL.PLANS" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/rules">
-                     <FormattedMessage id="AUTH.GENERAL.RULES" />
-                  </a>
-               </li>
-            </ul>
-         </div>
       </div>
    );
 }

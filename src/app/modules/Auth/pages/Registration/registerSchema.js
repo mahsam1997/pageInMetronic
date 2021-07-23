@@ -17,7 +17,7 @@ const registerSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.FULLNAME"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
 
       phoneNumber: Yup.string()
          .min(
@@ -34,11 +34,9 @@ const registerSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.PHONE"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
 
-      subPhoneNumber: Yup.number().required(
-         formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")
-      ),
+      subPhoneNumber: Yup.number().required(formatMessage("REQUIRED")),
 
       email: Yup.string()
          .email(formatMessage("AUTH.VALIDATION.EMAIL"))
@@ -56,7 +54,7 @@ const registerSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.EMAIL"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
 
       password: Yup.string()
          .min(
@@ -73,11 +71,9 @@ const registerSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.PASSWORD"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
 
-      acceptTerms: Yup.bool().required(
-         formatMessage("AUTH.VALIDATION.AGREEMENT_REQUIRED")
-      ),
+      acceptTerms: Yup.bool().required(formatMessage("REQUIRED")),
    });
 };
 

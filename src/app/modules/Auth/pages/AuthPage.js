@@ -7,6 +7,7 @@ import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
 
+import AuthBottom from "../../../components/AuthBottom";
 import routes from "../../../router/routes";
 
 import logo from "../../../Assets/images/logo.jpg";
@@ -24,7 +25,7 @@ export function AuthPage() {
                {/*begin::Content*/}
                <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
                   {/* begin::Content body */}
-                  <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
+                  <div className="d-flex flex-column-fluid flex-center  mt-30 mt-lg-0">
                      <Switch>
                         <Route path={routes.LOGIN} component={Login} />
                         <Route
@@ -43,6 +44,9 @@ export function AuthPage() {
                         <Redirect to={routes.LOGIN} />
                      </Switch>
                   </div>
+
+                  <AuthBottom />
+
                   {/*end::Content body*/}
                </div>
                {/*end::Content*/}
