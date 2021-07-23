@@ -27,7 +27,7 @@
    "AUTH.FORGOT.SEND": "ارسال",
    "AUTH.FORGOT.SUCCESS": "حساب شما با موفقیت بازنشانی شد.",
    "AUTH.REGISTER.TITLE": "ثبت نام",
-   "AUTH.REGISTER.DESC": "برای تکمیل ثبت نام اطلاعات زیر را وارد کنید",
+   "AUTH.REGISTER.DESC": "برای تکمیل ثبت نام اطلاعات زیر را وارد کنید.",
    "AUTH.REGISTER.SUCCESS": "حساب شما با موفقیت ثبت شد.",
    "AUTH.INPUT.EMAIL": "ایمیل",
    "AUTH.INPUT.EMAIL.PLACE": "ایمیل خود را وارد کنید",
