@@ -23,7 +23,7 @@ const loginSchema = formatMessage => {
          .min(
             6,
             formatMessage("MIN_X_CHARACTERS", {
-               x: 3,
+               x: 6,
                noun: formatMessage("AUTH.INPUT.PASSWORD"),
             })
          )
