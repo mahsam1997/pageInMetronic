@@ -21,12 +21,12 @@ const languages = [
    },
 ];
 
-export function LanguageSelectorDropdown({ overlayPlacement }) {
+export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
    const lang = useLang();
    const currentLanguage = languages.find(x => x.lang === lang);
 
    return (
-      <Dropdown drop="up" alignRight>
+      <Dropdown drop="up" alignRight={alignRight}>
          <Dropdown.Toggle
             as={DropdownItemToggler}
             id="dropdown-toggle-my-cart"
@@ -78,3 +78,7 @@ export function LanguageSelectorDropdown({ overlayPlacement }) {
       </Dropdown>
    );
 }
+
+LanguageSelectorDropdown.defaultProps = {
+   alignRight: true,
+};

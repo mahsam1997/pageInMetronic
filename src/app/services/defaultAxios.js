@@ -9,6 +9,23 @@ export const setConfig = () => {
    instanceWithAuthorization.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 };
 
+export const addAuthorization = () => {
+   const token = localStorage.getItem("token");
+   if (token)
+      instanceWithAuthorization.defaults.headers.common["Authorization"] =
+         "Bearer " + token;
+};
+
+const language =
+   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
+
+export const addLanguage = () => {
+   instance.defaults.headers.common["Accept-Language"] = language;
+   instanceWithAuthorization.defaults.headers.common[
+      "Accept-Language"
+   ] = language;
+};
+
 export const axiosSetup = axiosInstance => {
    axiosInstance.interceptors.request.use(
       req => {
@@ -27,11 +44,15 @@ export const axiosSetup = axiosInstance => {
    );
 };
 
+addLanguage();
+addAuthorization();
 setConfig();
+addAuthorization();
 axiosSetup(instance);
 axiosSetup(instanceWithAuthorization);
 
 const defaultAxios = {
+   // addAuthorization,
    axiosSetup,
    instance,
    instanceWithAuthorization,

@@ -186,7 +186,7 @@ export function Aside() {
                            }
                         >
                            <Link
-                              to={routes.CUSTOMERS}
+                              to={routes.ECOMMERCE_CUSTOMERS}
                               className="nav-link btn btn-icon btn-clean btn-lg"
                               data-toggle="tab"
                               data-target="#kt_aside_tab_3"
