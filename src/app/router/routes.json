@@ -12,5 +12,9 @@
    "ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS": "/e-commerce/customers/deleteCustomers",
    "ECOMMERCE_CUSTOMERS_FETCH": "/e-commerce/customers/fetch",
    "ECOMMERCE_CUSTOMERS_UPDATE_STATUS": "/e-commerce/customers/updateStatus",
-   "ECOMMERCE_CUSTOMERS_DELETE": "/e-commerce/customers/:id/delete"
+   "ECOMMERCE_CUSTOMERS_DELETE": "/e-commerce/customers/:id/delete",
+
+   "CONTACT":"/contact",
+   "PLANS":"/plans",
+   "RULES":"/rules"
 }
