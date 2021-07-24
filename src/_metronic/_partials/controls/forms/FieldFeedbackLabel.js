@@ -1,8 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
 
-import formatMessage from "../../../../app/utils/formatMessage";
-
 const inputLabel = (
    { label, touched, error, customFeedbackLabel },
    intl,
@@ -13,25 +11,12 @@ const inputLabel = (
    }
 
    if (touched && !error && label) {
-      return (
-         <div className="valid-feedback">
-            {label} {formatMessage(intl, "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT")}
-         </div>
-      );
+      return <div className="valid-feedback"></div>;
    }
 
    return (
       <div className="feedback">
          {customFeedbackLabel && <>{customFeedbackLabel}</>}
-         {!customFeedbackLabel && (
-            <>
-               {isEnglish &&
-                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
-               <b>{label}</b>{" "}
-               {!isEnglish &&
-                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
-            </>
-         )}
       </div>
    );
 };
@@ -48,15 +33,6 @@ const selectLabel = (
    return (
       <div className="feedback">
          {customFeedbackLabel && <>{customFeedbackLabel}</>}
-         {!customFeedbackLabel && label && (
-            <>
-               {isEnglish &&
-                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
-               <b>{label}</b>{" "}
-               {!isEnglish &&
-                  formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
-            </>
-         )}
       </div>
    );
 };

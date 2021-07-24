@@ -12,16 +12,15 @@ import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 import { Link } from "react-router-dom";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 
+import useFormatMessage from "../../../../app/hooks/useFormatMessage";
 import routes from "../../../../app/router/routes.json";
 
 export function Aside() {
    const uiService = useHtmlClassService();
 
-   const language = useIntl().locale;
-
-   const isEnglish = language === "en";
+   const isEnglish = useIntl().locale === "en";
    const placement = isEnglish ? "right" : "left";
 
    const layoutProps = useMemo(() => {
@@ -175,13 +174,16 @@ export function Aside() {
                         data-placement="rigth"
                         data-container="body"
                         data-boundary="window"
-                        title="User Management"
+                        title={useFormatMessage("DEFAULT.USER_MANAGEMENT")}
                      >
                         <OverlayTrigger
                            placement={placement}
                            overlay={
-                              <Tooltip id="latest-reports">
-                                 User Management
+                              <Tooltip
+                                 id="latest-reports"
+                                 style={{ fontFamily: "Vazir" }}
+                              >
+                                 <FormattedMessage id="DEFAULT.USER_MANAGEMENT" />
                               </Tooltip>
                            }
                         >
@@ -229,7 +231,13 @@ export function Aside() {
                                  className="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm"
                                  id="kt_aside_toggle"
                               >
-                                 <i className="ki ki-bold-arrow-back icon-sm" />
+                                 <i
+                                    className={`ki ${
+                                       isEnglish
+                                          ? "ki-bold-arrow-back"
+                                          : "ki-bold-arrow-next"
+                                    } icon-sm`}
+                                 />
                               </span>
                            </OverlayTrigger>
                         </>

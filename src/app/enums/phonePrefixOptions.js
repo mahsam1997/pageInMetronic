@@ -1,11 +1,20 @@
+import countryCodes from "country-codes-list";
+
 import toFarsiNumber from "../utils/toFarsiNumber";
 
-const values = ["+98", "+99", "+97"];
+const myCountryCodes = countryCodes.customList(
+   "countryCode",
+   "+{countryCallingCode}"
+);
+
+const callingCodeList = Object.values(myCountryCodes);
 
 const phonePrefixOptions = isEnglish =>
-   values.map(val => ({
+   callingCodeList.map(val => ({
       value: val,
       label: isEnglish ? val : toFarsiNumber(val),
    }));
+
+export { callingCodeList };
 
 export default phonePrefixOptions;

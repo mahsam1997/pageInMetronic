@@ -19,8 +19,9 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
+import { useIntl } from "react-intl";
 import useFormatMessage from "../../../../../hooks/useFormatMessage";
-
+import toFarsiNumber from "../../../../../utils/toFarsiNumber";
 import { getUsers } from "../../../../../services/users.service";
 
 export function CustomersTable() {
@@ -29,6 +30,8 @@ export function CustomersTable() {
       total: 0,
    });
    const [loading, setLoading] = useState(false);
+
+   const isEnglish = useIntl().locale === "en";
 
    // Customers UI Context
    const customersUIContext = useCustomersUIContext();
@@ -48,6 +51,8 @@ export function CustomersTable() {
       {
          dataField: "profile.fullName",
          text: useFormatMessage("AUTH.INPUT.FULLNAME"),
+         headerAlign: "center",
+         align: "center",
          // sort: true,
          // sortCaret: sortCaret,
          // headerSortingClasses,
@@ -55,18 +60,33 @@ export function CustomersTable() {
       {
          dataField: "email",
          text: useFormatMessage("AUTH.INPUT.EMAIL"),
+         formatter: (cell, row, rowIndex) =>
+            isEnglish ? cell : toFarsiNumber(cell),
+         headerAlign: "center",
+         align: "center",
       },
       {
          dataField: "mobile",
          text: useFormatMessage("ECOMMERCE.COMMON.MOBILE"),
+         formatter: (cell, row, rowIndex) =>
+            isEnglish ? cell : toFarsiNumber(cell),
+         headerAlign: "center",
+         align: "center",
+         style: {
+            direction: "ltr",
+         },
       },
       {
          dataField: "role",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.ROLE"),
+         headerAlign: "center",
+         align: "center",
       },
       {
          dataField: "status",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.STATUS"),
+         headerAlign: "center",
+         align: "center",
       },
       {
          dataField: "action",

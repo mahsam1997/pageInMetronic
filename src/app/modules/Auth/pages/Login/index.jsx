@@ -70,11 +70,8 @@ function Login(props) {
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
-         <div
-            className="login-title"
-            // mb-10 mb-lg-10
-         >
-            <h3 className="font-size-h1 ">
+         <div className=" mb-10 mb-lg-10 login-title">
+            <h3>
                <FormattedMessage id="AUTH.LOGIN.TITLE" />
             </h3>
             <p className="text-muted ">
@@ -135,7 +132,7 @@ function Login(props) {
                                  "AUTH.INPUT.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
-                              className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
+                              className={`form-control form-control-solid h-auto py-5 px-6 password-input ${getInputClasses(
                                  formik,
                                  "password"
                               )}`}
@@ -190,25 +187,6 @@ function Login(props) {
          </Formik>
 
          {/*end::Form*/}
-         <div className="login-bottom">
-            <ul>
-               <li className="text-muted">
-                  <a href="/contact">
-                     <FormattedMessage id="AUTH.GENERAL.CONTACT" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/plans">
-                     <FormattedMessage id="AUTH.GENERAL.PLANS" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/rules">
-                     <FormattedMessage id="AUTH.GENERAL.RULES" />
-                  </a>
-               </li>
-            </ul>
-         </div>
       </div>
    );
 }

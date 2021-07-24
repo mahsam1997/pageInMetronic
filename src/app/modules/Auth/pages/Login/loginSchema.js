@@ -18,7 +18,7 @@ const loginSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.EMAIL"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
       password: Yup.string()
          .min(
             6,
@@ -34,7 +34,7 @@ const loginSchema = formatMessage => {
                noun: formatMessage("AUTH.INPUT.PASSWORD"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(formatMessage("REQUIRED")),
    });
 };
 

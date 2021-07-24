@@ -2,10 +2,42 @@
 import React from "react";
 import { PaginationTotalStandalone } from "react-bootstrap-table2-paginator";
 
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import toFarsiNumber from "../../../../app/utils/toFarsiNumber";
+
+const CustomTotal = (from, to, size) => {
+   const isEnglish = useIntl().locale === "en";
+
+   return (
+      <span className="react-bootstrap-table-pagination-total">
+         {isEnglish ? (
+            <FormattedMessage
+               id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
+               values={{
+                  from,
+                  to,
+                  size,
+               }}
+            />
+         ) : (
+            <FormattedMessage
+               id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
+               values={{
+                  from: toFarsiNumber(from),
+                  to: toFarsiNumber(to),
+                  size: toFarsiNumber(size),
+               }}
+            />
+         )}
+      </span>
+   );
+};
 
 export function PaginationToolbar(props) {
    const { isLoading, paginationProps } = props;
+
+   const isEnglish = useIntl().locale === "en";
+
    const {
       sizePerPageList,
       sizePerPage,
@@ -44,14 +76,15 @@ export function PaginationToolbar(props) {
             style={style}
          >
             {sizePerPageList.map(option => {
-               const isSelect = sizePerPage === `${option.page}`;
+               // const isSelect = sizePerPage === `${option.page}`;
+               const isSelect = sizePerPage === option.value;
                return (
                   <option
                      key={option.text}
-                     value={option.page}
+                     value={option.value}
                      className={`btn ${isSelect ? "active" : ""}`}
                   >
-                     {option.text}
+                     {isEnglish ? option.text : toFarsiNumber(option.text)}
                   </option>
                );
             })}
@@ -59,6 +92,7 @@ export function PaginationToolbar(props) {
          <PaginationTotalStandalone
             className="text-muted"
             {...paginationProps}
+            paginationTotalRenderer={CustomTotal}
          />
       </div>
    );

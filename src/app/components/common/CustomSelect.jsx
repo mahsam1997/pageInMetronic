@@ -1,9 +1,16 @@
 import React from "react";
 import Select from "react-select";
-import { useIntl } from "react-intl";
+// import { useIntl } from "react-intl";
 
-const CustomSelect = ({ options, value, customStyles, ...props }) => {
-   const isEnglish = useIntl().locale === "en";
+const CustomSelect = ({
+   options,
+   value,
+   customStyles = {},
+   customOptionStyles = {},
+   customSingleValueStyles = {},
+   ...props
+}) => {
+   // const isEnglish = useIntl().locale === "en";
 
    const selectStyles = {
       control: styles => ({
@@ -13,7 +20,8 @@ const CustomSelect = ({ options, value, customStyles, ...props }) => {
          padding: "0",
          borderRadius: "4px",
          border: "1px solid rgba(0,0,0,.1)",
-         direction: isEnglish ? "ltr" : "rtl",
+         // direction: isEnglish ? "ltr" : "rtl",
+         direction: "ltr",
          paddingLeft: 5,
          fontStyle: "normal",
          fontWeight: 500,
@@ -21,15 +29,20 @@ const CustomSelect = ({ options, value, customStyles, ...props }) => {
          lineHeight: "24px",
          ...customStyles,
       }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-         return {
-            ...styles,
-            fontStyle: "normal",
-            fontWeight: 500,
-            fontSize: "14px",
-            lineHeight: "24px",
-         };
-      },
+      option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+         ...styles,
+         fontStyle: "normal",
+         fontWeight: 500,
+         fontSize: "14px",
+         lineHeight: "24px",
+         direction: "ltr",
+         ...customOptionStyles,
+      }),
+      singleValue: styles => ({
+         ...styles,
+         direction: "ltr",
+         ...customSingleValueStyles,
+      }),
    };
 
    const defaultValue = options.filter(option => option.value === value)[0];
