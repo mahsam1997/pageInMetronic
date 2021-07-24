@@ -1,7 +1,7 @@
 import React from "react";
 import { useIntl } from "react-intl";
 
-import formatMessage from "../../../../app/utils/formatMessage";
+// import formatMessage from "../../../../app/utils/formatMessage";
 
 const inputLabel = (
    { label, touched, error, customFeedbackLabel },
@@ -15,7 +15,7 @@ const inputLabel = (
    if (touched && !error && label) {
       return (
          <div className="valid-feedback">
-            {label} {formatMessage(intl, "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT")}
+            {/* {label} {formatMessage(intl, "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT")} */}
          </div>
       );
    }
@@ -23,7 +23,7 @@ const inputLabel = (
    return (
       <div className="feedback">
          {customFeedbackLabel && <>{customFeedbackLabel}</>}
-         {!customFeedbackLabel && (
+         {/* {!customFeedbackLabel && (
             <>
                {isEnglish &&
                   formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
@@ -31,7 +31,7 @@ const inputLabel = (
                {!isEnglish &&
                   formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
             </>
-         )}
+         )} */}
       </div>
    );
 };
@@ -48,7 +48,7 @@ const selectLabel = (
    return (
       <div className="feedback">
          {customFeedbackLabel && <>{customFeedbackLabel}</>}
-         {!customFeedbackLabel && label && (
+         {/* {!customFeedbackLabel && label && (
             <>
                {isEnglish &&
                   formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}{" "}
@@ -56,7 +56,7 @@ const selectLabel = (
                {!isEnglish &&
                   formatMessage(intl, "ECOMMERCE.CUSTOMERS.PLEASE_ENTER")}
             </>
-         )}
+         )} */}
       </div>
    );
 };

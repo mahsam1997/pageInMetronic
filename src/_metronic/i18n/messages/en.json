@@ -63,7 +63,7 @@
    "DEFAULT.SAVE": "Save",
    "DEFAULT.DELETE": "Delete",
    "DEFAULT.SELECT": "Select",
-   "DEFAULT.SUB_PHONE": "Sub phone",
+   "DEFAULT.SUB_PHONE": "Country code",
    "DEFAULT.DELETE_ALL": "Delete all",
    "DEFAULT.LOADING": "Loading ...",
    "DEFAULT.NOT_RECORDS": "No records found",

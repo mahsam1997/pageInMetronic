@@ -56,7 +56,7 @@
    "DEFAULT.SAVE": "ذخیره",
    "DEFAULT.DELETE": "حذف",
    "DEFAULT.SELECT": "انتخاب",
-   "DEFAULT.SUB_PHONE": "پیش شماره",
+   "DEFAULT.SUB_PHONE": "کد کشور",
    "DEFAULT.DELETE_ALL": "حذف همه",
    "DEFAULT.LOADING": "در حال بارگذاری ...",
    "DEFAULT.NOT_RECORDS": "هیچ سوابقی یافت نشد",

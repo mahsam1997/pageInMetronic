@@ -4,7 +4,7 @@ import CustomSelect from "./common/CustomSelect";
 
 import colors from "../Assets/sass/colors.scss";
 
-const PhoneSelect = ({ options, value }) => {
+const PhoneSelect = ({ options, value, ...props }) => {
    return (
       <CustomSelect
          options={options}
@@ -24,6 +24,7 @@ const PhoneSelect = ({ options, value }) => {
          customSingleValueStyles={{
             color: colors.gray,
          }}
+         {...props}
       />
    );
 };
