@@ -3,6 +3,8 @@ import { FormattedMessage } from "react-intl";
 
 import TermsConditionsModal from "../modals/TermsConditionsModal";
 
+import routes from "../router/routes.json";
+
 const AuthFooter = () => {
    const [showTerms, setShowTerms] = useState(false);
 
@@ -17,17 +19,17 @@ const AuthFooter = () => {
       <div className="auth-footer">
          <div>
             <span className="text-muted">
-               <a href="/contact">
+               <a href={routes.CONTACT}>
                   <FormattedMessage id="AUTH.GENERAL.CONTACT" />
                </a>
             </span>
             <span className="text-muted">
-               <a href="/plans">
+               <a href={routes.PLANS}>
                   <FormattedMessage id="AUTH.GENERAL.PLANS" />
                </a>
             </span>
             <span className="text-muted">
-               <a href="/rules" onClick={handleShowTermsConditions}>
+               <a href={routes.RULES} onClick={handleShowTermsConditions}>
                   <FormattedMessage id="AUTH.GENERAL.RULES" />
                </a>
             </span>
