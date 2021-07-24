@@ -68,6 +68,7 @@
    "DEFAULT.LOADING": "Loading ...",
    "DEFAULT.NOT_RECORDS": "No records found",
    "DEFAULT.PLEASE_WAIT": "Please wait...",
+   "DEFAULT.USER_MANAGEMENT": "User Management",
    "ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT": "Selected records count: ",
    "ECOMMERCE.COMMON.ALL": "All",
    "ECOMMERCE.COMMON.OK": "Ok",
@@ -109,5 +110,6 @@
    "ECOMMERCE.CUSTOMERS.STATUS": "Status",
    "ECOMMERCE.CUSTOMERS.ACTIONS": "Actions",
    "ECOMMERCE.CUSTOMERS.PLEASE_ENTER": "Please enter",
-   "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "valid input"
+   "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "valid input",
+   "ECOMMERCE.CUSTOMERS.SHOWING_ITEMS": "Showing {from} to {to} of {size} Results"
 }

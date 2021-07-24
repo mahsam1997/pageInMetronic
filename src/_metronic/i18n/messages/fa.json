@@ -61,6 +61,7 @@
    "DEFAULT.LOADING": "در حال بارگذاری ...",
    "DEFAULT.NOT_RECORDS": "هیچ سوابقی یافت نشد",
    "DEFAULT.PLEASE_WAIT": "لطفا صبر کنید...",
+   "DEFAULT.USER_MANAGEMENT": "مدیریت کاربران",
    "ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT": "تعداد سوابق انتخاب شده: ",
    "ECOMMERCE.COMMON.ALL": "همه",
    "ECOMMERCE.COMMON.OK": "تایید",
@@ -103,6 +104,7 @@
    "ECOMMERCE.CUSTOMERS.ACTIONS": "اقدامات",
    "ECOMMERCE.CUSTOMERS.PLEASE_ENTER": "را لطفا وارد کنید",
    "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "درست وارد شده است",
+   "ECOMMERCE.CUSTOMERS.SHOWING_ITEMS": "نمایش موارد {from} تا {to} از {size} مورد",
 
    "MENU.NEW": "جدید",
    "MENU.ACTIONS": "اقدامات",

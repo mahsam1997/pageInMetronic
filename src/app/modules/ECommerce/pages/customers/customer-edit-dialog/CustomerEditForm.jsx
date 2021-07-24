@@ -41,20 +41,20 @@ const CustomerEditSchema = formatedMessage =>
          .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
 
       mobile: Yup.string()
-         .min(
-            3,
-            formatedMessage("MIN_X_CHARACTERS", {
-               x: 3,
-               noun: formatedMessage("AUTH.INPUT.PHONE"),
-            })
-         )
-         .max(
-            50,
-            formatedMessage("MAX_X_CHARACTERS", {
-               x: 50,
-               noun: formatedMessage("AUTH.INPUT.PHONE"),
-            })
-         )
+         // .min(
+         //    3,
+         //    formatedMessage("MIN_X_CHARACTERS", {
+         //       x: 3,
+         //       noun: formatedMessage("AUTH.INPUT.PHONE"),
+         //    })
+         // )
+         // .max(
+         //    50,
+         //    formatedMessage("MAX_X_CHARACTERS", {
+         //       x: 50,
+         //       noun: formatedMessage("AUTH.INPUT.PHONE"),
+         //    })
+         // )
          .required(formatedMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
 
       subMobile: Yup.string().required(
@@ -114,6 +114,7 @@ export function CustomerEditForm({
                                     intl,
                                     "AUTH.INPUT.FULLNAME"
                                  )}
+                                 withFeedbackLabel={false}
                               />
                            </div>
                            {/* Email */}
@@ -130,6 +131,7 @@ export function CustomerEditForm({
                                     intl,
                                     "ECOMMERCE.COMMON.EMAIL"
                                  )}
+                                 withFeedbackLabel={false}
                               />
                            </div>
                         </div>
@@ -142,6 +144,8 @@ export function CustomerEditForm({
                                     intl,
                                     "DEFAULT.SUB_PHONE"
                                  )}
+                                 style={{ direction: "ltr" }}
+                                 withFeedbackLabel={false}
                               >
                                  {callingCodeList.map((callCode, i) => (
                                     <option key={i} value={callCode}>
@@ -166,6 +170,7 @@ export function CustomerEditForm({
                                     intl,
                                     "ECOMMERCE.COMMON.MOBILE"
                                  )}
+                                 withFeedbackLabel={false}
                               />
                            </div>
                         </div>

@@ -19,8 +19,9 @@ import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
+import { useIntl } from "react-intl";
 import useFormatMessage from "../../../../../hooks/useFormatMessage";
-
+import toFarsiNumber from "../../../../../utils/toFarsiNumber";
 import { getUsers } from "../../../../../services/users.service";
 
 export function CustomersTable() {
@@ -29,6 +30,8 @@ export function CustomersTable() {
       total: 0,
    });
    const [loading, setLoading] = useState(false);
+
+   const isEnglish = useIntl().locale === "en";
 
    // Customers UI Context
    const customersUIContext = useCustomersUIContext();
@@ -57,11 +60,20 @@ export function CustomersTable() {
       {
          dataField: "email",
          text: useFormatMessage("AUTH.INPUT.EMAIL"),
+         formatter: (cell, row, rowIndex) =>
+            isEnglish ? cell : toFarsiNumber(cell),
          // headerAlign: "center",
       },
       {
          dataField: "mobile",
          text: useFormatMessage("ECOMMERCE.COMMON.MOBILE"),
+         // formatter: (cell, row, rowIndex) =>
+         //    isEnglish ? cell : toFarsiNumber(cell),
+         style: {
+            direction: "ltr",
+         },
+         // validator: (arg1, arg2) => console.log(arg1, "  ", arg2),
+         // filter: (arg1, arg2) => console.log(arg1, "  ", arg2),
          // headerAlign: "center",
       },
       {
