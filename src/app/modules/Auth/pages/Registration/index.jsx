@@ -260,7 +260,7 @@ function Registration(props) {
                            }
                            tagName="span"
                            title="AUTH.GENERAL.REGISTER_BUTTON"
-                           classNames="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 "
                         />
                         <CustomButton
                            title="AUTH.LOGIN.GOOGLE"

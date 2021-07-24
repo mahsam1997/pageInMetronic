@@ -21,7 +21,6 @@ const CustomSelect = ({
          borderRadius: "4px",
          border: "1px solid rgba(0,0,0,.1)",
          direction: isEnglish ? "ltr" : "rtl",
-         // direction: "ltr",
          paddingLeft: 5,
          fontStyle: "normal",
          fontWeight: 500,
@@ -36,13 +35,11 @@ const CustomSelect = ({
          fontSize: "14px",
          lineHeight: "24px",
          direction: isEnglish ? "ltr" : "rtl",
-         // direction: "ltr",
          ...customOptionStyles,
       }),
       singleValue: styles => ({
          ...styles,
          direction: isEnglish ? "ltr" : "rtl",
-         // direction: "ltr",
          ...customSingleValueStyles,
       }),
    };
