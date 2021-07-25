@@ -41,6 +41,7 @@ import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 const initialValues = {
    email: "",
    password: "",
+   rememberMe: false,
 };
 
 function Login(props) {
@@ -55,10 +56,11 @@ function Login(props) {
    const loginSchema = schema(useFormatMessage);
 
    const onSubmit = async (values, { setFieldError }) => {
+      const saveType = values.rememberMe ? "localStorage" : "sessionStorage";
       const response = await login(values);
       if (response?.data?.success) {
          const { id, refresh, role, token } = response.data.data;
-         setAuthenticate(id, refresh, role, token);
+         setAuthenticate(id, refresh, role, token, saveType);
          setIsAuth(true);
       } else if (response?.errorMessage) {
          response.response.data.errors.forEach(error =>
@@ -98,6 +100,10 @@ function Login(props) {
             validationSchema={loginSchema}
          >
             {formik => {
+               const {
+                  values: { rememberMe },
+                  setFieldValue,
+               } = formik;
                return (
                   <Form
                      noValidate="noValidate"
@@ -160,7 +166,13 @@ function Login(props) {
                      <br />
                      <br />
                      <div className="d-flex align-items-baseline">
-                        <Checkbox id="remember-me">
+                        <Checkbox
+                           id="remember-me"
+                           isSelected={rememberMe}
+                           onChange={() =>
+                              setFieldValue("rememberMe", !rememberMe)
+                           }
+                        >
                            <FormattedMessage id="AUTH.LABEL.REMEMBER.ME" />
                         </Checkbox>
                      </div>
