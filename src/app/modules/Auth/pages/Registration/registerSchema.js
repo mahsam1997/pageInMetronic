@@ -36,7 +36,7 @@ const registerSchema = formatMessage => {
          )
          .required(formatMessage("REQUIRED")),
 
-      subPhoneNumber: Yup.number().required(formatMessage("REQUIRED")),
+      countryCode: Yup.string().required(formatMessage("REQUIRED")),
 
       email: Yup.string()
          .email(formatMessage("AUTH.VALIDATION.EMAIL"))

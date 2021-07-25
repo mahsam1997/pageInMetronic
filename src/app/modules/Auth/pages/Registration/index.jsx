@@ -28,7 +28,7 @@ import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 const initialValues = {
    fullName: "",
    phoneNumber: "",
-   subPhoneNumber: "+98",
+   countryCode: "+98",
    email: "",
    password: "",
    acceptTerms: false,
@@ -45,13 +45,14 @@ function Registration(props) {
    const registrationSchema = schema(useFormatMessage);
 
    const onSubmit = async (
-      { email, password, subPhoneNumber, phoneNumber, fullName },
+      { email, password, countryCode, phoneNumber, fullName },
       { setFieldError }
    ) => {
       const newUser = {
          email,
          password,
-         mobile: `${subPhoneNumber}${phoneNumber}`,
+         countryCode,
+         mobile: phoneNumber + "",
          profile: {
             fullName,
          },
@@ -97,7 +98,7 @@ function Registration(props) {
          >
             {formik => {
                const {
-                  values: { acceptTerms, subPhoneNumber },
+                  values: { acceptTerms, countryCode },
                   setFieldValue,
                   setFieldTouched,
                } = formik;
@@ -156,14 +157,14 @@ function Registration(props) {
                            </div>
                            <PhoneSelect
                               options={phonePrefixOptions(isEnglish)}
-                              value={subPhoneNumber}
+                              value={countryCode}
                               onChange={value =>
-                                 setFieldValue("subPhoneNumber", value.value)
+                                 setFieldValue("countryCode", value.value)
                               }
                               onBlur={() =>
-                                 setFieldTouched("subPhoneNumber", true)
+                                 setFieldTouched("countryCode", true)
                               }
-                              name="subPhoneNumber"
+                              name="countryCode"
                            />
                         </div>
                      </div>
