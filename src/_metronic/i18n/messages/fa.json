@@ -53,6 +53,7 @@
    "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست",
    "SELECT.LANGUAGE": "زبان خود را انتخاب کنید",
 
+   "DEFAULT.": "مقدار پیش فرض",
    "DEFAULT.SAVE": "ذخیره",
    "DEFAULT.DELETE": "حذف",
    "DEFAULT.SELECT": "انتخاب",

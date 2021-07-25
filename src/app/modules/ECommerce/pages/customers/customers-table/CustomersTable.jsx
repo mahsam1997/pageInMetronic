@@ -31,7 +31,9 @@ export function CustomersTable() {
    });
    const [loading, setLoading] = useState(false);
 
-   const isEnglish = useIntl().locale === "en";
+   const intl = useIntl();
+
+   const isEnglish = intl.locale === "en";
 
    // Customers UI Context
    const customersUIContext = useCustomersUIContext();
@@ -91,7 +93,8 @@ export function CustomersTable() {
       {
          dataField: "action",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.ACTIONS"),
-         formatter: columnFormatters.ActionsColumnFormatter,
+         formatter: (...args) =>
+            columnFormatters.ActionsColumnFormatter(intl, ...args),
          formatExtraData: {
             openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
             openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,

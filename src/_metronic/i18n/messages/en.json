@@ -59,6 +59,8 @@
    "AUTH.VALIDATION.MAX_LENGTH_FIELD": "Maximum field length:",
    "AUTH.VALIDATION.INVALID_FIELD": "Field is not valid",
    "SELECT.LANGUAGE": "Select Language",
+
+   "DEFAULT.": "this is default",
    "DEFAULT.SAVE": "Save",
    "DEFAULT.DELETE": "Delete",
    "DEFAULT.SELECT": "Select",

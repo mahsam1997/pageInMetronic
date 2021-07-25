@@ -53,8 +53,6 @@ export function SubHeader() {
             : header.title
       );
 
-      console.log(aside.breadcrumbs);
-
       // eslint-disable-next-line
    }, [location.pathname]);
 
