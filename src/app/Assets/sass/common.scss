@@ -43,7 +43,9 @@ input[type="number"] {
    appearance: textfield;
 }
 
-.Select-menu-outer {
-   top: auto;
-   bottom: 100%;
+.d-flex-rtl-disable {
+   /*rtl:ignore*/
+   display: flex;
+   /*rtl:ignore*/
+   direction: ltr;
 }
