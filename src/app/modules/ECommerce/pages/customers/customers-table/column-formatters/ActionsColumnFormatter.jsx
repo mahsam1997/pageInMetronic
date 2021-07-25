@@ -14,7 +14,6 @@ export function ActionsColumnFormatter(
    return (
       <>
          <a
-            title="Edit customer"
             className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
             onClick={() => openEditCustomerDialog(row["_id"])}
          >
@@ -29,7 +28,6 @@ export function ActionsColumnFormatter(
          <> </>
 
          <a
-            title="Delete customer"
             className="btn btn-icon btn-light btn-hover-danger btn-sm"
             onClick={() => openDeleteCustomerDialog(row["_id"])}
          >

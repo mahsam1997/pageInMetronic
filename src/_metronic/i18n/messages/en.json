@@ -6,7 +6,6 @@
    "MENU.PAGES": "Pages",
    "MENU.FEATURES": "Features",
    "MENU.APPS": "Apps",
-   "MENU.DASHBOARD": "Dashboard",
    "AUTH.AUTHPAGE.TITLE.1": "Startup Academy",
    "AUTH.AUTHPAGE.TITLE.2": "Complete Educational Experience",
    "AUTH.GENERAL.OR": "Or",
@@ -69,6 +68,10 @@
    "DEFAULT.NOT_RECORDS": "No records found",
    "DEFAULT.PLEASE_WAIT": "Please wait...",
    "DEFAULT.USER_MANAGEMENT": "User Management",
+   "DEFAULT.CUSTOMERS": "Customers",
+   "DEFAULT.DASHBOARD": "Dashboard",
+   "DEFAULT.ECOMMERCE": "e Commerce",
+
    "ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT": "Selected records count: ",
    "ECOMMERCE.COMMON.ALL": "All",
    "ECOMMERCE.COMMON.OK": "Ok",
@@ -111,5 +114,8 @@
    "ECOMMERCE.CUSTOMERS.ACTIONS": "Actions",
    "ECOMMERCE.CUSTOMERS.PLEASE_ENTER": "Please enter",
    "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "valid input",
-   "ECOMMERCE.CUSTOMERS.SHOWING_ITEMS": "Showing {from} to {to} of {size} Results"
+   "ECOMMERCE.CUSTOMERS.SHOWING_ITEMS": "Showing {from} to {to} of {size} Results",
+   "ECOMMERCE.CUSTOMERS.NEW_MEMBER": "New Member",
+   "ECOMMERCE.CUSTOMERS.QUICK_ACTIONS": "Quick actions",
+   "ECOMMERCE.CUSTOMERS.NEW_REPORT": "New Report"
 }
