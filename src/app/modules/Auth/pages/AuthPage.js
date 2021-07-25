@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-// import { FormattedMessage } from "react-intl";
 import Login from "./Login/index";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";

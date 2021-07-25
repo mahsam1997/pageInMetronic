@@ -22,7 +22,7 @@ import { setAuthenticate } from "../../../../utils/authenticate";
 import loginSchema from "./loginSchema";
 import routes from "../../../../router/routes.json";
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
-import i18next from "i18next";
+
 /*
   INTL (i18n) docs:
   https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
@@ -53,13 +53,6 @@ function Login(props) {
       }
    };
 
-   console.log("login log");
-
-   console.log(
-      "translator login file",
-      i18next.t("errors.AUTH.VALIDATION.EMAIL")
-   );
-
    return (
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
@@ -85,10 +78,7 @@ function Login(props) {
                return (
                   <Form className="form fv-plugins-bootstrap fv-plugins-framework">
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           {/* <FormattedMessage id="AUTH.INPUT.EMAIL" /> */}
-                           {t("messages.AUTH.INPUT.EMAIL")}
-                        </label>
+                        <label>{t("messages.AUTH.INPUT.EMAIL")}</label>
                         <Field
                            placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                            type="email"
@@ -163,19 +153,6 @@ function Login(props) {
          </Formik>
 
          {/*end::Form*/}
-         <div className="login-bottom">
-            <ul>
-               <li className="text-muted">
-                  <a href="/contact">{t("messages.AUTH.GENERAL.CONTACT")}</a>
-               </li>
-               <li className="text-muted">
-                  <a href="/plans">{t("messages.AUTH.GENERAL.PLANS")}</a>
-               </li>
-               <li className="text-muted">
-                  <a href="/rules">{t("messages.AUTH.GENERAL.RULES")}</a>
-               </li>
-            </ul>
-         </div>
       </div>
    );
 }

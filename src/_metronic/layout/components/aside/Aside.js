@@ -17,8 +17,7 @@ import i18next from "i18next";
 export function Aside() {
    const uiService = useHtmlClassService();
 
-   const isLtrDirection = i18next.dir() === "ltr";
-   const placement = isLtrDirection ? "right" : "left";
+   const placement = i18next.dir() === "ltr" ? "right" : "left";
 
    const layoutProps = useMemo(() => {
       return {

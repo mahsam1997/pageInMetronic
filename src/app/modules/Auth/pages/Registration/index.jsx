@@ -19,7 +19,6 @@ import registerSchema from "./registerSchema";
 import phonePrefixOptions from "../../../../enums/phonePrefixOptions";
 
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
-import i18next from "i18next";
 
 const initialValues = {
    fullName: "",
@@ -59,8 +58,6 @@ function Registration(props) {
          setIsAuth(true);
       }
    };
-
-   console.log(i18next.t("messages.AUTH.INPUT.PHONE"));
 
    return (
       <div
@@ -237,20 +234,6 @@ function Registration(props) {
                );
             }}
          </Formik>
-
-         <div className="login-bottom justify-content-start">
-            <ul>
-               <li className="text-muted">
-                  <a href="/contact">{t("messages.AUTH.GENERAL.CONTACT")}</a>
-               </li>
-               <li className="text-muted">
-                  <a href="/plans">{t("messages.AUTH.GENERAL.PLANS")}</a>
-               </li>
-               <li className="text-muted">
-                  <a href="/rules">{t("messages.AUTH.GENERAL.RULES")}</a>
-               </li>
-            </ul>
-         </div>
       </div>
    );
 }
