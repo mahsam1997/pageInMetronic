@@ -69,7 +69,6 @@ export function CustomerEditForm({
             validationSchema={CustomerEditSchema(useFormatMessage)}
             onSubmit={values => {
                saveCustomer(values);
-               console.log("form values: ", values);
             }}
          >
             {formik => {
