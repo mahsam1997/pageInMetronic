@@ -36,9 +36,9 @@ const registerSchema = t => {
          )
          .required(t("errors.REQUIRED")),
 
-      subPhoneNumber: Yup.number().required(
-         t("errors.REQUIRED")
-      ),
+      countryCode: Yup.string().required(t("errors.REQUIRED")),
+
+      subPhoneNumber: Yup.number().required(t("errors.REQUIRED")),
       email: Yup.string()
          .email(t("errors.AUTH.VALIDATION.EMAIL"))
          .min(
@@ -74,9 +74,7 @@ const registerSchema = t => {
          )
          .required(t("errors.REQUIRED")),
 
-      acceptTerms: Yup.bool().required(
-         t("errors.REQUIRED")
-      ),
+      acceptTerms: Yup.bool().required(t("errors.REQUIRED")),
    });
 };
 

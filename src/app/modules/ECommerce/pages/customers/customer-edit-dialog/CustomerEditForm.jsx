@@ -57,7 +57,7 @@ const CustomerEditSchema = formatedMessage =>
          )
          .required(formatedMessage("REQUIRED")),
 
-      subMobile: Yup.string().required(formatedMessage("REQUIRED")),
+      countryCode: Yup.string().required(formatedMessage("REQUIRED")),
    });
 
 export function CustomerEditForm({
@@ -69,12 +69,9 @@ export function CustomerEditForm({
    const intl = useIntl();
    const isEnglish = intl.locale === "en";
 
-   const mobile = customer.mobile.slice(3);
-   const subMobile = customer.mobile.substr(0, 3);
-
    const initialValues = {
-      mobile,
-      subMobile,
+      mobile: customer.mobile,
+      countryCode: customer.countryCode,
       fullName: customer.profile.fullName,
       email: customer.email,
    };
@@ -157,24 +154,25 @@ export function CustomerEditForm({
                               </div>
                               {/* Sub Mobile */}
                               <div className="col-lg-4 ">
-                                 {console.log(
-                                    "user sub phone:",
-                                    values.subMobile
-                                 )}
                                  <label>
                                     <FormattedMessage id="DEFAULT.SUB_PHONE" />
                                  </label>
-                                 <CustomSelect
-                                    options={phonePrefixOptions(isEnglish)}
-                                    value={values.subMobile || "+98"}
-                                    onChange={value =>
-                                       setFieldValue("subMobile", value.value)
-                                    }
-                                    onBlur={() =>
-                                       setFieldTouched("subMobile", true)
-                                    }
-                                    name="subMobile"
-                                 />
+                                 {values.countryCode && (
+                                    <CustomSelect
+                                       options={phonePrefixOptions(isEnglish)}
+                                       value={values.countryCode}
+                                       onChange={value =>
+                                          setFieldValue(
+                                             "countryCode",
+                                             value.value
+                                          )
+                                       }
+                                       onBlur={() =>
+                                          setFieldTouched("countryCode", true)
+                                       }
+                                       name="countryCode"
+                                    />
+                                 )}
                               </div>
                            </div>
                         </Form>

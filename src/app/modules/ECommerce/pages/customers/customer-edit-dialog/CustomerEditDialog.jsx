@@ -10,6 +10,7 @@ import { getUser, editUser } from "../../../../../services/users.service";
 const customerForEditInitialValue = {
    email: "",
    mobile: "",
+   countryCode: "",
    profile: {
       fullName: "",
    },
@@ -50,9 +51,11 @@ export function CustomerEditDialog({ id, show, onHide }) {
          profile: {
             fullName: customer.fullName,
          },
-         mobile: `${customer.subMobile}${customer.mobile}`,
+         mobile: `${customer.mobile}`,
+         countryCode: customer.countryCode,
          email: customer.email,
       };
+
       if (!id) {
          // server request for creating customer
       } else {
