@@ -2,23 +2,24 @@
 import React from "react";
 import { PaginationTotalStandalone } from "react-bootstrap-table2-paginator";
 
-import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "react-i18next";
 import CustomSelect from "../../../../app/components/common/CustomSelect";
 import toFarsiNumber from "../../../../app/utils/toFarsiNumber";
 
+//
+import { FormattedMessage } from "react-intl";
+
 const CustomTotal = (from, to, size) => {
-   const isEnglish = useIntl().locale === "en";
+   const { i18n } = useTranslation();
+
+   const isLtrDir = i18n.dir() === "ltr";
 
    return (
       <div className="react-bootstrap-table-pagination-total mr-15">
-         {isEnglish ? (
+         {isLtrDir ? (
             <FormattedMessage
                id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
-               values={{
-                  from,
-                  to,
-                  size,
-               }}
+               values={{ from, to, size }}
             />
          ) : (
             <FormattedMessage
@@ -37,7 +38,9 @@ const CustomTotal = (from, to, size) => {
 export function PaginationToolbar(props) {
    const { isLoading, paginationProps } = props;
 
-   const isEnglish = useIntl().locale === "en";
+   const { i18n } = useTranslation();
+
+   const isLtrDir = i18n.dir() === "ltr";
 
    const {
       sizePerPageList,
@@ -74,33 +77,12 @@ export function PaginationToolbar(props) {
             {...paginationProps}
             paginationTotalRenderer={CustomTotal}
          />
-         {/* <select
-            disabled={totalSize === 0}
-            className={`form-control form-control-sm font-weight-bold mr-4 border-0 bg-light ${totalSize ===
-               0 && "disabled"}`}
-            onChange={onSizeChange}
-            value={sizePerPage}
-            style={style}
-         >
-            {sizePerPageList.map(option => {
-               const isSelect = sizePerPage === option.value;
-               return (
-                  <option
-                     key={option.text}
-                     value={option.value}
-                     className={`btn ${isSelect ? "active" : ""}`}
-                  >
-                     {isEnglish ? option.text : toFarsiNumber(option.text)}
-                  </option>
-               );
-            })}
-         </select> */}
 
          <CustomSelect
             isDisabled={totalSize === 0}
             options={sizePerPageList}
             getOptionLabel={option =>
-               isEnglish ? option.text : toFarsiNumber(option.text)
+               isLtrDir ? option.text : toFarsiNumber(option.text)
             }
             customStyles={{
                width: "80px",
@@ -119,11 +101,6 @@ export function PaginationToolbar(props) {
             }}
             menuPlacement="top"
             onChange={onSizeChange}
-            customSingleValueStyles={
-               {
-                  // padding: "90px",
-               }
-            }
          />
       </div>
    );

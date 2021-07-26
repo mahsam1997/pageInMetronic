@@ -1,7 +1,7 @@
 /* Pagination Helprs */
 import React from "react";
 
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 export const getPagesCount = (totalSize, sizePerPage) => {
    return Math.ceil(totalSize / sizePerPage);
@@ -97,29 +97,22 @@ export function getHandlerTableChange(setQueryParams) {
 }
 
 export function PleaseWaitMessage({ entities, id = "DEFAULT.PLEASE_WAIT" }) {
-   return (
-      <>
-         {entities === null && (
-            <div>
-               <FormattedMessage id={id} />
-            </div>
-         )}
-      </>
-   );
+   const { t } = useTranslation();
+
+   return <>{entities === null && <div>{t(id)}</div>}</>;
 }
 
 export function NoRecordsFoundMessage({
    entities,
    id = "DEFAULT.NOT_RECORDS",
 }) {
+   const { t } = useTranslation();
+
    const customersList = entities === null ? [] : entities;
+
    return (
       <>
-         {customersList.length === 0 && entities !== null && (
-            <div>
-               <FormattedMessage id={id} />
-            </div>
-         )}
+         {customersList.length === 0 && entities !== null && <div>{t(id)}</div>}
       </>
    );
 }

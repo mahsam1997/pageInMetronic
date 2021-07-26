@@ -12,9 +12,11 @@ import { Integrations } from "@sentry/apm";
 import { ToastContainer } from "react-toastify";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
+import AppDirection from "./components/AppDirection";
+import i18next from "i18next";
+import initI18next from "./utils/i18next";
 
-const RtlStyles = React.lazy(() => import("./components/RtlStyles"));
-const LtrStyles = React.lazy(() => import("./components/LtrStyles"));
+initI18next();
 
 Sentry.init({
    dsn: "https://bc196634740145339f746fdfdc7b10e9@sentry.dropp.ir/19",
@@ -22,39 +24,40 @@ Sentry.init({
    tracesSampleRate: 1.0,
 });
 
-const language =
-   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
-const body = document.getElementById("kt_body");
-
-const isEnglish = language === "en";
-body.direction = isEnglish ? "ltr" : "rtl";
-body.dir = isEnglish ? "ltr" : "rtl";
-body.style.direction = isEnglish ? "ltr" : "rtl";
-
 export default function App({ basename }) {
    const [isAuth, setIsAuth] = useState(isAuthenticate());
 
+   const [isLanguageReady, setIsLanguageReady] = useState(false);
+
+   const isLtrDir = i18next.dir() === "ltr";
+
+   i18next.on("initialized", () => {
+      setIsLanguageReady(true);
+   });
+
    return (
       <React.Suspense fallback={<LayoutSplashScreen />}>
-         {isEnglish ? <LtrStyles /> : <RtlStyles />}
          <BrowserRouter basename={basename}>
             <MaterialThemeProvider>
-               <I18nProvider>
-                  <AuthenticationProvider value={{ isAuth, setIsAuth }}>
-                     <Routes />
-                     <ToastContainer
-                        position={isEnglish ? "bottom-left" : "bottom-right"}
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={isEnglish ? false : true}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                     />
-                  </AuthenticationProvider>
-               </I18nProvider>
+               {isLanguageReady && (
+                  <I18nProvider>
+                     <AppDirection />
+                     <AuthenticationProvider value={{ isAuth, setIsAuth }}>
+                        <Routes />
+                        <ToastContainer
+                           position={isLtrDir ? "bottom-left" : "bottom-right"}
+                           autoClose={5000}
+                           hideProgressBar={false}
+                           newestOnTop={false}
+                           closeOnClick
+                           rtl={isLtrDir ? false : true}
+                           pauseOnFocusLoss
+                           draggable
+                           pauseOnHover
+                        />
+                     </AuthenticationProvider>
+                  </I18nProvider>
+               )}
             </MaterialThemeProvider>
          </BrowserRouter>
       </React.Suspense>

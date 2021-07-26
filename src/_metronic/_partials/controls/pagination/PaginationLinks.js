@@ -2,11 +2,12 @@
 import React from "react";
 import { getPages, getPagesCount } from "../../../_helpers";
 
-import { useIntl } from "react-intl";
+import { useTranslation } from "react-i18next";
 import toFarsiNumber from "../../../../app/utils/toFarsiNumber";
 
 export function PaginationLinks({ paginationProps }) {
-   const isEnglish = useIntl().locale === "en";
+   const { i18n } = useTranslation();
+   const isLtrDir = i18n.dir() === "ltr";
 
    const { totalSize, sizePerPage, page, paginationSize } = paginationProps;
    const pagesCount = getPagesCount(totalSize, sizePerPage);
@@ -48,7 +49,7 @@ export function PaginationLinks({ paginationProps }) {
                   >
                      <i
                         className={`ki ${
-                           isEnglish
+                           isLtrDir
                               ? "ki-bold-double-arrow-back"
                               : "ki-bold-double-arrow-next"
                         } icon-xs`}
@@ -61,7 +62,7 @@ export function PaginationLinks({ paginationProps }) {
                   >
                      <i
                         className={`ki ${
-                           isEnglish
+                           isLtrDir
                               ? "ki-bold-arrow-back"
                               : "ki-bold-arrow-next"
                         } icon-xs`}
@@ -76,7 +77,7 @@ export function PaginationLinks({ paginationProps }) {
                            page === p ? " btn-hover-primary active" : ""
                         } mr-2 my-1`}
                      >
-                        {isEnglish ? p : toFarsiNumber(p)}
+                        {isLtrDir ? p : toFarsiNumber(p)}
                      </a>
                   ))}
                   <a
@@ -86,7 +87,7 @@ export function PaginationLinks({ paginationProps }) {
                   >
                      <i
                         className={`ki ${
-                           isEnglish
+                           isLtrDir
                               ? "ki-bold-arrow-next"
                               : "ki-bold-arrow-back"
                         } icon-xs`}
@@ -99,7 +100,7 @@ export function PaginationLinks({ paginationProps }) {
                   >
                      <i
                         className={`ki ${
-                           isEnglish
+                           isLtrDir
                               ? "ki-bold-double-arrow-next"
                               : "ki-bold-double-arrow-back"
                         } icon-xs`}

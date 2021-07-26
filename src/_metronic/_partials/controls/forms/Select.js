@@ -2,7 +2,7 @@ import React from "react";
 import { useField } from "formik";
 import { FieldFeedbackLabel } from "./FieldFeedbackLabel";
 
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 const getFieldCSSClasses = (touched, errors) => {
    const classes = ["form-control", "form-control-solid"];
@@ -27,11 +27,14 @@ export function Select({
 }) {
    const [field, meta] = useField(props);
    const { touched, error } = meta;
+
+   const { t } = useTranslation();
+
    return (
       <>
          {label && (
             <label>
-               <FormattedMessage id="DEFAULT.SELECT" /> {label}
+               {t("DEFAULT.SELECT")} {label}
             </label>
          )}
          <select
@@ -43,7 +46,7 @@ export function Select({
          </select>
          {withFeedbackLabel && (
             <FieldFeedbackLabel
-               erros={error}
+               error={error}
                touched={touched}
                label={label}
                customFeedbackLabel={customFeedbackLabel}
