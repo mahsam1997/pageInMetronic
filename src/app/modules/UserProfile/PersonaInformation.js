@@ -18,21 +18,9 @@ function PersonaInformation(props) {
    // Methods
    const saveUser = (values, setStatus, setSubmitting) => {
       setloading(true);
-      // user for update preparation
-      // dispatch(props.setUser(updatedUser));
       setTimeout(() => {
          setloading(false);
          setSubmitting(false);
-         // Do request to your server for user update, we just imitate user update there, For example:
-         // update(updatedUser)
-         //  .then(()) => {
-         //    setloading(false);
-         //  })
-         //  .catch((error) => {
-         //    setloading(false);
-         //    setSubmitting(false);
-         //    setStatus(error);
-         // });
       }, 1000);
    };
    // UI Helpers

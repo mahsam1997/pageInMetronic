@@ -18,4 +18,34 @@ body {
    color: $login-remember-me-color;
    margin-right: 5px;
    margin-left: 5px;
+   user-select: none;
+}
+
+.form-control.is-valid {
+   background-position: right calc(0.375em + 0.325rem) center;
+}
+.form-control.is-valid {
+   background-position: right calc(0.375em + 0.325rem) center;
+}
+
+.fas.fa-eye,
+.fas.fa-eye-slash {
+   user-select: none;
+}
+
+input[type="number"] {
+   &::-webkit-outer-spin-button,
+   &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+   }
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
+
+.d-flex-rtl-disable {
+   /*rtl:ignore*/
+   display: flex;
+   /*rtl:ignore*/
+   direction: ltr;
 }

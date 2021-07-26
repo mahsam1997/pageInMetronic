@@ -3,6 +3,8 @@
 }
 
 .login-aside {
+   min-width: 475px !important;
+
    .aside-top {
       margin-top: 65px;
       text-align: center;
@@ -19,11 +21,12 @@
    .aside-title {
       font-style: normal;
       font-weight: bold;
-      font-size: 30px;
-      line-height: 48px;
+      font-size: 23px;
+      // line-height: 20px;
       text-align: center;
       letter-spacing: -0.03em;
       color: $login-aside-color;
+      margin-top: 12px;
    }
 
    .aside-pic {
@@ -38,15 +41,15 @@
       color: $login-title;
       font-weight: 500;
       font-style: normal;
-      font-size: 30px;
-      line-height: 47px;
+      font-size: 25px;
+      // line-height: 47px;
       letter-spacing: -0.02em;
    }
    p {
       font-style: normal;
       font-weight: 500;
-      font-size: 18px;
-      line-height: 28px;
+      font-size: 15px;
+      // line-height: 28px;
       a {
          margin-left: 4px;
       }
@@ -56,17 +59,25 @@
       border-radius: 12px;
    }
    input.password-input {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       border-top-left-radius: 12px !important;
       border-bottom-left-radius: 12px !important;
+
+      border-color: #fff !important;
+      &:focus {
+         border-color: #fff !important;
+      }
    }
    .showPass {
       background-color: $login-input-back !important;
-      border: none;
+      border: none !important;
+      border-radius: 0;
       border-top-right-radius: 12px;
       border-bottom-right-radius: 12px;
+
       cursor: pointer;
+      width: 45px;
    }
    label {
       font-style: normal;
@@ -93,6 +104,7 @@
       font-weight: bold;
       font-size: 14px;
       line-height: 22px;
+      user-select: none;
    }
 
    button[type="button"] {
@@ -127,34 +139,4 @@
       line-height: 28px;
       color: $login-submit-button-color;
    }
-
-   .login-bottom {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      ul {
-         display: flex;
-         position: absolute;
-         bottom: 5px;
-         li {
-            padding-left: 15px;
-            padding-right: 15px;
-            list-style: none;
-            a {
-               color: $login-bottom-list;
-               font-style: normal;
-               font-weight: bold;
-               font-size: 16px;
-               line-height: 25px;
-            }
-         }
-      }
-   }
-}
-
-.form-control.is-valid {
-   background-position: right calc(0.375em + 0.325rem) center;
-}
-.form-control.is-invalid {
-   background-position: right calc(0.375em + 0.325rem) center;
 }

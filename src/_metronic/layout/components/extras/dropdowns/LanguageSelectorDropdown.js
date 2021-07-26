@@ -6,8 +6,9 @@ import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownItemToggler } from "../../../../_partials/dropdowns";
 import i18next from "i18next";
 import { getLanguageList } from "../../../../../app/services/language.service";
+import { FormattedMessage } from "react-intl";
 
-export function LanguageSelectorDropdown({ overlayPlacement }) {
+export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
    const [languageList, setLanguageList] = useState([]);
    const currentLanguage = languageList.find(x => x.lang === i18next.language);
 
@@ -32,8 +33,8 @@ export function LanguageSelectorDropdown({ overlayPlacement }) {
    };
 
    return (
-      languageList.length && (
-         <Dropdown drop="down" alignRight>
+      languageList.length > 0 && (
+         <Dropdown drop="up" alignRight={alignRight}>
             <Dropdown.Toggle
                as={DropdownItemToggler}
                id="dropdown-toggle-my-cart"
@@ -43,7 +44,7 @@ export function LanguageSelectorDropdown({ overlayPlacement }) {
                   placement={overlayPlacement}
                   overlay={
                      <Tooltip id="language-panel-tooltip">
-                        Select Language
+                        <FormattedMessage id="SELECT.LANGUAGE" />
                      </Tooltip>
                   }
                >
@@ -83,3 +84,7 @@ export function LanguageSelectorDropdown({ overlayPlacement }) {
       )
    );
 }
+
+LanguageSelectorDropdown.defaultProps = {
+   alignRight: true,
+};

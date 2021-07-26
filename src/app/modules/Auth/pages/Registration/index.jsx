@@ -5,6 +5,9 @@ import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Chec
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
+
+import CustomButton from "../../../../components/common/CustomButton";
 // hooks
 import { useTranslation } from "react-i18next";
 // context
@@ -33,15 +36,14 @@ function Registration(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const { setIsAuth } = useContext(AuthenticationContext);
-   const { t } = useTranslation();
+   const { t, i18n } = useTranslation();
+   const isLtrDirection = i18n.dir() === "ltr";
+   const placement = isLtrDirection ? "right" : "left";
 
-   const onSubmit = async ({
-      email,
-      password,
-      subPhoneNumber,
-      phoneNumber,
-      fullName,
-   }) => {
+   const onSubmit = async (
+      { email, password, subPhoneNumber, phoneNumber, fullName },
+      { setFieldError }
+   ) => {
       const newUser = {
          email,
          password,
@@ -50,12 +52,16 @@ function Registration(props) {
             fullName,
          },
       };
-      console.log(newUser);
-      const { data } = await register(newUser);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+
+      const response = await register(newUser);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
@@ -65,13 +71,18 @@ function Registration(props) {
          style={{ display: "block" }}
       >
          <div className=" mb-5 mb-lg-10">
-            <h3 className="font-size-h1">
-               {t("messages.AUTH.REGISTER.TITLE")}
-            </h3>
+            <h3>{t("messages.AUTH.REGISTER.TITLE")}</h3>
             <p className="text-muted font-weight-bold">
                {t("messages.AUTH.REGISTER.DESC")}
             </p>
          </div>
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isLtrDirection}
+         />
+
+         <br />
 
          <Formik
             initialValues={initialValues}
@@ -87,6 +98,7 @@ function Registration(props) {
 
                return (
                   <Form
+                     noValidate="noValidate"
                      id="kt_login_signin_form"
                      className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
                   >
@@ -112,8 +124,25 @@ function Registration(props) {
                      {/* begin: Phone Number */}
                      <div className="form-group fv-plugins-icon-container">
                         <label>{t("messages.AUTH.INPUT.PHONE")}</label>
-                        <div className="d-flex">
-                           <div style={{ width: "80%" }}>
+                        <div className="d-flex-rtl-disable">
+                           <PhoneSelect
+                              options={phonePrefixOptions(isLtrDirection)}
+                              value={subPhoneNumber}
+                              onChange={value =>
+                                 setFieldValue("subPhoneNumber", value.value)
+                              }
+                              onBlur={() =>
+                                 setFieldTouched("subPhoneNumber", true)
+                              }
+                              name="subPhoneNumber"
+                           />
+                           <div
+                              style={{
+                                 width: "80%",
+                                 marginLeft: "10px",
+                              }}
+                              className="mobile-input"
+                           >
                               <Field
                                  placeholder={t(
                                     "messages.AUTH.INPUT.PHONE.PLACE"
@@ -130,17 +159,6 @@ function Registration(props) {
                                  children={TextError}
                               />
                            </div>
-                           <PhoneSelect
-                              options={phonePrefixOptions}
-                              value={subPhoneNumber}
-                              onChange={value =>
-                                 setFieldValue("subPhoneNumber", value.value)
-                              }
-                              onBlur={() =>
-                                 setFieldTouched("subPhoneNumber", true)
-                              }
-                              name="subPhoneNumber"
-                           />
                         </div>
                      </div>
                      {/* end: Phone Number */}
@@ -208,27 +226,23 @@ function Registration(props) {
                      </div>
 
                      <div className="form-group d-flex">
-                        <button
+                        <CustomButton
                            type="submit"
                            disabled={
                               formik.isSubmitting ||
                               !formik.isValid ||
                               !acceptTerms
                            }
-                           className="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 "
                         >
                            <span>
                               {t("messages.AUTH.GENERAL.REGISTER_BUTTON")}
                            </span>
-                        </button>
-
-                        <button
-                           type="button"
-                           className="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
-                        >
+                        </CustomButton>
+                        <CustomButton classNames="btn btn-light-primary font-weight-bold px-10  my-3 mx-4">
                            <img src={googleLogo} alt="google logo" />
                            <span>{t("messages.AUTH.LOGIN.GOOGLE")}</span>
-                        </button>
+                        </CustomButton>
                      </div>
                   </Form>
                );

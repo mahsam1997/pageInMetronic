@@ -9,6 +9,7 @@ import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/apm";
+import { ToastContainer } from "react-toastify";
 import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 import AppDirection from "./components/AppDirection";
@@ -28,6 +29,8 @@ export default function App({ basename }) {
 
    const [isLanguageReady, setIsLanguageReady] = useState(false);
 
+   const isLtrDir = i18next.dir() === "ltr";
+
    i18next.on("initialized", () => {
       setIsLanguageReady(true);
    });
@@ -41,6 +44,17 @@ export default function App({ basename }) {
                      <AppDirection />
                      <AuthenticationProvider value={{ isAuth, setIsAuth }}>
                         <Routes />
+                        <ToastContainer
+                           position={isLtrDir ? "bottom-left" : "bottom-right"}
+                           autoClose={5000}
+                           hideProgressBar={false}
+                           newestOnTop={false}
+                           closeOnClick
+                           rtl={isLtrDir ? false : true}
+                           pauseOnFocusLoss
+                           draggable
+                           pauseOnHover
+                        />
                      </AuthenticationProvider>
                   </I18nProvider>
                )}

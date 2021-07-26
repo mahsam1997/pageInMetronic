@@ -1,5 +1,6 @@
 import axios from "axios";
 import errorHandler from "../utils/errorHandler";
+import storageHelper from "../utils/storageHelper";
 
 const instance = axios.create();
 const instanceWithAuthorization = axios.create();
@@ -10,10 +11,21 @@ export const setConfig = () => {
 };
 
 export const addAuthorization = () => {
-   let token = localStorage.getItem("token");
+   const token = storageHelper.getItem("token");
+
    if (token)
       instanceWithAuthorization.defaults.headers.common["Authorization"] =
          "Bearer " + token;
+};
+
+const language =
+   JSON.parse(localStorage.getItem("i18nConfig"))?.selectedLang || "en";
+
+export const addLanguage = () => {
+   instance.defaults.headers.common["Accept-Language"] = language;
+   instanceWithAuthorization.defaults.headers.common[
+      "Accept-Language"
+   ] = language;
 };
 
 export const axiosSetup = axiosInstance => {
@@ -34,6 +46,8 @@ export const axiosSetup = axiosInstance => {
    );
 };
 
+addLanguage();
+addAuthorization();
 setConfig();
 addAuthorization();
 axiosSetup(instance);

@@ -11,13 +11,18 @@ import { LanguageSelectorDropdown } from "../extras/dropdowns/LanguageSelectorDr
 import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
+import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 import i18next from "i18next";
+import routes from "../../../../app/router/routes.json";
+import useFormatMessage from "../../../../app/hooks/useFormatMessage";
 
 export function Aside() {
    const uiService = useHtmlClassService();
 
-   const placement = i18next.dir() === "ltr" ? "right" : "left";
+   const inLtrDirection = i18next.dir() === "ltr";
+   const placement = inLtrDirection ? "right" : "left";
 
    const layoutProps = useMemo(() => {
       return {
@@ -138,7 +143,7 @@ export function Aside() {
                            placement={placement}
                            overlay={
                               <Tooltip id="metronic-features">
-                                 Metronic Features
+                                 Latest Reports
                               </Tooltip>
                            }
                         >
@@ -149,42 +154,6 @@ export function Aside() {
                               data-toggle="tab"
                               data-target={`#${tabs.tabId2}`}
                               onClick={() => handleTabChange(tabs.tabId2)}
-                              role="tab"
-                           >
-                              <span className="svg-icon svg-icon-lg">
-                                 <SVG
-                                    src={toAbsoluteUrl(
-                                       "/media/svg/icons/Communication/Group.svg"
-                                    )}
-                                 />
-                              </span>
-                           </a>
-                        </OverlayTrigger>
-                     </li>
-                     {/* end::Item */}
-
-                     {/* begin::Item */}
-                     <li
-                        className="nav-item mb-3"
-                        data-toggle="tooltip"
-                        data-placement="rigth"
-                        data-container="body"
-                        data-boundary="window"
-                        title="Latest Reports"
-                     >
-                        <OverlayTrigger
-                           placement={placement}
-                           overlay={
-                              <Tooltip id="latest-reports">
-                                 Latest Reports
-                              </Tooltip>
-                           }
-                        >
-                           <a
-                              href="#"
-                              className="nav-link btn btn-icon btn-clean btn-lg"
-                              data-toggle="tab"
-                              data-target="#kt_aside_tab_3"
                               role="tab"
                            >
                               <span className="svg-icon svg-icon-lg">
@@ -206,103 +175,34 @@ export function Aside() {
                         data-placement="rigth"
                         data-container="body"
                         data-boundary="window"
-                        title="Project Management"
+                        title={useFormatMessage("DEFAULT.USER_MANAGEMENT")}
                      >
                         <OverlayTrigger
                            placement={placement}
                            overlay={
-                              <Tooltip id="project-management">
-                                 Project Management
+                              <Tooltip
+                                 id="latest-reports"
+                                 style={{ fontFamily: "Vazir" }}
+                              >
+                                 <FormattedMessage id="DEFAULT.USER_MANAGEMENT" />
                               </Tooltip>
                            }
                         >
-                           <a
-                              href="#"
+                           <Link
+                              to={routes.ECOMMERCE_CUSTOMERS}
                               className="nav-link btn btn-icon btn-clean btn-lg"
                               data-toggle="tab"
-                              data-target="#kt_aside_tab_4"
+                              data-target="#kt_aside_tab_3"
                               role="tab"
                            >
                               <span className="svg-icon svg-icon-lg">
                                  <SVG
                                     src={toAbsoluteUrl(
-                                       "/media/svg/icons/General/Shield-check.svg"
+                                       "/media/svg/icons/Communication/Group.svg"
                                     )}
                                  />
                               </span>
-                           </a>
-                        </OverlayTrigger>
-                     </li>
-                     {/* end::Item */}
-
-                     {/* begin::Item */}
-                     <li
-                        className="nav-item mb-3"
-                        data-toggle="tooltip"
-                        data-placement="rigth"
-                        data-container="body"
-                        data-boundary="window"
-                        title="User Management"
-                     >
-                        <OverlayTrigger
-                           placement={placement}
-                           overlay={
-                              <Tooltip id="user-management">
-                                 User Management
-                              </Tooltip>
-                           }
-                        >
-                           <a
-                              href="#"
-                              className="nav-link btn btn-icon btn-clean btn-lg"
-                              data-toggle="tab"
-                              data-target="#kt_aside_tab_5"
-                              role="tab"
-                           >
-                              <span className="svg-icon svg-icon-lg">
-                                 <SVG
-                                    src={toAbsoluteUrl(
-                                       "/media/svg/icons/Home/Library.svg"
-                                    )}
-                                 />
-                              </span>
-                           </a>
-                        </OverlayTrigger>
-                     </li>
-                     {/* end::Item */}
-
-                     {/* begin::Item */}
-                     <li
-                        className="nav-item mb-3"
-                        data-toggle="tooltip"
-                        data-placement="rigth"
-                        data-container="body"
-                        data-boundary="window"
-                        title="Finance & Accounting"
-                     >
-                        <OverlayTrigger
-                           placement={placement}
-                           overlay={
-                              <Tooltip id="finance-accounting">
-                                 Finance & Accounting
-                              </Tooltip>
-                           }
-                        >
-                           <a
-                              href="#"
-                              className="nav-link btn btn-icon btn-clean btn-lg"
-                              data-toggle="tab"
-                              data-target="#kt_aside_tab_6"
-                              role="tab"
-                           >
-                              <span className="svg-icon svg-icon-lg">
-                                 <SVG
-                                    src={toAbsoluteUrl(
-                                       "/media/svg/icons/Files/File-plus.svg"
-                                    )}
-                                 />
-                              </span>
-                           </a>
+                           </Link>
                         </OverlayTrigger>
                      </li>
                      {/* end::Item */}
@@ -332,7 +232,13 @@ export function Aside() {
                                  className="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm"
                                  id="kt_aside_toggle"
                               >
-                                 <i className="ki ki-bold-arrow-back icon-sm" />
+                                 <i
+                                    className={`ki ${
+                                       inLtrDirection
+                                          ? "ki-bold-arrow-back"
+                                          : "ki-bold-arrow-next"
+                                    } icon-sm`}
+                                 />
                               </span>
                            </OverlayTrigger>
                         </>
