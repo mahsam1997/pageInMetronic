@@ -10,7 +10,6 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import { Layout } from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
-import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import routes from "./router/routes.json";
 
 import { AuthenticationContext } from "./context/AuthenticationContext";
@@ -30,7 +29,6 @@ export function Routes() {
             <Redirect from={routes.AUTH} to={routes.ROOT} />
          )}
 
-         <Route path="/error" component={ErrorsPage} />
          <Route path={routes.LOGOUT} component={Logout} />
 
          {!isAuth ? (

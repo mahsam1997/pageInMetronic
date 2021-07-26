@@ -16,9 +16,7 @@ export function BreadCrumbs({ items }) {
          {items.map((item, index) => (
             <li className="breadcrumb-item" key={index}>
                <Link className="text-muted " to={{ pathname: item.pathname }}>
-                  <FormattedMessage
-                     id={`DEFAULT.${item.title.toUpperCase()}`}
-                  />
+                  {item.title}
                </Link>
             </li>
          ))}
