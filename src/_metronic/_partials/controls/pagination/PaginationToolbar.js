@@ -3,13 +3,14 @@ import React from "react";
 import { PaginationTotalStandalone } from "react-bootstrap-table2-paginator";
 
 import { FormattedMessage, useIntl } from "react-intl";
+import CustomSelect from "../../../../app/components/common/CustomSelect";
 import toFarsiNumber from "../../../../app/utils/toFarsiNumber";
 
 const CustomTotal = (from, to, size) => {
    const isEnglish = useIntl().locale === "en";
 
    return (
-      <span className="react-bootstrap-table-pagination-total">
+      <div className="react-bootstrap-table-pagination-total mr-15">
          {isEnglish ? (
             <FormattedMessage
                id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
@@ -29,7 +30,7 @@ const CustomTotal = (from, to, size) => {
                }}
             />
          )}
-      </span>
+      </div>
    );
 };
 
@@ -43,17 +44,18 @@ export function PaginationToolbar(props) {
       sizePerPage,
       totalSize,
       onSizePerPageChange = [
-         { text: "3", value: 3 },
-         { text: "5", value: 5 },
          { text: "10", value: 10 },
+         { text: "25", value: 25 },
+         { text: "50", value: 50 },
+         { text: "100", value: 100 },
+         { text: "150", value: 150 },
+         { text: "200", value: 200 },
       ],
    } = paginationProps;
-   const style = {
-      width: "75px",
-   };
 
-   const onSizeChange = event => {
-      const newSize = +event.target.value;
+   const onSizeChange = value => {
+      const newSize = value.value;
+      console.log(newSize);
       onSizePerPageChange(newSize);
    };
 
@@ -67,7 +69,12 @@ export function PaginationToolbar(props) {
                <div className="spinner spinner-primary mr-10"></div>
             </div>
          )}
-         <select
+         <PaginationTotalStandalone
+            className="text-muted"
+            {...paginationProps}
+            paginationTotalRenderer={CustomTotal}
+         />
+         {/* <select
             disabled={totalSize === 0}
             className={`form-control form-control-sm font-weight-bold mr-4 border-0 bg-light ${totalSize ===
                0 && "disabled"}`}
@@ -76,7 +83,6 @@ export function PaginationToolbar(props) {
             style={style}
          >
             {sizePerPageList.map(option => {
-               // const isSelect = sizePerPage === `${option.page}`;
                const isSelect = sizePerPage === option.value;
                return (
                   <option
@@ -88,11 +94,36 @@ export function PaginationToolbar(props) {
                   </option>
                );
             })}
-         </select>
-         <PaginationTotalStandalone
-            className="text-muted"
-            {...paginationProps}
-            paginationTotalRenderer={CustomTotal}
+         </select> */}
+
+         <CustomSelect
+            isDisabled={totalSize === 0}
+            options={sizePerPageList}
+            getOptionLabel={option =>
+               isEnglish ? option.text : toFarsiNumber(option.text)
+            }
+            customStyles={{
+               width: "80px",
+               padding: 0,
+               top: "auto",
+               bottom: "100%",
+               margin: "0",
+            }}
+            value={{
+               text: "" + sizePerPage,
+               value: sizePerPage,
+            }}
+            defaultValue={{
+               text: "" + sizePerPage,
+               value: sizePerPage,
+            }}
+            menuPlacement="top"
+            onChange={onSizeChange}
+            customSingleValueStyles={
+               {
+                  // padding: "90px",
+               }
+            }
          />
       </div>
    );

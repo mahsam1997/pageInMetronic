@@ -5,7 +5,10 @@ import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
 
+import formatMessage from "../../../../../../utils/formatMessage";
+
 export function ActionsColumnFormatter(
+   intl,
    cellContent,
    row,
    rowIndex,
@@ -14,7 +17,7 @@ export function ActionsColumnFormatter(
    return (
       <>
          <a
-            title="Edit customer"
+            title={formatMessage(intl, "ECOMMERCE.CUSTOMERS.EDIT_CUSTOMER")}
             className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
             onClick={() => openEditCustomerDialog(row["_id"])}
          >
@@ -29,7 +32,10 @@ export function ActionsColumnFormatter(
          <> </>
 
          <a
-            title="Delete customer"
+            title={formatMessage(
+               intl,
+               "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE"
+            )}
             className="btn btn-icon btn-light btn-hover-danger btn-sm"
             onClick={() => openDeleteCustomerDialog(row["_id"])}
          >

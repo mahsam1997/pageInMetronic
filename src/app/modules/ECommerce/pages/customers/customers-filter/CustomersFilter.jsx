@@ -90,7 +90,7 @@ export function CustomersFilter({ listLoading }) {
             }) => (
                <form onSubmit={handleSubmit} className="form form-label-right">
                   <div className="form-group row">
-                     <div className="col-lg-2">
+                     <div className="col-lg-2 mb-4">
                         <small className="form-text text-muted mb-1">
                            <FormattedMessage
                               id="ECOMMERCE.COMMON.FILTER"
@@ -109,7 +109,7 @@ export function CustomersFilter({ listLoading }) {
                            name="status"
                         />
                      </div>
-                     <div className="col-lg-2">
+                     <div className="col-lg-2 mb-4">
                         <small className="form-text text-muted mb-1">
                            <FormattedMessage
                               id="ECOMMERCE.COMMON.FILTER"
@@ -128,7 +128,7 @@ export function CustomersFilter({ listLoading }) {
                            name="role"
                         />
                      </div>
-                     <div className="col-lg-3">
+                     <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
                            <FormattedMessage
                               tagName="b"
@@ -148,7 +148,7 @@ export function CustomersFilter({ listLoading }) {
                            name="searchBy"
                         />
                      </div>
-                     <div className="col-lg-3">
+                     <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
                            <FormattedMessage
                               tagName="b"
