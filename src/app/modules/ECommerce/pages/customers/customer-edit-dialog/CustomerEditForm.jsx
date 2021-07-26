@@ -40,7 +40,22 @@ const CustomerEditSchema = formatedMessage =>
          .email(formatedMessage("AUTH.VALIDATION.EMAIL"))
          .required(formatedMessage("REQUIRED")),
 
-      mobile: Yup.string().required(formatedMessage("REQUIRED")),
+      mobile: Yup.string()
+         .min(
+            10,
+            formatedMessage("MIN_X_CHARACTERS", {
+               x: 10,
+               noun: formatedMessage("AUTH.INPUT.PHONE"),
+            })
+         )
+         .max(
+            10,
+            formatedMessage("MAX_X_CHARACTERS", {
+               x: 10,
+               noun: formatedMessage("AUTH.INPUT.PHONE"),
+            })
+         )
+         .required(formatedMessage("REQUIRED")),
 
       countryCode: Yup.string().required(formatedMessage("REQUIRED")),
    });
@@ -101,7 +116,6 @@ export function CustomerEditForm({
                                        intl,
                                        "AUTH.INPUT.FULLNAME"
                                     )}
-                                    // withFeedbackLabel={false}
                                  />
                               </div>
                               {/* Email */}
@@ -118,7 +132,6 @@ export function CustomerEditForm({
                                        intl,
                                        "ECOMMERCE.COMMON.EMAIL"
                                     )}
-                                    // withFeedbackLabel={false}
                                  />
                               </div>
                            </div>
@@ -137,7 +150,6 @@ export function CustomerEditForm({
                                        intl,
                                        "ECOMMERCE.COMMON.MOBILE"
                                     )}
-                                    // withFeedbackLabel={false}
                                  />
                               </div>
                               {/* Sub Mobile */}

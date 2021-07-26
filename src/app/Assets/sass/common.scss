@@ -40,5 +40,12 @@ input[type="number"] {
       margin: 0;
    }
    -moz-appearance: textfield;
-   appearance: none;
+   appearance: textfield;
+}
+
+.d-flex-rtl-disable {
+   /*rtl:ignore*/
+   display: flex;
+   /*rtl:ignore*/
+   direction: ltr;
 }

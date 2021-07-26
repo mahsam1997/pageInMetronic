@@ -11,8 +11,8 @@ import {
    getHandlerTableChange,
    NoRecordsFoundMessage,
    PleaseWaitMessage,
-   // sortCaret,
-   // headerSortingClasses,
+   sortCaret,
+   headerSortingClasses,
 } from "../../../../../../_metronic/_helpers";
 import * as uiHelpers from "../CustomersUIHelpers";
 import * as columnFormatters from "./column-formatters";
@@ -31,7 +31,9 @@ export function CustomersTable() {
    });
    const [loading, setLoading] = useState(false);
 
-   const isEnglish = useIntl().locale === "en";
+   const intl = useIntl();
+
+   const isEnglish = intl.locale === "en";
 
    // Customers UI Context
    const customersUIContext = useCustomersUIContext();
@@ -53,9 +55,9 @@ export function CustomersTable() {
          text: useFormatMessage("AUTH.INPUT.FULLNAME"),
          headerAlign: "center",
          align: "center",
-         // sort: true,
-         // sortCaret: sortCaret,
-         // headerSortingClasses,
+         sort: true,
+         sortCaret: sortCaret,
+         headerSortingClasses,
       },
       {
          dataField: "email",
@@ -64,6 +66,9 @@ export function CustomersTable() {
             isEnglish ? cell : toFarsiNumber(cell),
          headerAlign: "center",
          align: "center",
+         sort: true,
+         sortCaret: sortCaret,
+         headerSortingClasses,
       },
       {
          dataField: "mobile",
@@ -72,6 +77,9 @@ export function CustomersTable() {
             isEnglish ? cell : toFarsiNumber(cell),
          headerAlign: "center",
          align: "center",
+         sort: true,
+         sortCaret: sortCaret,
+         headerSortingClasses,
          style: {
             direction: "ltr",
          },
@@ -81,17 +89,24 @@ export function CustomersTable() {
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.ROLE"),
          headerAlign: "center",
          align: "center",
+         sort: true,
+         sortCaret: sortCaret,
+         headerSortingClasses,
       },
       {
          dataField: "status",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.STATUS"),
          headerAlign: "center",
          align: "center",
+         sort: true,
+         sortCaret: sortCaret,
+         headerSortingClasses,
       },
       {
          dataField: "action",
          text: useFormatMessage("ECOMMERCE.CUSTOMERS.ACTIONS"),
-         formatter: columnFormatters.ActionsColumnFormatter,
+         formatter: (...args) =>
+            columnFormatters.ActionsColumnFormatter(intl, ...args),
          formatExtraData: {
             openEditCustomerDialog: customersUIProps.openEditCustomerDialog,
             openDeleteCustomerDialog: customersUIProps.openDeleteCustomerDialog,
@@ -125,7 +140,9 @@ export function CustomersTable() {
          const users = await getUsers(
             customersUIProps.queryParams.pageSize,
             customersUIProps.queryParams.pageNumber,
-            customersUIProps.queryParams.filter
+            customersUIProps.queryParams.filter,
+            customersUIProps.queryParams.sortOrder,
+            customersUIProps.queryParams.sortField
          );
          if (users?.data?.success) {
             setEntities({

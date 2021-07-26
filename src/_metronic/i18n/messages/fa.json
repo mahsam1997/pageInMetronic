@@ -53,6 +53,7 @@
    "AUTH.VALIDATION.INVALID_FIELD": "فیلد معتبر نیست",
    "SELECT.LANGUAGE": "زبان خود را انتخاب کنید",
 
+   "DEFAULT.": "مقدار پیش فرض",
    "DEFAULT.SAVE": "ذخیره",
    "DEFAULT.DELETE": "حذف",
    "DEFAULT.SELECT": "انتخاب",
@@ -62,6 +63,10 @@
    "DEFAULT.NOT_RECORDS": "هیچ سوابقی یافت نشد",
    "DEFAULT.PLEASE_WAIT": "لطفا صبر کنید...",
    "DEFAULT.USER_MANAGEMENT": "مدیریت کاربران",
+   "DEFAULT.CUSTOMERS": "مشتریان",
+   "DEFAULT.DASHBOARD": "داشبورد",
+   "DEFAULT.ECOMMERCE": "تجارت الکترونیک",
+
    "ECOMMERCE.COMMON.SELECTED_RECORDS_COUNT": "تعداد سوابق انتخاب شده: ",
    "ECOMMERCE.COMMON.ALL": "همه",
    "ECOMMERCE.COMMON.OK": "تایید",
@@ -105,6 +110,9 @@
    "ECOMMERCE.CUSTOMERS.PLEASE_ENTER": "را لطفا وارد کنید",
    "ECOMMERCE.CUSTOMERS.ENTERED_CORRECT": "درست وارد شده است",
    "ECOMMERCE.CUSTOMERS.SHOWING_ITEMS": "نمایش موارد {from} تا {to} از {size} مورد",
+   "ECOMMERCE.CUSTOMERS.NEW_MEMBER": "عضو جدید",
+   "ECOMMERCE.CUSTOMERS.QUICK_ACTIONS": "اقدامات سریع",
+   "ECOMMERCE.CUSTOMERS.NEW_REPORT": "گزارش جدید",
 
    "MENU.NEW": "جدید",
    "MENU.ACTIONS": "اقدامات",
@@ -112,6 +120,5 @@
    "MENU.PAGES": "صفحات",
    "MENU.FEATURES": "امکانات",
    "MENU.APPS": "برنامه ها",
-   "MENU.DASHBOARD": "داشبورد",
    "TRANSLATOR.SELECT": "زبان خود را انتخاب کنید"
 }

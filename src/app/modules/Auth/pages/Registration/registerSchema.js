@@ -21,16 +21,16 @@ const registerSchema = formatMessage => {
 
       phoneNumber: Yup.string()
          .min(
-            3,
+            10,
             formatMessage("MIN_X_CHARACTERS", {
-               x: 3,
+               x: 10,
                noun: formatMessage("AUTH.INPUT.PHONE"),
             })
          )
          .max(
-            50,
+            10,
             formatMessage("MAX_X_CHARACTERS", {
-               x: 50,
+               x: 10,
                noun: formatMessage("AUTH.INPUT.PHONE"),
             })
          )

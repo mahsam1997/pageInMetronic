@@ -136,8 +136,25 @@ function Registration(props) {
                         <label>
                            <FormattedMessage id="AUTH.INPUT.PHONE" />
                         </label>
-                        <div className="d-flex">
-                           <div style={{ width: "80%" }}>
+                        <div className="d-flex-rtl-disable">
+                           <PhoneSelect
+                              options={phonePrefixOptions(isEnglish)}
+                              value={countryCode}
+                              onChange={value =>
+                                 setFieldValue("countryCode", value.value)
+                              }
+                              onBlur={() =>
+                                 setFieldTouched("countryCode", true)
+                              }
+                              name="countryCode"
+                           />
+                           <div
+                              style={{
+                                 width: "80%",
+                                 marginLeft: "10px",
+                              }}
+                              className="mobile-input"
+                           >
                               <Field
                                  placeholder={formatMessage(
                                     intl,
@@ -155,17 +172,6 @@ function Registration(props) {
                                  children={TextError}
                               />
                            </div>
-                           <PhoneSelect
-                              options={phonePrefixOptions(isEnglish)}
-                              value={countryCode}
-                              onChange={value =>
-                                 setFieldValue("countryCode", value.value)
-                              }
-                              onBlur={() =>
-                                 setFieldTouched("countryCode", true)
-                              }
-                              name="countryCode"
-                           />
                         </div>
                      </div>
                      {/* end: Phone Number */}
@@ -261,7 +267,7 @@ function Registration(props) {
                            }
                            tagName="span"
                            title="AUTH.GENERAL.REGISTER_BUTTON"
-                           classNames="btn btn-primary font-weight-bold px-10 my-3 mx-4"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 "
                         />
                         <CustomButton
                            title="AUTH.LOGIN.GOOGLE"
