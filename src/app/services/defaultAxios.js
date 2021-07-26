@@ -1,5 +1,6 @@
 import axios from "axios";
 import errorHandler from "../utils/errorHandler";
+import storageHelper from "../utils/storageHelper";
 
 const instance = axios.create();
 const instanceWithAuthorization = axios.create();
@@ -10,7 +11,8 @@ export const setConfig = () => {
 };
 
 export const addAuthorization = () => {
-   const token = localStorage.getItem("token");
+   const token = storageHelper.getItem("token");
+
    if (token)
       instanceWithAuthorization.defaults.headers.common["Authorization"] =
          "Bearer " + token;
@@ -52,7 +54,7 @@ axiosSetup(instance);
 axiosSetup(instanceWithAuthorization);
 
 const defaultAxios = {
-   // addAuthorization,
+   addAuthorization,
    axiosSetup,
    instance,
    instanceWithAuthorization,

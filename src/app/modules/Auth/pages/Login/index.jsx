@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { FormattedMessage, useIntl } from "react-intl";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 
@@ -14,17 +13,15 @@ import CustomButton from "../../../../components/common/CustomButton";
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
 
 // hooks
-import useFormatMessage from "../../../../hooks/useFormatMessage";
-
+import { useTranslation } from "react-i18next";
 // service
 import { login } from "../../../../services/auth.service";
 
 // utils
-import formatMessage from "../../../../utils/formatMessage";
 import getInputClasses from "../../../../utils/getInputClasses";
 import { setAuthenticate } from "../../../../utils/authenticate";
 
-import schema from "./loginSchema";
+import loginSchema from "./loginSchema";
 import routes from "../../../../router/routes.json";
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 
@@ -47,13 +44,10 @@ const initialValues = {
 function Login(props) {
    const [showPassword, setShowPassword] = useState(false);
 
-   const intl = useIntl();
-   const isEnglish = intl.locale === "en";
-   const placement = isEnglish ? "right" : "left";
-
+   const { t, i18n } = useTranslation();
    const { setIsAuth } = useContext(AuthenticationContext);
-
-   const loginSchema = schema(useFormatMessage);
+   const isLtrDirection = i18n.dir() === "ltr";
+   const placement = isLtrDirection ? "right" : "left";
 
    const onSubmit = async (values, { setFieldError }) => {
       const saveType = values.rememberMe ? "localStorage" : "sessionStorage";
@@ -73,13 +67,11 @@ function Login(props) {
       <div className="login-form login-signin" id="kt_login_signin_form">
          {/* begin::Head */}
          <div className=" mb-10 mb-lg-10 login-title">
-            <h3>
-               <FormattedMessage id="AUTH.LOGIN.TITLE" />
-            </h3>
+            <h3>{t("messages.AUTH.LOGIN.TITLE")}</h3>
             <p className="text-muted ">
-               <FormattedMessage id="AUTH.GENERAL.NO_ACCOUNT" />
+               {t("messages.AUTH.GENERAL.NO_ACCOUNT")}
                <Link to={routes.REGISTER}>
-                  <FormattedMessage id="AUTH.LOGIN.NEW_ACCOUNT" />
+                  {t("messages.AUTH.LOGIN.NEW_ACCOUNT")}
                </Link>
             </p>
          </div>
@@ -87,7 +79,7 @@ function Login(props) {
 
          <LanguageSelectorDropdown
             overlayPlacement={placement}
-            alignRight={!isEnglish}
+            alignRight={!isLtrDirection}
          />
 
          <br />
@@ -97,7 +89,7 @@ function Login(props) {
          <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
-            validationSchema={loginSchema}
+            validationSchema={loginSchema(t)}
          >
             {formik => {
                const {
@@ -110,14 +102,9 @@ function Login(props) {
                      className="form fv-plugins-bootstrap fv-plugins-framework"
                   >
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           <FormattedMessage id="AUTH.INPUT.EMAIL" />
-                        </label>
+                        <label>{t("messages.AUTH.INPUT.EMAIL")}</label>
                         <Field
-                           placeholder={formatMessage(
-                              intl,
-                              "AUTH.INPUT.EMAIL.PLACE"
-                           )}
+                           placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -128,14 +115,11 @@ function Login(props) {
                         <ErrorMessage name="email" children={TextError} />
                      </div>
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           <FormattedMessage id="AUTH.INPUT.PASSWORD" />
-                        </label>
+                        <label>{t("messages.AUTH.INPUT.PASSWORD")}</label>
                         <div className="input-group">
                            <Field
-                              placeholder={formatMessage(
-                                 intl,
-                                 "AUTH.INPUT.PASSWORD.PLACE"
+                              placeholder={t(
+                                 "messages.AUTH.INPUT.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
                               className={`form-control form-control-solid h-auto py-5 px-6 password-input ${getInputClasses(
@@ -161,7 +145,7 @@ function Login(props) {
                         className="forget-pass"
                         // id="kt_login_forgot"
                      >
-                        <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
+                        {t("messages.AUTH.GENERAL.FORGOT_BUTTON")}
                      </Link>
                      <br />
                      <br />
@@ -173,7 +157,7 @@ function Login(props) {
                               setFieldValue("rememberMe", !rememberMe)
                            }
                         >
-                           <FormattedMessage id="AUTH.LABEL.REMEMBER.ME" />
+                           {t("messages.AUTH.LABEL.REMEMBER.ME")}
                         </Checkbox>
                      </div>
                      <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
@@ -181,16 +165,13 @@ function Login(props) {
                            type="submit"
                            id="kt_login_signin_submit"
                            disabled={formik.isSubmitting}
-                           tagName="span"
-                           title="AUTH.LOGIN.BUTTON"
-                           classNames="btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth"
-                        />
-                        <CustomButton
-                           title="AUTH.LOGIN.GOOGLE"
-                           tagName="span"
-                           classNames="btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth"
+                           className={`btn btn-primary font-weight-bold px-9 py-4 my-3 fullWidth`}
                         >
+                           <span>{t("messages.AUTH.LOGIN.BUTTON")}</span>
+                        </CustomButton>
+                        <CustomButton classNames="btn font-weight-bold px-9 py-4 my-3 login-with-google fullWidth">
                            <img src={googleLogo} alt="google logo" />
+                           <span>{t("messages.AUTH.LOGIN.GOOGLE")}</span>
                         </CustomButton>
                      </div>
                   </Form>

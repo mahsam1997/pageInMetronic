@@ -12,16 +12,17 @@ import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 import { Link } from "react-router-dom";
-import { useIntl, FormattedMessage } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
-import useFormatMessage from "../../../../app/hooks/useFormatMessage";
+import i18next from "i18next";
 import routes from "../../../../app/router/routes.json";
+import useFormatMessage from "../../../../app/hooks/useFormatMessage";
 
 export function Aside() {
    const uiService = useHtmlClassService();
 
-   const isEnglish = useIntl().locale === "en";
-   const placement = isEnglish ? "right" : "left";
+   const inLtrDirection = i18next.dir() === "ltr";
+   const placement = inLtrDirection ? "right" : "left";
 
    const layoutProps = useMemo(() => {
       return {
@@ -233,7 +234,7 @@ export function Aside() {
                               >
                                  <i
                                     className={`ki ${
-                                       isEnglish
+                                       inLtrDirection
                                           ? "ki-bold-arrow-back"
                                           : "ki-bold-arrow-next"
                                     } icon-sm`}

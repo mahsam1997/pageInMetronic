@@ -2,33 +2,32 @@ import React, { useState } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import { Link, Redirect } from "react-router-dom";
 import * as Yup from "yup";
-import { FormattedMessage, useIntl } from "react-intl";
 import routes from "../../../router/routes.json";
 
 // components
 import TextError from "../../../components/common/TextError";
 
 // hooks
-import useFormatMessage from "../../../hooks/useFormatMessage";
-
+import { useTranslation } from "react-i18next";
 // servise
 import { forgotPassword } from "../../../services/auth.service";
 
 // utils
 import getInputClasses from "../../../utils/getInputClasses";
-import formatMessage from "../../../utils/formatMessage";
 
 const initialValues = {
    email: "",
 };
 
 function ForgotPassword(props) {
-   const intl = useIntl();
    const [isRequested, setIsRequested] = useState(false);
+
+   const { t } = useTranslation();
+
    const forgotPasswordSchema = Yup.object().shape({
       email: Yup.string()
-         .email(useFormatMessage("AUTH.VALIDATION.EMAIL"))
-         .required(useFormatMessage("REQUIRED")),
+         .email(t("errors.AUTH.VALIDATION.EMAIL"))
+         .required(t("errors.REQUIRED")),
    });
 
    const onSubmit = async values => {
@@ -46,10 +45,10 @@ function ForgotPassword(props) {
             >
                <div className="mb-5 mb-lg-10">
                   <h3 className="font-size-h1">
-                     <FormattedMessage id="AUTH.FORGOT.TITLE" />
+                     {t("messages.AUTH.FORGOT.TITLE")}
                   </h3>
                   <div className="text-muted font-weight-bold">
-                     <FormattedMessage id="AUTH.FORGOT.DESC" />
+                     {t("messages.AUTH.FORGOT.DESC")}
                   </div>
                </div>
                <Formik
@@ -64,7 +63,7 @@ function ForgotPassword(props) {
                      >
                         <div className="form-group fv-plugins-icon-container">
                            <label htmlFor="email">
-                              <FormattedMessage id="AUTH.INPUT.EMAIL" />
+                              {t("messages.AUTH.INPUT.EMAIL")}
                            </label>
                            <Field
                               type="email"
@@ -72,10 +71,7 @@ function ForgotPassword(props) {
                                  formik,
                                  "email"
                               )}`}
-                              placeholder={formatMessage(
-                                 intl,
-                                 "AUTH.INPUT.EMAIL.PLACE"
-                              )}
+                              placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                               name="email"
                               id="email"
                            />
@@ -88,7 +84,7 @@ function ForgotPassword(props) {
                               className="btn btn-primary font-weight-bold px-11 py-3 my-3"
                               disabled={formik.isSubmitting}
                            >
-                              <FormattedMessage id="AUTH.FORGOT.SEND" />
+                              {t("messages.AUTH.FORGOT.SEND")}
                            </button>
                            <Link to={routes.AUTH}>
                               <button
@@ -96,7 +92,7 @@ function ForgotPassword(props) {
                                  id="kt_login_forgot_cancel"
                                  className="btn btn-light-primary font-weight-bold px-13 py-3 my-3 mx-4"
                               >
-                                 <FormattedMessage id="AUTH.GENERAL.CANCEL" />
+                                 {t("messages.AUTH.GENERAL.CANCEL")}
                               </button>
                            </Link>
                         </div>

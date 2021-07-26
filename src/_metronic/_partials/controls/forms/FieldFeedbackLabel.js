@@ -1,11 +1,6 @@
 import React from "react";
-import { useIntl } from "react-intl";
 
-const inputLabel = (
-   { label, touched, error, customFeedbackLabel },
-   intl,
-   isEnglish
-) => {
+const inputLabel = ({ label, touched, error, customFeedbackLabel }) => {
    if (touched && error) {
       return <div className="invalid-feedback">{error}</div>;
    }
@@ -21,11 +16,7 @@ const inputLabel = (
    );
 };
 
-const selectLabel = (
-   { label, touched, error, customFeedbackLabel },
-   intl,
-   isEnglish
-) => {
+const selectLabel = ({ label, touched, error, customFeedbackLabel }) => {
    if (touched && error) {
       return <div className="invalid-feedback">{error}</div>;
    }
@@ -44,24 +35,13 @@ export function FieldFeedbackLabel({
    type,
    customFeedbackLabel,
 }) {
-   const intl = useIntl();
-   const isEnglish = intl.locale === "en";
-
    switch (type) {
       case "text":
       case "email":
       case "password":
       case "number":
-         return inputLabel(
-            { label, touched, error, customFeedbackLabel },
-            intl,
-            isEnglish
-         );
+         return inputLabel({ label, touched, error, customFeedbackLabel });
       default:
-         return selectLabel(
-            { label, touched, error, customFeedbackLabel },
-            intl,
-            isEnglish
-         );
+         return selectLabel({ label, touched, error, customFeedbackLabel });
    }
 }
