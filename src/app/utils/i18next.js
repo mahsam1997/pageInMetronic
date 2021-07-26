@@ -15,6 +15,8 @@ import urls from "../services/urls.json";
 const fallbackLng = [];
 const availableLanguages = [];
 
+const expirationTime = 7 * 24 * 60 * 60 * 1000; // 7 days
+
 const detectionOptions = {
    // order and from where user language should be detected
    order: [
@@ -71,18 +73,11 @@ const getList = async () => {
             fallbackLng,
             debug: true,
 
-            //
-            // keySeparator: false,
-            // react: {
-            //    wait: true,
-            //    useSuspense: true,
-            // },
-            //
             backend: {
                backends: [LocalStorageBackend, HttpBackend],
                backendOptions: [
                   {
-                     expirationTime: 7 * 24 * 60 * 60 * 1000, // 7 days
+                     expirationTime,
                      defaultVersion: version,
                   },
                   {
