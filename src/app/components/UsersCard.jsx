@@ -10,10 +10,11 @@ import { UsersTable } from "./UsersTable";
 import UsersGrouping from "./UsersGrouping";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-import useFormatMessage from "../hooks/useFormatMessage";
+import { useTranslation } from "react-i18next";
 
 function UsersCard() {
    const usersUIContext = useUsersUIContext();
+   const { t } = useTranslation();
    const usersUIProps = useMemo(() => {
       return {
          ids: usersUIContext.ids,
@@ -22,7 +23,7 @@ function UsersCard() {
 
    return (
       <Card>
-         <CardHeader title={useFormatMessage("USERS.USERS_LIST")}></CardHeader>
+         <CardHeader title={t("messages.USERS.USERS_LIST")}></CardHeader>
          <CardBody>
             <UsersFilter />
             {usersUIProps.ids.length > 0 && <UsersGrouping />}

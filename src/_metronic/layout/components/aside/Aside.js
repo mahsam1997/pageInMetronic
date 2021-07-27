@@ -12,16 +12,16 @@ import { QuickUserToggler } from "../extras/QuickUserToggler";
 import { Brand } from "../brand/Brand";
 import { KTUtil } from "./../../../_assets/js/components/util";
 import { Link } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
 
-import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import routes from "../../../../app/router/routes.json";
-import useFormatMessage from "../../../../app/hooks/useFormatMessage";
 
 export function Aside() {
    const uiService = useHtmlClassService();
 
-   const inLtrDirection = i18next.dir() === "ltr";
+   const { t, i18n } = useTranslation();
+
+   const inLtrDirection = i18n.dir() === "ltr";
    const placement = inLtrDirection ? "right" : "left";
 
    const layoutProps = useMemo(() => {
@@ -175,7 +175,7 @@ export function Aside() {
                         data-placement="rigth"
                         data-container="body"
                         data-boundary="window"
-                        title={useFormatMessage("DEFAULT.USER_MANAGEMENT")}
+                        title={t("messages.DEFAULT.USER_MANAGEMENT")}
                      >
                         <OverlayTrigger
                            placement={placement}
@@ -184,7 +184,7 @@ export function Aside() {
                                  id="latest-reports"
                                  style={{ fontFamily: "Vazir" }}
                               >
-                                 <FormattedMessage id="DEFAULT.USER_MANAGEMENT" />
+                                 {t("messages.DEFAULT.USER_MANAGEMENT")}
                               </Tooltip>
                            }
                         >

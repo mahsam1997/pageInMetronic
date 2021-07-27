@@ -3,10 +3,9 @@ import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-import { FormattedMessage, useIntl } from "react-intl";
 import CustomDebounceInput from "../components/common/CustomDebounceInput";
 import CustomSelect from "../components/common/CustomSelect";
-import formatMessage from "../utils/formatMessage";
+import { useTranslation } from "react-i18next";
 
 import {
    statusPrefixOptions,
@@ -42,7 +41,7 @@ const mobileRemoveFirstChar = value => {
 };
 
 function UsersFilter({ listLoading }) {
-   const intl = useIntl();
+   const { t } = useTranslation();
 
    // Users UI Context
    const usersUIContext = useUsersUIContext();
@@ -88,14 +87,11 @@ function UsersFilter({ listLoading }) {
                   <div className="form-group row">
                      <div className="col-lg-2 mb-4">
                         <small className="form-text text-muted mb-1">
-                           <FormattedMessage
-                              id="USERS.COMMON.FILTER"
-                              tagName="b"
-                           />
-                           <FormattedMessage id="USERS.COMMON.BY_STATUS" />
+                           <b>{t("messages.USERS.COMMON.FILTER")}</b>{" "}
+                           {t("messages.USERS.COMMON.BY_STATUS")}
                         </small>
                         <CustomSelect
-                           options={statusPrefixOptions(intl, formatMessage)}
+                           options={statusPrefixOptions}
                            value={values.status}
                            onChange={value => {
                               setFieldValue("status", value.value);
@@ -107,14 +103,11 @@ function UsersFilter({ listLoading }) {
                      </div>
                      <div className="col-lg-2 mb-4">
                         <small className="form-text text-muted mb-1">
-                           <FormattedMessage
-                              id="USERS.COMMON.FILTER"
-                              tagName="b"
-                           />
-                           <FormattedMessage id="USERS.COMMON.BY_ROLE" />
+                           <b>{t("messages.USERS.COMMON.FILTER")}</b>
+                           {t("messages.USERS.COMMON.BY_ROLE")}
                         </small>
                         <CustomSelect
-                           options={rolePrefixOptions(intl, formatMessage)}
+                           options={rolePrefixOptions}
                            value={values.role}
                            onChange={value => {
                               setFieldValue("role", value.value);
@@ -126,15 +119,12 @@ function UsersFilter({ listLoading }) {
                      </div>
                      <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
-                           <FormattedMessage
-                              tagName="b"
-                              id="USERS.COMMON.SEARCH"
-                           />
-                           <FormattedMessage id="USERS.COMMON.BY" />
-                           <FormattedMessage id={fieldsIds[values.searchBy]} />
+                           <b>{t("messages.USERS.COMMON.SEARCH")}</b>{" "}
+                           {t("messages.USERS.COMMON.BY")}
+                           {t(fieldsIds[values.searchBy])}
                         </small>
                         <CustomSelect
-                           options={searchByPrefixOptions(intl, formatMessage)}
+                           options={searchByPrefixOptions}
                            value={values.searchBy}
                            onChange={value => {
                               setFieldValue("searchBy", value.value);
@@ -146,21 +136,15 @@ function UsersFilter({ listLoading }) {
                      </div>
                      <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
-                           <FormattedMessage
-                              tagName="b"
-                              id="USERS.COMMON.SEARCH"
-                           />
-                           <FormattedMessage id="USERS.COMMON.IN" />
-                           <FormattedMessage id={fieldsIds[values.searchBy]} />
+                           <b>{t("messages.USERS.COMMON.SEARCH")}</b>{" "}
+                           {t("messages.USERS.COMMON.IN")}
+                           {t(fieldsIds[values.searchBy])}
                         </small>
                         <CustomDebounceInput
                            type="text"
                            className="form-control"
                            name="searchText"
-                           placeholder={formatMessage(
-                              intl,
-                              "USERS.COMMON.SEARCH"
-                           )}
+                           placeholder={t("messages.USERS.COMMON.SEARCH")}
                            onBlur={handleBlur}
                            value={values.searchText}
                            onChange={e => {

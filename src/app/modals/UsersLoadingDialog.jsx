@@ -1,14 +1,11 @@
 import React, { useMemo } from "react";
 import { LoadingDialog } from "../../_metronic/_partials/controls";
 
-import { useIntl } from "react-intl";
-
+import { useTranslation } from "react-i18next";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-import formatMessage from "../utils/formatMessage";
-
 function UsersLoadingDialog() {
-   const intl = useIntl();
+   const { t } = useTranslation();
 
    // Users UI Context
    const customersUIContext = useUsersUIContext();
@@ -21,7 +18,7 @@ function UsersLoadingDialog() {
    return (
       <LoadingDialog
          isLoading={customersUIProps.isLoading}
-         text={formatMessage(intl, "DEFAULT.LOADING")}
+         text={t("messages.DEFAULT.LOADING")}
       />
    );
 }

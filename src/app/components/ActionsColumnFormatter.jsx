@@ -5,10 +5,9 @@ import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../_metronic/_helpers";
 
-import formatMessage from "../utils/formatMessage";
+import i18next from "i18next";
 
 function ActionsColumnFormatter(
-   intl,
    cellContent,
    row,
    rowIndex,
@@ -17,7 +16,7 @@ function ActionsColumnFormatter(
    return (
       <>
          <a
-            title={formatMessage(intl, "ECOMMERCE.CUSTOMERS.EDIT_CUSTOMER")}
+            title={i18next.t("messages.USERS.EDIT_USER")}
             className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
             onClick={() => openEditUserDialog(row["_id"])}
          >
@@ -32,10 +31,7 @@ function ActionsColumnFormatter(
          <> </>
 
          <a
-            title={formatMessage(
-               intl,
-               "ECOMMERCE.CUSTOMERS.DELETE_CUSTOMER_SIMPLE.TITLE"
-            )}
+            title={i18next.t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
             className="btn btn-icon btn-light btn-hover-danger btn-sm"
             onClick={() => openDeleteUserDialog(row["_id"])}
          >

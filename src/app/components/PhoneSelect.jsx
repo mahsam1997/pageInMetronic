@@ -21,7 +21,6 @@ const PhoneSelect = ({ options, value, ...props }) => {
          }}
          customSingleValueStyles={{
             color: colors.gray,
-            marginLeft: "10px",
          }}
          {...props}
       />

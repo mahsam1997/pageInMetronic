@@ -3,13 +3,15 @@ import { Modal } from "react-bootstrap";
 import { useUsersUIContext } from "../context/UsersUIContext";
 import { ModalProgressBar } from "../../_metronic/_partials/controls";
 
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 import CustomButton from "../components/common/CustomButton";
 
 import { deleteUser } from "../services/users.service";
 
 function UsersDeleteDialog({ show, onHide }) {
    const [loading, setLoading] = useState(false);
+
+   const { t } = useTranslation();
 
    // Users UI Context
    const usersUIContext = useUsersUIContext();
@@ -52,31 +54,27 @@ function UsersDeleteDialog({ show, onHide }) {
          {/*end::Loading*/}
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               <FormattedMessage id="USERS.DELETE_USERS_SIMPLE.TITLE" />
+               {t("messages.USERS.DELETE_USERS_SIMPLE.TITLE")}
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
             {!loading && (
-               <FormattedMessage
-                  id="USERS.DELETE_USER_MULTY.DESCRIPTION"
-                  tagName="span"
-               />
+               <span>{t("messages.USERS.DELETE_USER_MULTY.DESCRIPTION")}</span>
             )}
             {loading && (
-               <FormattedMessage
-                  id="USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION"
-                  tagName="span"
-               />
+               <span>
+                  {t("messages.USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION")}
+               </span>
             )}
          </Modal.Body>
          <Modal.Footer>
             <CustomButton
-               title="AUTH.GENERAL.CANCEL"
+               title="messages.AUTH.GENERAL.CANCEL"
                onClick={onHide}
                classNames="btn btn-light btn-elevate"
             />
             <CustomButton
-               title="DEFAULT.DELETE"
+               title="messages.DEFAULT.DELETE"
                onClick={deleteUsers}
                classNames="btn btn-primary btn-elevate"
             />

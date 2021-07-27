@@ -8,61 +8,59 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input } from "../../../_metronic/_partials/controls";
 
+import { useTranslation } from "react-i18next";
 import CustomButton from "../../components/common/CustomButton";
-
-import { useIntl, FormattedMessage } from "react-intl";
-import useFormatMessage from "../../hooks/useFormatMessage";
-import formatMessage from "../../utils/formatMessage";
 import CustomSelect from "../../components/common/CustomSelect";
 import phonePrefixOptions from "../../enums/phonePrefixOptions";
 
 // Validation schema
-const UserEditSchema = formatedMessage =>
+const UserEditSchema = t =>
    Yup.object().shape({
       fullName: Yup.string()
          .min(
             3,
-            formatedMessage("MIN_X_CHARACTERS", {
+            t("errors.MIN_X_CHARACTERS", {
                x: 3,
-               noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+               noun: t("messages.AUTH.INPUT.FULLNAME"),
             })
          )
          .max(
             50,
-            formatedMessage("MAX_X_CHARACTERS", {
+            t("errors.MAX_X_CHARACTERS", {
                x: 50,
-               noun: formatedMessage("AUTH.INPUT.FULLNAME"),
+               noun: t("messages.AUTH.INPUT.FULLNAME"),
             })
          )
-         .required(formatedMessage("REQUIRED")),
+         .required(t("errors.REQUIRED")),
 
       email: Yup.string()
-         .email(formatedMessage("AUTH.VALIDATION.EMAIL"))
-         .required(formatedMessage("REQUIRED")),
+         .email(t("errors.AUTH.VALIDATION.EMAIL"))
+         .required(t("errors.REQUIRED")),
 
       mobile: Yup.string()
          .min(
             10,
-            formatedMessage("MIN_X_CHARACTERS", {
+            t("errors.EXACT_X_CHARACTERS", {
                x: 10,
-               noun: formatedMessage("AUTH.INPUT.PHONE"),
+               noun: t("messages.AUTH.INPUT.PHONE"),
             })
          )
          .max(
             10,
-            formatedMessage("MAX_X_CHARACTERS", {
+            t("errors.EXACT_X_CHARACTERS", {
                x: 10,
-               noun: formatedMessage("AUTH.INPUT.PHONE"),
+               noun: t("messages.AUTH.INPUT.PHONE"),
             })
          )
-         .required(formatedMessage("REQUIRED")),
+         .required(t("errors.REQUIRED")),
 
-      countryCode: Yup.string().required(formatedMessage("REQUIRED")),
+      countryCode: Yup.string().required(t("errors.REQUIRED")),
    });
 
 function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
-   const intl = useIntl();
-   const isEnglish = intl.locale === "en";
+   const { t, i18n } = useTranslation();
+
+   const isLtrDir = i18n.dir() === "ltr";
 
    const initialValues = {
       mobile: user.mobile,
@@ -76,7 +74,7 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
          <Formik
             enableReinitialize={true}
             initialValues={initialValues}
-            validationSchema={UserEditSchema(useFormatMessage)}
+            validationSchema={UserEditSchema(t)}
             onSubmit={values => {
                saveUser(values);
             }}
@@ -103,14 +101,10 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                                  <Field
                                     name="fullName"
                                     component={Input}
-                                    placeholder={formatMessage(
-                                       intl,
-                                       "AUTH.INPUT.FULLNAME"
+                                    placeholder={t(
+                                       "messages.AUTH.INPUT.FULLNAME"
                                     )}
-                                    label={formatMessage(
-                                       intl,
-                                       "AUTH.INPUT.FULLNAME"
-                                    )}
+                                    label={t("messages.AUTH.INPUT.FULLNAME")}
                                  />
                               </div>
                               {/* Email */}
@@ -119,11 +113,8 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                                     type="text"
                                     name="email"
                                     component={Input}
-                                    placeholder={formatMessage(
-                                       intl,
-                                       "DEFAULT.EMAIL"
-                                    )}
-                                    label={formatMessage(intl, "DEFAULT.EMAIL")}
+                                    placeholder={t("messages.DEFAULT.EMAIL")}
+                                    label={t("messages.DEFAULT.EMAIL")}
                                  />
                               </div>
                            </div>
@@ -134,24 +125,18 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                                     type="number"
                                     name="mobile"
                                     component={Input}
-                                    placeholder={formatMessage(
-                                       intl,
-                                       "DEFAULT.MOBILE"
-                                    )}
-                                    label={formatMessage(
-                                       intl,
-                                       "DEFAULT.MOBILE"
-                                    )}
+                                    placeholder={t("messages.DEFAULT.MOBILE")}
+                                    label={t("messages.DEFAULT.MOBILE")}
                                  />
                               </div>
                               {/* Sub Mobile */}
                               <div className="col-lg-4 ">
                                  <label>
-                                    <FormattedMessage id="DEFAULT.SUB_PHONE" />
+                                    {t("messages.DEFAULT.SUB_PHONE")}
                                  </label>
                                  {values.countryCode && (
                                     <CustomSelect
-                                       options={phonePrefixOptions(isEnglish)}
+                                       options={phonePrefixOptions(isLtrDir)}
                                        value={values.countryCode}
                                        onChange={value =>
                                           setFieldValue(
@@ -171,13 +156,13 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                      </Modal.Body>
                      <Modal.Footer>
                         <CustomButton
-                           title="AUTH.GENERAL.CANCEL"
+                           title="messages.AUTH.GENERAL.CANCEL"
                            onClick={onHide}
                            classNames="btn btn-light btn-elevate"
                         />
                         <CustomButton
                            type="submit"
-                           title="DEFAULT.SAVE"
+                           title="messages.DEFAULT.SAVE"
                            onClick={() => handleSubmit()}
                            classNames="btn btn-primary btn-elevate"
                            disabled={formik.isSubmitting || !formik.isValid}

@@ -12,13 +12,14 @@ import {
 } from "../../_core/MetronicSubheader";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 
-import { FormattedMessage } from "react-intl";
-import useFormatMessage from "../../../../app/hooks/useFormatMessage";
+import { useTranslation } from "react-i18next";
 
 export function SubHeader() {
    const uiService = useHtmlClassService();
    const location = useLocation();
    const subheader = useSubheader();
+
+   const { t } = useTranslation();
 
    const layoutProps = useMemo(() => {
       return {
@@ -38,6 +39,7 @@ export function SubHeader() {
 
    useLayoutEffect(() => {
       const aside = getBreadcrumbsAndTitle("kt_aside_menu", location.pathname);
+      console.log(aside);
       const header = getBreadcrumbsAndTitle(
          "kt_header_menu",
          location.pathname
@@ -57,7 +59,9 @@ export function SubHeader() {
    }, [location.pathname]);
 
    // Do not remove this useEffect, need from update title/breadcrumbs outside (from the page)
-   useEffect(() => {}, [subheader]);
+   useEffect(() => {
+      // this useEffect for update title/breadcrumbs
+   }, [subheader]);
 
    return (
       <div
@@ -98,7 +102,7 @@ export function SubHeader() {
                <button
                   type="button"
                   className={`btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2`}
-                  title={useFormatMessage("NEW_MEMBER")}
+                  title={t("messages.DEFAULT.NEW_MEMBER")}
                >
                   <span className="svg-icon svg-icon-lg">
                      <SVG
@@ -108,7 +112,7 @@ export function SubHeader() {
                      />
                   </span>
                   {` `}
-                  <FormattedMessage id="NEW_MEMBER" />
+                  {t("messages.DEFAULT.NEW_MEMBER")}
                </button>
 
                <QuickActions />

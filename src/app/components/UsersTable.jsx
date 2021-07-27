@@ -19,11 +19,9 @@ import ActionsColumnFormatter from "./ActionsColumnFormatter";
 import { Pagination } from "../../_metronic/_partials/controls";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-import { useIntl } from "react-intl";
-import useFormatMessage from "../hooks/useFormatMessage";
 import toFarsiNumber from "../utils/toFarsiNumber";
 import { getUsers } from "../services/users.service";
-
+import { useTranslation } from "react-i18next";
 import { useSubheader } from "../../_metronic/layout";
 
 export function UsersTable() {
@@ -33,12 +31,14 @@ export function UsersTable() {
    });
    const [loading, setLoading] = useState(false);
 
-   const intl = useIntl();
+   const { t, i18n } = useTranslation();
 
-   const isEnglish = intl.locale === "en";
+   console.log("direction: ", i18n.dir());
+
+   const isLtrDir = i18n.dir() === "ltr";
 
    const subHeader = useSubheader();
-   subHeader.setTitle(useFormatMessage("USERS.USERS"));
+   subHeader.setTitle(t("messages.USERS.USERS"));
 
    // Users UI Context
    const usersUIContext = useUsersUIContext();
@@ -57,7 +57,7 @@ export function UsersTable() {
    const columns = [
       {
          dataField: "profile.fullName",
-         text: useFormatMessage("AUTH.INPUT.FULLNAME"),
+         text: t("messages.AUTH.INPUT.FULLNAME"),
          headerAlign: "center",
          align: "center",
          sort: true,
@@ -66,9 +66,9 @@ export function UsersTable() {
       },
       {
          dataField: "email",
-         text: useFormatMessage("AUTH.INPUT.EMAIL"),
+         text: t("messages.AUTH.INPUT.EMAIL"),
          formatter: (cell, row, rowIndex) =>
-            isEnglish ? cell : toFarsiNumber(cell),
+            isLtrDir ? cell : toFarsiNumber(cell),
          headerAlign: "center",
          align: "center",
          sort: true,
@@ -77,9 +77,9 @@ export function UsersTable() {
       },
       {
          dataField: "mobile",
-         text: useFormatMessage("DEFAULT.MOBILE"),
+         text: t("messages.DEFAULT.MOBILE"),
          formatter: (cell, row, rowIndex) =>
-            isEnglish ? cell : toFarsiNumber(cell),
+            isLtrDir ? cell : toFarsiNumber(cell),
          headerAlign: "center",
          align: "center",
          sort: true,
@@ -91,7 +91,7 @@ export function UsersTable() {
       },
       {
          dataField: "role",
-         text: useFormatMessage("USERS.ROLE"),
+         text: t("messages.USERS.ROLE"),
          headerAlign: "center",
          align: "center",
          sort: true,
@@ -100,7 +100,7 @@ export function UsersTable() {
       },
       {
          dataField: "status",
-         text: useFormatMessage("USERS.STATUS"),
+         text: t("messages.USERS.STATUS"),
          headerAlign: "center",
          align: "center",
          sort: true,
@@ -109,8 +109,8 @@ export function UsersTable() {
       },
       {
          dataField: "action",
-         text: useFormatMessage("USERS.ACTIONS"),
-         formatter: (...args) => ActionsColumnFormatter(intl, ...args),
+         text: t("messages.USERS.ACTIONS"),
+         formatter: ActionsColumnFormatter,
          formatExtraData: {
             openEditUserDialog: usersUIProps.openEditUserDialog,
             openDeleteUserDialog: usersUIProps.openDeleteUserDialog,

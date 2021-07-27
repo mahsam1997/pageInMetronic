@@ -20,7 +20,6 @@ import {
    MetronicSplashScreenProvider,
    MetronicSubheaderProvider,
 } from "./_metronic/layout";
-import { MetronicI18nProvider } from "./_metronic/i18n";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./app/Assets/fonts/Vazir/fontVazir.css";
@@ -32,29 +31,13 @@ import "./app/Assets/fonts/Vazir/fontVazir.css";
  */
 const { PUBLIC_URL } = process.env;
 
-/**
- * Creates `axios-mock-adapter` instance for provided `axios` instance, add
- * basic Metronic mocks and returns it.
- *
- * @see https://github.com/ctimmerm/axios-mock-adapter
- */
-/* const mock = */
-
-/**
- * Inject metronic interceptors for axios.
- *
- * @see https://github.com/axios/axios#interceptors
- */
-
 ReactDOM.render(
-   <MetronicI18nProvider>
-      <MetronicLayoutProvider>
-         <MetronicSubheaderProvider>
-            <MetronicSplashScreenProvider>
-               <App basename={PUBLIC_URL} />
-            </MetronicSplashScreenProvider>
-         </MetronicSubheaderProvider>
-      </MetronicLayoutProvider>
-   </MetronicI18nProvider>,
+   <MetronicLayoutProvider>
+      <MetronicSubheaderProvider>
+         <MetronicSplashScreenProvider>
+            <App basename={PUBLIC_URL} />
+         </MetronicSplashScreenProvider>
+      </MetronicSubheaderProvider>
+   </MetronicLayoutProvider>,
    document.getElementById("root")
 );

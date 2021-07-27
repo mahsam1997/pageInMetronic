@@ -26,11 +26,6 @@ import routes from "../../../../router/routes.json";
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 
 /*
-  INTL (i18n) docs:
-  https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
-*/
-
-/*
   Formik+YUP:
   https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
 */

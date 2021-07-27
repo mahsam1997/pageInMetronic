@@ -22,14 +22,14 @@ const registerSchema = t => {
       phoneNumber: Yup.string()
          .min(
             10,
-            t("errors.MIN_X_CHARACTERS", {
+            t("errors.EXACT_X_CHARACTERS", {
                x: 10,
                noun: t("messages.AUTH.INPUT.PHONE"),
             })
          )
          .max(
             10,
-            t("errors.MAX_X_CHARACTERS", {
+            t("errors.EXACT_X_CHARACTERS", {
                x: 10,
                noun: t("messages.AUTH.INPUT.PHONE"),
             })
@@ -38,7 +38,6 @@ const registerSchema = t => {
 
       countryCode: Yup.string().required(t("errors.REQUIRED")),
 
-      subPhoneNumber: Yup.number().required(t("errors.REQUIRED")),
       email: Yup.string()
          .email(t("errors.AUTH.VALIDATION.EMAIL"))
          .min(
