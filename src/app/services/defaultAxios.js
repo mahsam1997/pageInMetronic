@@ -49,7 +49,6 @@ export const axiosSetup = axiosInstance => {
 i18next.on("initialized", () => {
    addLanguage();
 });
-addAuthorization();
 setConfig();
 addAuthorization();
 axiosSetup(instance);
