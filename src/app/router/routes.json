@@ -5,16 +5,13 @@
    "FORGETPASS": "/auth/forgot-password",
    "LOGOUT": "/logout",
    "ROOT": "/",
-   "ECOMMERCE": "/e-commerce",
-   "ECOMMERCE_CUSTOMERS": "/e-commerce/customers",
-   "ECOMMERCE_CUSTOMERS_NEW": "/e-commerce/customers/new",
-   "ECOMMERCE_CUSTOMERS_EDIT": "/e-commerce/customers/:id/edit",
-   "ECOMMERCE_CUSTOMERS_DELETE_CUSTOMERS": "/e-commerce/customers/deleteCustomers",
-   "ECOMMERCE_CUSTOMERS_FETCH": "/e-commerce/customers/fetch",
-   "ECOMMERCE_CUSTOMERS_UPDATE_STATUS": "/e-commerce/customers/updateStatus",
-   "ECOMMERCE_CUSTOMERS_DELETE": "/e-commerce/customers/:id/delete",
 
-   "CONTACT":"/contact",
-   "PLANS":"/plans",
-   "RULES":"/rules"
+   "USERS": "/user-management",
+   "USER_EDIT": "/user-management/:id/edit",
+   "USERS_DELETE": "/user-management/deleteCustomers",
+   "USER_DELETE": "/user-management/:id/delete",
+
+   "CONTACT": "/contact",
+   "PLANS": "/plans",
+   "RULES": "/rules"
 }

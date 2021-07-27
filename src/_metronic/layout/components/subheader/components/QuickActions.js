@@ -25,7 +25,7 @@ const QuickActionsDropdownToggle = forwardRef((props, ref) => {
             <SVG src={toAbsoluteUrl("/media/svg/icons/Files/File.svg")} />
          </span>
          {` `}
-         <FormattedMessage id="ECOMMERCE.CUSTOMERS.NEW_REPORT" />
+         <FormattedMessage id="NEW_REPORT" />
       </a>
    );
 });
@@ -42,7 +42,7 @@ export function QuickActions() {
                   id="quick-actions-tooltip"
                   style={{ fontFamily: "Vazir" }}
                >
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.QUICK_ACTIONS" />
+                  <FormattedMessage id="QUICK_ACTIONS" />
                </Tooltip>
             }
          >

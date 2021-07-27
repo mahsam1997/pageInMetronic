@@ -18,12 +18,12 @@ const CustomTotal = (from, to, size) => {
       <div className="react-bootstrap-table-pagination-total mr-15">
          {isLtrDir ? (
             <FormattedMessage
-               id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
+               id="USERS.SHOWING_ITEMS"
                values={{ from, to, size }}
             />
          ) : (
             <FormattedMessage
-               id="ECOMMERCE.CUSTOMERS.SHOWING_ITEMS"
+               id="USERS.SHOWING_ITEMS"
                values={{
                   from: toFarsiNumber(from),
                   to: toFarsiNumber(to),

@@ -1,24 +1,17 @@
 import React, { Suspense, lazy } from "react";
-import { Redirect, Switch, Route } from "react-router-dom";
-import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
-import { BuilderPage } from "./pages/BuilderPage";
-import { MyPage } from "./pages/MyPage";
+import { Redirect, Switch } from "react-router-dom";
+import { LayoutSplashScreen } from "../_metronic/layout";
 import { DashboardPage } from "./pages/DashboardPage";
 
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
-const GoogleMaterialPage = lazy(() =>
-   import("./modules/GoogleMaterialExamples/GoogleMaterialPage")
-);
-const ReactBootstrapPage = lazy(() =>
-   import("./modules/ReactBootstrapExamples/ReactBootstrapPage")
-);
-const ECommercePage = lazy(() =>
-   import("./modules/ECommerce/pages/eCommercePage")
-);
-const UserProfilepage = lazy(() =>
-   import("./modules/UserProfile/UserProfilePage")
-);
+import routes from "./router/routes.json";
+
+// const ECommercePage = lazy(() =>
+//    import("./modules/ECommerce/pages/eCommercePage")
+// );
+
+const UsersPage = lazy(() => import("./modules/UserManagement/UserRoutes"));
 
 export default function BasePage() {
    // useEffect(() => {
@@ -34,13 +27,8 @@ export default function BasePage() {
                <Redirect exact from="/" to="/dashboard" />
             }
             <ProtectedRoute path="/dashboard" component={DashboardPage} />
-            <ContentRoute path="/builder" component={BuilderPage} />
-            <ContentRoute path="/my-page" component={MyPage} />
-            <Route path="/google-material" component={GoogleMaterialPage} />
-            <Route path="/react-bootstrap" component={ReactBootstrapPage} />
-            <ProtectedRoute path="/e-commerce" component={ECommercePage} />
-            <Route path="/user-profile" component={UserProfilepage} />
-            <Redirect to="error/error-v1" />
+            {/* <ProtectedRoute path="/e-commerce" component={ECommercePage} /> */}
+            <ProtectedRoute path={routes.USERS} component={UsersPage} />
          </Switch>
       </Suspense>
    );

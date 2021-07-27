@@ -84,9 +84,7 @@ export function SubHeader() {
                <div className="d-flex align-items-baseline mr-5">
                   {/* begin::Title */}
                   <h2 className="subheader-title text-dark font-weight-bold my-2 mr-3">
-                     <FormattedMessage
-                        id={`DEFAULT.${subheader.title.toUpperCase()}`}
-                     />
+                     {subheader.title}
                   </h2>
                   {/* end::Title */}
                   <BreadCrumbs items={subheader.breadcrumbs} />
@@ -100,7 +98,7 @@ export function SubHeader() {
                <button
                   type="button"
                   className={`btn btn-primary btn-fixed-height font-weight-bold px-2 px-lg-5 mr-2`}
-                  title={useFormatMessage("ECOMMERCE.CUSTOMERS.NEW_MEMBER")}
+                  title={useFormatMessage("NEW_MEMBER")}
                >
                   <span className="svg-icon svg-icon-lg">
                      <SVG
@@ -110,7 +108,7 @@ export function SubHeader() {
                      />
                   </span>
                   {` `}
-                  <FormattedMessage id="ECOMMERCE.CUSTOMERS.NEW_MEMBER" />
+                  <FormattedMessage id="NEW_MEMBER" />
                </button>
 
                <QuickActions />
