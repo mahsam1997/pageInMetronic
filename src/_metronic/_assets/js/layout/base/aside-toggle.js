@@ -7,84 +7,94 @@ import KTLayoutAsideMenu from "./aside-menu.js";
 import { KTCookie } from "./../../components/cookie.js";
 import { KTUtil } from "./../../components/util.js";
 
-var KTLayoutAsideToggle = function() {
-    // Private properties
-    var _body;
-    var _element;
-    var _toggleObject;
+var KTLayoutAsideToggle = (function() {
+   // Private properties
+   var _body;
+   var _element;
+   var _toggleObject;
 
-	// Initialize
-	var _init = function() {
-		_toggleObject = new KTToggle(_element, _body, {
-			targetState: 'aside-minimize',
-			toggleState: 'aside-toggle-active'
-		});
+   // Initialize
+   var _init = function() {
+      _toggleObject = new KTToggle(_element, _body, {
+         targetState: "aside-minimize",
+         toggleState: "aside-toggle-active",
+      });
 
-		_toggleObject.on('toggle', function(toggle) {
-            // Update sticky card
-            if (typeof KTLayoutStickyCard !== 'undefined') {
-                setTimeout(function() {
-                    KTLayoutStickyCard.update();
-                }, 500);
-            }
+      // This code may reduce performance
+      const asideToggleState = KTCookie.getCookie("kt_aside_toggle_state");
+      if (asideToggleState) {
+         if (asideToggleState === "on") {
+            _toggleObject.toggleOn();
+         } else {
+            _toggleObject.toggleOff();
+         }
+      }
 
-            // Pause header menu dropdowns
-            if (typeof KTLayoutHeaderMenu !== 'undefined') {
-                KTLayoutHeaderMenu.pauseDropdownHover(800);
-            }
+      _toggleObject.on("toggle", function(toggle) {
+         // Update sticky card
+         if (typeof KTLayoutStickyCard !== "undefined") {
+            setTimeout(function() {
+               KTLayoutStickyCard.update();
+            }, 500);
+         }
 
-            // Pause aside menu dropdowns
-            if (typeof KTLayoutAsideMenu !== 'undefined') {
-                KTLayoutAsideMenu.pauseDropdownHover(800);
-            }
+         // Pause header menu dropdowns
+         if (typeof KTLayoutHeaderMenu !== "undefined") {
+            KTLayoutHeaderMenu.pauseDropdownHover(800);
+         }
 
-            // Remember state in cookie
-			KTCookie.setCookie('kt_aside_toggle_state', toggle.getState());
-			// to set default minimized left aside use this cookie value in your
-			// server side code and add "kt-primary--minimize aside-minimize" classes to
-			// the body tag in order to initialize the minimized left aside mode during page loading.
-		});
+         // Pause aside menu dropdowns
+         if (typeof KTLayoutAsideMenu !== "undefined") {
+            KTLayoutAsideMenu.pauseDropdownHover(800);
+         }
 
-		_toggleObject.on('beforeToggle', function(toggle) {
-			//if (KTUtil.hasClass(_body, 'aside-minimize') === false && KTUtil.hasClass(_body, 'aside-minimize-hover')) {
-			//	KTUtil.removeClass(_body, 'aside-minimize-hover');
-			//}
-		});
-	}
+         // Remember state in cookie
+         KTCookie.setCookie("kt_aside_toggle_state", toggle.getState());
+         // to set default minimized left aside use this cookie value in your
+         // server side code and add "kt-primary--minimize aside-minimize" classes to
+         // the body tag in order to initialize the minimized left aside mode during page loading.
+      });
 
-    // Public methods
-	return {
-		init: function(id) {
-            _element = KTUtil.getById(id);
-            _body = KTUtil.getBody();
+      _toggleObject.on("beforeToggle", function(toggle) {
+         //if (KTUtil.hasClass(_body, 'aside-minimize') === false && KTUtil.hasClass(_body, 'aside-minimize-hover')) {
+         //	KTUtil.removeClass(_body, 'aside-minimize-hover');
+         //}
+      });
+   };
 
-            if (!_element) {
-                return;
-            }
+   // Public methods
+   return {
+      init: function(id) {
+         _element = KTUtil.getById(id);
+         _body = KTUtil.getBody();
 
-            // Initialize
-            _init();
-		},
+         if (!_element) {
+            return;
+         }
 
-        getElement: function() {
-            return _element;
-        },
+         // Initialize
+         _init();
+      },
 
-        getToggle: function() {
-			return _toggleObject;
-		},
+      getElement: function() {
+         return _element;
+      },
 
-		onToggle: function(handler) {
-			if (typeof _toggleObject.element !== 'undefined') {
-				_toggleObject.on('toggle', handler);
-			}
-		}
-	};
-}();
+      getToggle: function() {
+         return _toggleObject;
+      },
+
+      onToggle: function(handler) {
+         if (typeof _toggleObject.element !== "undefined") {
+            _toggleObject.on("toggle", handler);
+         }
+      },
+   };
+})();
 
 // Webpack support
-if (typeof module !== 'undefined') {
-	// module.exports = KTLayoutAsideToggle;
+if (typeof module !== "undefined") {
+   // module.exports = KTLayoutAsideToggle;
 }
 
 export default KTLayoutAsideToggle;
