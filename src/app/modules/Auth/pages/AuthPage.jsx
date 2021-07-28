@@ -15,7 +15,7 @@ import logo from "../../../Assets/images/logo.jpg";
 import pic from "../../../Assets/images/pic-aside.jpg";
 
 export function AuthPage() {
-   const { t } = useTranslation();
+   const { t, i18n } = useTranslation();
 
    return (
       <>
@@ -46,13 +46,20 @@ export function AuthPage() {
                   </div>
                   {/*end: Aside Container*/}
 
-                  <img src={pic} alt="aside pic" className="aside-pic" />
+                  <img
+                     src={pic}
+                     alt="aside pic"
+                     className="aside-pic"
+                     style={{
+                        transform: i18n.dir() === "rtl" ? "scaleX(-1)" : null,
+                     }}
+                  />
                </div>
                {/* begin::Aside */}
                {/*begin::Content*/}
                <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
                   {/* begin::Content body */}
-                  <div className="d-flex flex-column-fluid flex-center  mt-30 mt-lg-0">
+                  <div className="d-flex flex-column-fluid flex-center  mt-30 mt-lg-0 auth-main">
                      <Switch>
                         <Route path={routes.LOGIN} component={Login} />
                         <Route

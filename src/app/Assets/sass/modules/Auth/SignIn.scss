@@ -3,8 +3,6 @@
 }
 
 .login-aside {
-   // min-width: 475px !important;
-
    .aside-top {
       margin-top: 65px;
       text-align: center;
@@ -22,7 +20,6 @@
       font-style: normal;
       font-weight: bold;
       font-size: 23px;
-      // line-height: 20px;
       text-align: center;
       letter-spacing: -0.03em;
       color: $login-aside-color;
@@ -33,6 +30,15 @@
       object-fit: contain;
       background-size: cover;
       background-position: center;
+   }
+}
+
+@media only screen and (max-width: 990px) {
+   .login-aside {
+      display: block !important;
+   }
+   .auth-main {
+      margin-top: 5px !important;
    }
 }
 
