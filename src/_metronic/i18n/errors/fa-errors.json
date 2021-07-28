@@ -1,6 +1,6 @@
 {
    "AUTH.VALIDATION.INVALID": "{{name}} معتبر نیست",
-   "AUTH.VALIDATION.EMAIL": "ایمیل نامعتبر است",
+   "AUTH.VALIDATION.EMAIL": "ایمیل نامعتبر است.",
    "AUTH.VALIDATION.REQUIRED": "{{name}} مورد نیاز است",
    "AUTH.VALIDATION.MIN_LENGTH": "{{name}} حداقل طول است {{min}}",
    "AUTH.VALIDATION.AGREEMENT_REQUIRED": "پذیرش شرایط و ضوابط لازم است",
@@ -25,7 +25,7 @@
    "LEAST_X_CHARACTERS_AND_MAX_Y_CHARACTERS": "{{noun}} باید حداقل {{x}} و حداکثر {{y}} کاراکتر باشد.",
    "MAX_X_CHARACTERS": "{{noun}} باید حداکثر {{x}} کاراکتر باشد.",
    "MIN_X_CHARACTERS": "{{noun}} باید حداقل {{x}} کاراکتر باشد.",
-   "EXACT_X_CHARACTERS": "{{noun}} باید دقیقا {{x}} کاراکتر باشد.",
+   "EXACT_X_CHARACTERS": "{{noun}} باید {{x}} کاراکتر باشد.",
    "SHOULD_BE_INTEGER": "{{noun}} باید عدد صحیح باشد.",
    "SHOULD_BE_STRING": "{{noun}} باید رشته باشد.",
    "SHOULD_BE_BOOLEAN": "{{noun}} باید بولین باشد.",

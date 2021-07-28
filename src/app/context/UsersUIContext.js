@@ -13,7 +13,8 @@ export const UsersUIConsumer = UsersUIContext.Consumer;
 export function UsersUIProvider({ usersUIEvents, children }) {
    const [queryParams, setQueryParamsBase] = useState(initialFilter);
    const [ids, setIds] = useState([]);
-   const [isLoading, setIsLoading] = useState(false);
+   const [isModalClose, setIsModalClose] = useState(false);
+   const [isModalLoading, setIsModalLoading] = useState(false);
 
    const setQueryParams = useCallback(nextQueryParams => {
       setQueryParamsBase(prevQueryParams => {
@@ -41,8 +42,10 @@ export function UsersUIProvider({ usersUIEvents, children }) {
    };
 
    const value = {
-      isLoading,
-      setIsLoading,
+      isModalClose,
+      setIsModalClose,
+      isModalLoading,
+      setIsModalLoading,
       //
       queryParams,
       setQueryParamsBase,
@@ -50,9 +53,9 @@ export function UsersUIProvider({ usersUIEvents, children }) {
       setIds,
       setQueryParams,
       initUser,
-      openEditUserDialog: usersUIEvents.openEditUserDialog,
-      openDeleteUserDialog: usersUIEvents.openDeleteUserDialog,
-      openDeleteUsersDialog: usersUIEvents.openDeleteUsersDialog,
+      openEditUserModal: usersUIEvents.openEditUserModal,
+      openDeleteUserModal: usersUIEvents.openDeleteUserModal,
+      openDeleteUsersModal: usersUIEvents.openDeleteUsersModal,
    };
 
    return (

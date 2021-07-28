@@ -1,6 +1,6 @@
 {
    "AUTH.VALIDATION.INVALID": "{{name}} not valid",
-   "AUTH.VALIDATION.EMAIL": "Email is invalid",
+   "AUTH.VALIDATION.EMAIL": "Email is invalid.",
    "AUTH.VALIDATION.REQUIRED": "{{name}} is required",
    "AUTH.VALIDATION.MIN_LENGTH": "{{name}} minimum symbols {{min}}",
    "AUTH.VALIDATION.AGREEMENT_REQUIRED": "accepted Terms and Conditions is required",

@@ -11,14 +11,14 @@ function ActionsColumnFormatter(
    cellContent,
    row,
    rowIndex,
-   { openEditUserDialog, openDeleteUserDialog }
+   { openEditUserModal, openDeleteUserModal }
 ) {
    return (
       <>
          <a
             title={i18next.t("messages.USERS.EDIT_USER")}
             className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-            onClick={() => openEditUserDialog(row["_id"])}
+            onClick={() => openEditUserModal(row["_id"])}
          >
             <span className="svg-icon svg-icon-md svg-icon-primary">
                <SVG
@@ -33,7 +33,7 @@ function ActionsColumnFormatter(
          <a
             title={i18next.t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
             className="btn btn-icon btn-light btn-hover-danger btn-sm"
-            onClick={() => openDeleteUserDialog(row["_id"])}
+            onClick={() => openDeleteUserModal(row["_id"])}
          >
             <span className="svg-icon svg-icon-md svg-icon-danger">
                <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
