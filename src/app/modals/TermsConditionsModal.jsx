@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { FormattedMessage, useIntl } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 import { getTerms } from "../services/terms.service";
 
 const TermsConditionsModal = ({ show, handleClose }) => {
-   const language = useIntl().locale;
-
    const [terms, setTerms] = useState({
       title: "",
       content: "",
    });
    const [loading, setLoading] = useState(false);
+
+   const { t, i18n } = useTranslation();
+   const language = i18n.language;
 
    useEffect(() => {
       const getTermsAsync = async () => {
@@ -43,7 +44,7 @@ const TermsConditionsModal = ({ show, handleClose }) => {
          </Modal.Body>
          <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-               <FormattedMessage id="AUTH.GENERAL.CLOSE" />
+               {t("messages.AUTH.GENERAL.CLOSE")}
             </Button>
          </Modal.Footer>
       </Modal>

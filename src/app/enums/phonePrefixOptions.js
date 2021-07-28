@@ -9,10 +9,10 @@ const myCountryCodes = countryCodes.customList(
 
 const callingCodeList = Object.values(myCountryCodes);
 
-const phonePrefixOptions = isEnglish =>
+const phonePrefixOptions = isLtrDir =>
    callingCodeList.map(val => ({
       value: val,
-      label: isEnglish ? val : toFarsiNumber(val),
+      label: isLtrDir ? val : toFarsiNumber(val),
    }));
 
 export { callingCodeList };

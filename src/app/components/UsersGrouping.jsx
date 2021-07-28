@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 import CustomButton from "./common/CustomButton";
 
 function CustomersGrouping() {
@@ -15,6 +15,8 @@ function CustomersGrouping() {
       };
    }, [usersUIContext]);
 
+   const { t } = useTranslation();
+
    return (
       <div className="form">
          <div className="row align-items-center form-group-actions margin-top-20 margin-bottom-20">
@@ -23,14 +25,14 @@ function CustomersGrouping() {
                   <div className="form-label form-label-no-wrap">
                      <label className="font-bold font-danger">
                         <span>
-                           <FormattedMessage id="USERS.COMMON.SELECTED_RECORDS_COUNT" />{" "}
+                           {t("messages.USERS.COMMON.SELECTED_RECORDS_COUNT")}{" "}
                            <b>{usersUIProps.ids.length}</b>
                         </span>
                      </label>
                   </div>
                   <div>
                      <CustomButton
-                        title="DEFAULT.DELETE_ALL"
+                        title="messages.DEFAULT.DELETE_ALL"
                         onClick={usersUIProps.openDeleteUsersDialog}
                         classNames="btn btn-danger font-weight-bolder font-size-sm"
                      >

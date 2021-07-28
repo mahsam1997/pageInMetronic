@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "../app/Routes";
-import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/apm";
@@ -40,7 +39,7 @@ export default function App({ basename }) {
          <BrowserRouter basename={basename}>
             <MaterialThemeProvider>
                {isLanguageReady && (
-                  <I18nProvider>
+                  <>
                      <AppDirection />
                      <AuthenticationProvider value={{ isAuth, setIsAuth }}>
                         <Routes />
@@ -56,7 +55,7 @@ export default function App({ basename }) {
                            pauseOnHover
                         />
                      </AuthenticationProvider>
-                  </I18nProvider>
+                  </>
                )}
             </MaterialThemeProvider>
          </BrowserRouter>

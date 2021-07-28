@@ -1,11 +1,3 @@
-export const UserStatusCssClasses = ["danger", "success", "info", ""];
-
-export const UserStatusTitles = ["Suspended", "Active", "Pending", ""];
-
-export const UserTypeCssClasses = ["success", "primary", ""];
-
-export const UserTypeTitles = ["Business", "Individual", ""];
-
 export const defaultSorted = [{ dataField: "_id", order: "asc" }];
 
 export const sizePerPageList = [

@@ -31,7 +31,7 @@ const loginSchema = t => {
             50,
             t("errors.MAX_X_CHARACTERS", {
                x: 50,
-               noun: t("messages.AUTH.INPUT.EMAIL"),
+               noun: t("messages.AUTH.INPUT.PASSWORD"),
             })
          )
          .required(t("errors.REQUIRED")),

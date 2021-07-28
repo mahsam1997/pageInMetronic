@@ -4,13 +4,14 @@ import clsx from "clsx";
 import { Dropdown, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownItemToggler } from "../../../../_partials/dropdowns";
-import i18next from "i18next";
+
+import { useTranslation } from "react-i18next";
 import { getLanguageList } from "../../../../../app/services/language.service";
-import { FormattedMessage } from "react-intl";
 
 export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
    const [languageList, setLanguageList] = useState([]);
-   const currentLanguage = languageList.find(x => x.lang === i18next.language);
+   const { t, i18n } = useTranslation();
+   const currentLanguage = languageList.find(x => x.lang === i18n.language);
 
    useEffect(() => {
       const getList = async () => {
@@ -28,7 +29,7 @@ export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
    }, []);
 
    const handleChangeLanguage = newLng => {
-      i18next.changeLanguage(newLng);
+      i18n.changeLanguage(newLng);
       window.location.reload();
    };
 
@@ -43,8 +44,11 @@ export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
                <OverlayTrigger
                   placement={overlayPlacement}
                   overlay={
-                     <Tooltip id="language-panel-tooltip">
-                        <FormattedMessage id="SELECT.LANGUAGE" />
+                     <Tooltip
+                        id="language-panel-tooltip"
+                        style={{ fontFamily: "Vazir" }}
+                     >
+                        {t("messages.SELECT.LANGUAGE")}
                      </Tooltip>
                   }
                >

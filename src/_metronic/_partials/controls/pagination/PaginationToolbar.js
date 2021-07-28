@@ -6,31 +6,20 @@ import { useTranslation } from "react-i18next";
 import CustomSelect from "../../../../app/components/common/CustomSelect";
 import toFarsiNumber from "../../../../app/utils/toFarsiNumber";
 
-//
-import { FormattedMessage } from "react-intl";
-
 const CustomTotal = (from, to, size) => {
-   const { i18n } = useTranslation();
+   const { t, i18n } = useTranslation();
 
    const isLtrDir = i18n.dir() === "ltr";
 
    return (
       <div className="react-bootstrap-table-pagination-total mr-15">
-         {isLtrDir ? (
-            <FormattedMessage
-               id="USERS.SHOWING_ITEMS"
-               values={{ from, to, size }}
-            />
-         ) : (
-            <FormattedMessage
-               id="USERS.SHOWING_ITEMS"
-               values={{
-                  from: toFarsiNumber(from),
-                  to: toFarsiNumber(to),
-                  size: toFarsiNumber(size),
-               }}
-            />
-         )}
+         {isLtrDir
+            ? t("messages.USERS.SHOWING_ITEMS", { from, to, size })
+            : t("messages.USERS.SHOWING_ITEMS", {
+                 from: toFarsiNumber(from),
+                 to: toFarsiNumber(to),
+                 size: toFarsiNumber(size),
+              })}
       </div>
    );
 };
@@ -38,7 +27,7 @@ const CustomTotal = (from, to, size) => {
 export function PaginationToolbar(props) {
    const { isLoading, paginationProps } = props;
 
-   const { i18n } = useTranslation();
+   const { t, i18n } = useTranslation();
 
    const isLtrDir = i18n.dir() === "ltr";
 
@@ -66,9 +55,7 @@ export function PaginationToolbar(props) {
       <div className="d-flex align-items-center py-3">
          {isLoading && (
             <div className="d-flex align-items-center">
-               <div className="mr-2 text-muted">
-                  <FormattedMessage id={props.id} />
-               </div>
+               <div className="mr-2 text-muted">{t(props.id)}</div>
                <div className="spinner spinner-primary mr-10"></div>
             </div>
          )}
@@ -107,5 +94,5 @@ export function PaginationToolbar(props) {
 }
 
 PaginationToolbar.defaultProps = {
-   id: "DEFAULT.LOADING",
+   id: "messages.DEFAULT.LOADING",
 };

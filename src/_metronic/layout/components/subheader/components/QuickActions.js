@@ -7,9 +7,11 @@ import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../../_helpers";
 import { DropdownMenu1 } from "../../../../_partials/dropdowns";
 
-import { useIntl, FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 const QuickActionsDropdownToggle = forwardRef((props, ref) => {
+   const { t } = useTranslation();
+
    return (
       <a
          href="#"
@@ -25,24 +27,26 @@ const QuickActionsDropdownToggle = forwardRef((props, ref) => {
             <SVG src={toAbsoluteUrl("/media/svg/icons/Files/File.svg")} />
          </span>
          {` `}
-         <FormattedMessage id="NEW_REPORT" />
+         {t("messages.DEFAULT.NEW_REPORT")}
       </a>
    );
 });
 
 export function QuickActions() {
-   const isEnglish = useIntl().locale === "en";
+   const { t, i18n } = useTranslation();
+
+   const isLtrDir = i18n.dir() === "ltr";
 
    return (
       <>
          <OverlayTrigger
-            placement={isEnglish ? "left" : "right"}
+            placement={isLtrDir ? "left" : "right"}
             overlay={
                <Tooltip
                   id="quick-actions-tooltip"
                   style={{ fontFamily: "Vazir" }}
                >
-                  <FormattedMessage id="QUICK_ACTIONS" />
+                  {t("messages.DEFAULT.QUICK_ACTIONS")}
                </Tooltip>
             }
          >

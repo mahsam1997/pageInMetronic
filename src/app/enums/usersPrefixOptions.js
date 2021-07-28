@@ -1,34 +1,36 @@
-const statusPrefixOptions = (intl, formatMessage) => [
-   { value: "", label: formatMessage(intl, "DEFAULT.ALL") },
+import i18next from "i18next";
+
+const statusPrefixOptions = [
+   {
+      value: "",
+      label: i18next.t("messages.DEFAULT.ALL"),
+   },
    {
       value: "active",
-      label: formatMessage(intl, "USERS.COMMON.ACTIVE"),
+      label: i18next.t("messages.USERS.COMMON.ACTIVE"),
    },
    {
       value: "removed",
-      label: formatMessage(intl, "USERS.COMMON.REMOVED"),
+      label: i18next.t("messages.USERS.COMMON.REMOVED"),
    },
 ];
 
-//
-
-const rolePrefixOptions = (intl, formatMessage) => [
-   { value: "", label: formatMessage(intl, "DEFAULT.ALL") },
-   { value: "admin", label: formatMessage(intl, "USERS.COMMON.ADMIN") },
-   { value: "user", label: formatMessage(intl, "USERS.COMMON.USER") },
+const rolePrefixOptions = [
+   { value: "", label: i18next.t("messages.DEFAULT.ALL") },
+   { value: "admin", label: i18next.t("messages.USERS.COMMON.ADMIN") },
+   { value: "user", label: i18next.t("messages.USERS.COMMON.USER") },
 ];
 
-//
 const fieldsIds = {
-   fullName: "AUTH.INPUT.FULLNAME",
-   mobile: "DEFAULT.MOBILE",
-   email: "DEFAULT.EMAIL",
+   fullName: "messages.AUTH.INPUT.FULLNAME",
+   mobile: "messages.DEFAULT.MOBILE",
+   email: "messages.DEFAULT.EMAIL",
 };
 
-const searchByPrefixOptions = (intl, formatMessage) => [
-   { value: "fullName", label: formatMessage(intl, fieldsIds.fullName) },
-   { value: "email", label: formatMessage(intl, fieldsIds.email) },
-   { value: "mobile", label: formatMessage(intl, fieldsIds.mobile) },
+const searchByPrefixOptions = [
+   { value: "fullName", label: i18next.t(fieldsIds.fullName) },
+   { value: "email", label: i18next.t(fieldsIds.email) },
+   { value: "mobile", label: i18next.t(fieldsIds.mobile) },
 ];
 
 export {

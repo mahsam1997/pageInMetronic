@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../_metronic/_partials/controls";
-import { FormattedMessage } from "react-intl";
 import { deleteUser } from "../services/users.service";
 
+import { useTranslation } from "react-i18next";
 import CustomButton from "../components/common/CustomButton";
 
 function UserDeleteDialog({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
+
+   const { t } = useTranslation();
 
    // if !id we should close modal
    useEffect(() => {
@@ -36,29 +38,27 @@ function UserDeleteDialog({ id, show, onHide }) {
          {/*end::Loading*/}
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               <FormattedMessage id="USERS.DELETE_USER_SIMPLE.TITLE" />
+               {t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
             {!loading && (
-               <span>
-                  <FormattedMessage id="USERS.DELETE_USER_SIMPLE.DESCRIPTION" />
-               </span>
+               <span>{t("messages.USERS.DELETE_USER_SIMPLE.DESCRIPTION")}</span>
             )}
             {loading && (
                <span>
-                  <FormattedMessage id="USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION" />
+                  {t("messages.USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION")}
                </span>
             )}
          </Modal.Body>
          <Modal.Footer>
             <CustomButton
-               title="AUTH.GENERAL.CANCEL"
+               title="messages.AUTH.GENERAL.CANCEL"
                onClick={onHide}
                classNames="btn btn-light btn-elevate"
             />
             <CustomButton
-               title="DEFAULT.DELETE"
+               title="messages.DEFAULT.DELETE"
                onClick={deleteUserFn}
                classNames="btn btn-primary btn-elevate"
             />

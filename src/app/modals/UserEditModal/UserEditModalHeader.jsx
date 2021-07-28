@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../_metronic/_partials/controls";
-import { useIntl } from "react-intl";
 
-import formatMessage from "../../utils/formatMessage";
+import { useTranslation } from "react-i18next";
 
 function UserEditDialogHeader({ id, userForEdit, loading }) {
    const [title, setTitle] = useState("");
 
-   const intl = useIntl();
+   const { t } = useTranslation();
 
    // Title Form
    useEffect(() => {
-      let _title = id ? "" : formatMessage(intl, "USERS.NEW_USER");
+      let _title = id ? "" : t("messages.USERS.NEW_USER");
       if (userForEdit && id) {
-         _title = `${formatMessage(intl, "USERS.EDIT_USER")} '${
+         _title = `${t("messages.USERS.EDIT_USER")} '${
             userForEdit.profile.fullName
          }'`;
       }

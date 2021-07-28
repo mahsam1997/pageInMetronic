@@ -56,7 +56,7 @@ const detectionOptions = {
    // cookieOptions:{path:"/", sameSite:"strict"}
 };
 
-const getList = async () => {
+const initializingI18next = async () => {
    const response = await getLanguageList();
    if (response?.data?.success) {
       response.data.data.forEach((lang, i) => {
@@ -71,7 +71,7 @@ const getList = async () => {
          .use(initReactI18next)
          .init({
             fallbackLng,
-            debug: true,
+            debug: false, // debug mode for lifecycle logs
 
             backend: {
                backends: [LocalStorageBackend, HttpBackend],
@@ -96,7 +96,6 @@ const getList = async () => {
             },
          });
    }
-   return true;
 };
 
-export default getList;
+export default initializingI18next;
