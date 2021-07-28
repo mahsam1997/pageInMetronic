@@ -1,6 +1,6 @@
 import React from "react";
 import "../../index.scss";
 
-const Ltr = () => <React.Fragment></React.Fragment>;
+const LtrStyles = () => <React.Fragment></React.Fragment>;
 
-export default Ltr;
+export default LtrStyles;

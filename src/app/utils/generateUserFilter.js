@@ -1,4 +1,4 @@
-const generateCustomerFilter = filter => {
+const generateUserFilter = filter => {
    const role = filter.role ? filter.role : "";
    const status = filter.status ? filter.status : "";
    const filterText = filter[filter.searchKey] ? filter[filter.searchKey] : "";
@@ -16,4 +16,4 @@ const generateCustomerFilter = filter => {
    return `${getRoleQuery()}${getStatusQuery()}${getFilterTextQuery()}`;
 };
 
-export default generateCustomerFilter;
+export default generateUserFilter;

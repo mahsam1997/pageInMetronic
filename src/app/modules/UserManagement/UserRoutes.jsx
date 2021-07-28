@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import UsersLoadingDialog from "../../modals/UsersLoadingDialog";
-import UserEditDialog from "../../modals/UserEditModal/UserEditModal";
-import UserDeleteDialog from "../../modals/UserDeleteDialog";
-import UsersDeleteDialog from "../../modals/UsersDeleteDialog";
+import UsersLoadingModal from "../../modals/UsersLoadingModal";
+import UserEditModal from "../../modals/UserEditModal/UserEditModal";
+import UserDeleteModal from "../../modals/UserDeleteModal";
+import UsersDeleteModal from "../../modals/UsersDeleteModal";
 import { UsersUIProvider } from "../../context/UsersUIContext";
 import UsersCard from "../../components/UsersCard";
 
@@ -24,10 +24,10 @@ function UserRoutes({ history }) {
 
    return (
       <UsersUIProvider usersUIEvents={usersUIEvents}>
-         <UsersLoadingDialog />
+         <UsersLoadingModal />
          <Route path={routes.USER_EDIT}>
             {({ match }) => (
-               <UserEditDialog
+               <UserEditModal
                   show={match != null}
                   id={match && match.params.id}
                   onHide={() => {
@@ -38,7 +38,7 @@ function UserRoutes({ history }) {
          </Route>
          <Route path={routes.USER_DELETE}>
             {({ match }) => (
-               <UserDeleteDialog
+               <UserDeleteModal
                   show={match != null}
                   onHide={() => {
                      history.push(routes.USERS);
@@ -48,7 +48,7 @@ function UserRoutes({ history }) {
          </Route>
          <Route path={routes.USERS_DELETE}>
             {({ match }) => (
-               <UsersDeleteDialog
+               <UsersDeleteModal
                   show={match != null}
                   id={match && match.params.id}
                   onHide={() => {

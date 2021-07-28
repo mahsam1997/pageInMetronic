@@ -4,7 +4,7 @@ import { useUsersUIContext } from "../context/UsersUIContext";
 import { useTranslation } from "react-i18next";
 import CustomButton from "./common/CustomButton";
 
-function CustomersGrouping() {
+function UsersGrouping() {
    // Users UI Context
    const usersUIContext = useUsersUIContext();
    const usersUIProps = useMemo(() => {
@@ -46,4 +46,4 @@ function CustomersGrouping() {
    );
 }
 
-export default CustomersGrouping;
+export default UsersGrouping;

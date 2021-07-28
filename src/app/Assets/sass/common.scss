@@ -1,5 +1,5 @@
 body {
-   font-family: Vazir;
+   font-family: "Vazir", Helvetica, Arial, Verdana, Tahoma;
 }
 
 .rlt {
@@ -21,9 +21,6 @@ body {
    user-select: none;
 }
 
-.form-control.is-valid {
-   background-position: right calc(0.375em + 0.325rem) center;
-}
 .form-control.is-valid {
    background-position: right calc(0.375em + 0.325rem) center;
 }

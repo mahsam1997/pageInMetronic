@@ -4,7 +4,7 @@ import { LoadingDialog } from "../../_metronic/_partials/controls";
 import { useTranslation } from "react-i18next";
 import { useUsersUIContext } from "../context/UsersUIContext";
 
-function UsersLoadingDialog() {
+function UsersLoadingModal() {
    const { t } = useTranslation();
 
    // Users UI Context
@@ -23,4 +23,4 @@ function UsersLoadingDialog() {
    );
 }
 
-export default UsersLoadingDialog;
+export default UsersLoadingModal;

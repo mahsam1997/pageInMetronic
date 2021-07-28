@@ -13,7 +13,7 @@ import { AuthenticationProvider } from "./context/AuthenticationContext";
 import { isAuthenticate } from "./utils/authenticate";
 import AppDirection from "./components/AppDirection";
 import i18next from "i18next";
-import initI18next from "./utils/i18next";
+import initI18next from "./utils/initI18next";
 
 initI18next();
 
