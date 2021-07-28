@@ -97,8 +97,6 @@ function Registration(props) {
                   setFieldTouched,
                } = formik;
 
-               console.log(formik);
-
                return (
                   <Form
                      noValidate="noValidate"

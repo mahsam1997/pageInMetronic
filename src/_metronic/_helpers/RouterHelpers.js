@@ -1,5 +1,6 @@
 import * as utils from "./LocalStorageHelpers";
 import i18next from "i18next";
+import routes from "../../app/router/routes.json";
 
 const localStorageLastLocationKey = "metronic-lastLocation";
 
@@ -9,7 +10,7 @@ function acceptLocation(lastLocation) {
       lastLocation.pathname &&
       lastLocation.pathname !== "/" &&
       lastLocation.pathname.indexOf("auth") === -1 &&
-      lastLocation.pathname !== "/logout"
+      lastLocation.pathname !== routes.LOGOUT
    ) {
       return true;
    }

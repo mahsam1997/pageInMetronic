@@ -103,7 +103,7 @@ function UsersFilter({ listLoading }) {
                      </div>
                      <div className="col-lg-2 mb-4">
                         <small className="form-text text-muted mb-1">
-                           <b>{t("messages.USERS.COMMON.FILTER")}</b>
+                           <b>{t("messages.USERS.COMMON.FILTER")}</b>{" "}
                            {t("messages.USERS.COMMON.BY_ROLE")}
                         </small>
                         <CustomSelect
@@ -120,7 +120,7 @@ function UsersFilter({ listLoading }) {
                      <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
                            <b>{t("messages.USERS.COMMON.SEARCH")}</b>{" "}
-                           {t("messages.USERS.COMMON.BY")}
+                           {t("messages.USERS.COMMON.BY")}{" "}
                            {t(fieldsIds[values.searchBy])}
                         </small>
                         <CustomSelect
@@ -137,7 +137,7 @@ function UsersFilter({ listLoading }) {
                      <div className="col-lg-3 mb-4">
                         <small className="form-text text-muted mb-1">
                            <b>{t("messages.USERS.COMMON.SEARCH")}</b>{" "}
-                           {t("messages.USERS.COMMON.IN")}
+                           {t("messages.USERS.COMMON.IN")}{" "}
                            {t(fieldsIds[values.searchBy])}
                         </small>
                         <CustomDebounceInput
