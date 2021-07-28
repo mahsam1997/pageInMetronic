@@ -56,7 +56,7 @@ const detectionOptions = {
    // cookieOptions:{path:"/", sameSite:"strict"}
 };
 
-const initializingI18next = async () => {
+const initI18next = async () => {
    const response = await getLanguageList();
    if (response?.data?.success) {
       response.data.data.forEach((lang, i) => {
@@ -98,4 +98,4 @@ const initializingI18next = async () => {
    }
 };
 
-export default initializingI18next;
+export default initI18next;

@@ -16,7 +16,7 @@ const userForEditInitialValue = {
    },
 };
 
-function UserEditDialog({ id, show, onHide }) {
+function UserEditModal({ id, show, onHide }) {
    const [userForEdit, setUserForEdit] = useState(userForEditInitialValue);
    const [loading, setLoading] = useState(false);
 
@@ -88,4 +88,4 @@ function UserEditDialog({ id, show, onHide }) {
    );
 }
 
-export default UserEditDialog;
+export default UserEditModal;

@@ -3,5 +3,6 @@
    "LOGIN": "/api/users/login",
    "FORGET.PASSWORD": "/api/users/forget-password",
    "LANGUAGE": "/api/translations",
-   "USERS": "/api/users"
+   "USERS": "/api/users",
+   "PAGES": "/api/pages"
 }

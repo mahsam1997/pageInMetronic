@@ -1,46 +1,30 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useUsersUIContext } from "../context/UsersUIContext";
 import { ModalProgressBar } from "../../_metronic/_partials/controls";
+import { deleteUser } from "../services/users.service";
 
 import { useTranslation } from "react-i18next";
 import CustomButton from "../components/common/CustomButton";
 
-import { deleteUser } from "../services/users.service";
-
-function UsersDeleteDialog({ show, onHide }) {
+function UserDeleteModal({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
 
    const { t } = useTranslation();
 
-   // Users UI Context
-   const usersUIContext = useUsersUIContext();
-   const usersUIProps = useMemo(() => {
-      return {
-         ids: usersUIContext.ids,
-         setIds: usersUIContext.setIds,
-         queryParams: usersUIContext.queryParams,
-      };
-   }, [usersUIContext]);
-
-   // if customers weren't selected we should close modal
+   // if !id we should close modal
    useEffect(() => {
-      if (!usersUIProps.ids || usersUIProps.ids.length === 0) {
+      if (!id) {
          onHide();
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [usersUIProps.ids]);
+   }, [id]);
 
-   const deleteUsers = () => {
+   const deleteUserFn = async () => {
+      // server request for deleting customer by id
       setLoading(true);
-
-      // server request for deleting customer by selected ids
-      usersUIProps.ids.forEach(async id => {
-         await deleteUser(id);
-      });
+      const response = await deleteUser(id);
+      response?.data?.success && onHide();
       setLoading(false);
-      usersUIProps.setIds([]);
-      onHide();
    };
 
    return (
@@ -54,12 +38,12 @@ function UsersDeleteDialog({ show, onHide }) {
          {/*end::Loading*/}
          <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-lg">
-               {t("messages.USERS.DELETE_USERS_SIMPLE.TITLE")}
+               {t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
             {!loading && (
-               <span>{t("messages.USERS.DELETE_USER_MULTY.DESCRIPTION")}</span>
+               <span>{t("messages.USERS.DELETE_USER_SIMPLE.DESCRIPTION")}</span>
             )}
             {loading && (
                <span>
@@ -75,7 +59,7 @@ function UsersDeleteDialog({ show, onHide }) {
             />
             <CustomButton
                title="messages.DEFAULT.DELETE"
-               onClick={deleteUsers}
+               onClick={deleteUserFn}
                classNames="btn btn-primary btn-elevate"
             />
          </Modal.Footer>
@@ -83,4 +67,4 @@ function UsersDeleteDialog({ show, onHide }) {
    );
 }
 
-export default UsersDeleteDialog;
+export default UserDeleteModal;

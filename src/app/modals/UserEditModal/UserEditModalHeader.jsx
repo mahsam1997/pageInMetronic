@@ -4,7 +4,7 @@ import { ModalProgressBar } from "../../../_metronic/_partials/controls";
 
 import { useTranslation } from "react-i18next";
 
-function UserEditDialogHeader({ id, userForEdit, loading }) {
+function UserEditModalHeader({ id, userForEdit, loading }) {
    const [title, setTitle] = useState("");
 
    const { t } = useTranslation();
@@ -32,4 +32,4 @@ function UserEditDialogHeader({ id, userForEdit, loading }) {
    );
 }
 
-export default UserEditDialogHeader;
+export default UserEditModalHeader;
