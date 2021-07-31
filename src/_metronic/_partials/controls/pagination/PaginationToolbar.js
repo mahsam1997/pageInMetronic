@@ -47,7 +47,6 @@ export function PaginationToolbar(props) {
 
    const onSizeChange = value => {
       const newSize = value.value;
-      console.log(newSize);
       onSizePerPageChange(newSize);
    };
 
