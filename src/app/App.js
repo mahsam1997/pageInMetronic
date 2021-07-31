@@ -53,6 +53,7 @@ export default function App({ basename }) {
                            pauseOnFocusLoss
                            draggable
                            pauseOnHover
+                           bodyClassName="toastBody"
                         />
                      </AuthenticationProvider>
                   </>
