@@ -32,7 +32,7 @@ function UserEditModal({ id, show, onHide }) {
       // server call for getting User by id
       const receiveUser = async () => {
          const response = await getUser(id);
-         if (response.data.success) {
+         if (response?.data?.success) {
             setUserForEdit(response.data.data);
          }
       };
@@ -49,7 +49,7 @@ function UserEditModal({ id, show, onHide }) {
    }, [id]);
 
    // server request for saving user
-   const saveUser = async user => {
+   const saveUser = async (user, setFieldError) => {
       const newUser = {
          profile: {
             fullName: user.fullName,
@@ -66,8 +66,12 @@ function UserEditModal({ id, show, onHide }) {
          setLoading(true);
          const response = await editUser(id, newUser);
          setLoading(false);
-         if (response?.data.success) {
+         if (response?.data?.success) {
             onHide();
+         } else if (response?.errorMessage) {
+            response.response.data.errors.forEach(error =>
+               setFieldError(error.field, error.error)
+            );
          }
       }
    };

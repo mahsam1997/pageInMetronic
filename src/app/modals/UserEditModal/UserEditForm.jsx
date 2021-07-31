@@ -75,8 +75,8 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
             enableReinitialize={true}
             initialValues={initialValues}
             validationSchema={UserEditSchema(t)}
-            onSubmit={values => {
-               saveUser(values);
+            onSubmit={(values, { setFieldError }) => {
+               saveUser(values, setFieldError);
             }}
          >
             {formik => {
@@ -136,6 +136,9 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                                  </label>
                                  {values.countryCode && (
                                     <CustomSelect
+                                       placeholder={t(
+                                          "messages.DEFAULT.SUB_PHONE"
+                                       )}
                                        options={phonePrefixOptions(isLtrDir)}
                                        value={values.countryCode}
                                        onChange={value =>
