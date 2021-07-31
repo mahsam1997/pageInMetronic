@@ -11,13 +11,13 @@ import routes from "../../router/routes.json";
 
 function UserRoutes({ history }) {
    const usersUIEvents = {
-      openEditUserDialog: id => {
+      openEditUserModal: id => {
          history.push(`${routes.USERS}/${id}/edit`);
       },
-      openDeleteUserDialog: id => {
+      openDeleteUserModal: id => {
          history.push(`${routes.USERS}/${id}/delete`);
       },
-      openDeleteUsersDialog: () => {
+      openDeleteUsersModal: () => {
          history.push(routes.USERS_DELETE);
       },
    };
@@ -40,6 +40,7 @@ function UserRoutes({ history }) {
             {({ match }) => (
                <UserDeleteModal
                   show={match != null}
+                  id={match && match.params.id}
                   onHide={() => {
                      history.push(routes.USERS);
                   }}

@@ -24,6 +24,7 @@ function UserEditModal({ id, show, onHide }) {
    const usersUIProps = useMemo(() => {
       return {
          initUser: usersUIContext.initUser,
+         setIsModalClose: usersUIContext.setIsModalClose,
       };
    }, [usersUIContext]);
 
@@ -39,7 +40,12 @@ function UserEditModal({ id, show, onHide }) {
          receiveUser();
       }
 
-      return () => setUserForEdit(userForEditInitialValue);
+      return () => {
+         setUserForEdit(userForEditInitialValue);
+         usersUIProps.setIsModalClose(prevState => !prevState);
+      };
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [id]);
 
    // server request for saving user

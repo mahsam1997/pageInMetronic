@@ -126,10 +126,9 @@ function UsersFilter({ listLoading }) {
                         <CustomSelect
                            options={searchByPrefixOptions}
                            value={values.searchBy}
-                           onChange={value => {
-                              setFieldValue("searchBy", value.value);
-                              handleSubmit();
-                           }}
+                           onChange={value =>
+                              setFieldValue("searchBy", value.value)
+                           }
                            onBlur={() => setFieldTouched("searchBy", true)}
                            name="searchBy"
                         />

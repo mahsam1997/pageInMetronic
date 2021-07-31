@@ -11,7 +11,7 @@ function UsersGrouping() {
       return {
          ids: usersUIContext.ids,
          setIds: usersUIContext.setIds,
-         openDeleteUsersDialog: usersUIContext.openDeleteUsersDialog,
+         openDeleteUsersModal: usersUIContext.openDeleteUsersModal,
       };
    }, [usersUIContext]);
 
@@ -33,7 +33,7 @@ function UsersGrouping() {
                   <div>
                      <CustomButton
                         title="messages.DEFAULT.DELETE_ALL"
-                        onClick={usersUIProps.openDeleteUsersDialog}
+                        onClick={usersUIProps.openDeleteUsersModal}
                         classNames="btn btn-danger font-weight-bolder font-size-sm"
                      >
                         <i className="fa fa-trash"></i>

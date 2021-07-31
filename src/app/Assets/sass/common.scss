@@ -46,3 +46,17 @@ input[type="number"] {
    /*rtl:ignore*/
    direction: ltr;
 }
+
+@media only screen and (max-width: 800px) {
+   .pagination-footer {
+      display: block !important;
+
+      .select {
+         margin-top: 10px !important;
+      }
+   }
+
+   .sort-icon {
+      display: none !important;
+   }
+}

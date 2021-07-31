@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../_metronic/_partials/controls";
 import { deleteUser } from "../services/users.service";
 
 import { useTranslation } from "react-i18next";
+import { useUsersUIContext } from "../context/UsersUIContext";
 import CustomButton from "../components/common/CustomButton";
 
 function UserDeleteModal({ id, show, onHide }) {
@@ -11,11 +12,20 @@ function UserDeleteModal({ id, show, onHide }) {
 
    const { t } = useTranslation();
 
+   const usersUIContext = useUsersUIContext();
+   const usersUIProps = useMemo(() => {
+      return {
+         setIsModalClose: usersUIContext.setIsModalClose,
+      };
+   }, [usersUIContext]);
+
    // if !id we should close modal
    useEffect(() => {
       if (!id) {
          onHide();
       }
+
+      return () => usersUIProps.setIsModalClose(prevState => !prevState);
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [id]);
 
@@ -47,7 +57,7 @@ function UserDeleteModal({ id, show, onHide }) {
             )}
             {loading && (
                <span>
-                  {t("messages.USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION")}
+                  {t("messages.USERS.DELETE_USER_SIMPLE.WAIT_DESCRIPTION")}
                </span>
             )}
          </Modal.Body>

@@ -148,6 +148,12 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                                           setFieldTouched("countryCode", true)
                                        }
                                        name="countryCode"
+                                       customSingleValueStyles={{
+                                          direction: "ltr",
+                                       }}
+                                       customOptionStyles={{
+                                          direction: "ltr",
+                                       }}
                                     />
                                  )}
                               </div>
