@@ -34,7 +34,6 @@ const prepareFilter = (queryParams, values) => {
 
 const mobileRemoveFirstChar = value => {
    if (value[0] === "+" || value[0] === "0") {
-      console.log(value.slice(1));
       return value.slice(1);
    }
    return value;
@@ -126,10 +125,9 @@ function UsersFilter({ listLoading }) {
                         <CustomSelect
                            options={searchByPrefixOptions}
                            value={values.searchBy}
-                           onChange={value => {
-                              setFieldValue("searchBy", value.value);
-                              handleSubmit();
-                           }}
+                           onChange={value =>
+                              setFieldValue("searchBy", value.value)
+                           }
                            onBlur={() => setFieldTouched("searchBy", true)}
                            name="searchBy"
                         />

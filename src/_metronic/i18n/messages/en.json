@@ -118,5 +118,6 @@
    "USERS.ACTIONS": "Actions",
    "USERS.PLEASE_ENTER": "Please enter",
    "USERS.ENTERED_CORRECT": "valid input",
-   "USERS.SHOWING_ITEMS": "Showing {from} to {to} of {size} Results"
+   "USERS.SHOWING_ITEMS": "Showing {{from}} to {{to}} of {{size}} Results",
+   "USERS.EDIT_SUCCESS_MESSAGE": "Edit user success."
 }

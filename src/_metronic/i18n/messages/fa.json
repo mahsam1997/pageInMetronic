@@ -111,6 +111,7 @@
    "USERS.PLEASE_ENTER": "را لطفا وارد کنید",
    "USERS.ENTERED_CORRECT": "درست وارد شده است",
    "USERS.SHOWING_ITEMS": "نمایش موارد {{from}} تا {{to}} از {{size}} مورد",
+   "USERS.EDIT_SUCCESS_MESSAGE": "ویرایش کاربر موفقیت آمیز بود.",
 
    "MENU.NEW": "جدید",
    "MENU.ACTIONS": "اقدامات",

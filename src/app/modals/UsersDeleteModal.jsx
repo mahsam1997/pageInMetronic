@@ -20,6 +20,7 @@ function UsersDeleteModal({ show, onHide }) {
          ids: usersUIContext.ids,
          setIds: usersUIContext.setIds,
          queryParams: usersUIContext.queryParams,
+         setIsModalClose: usersUIContext.setIsModalClose,
       };
    }, [usersUIContext]);
 
@@ -31,15 +32,22 @@ function UsersDeleteModal({ show, onHide }) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [usersUIProps.ids]);
 
+   useEffect(() => {
+      return () => usersUIProps.setIsModalClose(prevState => !prevState);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
    const deleteUsers = () => {
       setLoading(true);
 
       // server request for deleting customer by selected ids
-      usersUIProps.ids.forEach(async id => {
+      usersUIProps.ids.forEach(async (id, index, array) => {
          await deleteUser(id);
+         if (index === array.length - 1) {
+            setLoading(false);
+         }
       });
-      setLoading(false);
-      usersUIProps.setIds([]);
+
       onHide();
    };
 

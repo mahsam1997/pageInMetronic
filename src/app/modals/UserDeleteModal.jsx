@@ -1,21 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../_metronic/_partials/controls";
 import { deleteUser } from "../services/users.service";
 
 import { useTranslation } from "react-i18next";
+import { useUsersUIContext } from "../context/UsersUIContext";
 import CustomButton from "../components/common/CustomButton";
 
 function UserDeleteModal({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
+   const [error, setError] = useState("");
 
    const { t } = useTranslation();
+
+   const usersUIContext = useUsersUIContext();
+   const usersUIProps = useMemo(() => {
+      return {
+         setIsModalClose: usersUIContext.setIsModalClose,
+      };
+   }, [usersUIContext]);
 
    // if !id we should close modal
    useEffect(() => {
       if (!id) {
          onHide();
       }
+
+      return () => usersUIProps.setIsModalClose(prevState => !prevState);
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [id]);
 
@@ -23,7 +34,12 @@ function UserDeleteModal({ id, show, onHide }) {
       // server request for deleting customer by id
       setLoading(true);
       const response = await deleteUser(id);
-      response?.data?.success && onHide();
+      if (response?.data?.success) onHide();
+      else if (response?.errorMessage) {
+         response.response.data.errors.forEach(errorMsg =>
+            setError(errorMsg.error)
+         );
+      }
       setLoading(false);
    };
 
@@ -42,14 +58,15 @@ function UserDeleteModal({ id, show, onHide }) {
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
-            {!loading && (
+            {!loading && !error && (
                <span>{t("messages.USERS.DELETE_USER_SIMPLE.DESCRIPTION")}</span>
             )}
             {loading && (
                <span>
-                  {t("messages.USERS.DELETE_USER_MULTY.WAIT_DESCRIPTION")}
+                  {t("messages.USERS.DELETE_USER_SIMPLE.WAIT_DESCRIPTION")}
                </span>
             )}
+            {error && <span>{error}</span>}
          </Modal.Body>
          <Modal.Footer>
             <CustomButton

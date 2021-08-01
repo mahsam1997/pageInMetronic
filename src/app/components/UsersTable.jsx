@@ -33,8 +33,6 @@ export function UsersTable() {
 
    const { t, i18n } = useTranslation();
 
-   console.log("direction: ", i18n.dir());
-
    const isLtrDir = i18n.dir() === "ltr";
 
    const subHeader = useSubheader();
@@ -48,8 +46,10 @@ export function UsersTable() {
          setIds: usersUIContext.setIds,
          queryParams: usersUIContext.queryParams,
          setQueryParams: usersUIContext.setQueryParams,
-         openEditUserDialog: usersUIContext.openEditUserDialog,
-         openDeleteUserDialog: usersUIContext.openDeleteUserDialog,
+         openEditUserModal: usersUIContext.openEditUserModal,
+         openDeleteUserModal: usersUIContext.openDeleteUserModal,
+         isModalClose: usersUIContext.isModalClose,
+         setIsModalLoading: usersUIContext.setIsModalLoading,
       };
    }, [usersUIContext]);
 
@@ -85,9 +85,6 @@ export function UsersTable() {
          sort: true,
          sortCaret: sortCaret,
          headerSortingClasses,
-         style: {
-            direction: "ltr",
-         },
       },
       {
          dataField: "role",
@@ -110,10 +107,11 @@ export function UsersTable() {
       {
          dataField: "action",
          text: t("messages.USERS.ACTIONS"),
-         formatter: ActionsColumnFormatter,
+         formatter: (...args) =>
+            ActionsColumnFormatter(entities.users, ...args),
          formatExtraData: {
-            openEditUserDialog: usersUIProps.openEditUserDialog,
-            openDeleteUserDialog: usersUIProps.openDeleteUserDialog,
+            openEditUserModal: usersUIProps.openEditUserModal,
+            openDeleteUserModal: usersUIProps.openDeleteUserModal,
          },
          classes: "text-right pr-0",
          headerClasses: "text-right pr-3",
@@ -141,6 +139,7 @@ export function UsersTable() {
    useEffect(() => {
       const getUsersFn = async () => {
          setLoading(true);
+         usersUIProps.setIsModalLoading(true);
          const users = await getUsers(
             usersUIProps.queryParams.pageSize,
             usersUIProps.queryParams.pageNumber,
@@ -155,9 +154,12 @@ export function UsersTable() {
             });
          }
          setLoading(false);
+         usersUIProps.setIsModalLoading(false);
       };
       getUsersFn();
-   }, [usersUIProps]);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [usersUIProps.queryParams, usersUIProps.isModalClose]);
 
    return (
       <>

@@ -35,7 +35,11 @@ export function LanguageSelectorDropdown({ overlayPlacement, alignRight }) {
 
    return (
       languageList.length > 0 && (
-         <Dropdown drop="up" alignRight={alignRight}>
+         <Dropdown
+            drop="up"
+            alignRight={alignRight}
+            style={{ maxWidth: "fit-content" }}
+         >
             <Dropdown.Toggle
                as={DropdownItemToggler}
                id="dropdown-toggle-my-cart"

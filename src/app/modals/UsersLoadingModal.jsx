@@ -8,16 +8,16 @@ function UsersLoadingModal() {
    const { t } = useTranslation();
 
    // Users UI Context
-   const customersUIContext = useUsersUIContext();
-   const customersUIProps = useMemo(() => {
+   const usersUIContext = useUsersUIContext();
+   const usersUIProps = useMemo(() => {
       return {
-         isLoading: customersUIContext.isLoading,
+         isLoading: usersUIContext.isModalLoading,
       };
-   }, [customersUIContext]);
+   }, [usersUIContext]);
 
    return (
       <LoadingDialog
-         isLoading={customersUIProps.isLoading}
+         isLoading={usersUIProps.isLoading}
          text={t("messages.DEFAULT.LOADING")}
       />
    );

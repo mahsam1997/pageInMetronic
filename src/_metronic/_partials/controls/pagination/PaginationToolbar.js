@@ -47,12 +47,11 @@ export function PaginationToolbar(props) {
 
    const onSizeChange = value => {
       const newSize = value.value;
-      console.log(newSize);
       onSizePerPageChange(newSize);
    };
 
    return (
-      <div className="d-flex align-items-center py-3">
+      <div className="d-flex align-items-center py-3 pagination-footer">
          {isLoading && (
             <div className="d-flex align-items-center">
                <div className="mr-2 text-muted">{t(props.id)}</div>
@@ -65,30 +64,32 @@ export function PaginationToolbar(props) {
             paginationTotalRenderer={CustomTotal}
          />
 
-         <CustomSelect
-            isDisabled={totalSize === 0}
-            options={sizePerPageList}
-            getOptionLabel={option =>
-               isLtrDir ? option.text : toFarsiNumber(option.text)
-            }
-            customStyles={{
-               width: "80px",
-               padding: 0,
-               top: "auto",
-               bottom: "100%",
-               margin: "0",
-            }}
-            value={{
-               text: "" + sizePerPage,
-               value: sizePerPage,
-            }}
-            defaultValue={{
-               text: "" + sizePerPage,
-               value: sizePerPage,
-            }}
-            menuPlacement="top"
-            onChange={onSizeChange}
-         />
+         <div className="select">
+            <CustomSelect
+               isDisabled={totalSize === 0}
+               options={sizePerPageList}
+               getOptionLabel={option =>
+                  isLtrDir ? option.text : toFarsiNumber(option.text)
+               }
+               customStyles={{
+                  width: "80px",
+                  padding: 0,
+                  top: "auto",
+                  bottom: "100%",
+                  margin: "0",
+               }}
+               value={{
+                  text: "" + sizePerPage,
+                  value: sizePerPage,
+               }}
+               defaultValue={{
+                  text: "" + sizePerPage,
+                  value: sizePerPage,
+               }}
+               menuPlacement="top"
+               onChange={onSizeChange}
+            />
+         </div>
       </div>
    );
 }
