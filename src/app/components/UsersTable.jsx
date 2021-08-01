@@ -107,7 +107,8 @@ export function UsersTable() {
       {
          dataField: "action",
          text: t("messages.USERS.ACTIONS"),
-         formatter: ActionsColumnFormatter,
+         formatter: (...args) =>
+            ActionsColumnFormatter(entities.users, ...args),
          formatExtraData: {
             openEditUserModal: usersUIProps.openEditUserModal,
             openDeleteUserModal: usersUIProps.openDeleteUserModal,
