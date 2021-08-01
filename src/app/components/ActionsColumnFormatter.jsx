@@ -8,11 +8,13 @@ import { toAbsoluteUrl } from "../../_metronic/_helpers";
 import i18next from "i18next";
 
 function ActionsColumnFormatter(
+   users,
    cellContent,
    row,
    rowIndex,
    { openEditUserModal, openDeleteUserModal }
 ) {
+   const isRemoved = users[rowIndex].status === "removed";
    return (
       <>
          <a
@@ -32,7 +34,8 @@ function ActionsColumnFormatter(
 
          <a
             title={i18next.t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
-            className="btn btn-icon btn-light btn-hover-danger btn-sm"
+            className={`btn btn-icon btn-light btn-hover-danger btn-sm ${isRemoved &&
+               "disabled"}`}
             onClick={() => openDeleteUserModal(row["_id"])}
          >
             <span className="svg-icon svg-icon-md svg-icon-danger">

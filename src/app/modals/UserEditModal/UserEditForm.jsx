@@ -12,9 +12,11 @@ import { useTranslation } from "react-i18next";
 import CustomButton from "../../components/common/CustomButton";
 import CustomSelect from "../../components/common/CustomSelect";
 import phonePrefixOptions from "../../enums/phonePrefixOptions";
+import toFarsiNumber from "../../utils/toFarsiNumber";
+import toEnglishNumber from "../../utils/toEnglishNumber";
 
 // Validation schema
-const UserEditSchema = t =>
+const UserEditSchema = (t, isLtrDir) =>
    Yup.object().shape({
       fullName: Yup.string()
          .min(
@@ -53,6 +55,12 @@ const UserEditSchema = t =>
             })
          )
          .required(t("errors.REQUIRED")),
+      // .test(value => {
+      //    if (!isLtrDir) {
+      //       console.log("tid  : ", value);
+      //       return 123456
+      //    }
+      // }),
 
       countryCode: Yup.string().required(t("errors.REQUIRED")),
    });
@@ -74,7 +82,7 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
          <Formik
             enableReinitialize={true}
             initialValues={initialValues}
-            validationSchema={UserEditSchema(t)}
+            validationSchema={UserEditSchema(t, isLtrDir)}
             onSubmit={(values, { setFieldError }) => {
                saveUser(values, setFieldError);
             }}
@@ -119,47 +127,107 @@ function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                               </div>
                            </div>
                            <div className="form-group row">
+                              {/* Sub Mobile */}
+                              {isLtrDir && (
+                                 <div className="col-lg-4">
+                                    <label>
+                                       {t("messages.DEFAULT.SUB_PHONE")}
+                                    </label>
+                                    {values.countryCode && (
+                                       <CustomSelect
+                                          placeholder={t(
+                                             "messages.DEFAULT.SUB_PHONE"
+                                          )}
+                                          options={phonePrefixOptions(isLtrDir)}
+                                          value={values.countryCode}
+                                          onChange={value =>
+                                             setFieldValue(
+                                                "countryCode",
+                                                value.value
+                                             )
+                                          }
+                                          onBlur={() =>
+                                             setFieldTouched(
+                                                "countryCode",
+                                                true
+                                             )
+                                          }
+                                          name="countryCode"
+                                          customSingleValueStyles={{
+                                             direction: "ltr",
+                                          }}
+                                          customOptionStyles={{
+                                             direction: "ltr",
+                                          }}
+                                       />
+                                    )}
+                                 </div>
+                              )}
                               {/* Mobile */}
                               <div className="col-lg-4">
                                  <Field
-                                    type="number"
+                                    type={isLtrDir ? "number" : "text"}
                                     name="mobile"
                                     component={Input}
                                     placeholder={t("messages.DEFAULT.MOBILE")}
                                     label={t("messages.DEFAULT.MOBILE")}
+                                    value={
+                                       isLtrDir
+                                          ? values.mobile
+                                          : toFarsiNumber(values.mobile)
+                                    }
+                                    onChange={e => {
+                                       const mobileEn = toEnglishNumber(
+                                          e.target.value
+                                       );
+                                       if (
+                                          Number(mobileEn) ||
+                                          mobileEn === ""
+                                       ) {
+                                          setFieldValue(
+                                             "mobile",
+                                             e.target.value
+                                          );
+                                       }
+                                    }}
                                  />
                               </div>
                               {/* Sub Mobile */}
-                              <div className="col-lg-4 ">
-                                 <label>
-                                    {t("messages.DEFAULT.SUB_PHONE")}
-                                 </label>
-                                 {values.countryCode && (
-                                    <CustomSelect
-                                       placeholder={t(
-                                          "messages.DEFAULT.SUB_PHONE"
-                                       )}
-                                       options={phonePrefixOptions(isLtrDir)}
-                                       value={values.countryCode}
-                                       onChange={value =>
-                                          setFieldValue(
-                                             "countryCode",
-                                             value.value
-                                          )
-                                       }
-                                       onBlur={() =>
-                                          setFieldTouched("countryCode", true)
-                                       }
-                                       name="countryCode"
-                                       customSingleValueStyles={{
-                                          direction: "ltr",
-                                       }}
-                                       customOptionStyles={{
-                                          direction: "ltr",
-                                       }}
-                                    />
-                                 )}
-                              </div>
+                              {!isLtrDir && (
+                                 <div className="col-lg-4">
+                                    <label>
+                                       {t("messages.DEFAULT.SUB_PHONE")}
+                                    </label>
+                                    {values.countryCode && (
+                                       <CustomSelect
+                                          placeholder={t(
+                                             "messages.DEFAULT.SUB_PHONE"
+                                          )}
+                                          options={phonePrefixOptions(isLtrDir)}
+                                          value={values.countryCode}
+                                          onChange={value =>
+                                             setFieldValue(
+                                                "countryCode",
+                                                value.value
+                                             )
+                                          }
+                                          onBlur={() =>
+                                             setFieldTouched(
+                                                "countryCode",
+                                                true
+                                             )
+                                          }
+                                          name="countryCode"
+                                          customSingleValueStyles={{
+                                             direction: "ltr",
+                                          }}
+                                          customOptionStyles={{
+                                             direction: "ltr",
+                                          }}
+                                       />
+                                    )}
+                                 </div>
+                              )}
                            </div>
                         </Form>
                      </Modal.Body>
