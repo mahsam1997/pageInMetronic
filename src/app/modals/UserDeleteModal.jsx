@@ -9,6 +9,7 @@ import CustomButton from "../components/common/CustomButton";
 
 function UserDeleteModal({ id, show, onHide }) {
    const [loading, setLoading] = useState(false);
+   const [error, setError] = useState("");
 
    const { t } = useTranslation();
 
@@ -33,7 +34,12 @@ function UserDeleteModal({ id, show, onHide }) {
       // server request for deleting customer by id
       setLoading(true);
       const response = await deleteUser(id);
-      response?.data?.success && onHide();
+      if (response?.data?.success) onHide();
+      else if (response?.errorMessage) {
+         response.response.data.errors.forEach(errorMsg =>
+            setError(errorMsg.error)
+         );
+      }
       setLoading(false);
    };
 
@@ -52,7 +58,7 @@ function UserDeleteModal({ id, show, onHide }) {
             </Modal.Title>
          </Modal.Header>
          <Modal.Body>
-            {!loading && (
+            {!loading && !error && (
                <span>{t("messages.USERS.DELETE_USER_SIMPLE.DESCRIPTION")}</span>
             )}
             {loading && (
@@ -60,6 +66,7 @@ function UserDeleteModal({ id, show, onHide }) {
                   {t("messages.USERS.DELETE_USER_SIMPLE.WAIT_DESCRIPTION")}
                </span>
             )}
+            {error && <span>{error}</span>}
          </Modal.Body>
          <Modal.Footer>
             <CustomButton

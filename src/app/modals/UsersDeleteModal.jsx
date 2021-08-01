@@ -29,11 +29,14 @@ function UsersDeleteModal({ show, onHide }) {
       if (!usersUIProps.ids || usersUIProps.ids.length === 0) {
          onHide();
       }
-
-      return () => usersUIProps.setIsModalClose(prevState => !prevState);
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [usersUIProps.ids]);
 
+   useEffect(() => {
+      return () => usersUIProps.setIsModalClose(prevState => !prevState);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
    const deleteUsers = () => {
       setLoading(true);
 
@@ -44,7 +47,7 @@ function UsersDeleteModal({ show, onHide }) {
             setLoading(false);
          }
       });
-      usersUIProps.setIds([]);
+
       onHide();
    };
 

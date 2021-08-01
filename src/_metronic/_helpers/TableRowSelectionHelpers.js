@@ -46,21 +46,25 @@ export function getSelectRow(props) {
       selectionHeaderRenderer: () => {
          const isSelected =
             entities && entities.length > 0 && entities.length === ids.length;
-         const props = { isSelected, entities, setIds };
+         const groupingAllProps = { isSelected, entities, setIds };
          return (
             <SelectionCheckbox
                isSelected={isSelected}
-               onChange={() => groupingAllOnSelect(props)}
+               onChange={() => groupingAllOnSelect(groupingAllProps)}
             />
          );
       },
       selectionRenderer: ({ rowIndex }) => {
          const isSelected = ids.some(el => el === entities[rowIndex]._id);
-         const props = { ids, setIds, customerId: entities[rowIndex]._id };
+         const groupingItemProps = {
+            ids,
+            setIds,
+            customerId: entities[rowIndex]._id,
+         };
          return (
             <SelectionCheckbox
                isSelected={isSelected}
-               onChange={() => groupingItemOnSelect(props)}
+               onChange={() => groupingItemOnSelect(groupingItemProps)}
             />
          );
       },

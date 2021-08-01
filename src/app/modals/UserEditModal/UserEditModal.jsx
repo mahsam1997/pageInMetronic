@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Modal } from "react-bootstrap";
-
+import showToast from "../../utils/showToast";
+import { useTranslation } from "react-i18next";
 import UserEditDialogHeader from "./UserEditModalHeader";
 import UserEditForm from "./UserEditForm";
 import { useUsersUIContext } from "../../context/UsersUIContext";
@@ -19,6 +20,7 @@ const userForEditInitialValue = {
 function UserEditModal({ id, show, onHide }) {
    const [userForEdit, setUserForEdit] = useState(userForEditInitialValue);
    const [loading, setLoading] = useState(false);
+   const { t } = useTranslation();
 
    const usersUIContext = useUsersUIContext();
    const usersUIProps = useMemo(() => {
@@ -32,7 +34,7 @@ function UserEditModal({ id, show, onHide }) {
       // server call for getting User by id
       const receiveUser = async () => {
          const response = await getUser(id);
-         if (response.data.success) {
+         if (response?.data?.success) {
             setUserForEdit(response.data.data);
          }
       };
@@ -49,7 +51,7 @@ function UserEditModal({ id, show, onHide }) {
    }, [id]);
 
    // server request for saving user
-   const saveUser = async user => {
+   const saveUser = async (user, setFieldError) => {
       const newUser = {
          profile: {
             fullName: user.fullName,
@@ -66,8 +68,15 @@ function UserEditModal({ id, show, onHide }) {
          setLoading(true);
          const response = await editUser(id, newUser);
          setLoading(false);
-         if (response?.data.success) {
+         if (response?.data?.success) {
             onHide();
+            showToast({
+               text: t("messages.USERS.EDIT_SUCCESS_MESSAGE"),
+            });
+         } else if (response?.errorMessage) {
+            response.response.data.errors.forEach(error =>
+               setFieldError(error.field, error.error)
+            );
          }
       }
    };

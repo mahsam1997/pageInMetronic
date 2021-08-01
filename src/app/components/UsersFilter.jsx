@@ -34,7 +34,6 @@ const prepareFilter = (queryParams, values) => {
 
 const mobileRemoveFirstChar = value => {
    if (value[0] === "+" || value[0] === "0") {
-      console.log(value.slice(1));
       return value.slice(1);
    }
    return value;
