@@ -1,83 +1,79 @@
 import * as Yup from "yup";
 
-const registerSchema = formatMessage => {
+const registerSchema = t => {
    return Yup.object().shape({
       fullName: Yup.string()
          .min(
             3,
-            formatMessage("MIN_X_CHARACTERS", {
+            t("errors.MIN_X_CHARACTERS", {
                x: 3,
-               noun: formatMessage("AUTH.INPUT.FULLNAME"),
+               noun: t("messages.AUTH.INPUT.FULLNAME"),
             })
          )
          .max(
             50,
-            formatMessage("MAX_X_CHARACTERS", {
+            t("errors.MAX_X_CHARACTERS", {
                x: 50,
-               noun: formatMessage("AUTH.INPUT.FULLNAME"),
+               noun: t("messages.AUTH.INPUT.FULLNAME"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(t("errors.REQUIRED")),
 
       phoneNumber: Yup.string()
          .min(
-            3,
-            formatMessage("MIN_X_CHARACTERS", {
-               x: 3,
-               noun: formatMessage("AUTH.INPUT.PHONE"),
+            10,
+            t("errors.EXACT_X_CHARACTERS", {
+               x: 10,
+               noun: t("messages.AUTH.INPUT.PHONE"),
             })
          )
          .max(
-            50,
-            formatMessage("MAX_X_CHARACTERS", {
-               x: 50,
-               noun: formatMessage("AUTH.INPUT.PHONE"),
+            10,
+            t("errors.EXACT_X_CHARACTERS", {
+               x: 10,
+               noun: t("messages.AUTH.INPUT.PHONE"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(t("errors.REQUIRED")),
 
-      subPhoneNumber: Yup.number().required(
-         formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")
-      ),
+      countryCode: Yup.string().required(t("errors.REQUIRED")),
 
       email: Yup.string()
-         .email(formatMessage("AUTH.VALIDATION.EMAIL"))
+         .email(t("errors.AUTH.VALIDATION.EMAIL"))
          .min(
             3,
-            formatMessage("MIN_X_CHARACTERS", {
+            t("errors.MIN_X_CHARACTERS", {
                x: 3,
-               noun: formatMessage("AUTH.INPUT.EMAIL"),
+               noun: t("messages.AUTH.INPUT.EMAIL"),
             })
          )
          .max(
             50,
-            formatMessage("MAX_X_CHARACTERS", {
+            t("errors.MAX_X_CHARACTERS", {
                x: 50,
-               noun: formatMessage("AUTH.INPUT.EMAIL"),
+               noun: t("messages.AUTH.INPUT.EMAIL"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(t("errors.REQUIRED")),
 
       password: Yup.string()
          .min(
-            3,
-            formatMessage("MIN_X_CHARACTERS", {
-               x: 3,
-               noun: formatMessage("AUTH.INPUT.PASSWORD"),
+            6,
+            t("errors.MIN_X_CHARACTERS", {
+               x: 6,
+               noun: t("messages.AUTH.INPUT.PASSWORD"),
             })
          )
          .max(
             50,
-            formatMessage("MAX_X_CHARACTERS", {
+            t("errors.MAX_X_CHARACTERS", {
                x: 50,
-               noun: formatMessage("AUTH.INPUT.PASSWORD"),
+               noun: t("messages.AUTH.INPUT.PASSWORD"),
             })
          )
-         .required(formatMessage("AUTH.VALIDATION.REQUIRED_FIELD")),
+         .required(t("errors.REQUIRED")),
 
-      acceptTerms: Yup.bool().required(
-         formatMessage("AUTH.VALIDATION.AGREEMENT_REQUIRED")
-      ),
+      acceptTerms: Yup.bool().required(t("errors.REQUIRED")),
    });
 };
 

@@ -1,5 +1,8 @@
 import axios from "axios";
+import i18next from "i18next";
+
 import errorHandler from "../utils/errorHandler";
+import storageHelper from "../utils/storageHelper";
 
 const instance = axios.create();
 const instanceWithAuthorization = axios.create();
@@ -10,10 +13,19 @@ export const setConfig = () => {
 };
 
 export const addAuthorization = () => {
-   const token = localStorage.getItem("token");
+   const token = storageHelper.getItem("token");
+
    if (token)
       instanceWithAuthorization.defaults.headers.common["Authorization"] =
          "Bearer " + token;
+};
+
+export const addLanguage = () => {
+   const language = i18next.language;
+   instance.defaults.headers.common["Accept-Language"] = language;
+   instanceWithAuthorization.defaults.headers.common[
+      "Accept-Language"
+   ] = language;
 };
 
 export const axiosSetup = axiosInstance => {
@@ -34,13 +46,16 @@ export const axiosSetup = axiosInstance => {
    );
 };
 
+i18next.on("initialized", () => {
+   addLanguage();
+});
 setConfig();
 addAuthorization();
 axiosSetup(instance);
 axiosSetup(instanceWithAuthorization);
 
 const defaultAxios = {
-   // addAuthorization,
+   addAuthorization,
    axiosSetup,
    instance,
    instanceWithAuthorization,

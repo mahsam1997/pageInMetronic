@@ -3,13 +3,11 @@
       margin-bottom: 50px;
    }
 
-   input[type="number"]{
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button{
-         -webkit-appearance: none;
-         margin: 0;
+   .mobile-input {
+      direction: ltr !important;
+
+      input {
+         direction: ltr !important;
       }
-      -moz-appearance: none;
-      appearance: none;
    }
 }

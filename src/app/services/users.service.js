@@ -1,14 +1,14 @@
 import http from "./http.service";
 
-import generateCustomerFilter from "../utils/generateCustomerFilter";
+import generateUserFilter from "../utils/generateUserFilter";
 
 import urls from "./urls.json";
 
-const getUsers = (limit, pageNumber, filter) =>
+const getUsers = (limit, pageNumber, filter, sortOrder, sortField) =>
    http.get(
-      `${urls.USERS}?limit=${limit}&page=${pageNumber}${generateCustomerFilter(
+      `${urls.USERS}?limit=${limit}&page=${pageNumber}${generateUserFilter(
          filter
-      )}`
+      )}&sort[${sortField}]=${sortOrder === "asc" ? 1 : -1}`
    );
 
 const getUser = id => http.get(`${urls.USERS}/${id}`);

@@ -2,7 +2,9 @@ import React from "react";
 
 import CustomSelect from "./common/CustomSelect";
 
-const PhoneSelect = ({ options, value }) => {
+import colors from "../Assets/sass/colors.scss";
+
+const PhoneSelect = ({ options, value, ...props }) => {
    return (
       <CustomSelect
          options={options}
@@ -12,9 +14,15 @@ const PhoneSelect = ({ options, value }) => {
             padding: "7px 0",
             borderRadius: "12px",
             border: "none",
-            marginRight: "10px",
-            marginLeft: "10px",
+            color: colors.gray,
          }}
+         customOptionStyles={{
+            color: colors.gray,
+         }}
+         customSingleValueStyles={{
+            color: colors.gray,
+         }}
+         {...props}
       />
    );
 };

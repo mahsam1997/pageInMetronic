@@ -1,24 +1,24 @@
 import React, { useState, useContext } from "react";
 import { Form, Formik, ErrorMessage, Field } from "formik";
-import { FormattedMessage, useIntl } from "react-intl";
 
 import { Checkbox } from "../../../../../_metronic/_partials/controls/forms/Checkbox";
 // components
 import PhoneSelect from "../../../../components/PhoneSelect";
 import TextError from "../../../../components/common/TextError";
+import { LanguageSelectorDropdown } from "../../../../../_metronic/layout/components/extras/dropdowns/LanguageSelectorDropdown";
+
 import CustomButton from "../../../../components/common/CustomButton";
 // hooks
-import useFormatMessage from "../../../../hooks/useFormatMessage";
+import { useTranslation } from "react-i18next";
 // context
 import { AuthenticationContext } from "../../../../context/AuthenticationContext";
 // service
 import { register } from "../../../../services/auth.service";
 // utils
 import { setAuthenticate } from "../../../../utils/authenticate";
-import formatMessage from "../../../../utils/formatMessage";
 import getInputClasses from "../../../../utils/getInputClasses";
 
-import schema from "./registerSchema";
+import registerSchema from "./registerSchema";
 import phonePrefixOptions from "../../../../enums/phonePrefixOptions";
 
 import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
@@ -26,7 +26,7 @@ import googleLogo from "../../../../Assets/images/google-logo-removebg.png";
 const initialValues = {
    fullName: "",
    phoneNumber: "",
-   subPhoneNumber: "+98",
+   countryCode: "+98",
    email: "",
    password: "",
    acceptTerms: false,
@@ -36,31 +36,33 @@ function Registration(props) {
    const [showPassword, setShowPassword] = useState(false);
 
    const { setIsAuth } = useContext(AuthenticationContext);
-   const intl = useIntl();
+   const { t, i18n } = useTranslation();
+   const isLtrDirection = i18n.dir() === "ltr";
+   const placement = isLtrDirection ? "right" : "left";
 
-   const registrationSchema = schema(useFormatMessage);
-
-   const onSubmit = async ({
-      email,
-      password,
-      subPhoneNumber,
-      phoneNumber,
-      fullName,
-   }) => {
+   const onSubmit = async (
+      { email, password, countryCode, phoneNumber, fullName },
+      { setFieldError }
+   ) => {
       const newUser = {
          email,
          password,
-         mobile: `${subPhoneNumber}${phoneNumber}`,
+         countryCode,
+         mobile: phoneNumber + "",
          profile: {
             fullName,
          },
       };
-      console.log(newUser);
-      const { data } = await register(newUser);
-      if (data?.success) {
-         const { id, refresh, role, token } = data.data;
+
+      const response = await register(newUser);
+      if (response?.data?.success) {
+         const { id, refresh, role, token } = response.data.data;
          setAuthenticate(id, refresh, role, token);
          setIsAuth(true);
+      } else if (response?.errorMessage) {
+         response.response.data.errors.forEach(error =>
+            setFieldError(error.field, error.error)
+         );
       }
    };
 
@@ -70,41 +72,44 @@ function Registration(props) {
          style={{ display: "block" }}
       >
          <div className=" mb-5 mb-lg-10">
-            <h3 className="font-size-h1">
-               <FormattedMessage id="AUTH.REGISTER.TITLE" />
-            </h3>
+            <h3>{t("messages.AUTH.REGISTER.TITLE")}</h3>
             <p className="text-muted font-weight-bold">
-               <FormattedMessage id="AUTH.REGISTER.DESC" />
+               {t("messages.AUTH.REGISTER.DESC")}
             </p>
          </div>
+
+         <LanguageSelectorDropdown
+            overlayPlacement={placement}
+            alignRight={!isLtrDirection}
+         />
+
+         <br />
 
          <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
-            validationSchema={registrationSchema}
+            validationSchema={registerSchema(t)}
          >
             {formik => {
                const {
-                  values: { acceptTerms, subPhoneNumber },
+                  values: { acceptTerms, countryCode },
                   setFieldValue,
                   setFieldTouched,
                } = formik;
 
                return (
                   <Form
+                     noValidate="noValidate"
                      id="kt_login_signin_form"
                      className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
                   >
                      {/* begin: FullName */}
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="fullName">
-                           <FormattedMessage id="AUTH.INPUT.FULLNAME" />
+                           {t("messages.AUTH.INPUT.FULLNAME")}
                         </label>
                         <Field
-                           placeholder={formatMessage(
-                              intl,
-                              "AUTH.INPUT.FULLNAME.PLACE"
-                           )}
+                           placeholder={t("messages.AUTH.INPUT.FULLNAME.PLACE")}
                            type="text"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -119,15 +124,29 @@ function Registration(props) {
 
                      {/* begin: Phone Number */}
                      <div className="form-group fv-plugins-icon-container">
-                        <label>
-                           <FormattedMessage id="AUTH.INPUT.PHONE" />
-                        </label>
-                        <div className="d-flex">
-                           <div style={{ width: "80%" }}>
+                        <label>{t("messages.AUTH.INPUT.PHONE")}</label>
+                        <div className="d-flex-rtl-disable">
+                           <PhoneSelect
+                              options={phonePrefixOptions(isLtrDirection)}
+                              value={countryCode}
+                              onChange={value =>
+                                 setFieldValue("countryCode", value.value)
+                              }
+                              onBlur={() =>
+                                 setFieldTouched("countryCode", true)
+                              }
+                              name="countryCode"
+                           />
+                           <div
+                              style={{
+                                 width: "80%",
+                                 marginLeft: "10px",
+                              }}
+                              className="mobile-input"
+                           >
                               <Field
-                                 placeholder={formatMessage(
-                                    intl,
-                                    "AUTH.INPUT.PHONE.PLACE"
+                                 placeholder={t(
+                                    "messages.AUTH.INPUT.PHONE.PLACE"
                                  )}
                                  type="number"
                                  className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
@@ -141,17 +160,6 @@ function Registration(props) {
                                  children={TextError}
                               />
                            </div>
-                           <PhoneSelect
-                              options={phonePrefixOptions}
-                              value={subPhoneNumber}
-                              onChange={value =>
-                                 setFieldValue("subPhoneNumber", value.value)
-                              }
-                              onBlur={() =>
-                                 setFieldTouched("subPhoneNumber", true)
-                              }
-                              name="subPhoneNumber"
-                           />
                         </div>
                      </div>
                      {/* end: Phone Number */}
@@ -159,13 +167,10 @@ function Registration(props) {
                      {/* begin: Email */}
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="email">
-                           <FormattedMessage id="AUTH.INPUT.EMAIL" />
+                           {t("messages.AUTH.INPUT.EMAIL")}
                         </label>
                         <Field
-                           placeholder={formatMessage(
-                              intl,
-                              "AUTH.INPUT.EMAIL.PLACE"
-                           )}
+                           placeholder={t("messages.AUTH.INPUT.EMAIL.PLACE")}
                            type="email"
                            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
                               formik,
@@ -179,13 +184,12 @@ function Registration(props) {
 
                      <div className="form-group fv-plugins-icon-container">
                         <label htmlFor="password">
-                           <FormattedMessage id="AUTH.INPUT.PASSWORD" />
+                           {t("messages.AUTH.INPUT.PASSWORD")}
                         </label>
                         <div className="input-group">
                            <Field
-                              placeholder={formatMessage(
-                                 intl,
-                                 "AUTH.REGISTER.PASSWORD.PLACE"
+                              placeholder={t(
+                                 "messages.AUTH.REGISTER.PASSWORD.PLACE"
                               )}
                               type={showPassword ? "text" : "password"}
                               className={`password-input form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
@@ -217,27 +221,12 @@ function Registration(props) {
                               setFieldTouched("acceptTerms", true);
                            }}
                         >
-                           <FormattedMessage id="AUTH.GENERAL.ACCEPT.RULES" />
+                           {t("messages.AUTH.GENERAL.ACCEPT.RULES")}
                         </Checkbox>
                         <ErrorMessage name="acceptTerms" children={TextError} />
-                        {/*  */}
                      </div>
 
                      <div className="form-group d-flex">
-                        {/* <button
-                           type="submit"
-                           disabled={
-                              formik.isSubmitting ||
-                              !formik.isValid ||
-                              !acceptTerms
-                           }
-                           className="btn btn-primary font-weight-bold px-10 my-3 mx-4"
-                        >
-                           <FormattedMessage
-                              id="AUTH.GENERAL.REGISTER_BUTTON"
-                              tagName="span"
-                           />
-                        </button> */}
                         <CustomButton
                            type="submit"
                            disabled={
@@ -245,42 +234,21 @@ function Registration(props) {
                               !formik.isValid ||
                               !acceptTerms
                            }
-                           tagName="span"
-                           title="AUTH.GENERAL.REGISTER_BUTTON"
-                           classNames="btn btn-primary font-weight-bold px-10 my-3 mx-4"
-                        />
-                        <CustomButton
-                           title="AUTH.LOGIN.GOOGLE"
-                           tagName="span"
-                           classNames="btn btn-light-primary font-weight-bold px-10  my-3 mx-4"
+                           classNames="btn btn-primary font-weight-bold px-10 my-3 "
                         >
+                           <span>
+                              {t("messages.AUTH.GENERAL.REGISTER_BUTTON")}
+                           </span>
+                        </CustomButton>
+                        <CustomButton classNames="btn btn-light-primary font-weight-bold px-10  my-3 mx-4">
                            <img src={googleLogo} alt="google logo" />
+                           <span>{t("messages.AUTH.LOGIN.GOOGLE")}</span>
                         </CustomButton>
                      </div>
                   </Form>
                );
             }}
          </Formik>
-
-         <div className="login-bottom justify-content-start">
-            <ul>
-               <li className="text-muted">
-                  <a href="/contact">
-                     <FormattedMessage id="AUTH.GENERAL.CONTACT" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/plans">
-                     <FormattedMessage id="AUTH.GENERAL.PLANS" />
-                  </a>
-               </li>
-               <li className="text-muted">
-                  <a href="/rules">
-                     <FormattedMessage id="AUTH.GENERAL.RULES" />
-                  </a>
-               </li>
-            </ul>
-         </div>
       </div>
    );
 }

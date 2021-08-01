@@ -1,6 +1,6 @@
 import React from "react";
 
-import { FormattedMessage } from "react-intl";
+import { useTranslation } from "react-i18next";
 
 const CustomButton = ({
    title,
@@ -8,13 +8,15 @@ const CustomButton = ({
    classNames,
    type = "button",
    children,
-   tagName,
    ...props
-}) => (
-   <button type={type} onClick={onClick} className={classNames} {...props}>
-      {children}
-      <FormattedMessage id={title} tagName={tagName} />
-   </button>
-);
+}) => {
+   const { t } = useTranslation();
+   return (
+      <button type={type} onClick={onClick} className={classNames} {...props}>
+         {children}
+         {title && t(title)}
+      </button>
+   );
+};
 
 export default CustomButton;

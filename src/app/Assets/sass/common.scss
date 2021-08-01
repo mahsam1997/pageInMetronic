@@ -1,5 +1,5 @@
 body {
-   font-family: Vazir;
+   font-family: "Vazir", Helvetica, Arial, Verdana, Tahoma;
 }
 
 .rlt {
@@ -18,4 +18,62 @@ body {
    color: $login-remember-me-color;
    margin-right: 5px;
    margin-left: 5px;
+   user-select: none;
+}
+
+.form-control.is-valid {
+   background-position: right calc(0.375em + 0.325rem) center;
+}
+
+.fas.fa-eye,
+.fas.fa-eye-slash {
+   user-select: none;
+}
+
+input[type="number"] {
+   &::-webkit-outer-spin-button,
+   &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+   }
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
+
+.d-flex-rtl-disable {
+   /*rtl:ignore*/
+   display: flex;
+   /*rtl:ignore*/
+   direction: ltr;
+}
+
+.row-rtl-disable {
+   /*rtl:ignore*/
+   display: flex;
+   /*rtl:ignore*/
+   flex-wrap: wrap;
+   /*rtl:ignore*/
+   direction: ltr;
+   /*rtl:ignore*/
+   margin-right: -12.5px;
+   /*rtl:ignore*/
+   margin-left: -12.5px;
+}
+
+.toast-body {
+   font-family: "Vazir", Helvetica, Arial, Verdana, Tahoma;
+}
+
+@media only screen and (max-width: 800px) {
+   .pagination-footer {
+      display: block !important;
+
+      .select {
+         margin-top: 10px !important;
+      }
+   }
+
+   .sort-icon {
+      display: none !important;
+   }
 }
