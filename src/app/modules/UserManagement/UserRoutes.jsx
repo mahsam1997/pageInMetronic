@@ -6,10 +6,10 @@ import UserDeleteModal from "../../modals/UserDeleteModal";
 import UsersDeleteModal from "../../modals/UsersDeleteModal";
 import { UsersUIProvider } from "../../context/UsersUIContext";
 import UsersCard from "../../components/UsersCard";
-
 import routes from "../../router/routes.json";
 
 function UserRoutes({ history }) {
+   console.log("component user render");
    const usersUIEvents = {
       openEditUserModal: id => {
          history.push(`${routes.USERS}/${id}/edit`);
@@ -64,4 +64,4 @@ function UserRoutes({ history }) {
    );
 }
 
-export default UserRoutes;
+ export default UserRoutes;

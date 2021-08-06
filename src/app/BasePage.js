@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import routes from "./router/routes.json";
 
 const UsersPage = lazy(() => import("./modules/UserManagement/UserRoutes"));
+// const AddPageRoutes = lazy(() => import("./page/modules/Addpage/PageRouter"));
 
 export default function BasePage() {
    return (
@@ -18,6 +19,7 @@ export default function BasePage() {
                <Redirect exact from="/" to="/dashboard" />
             }
             <ProtectedRoute path="/dashboard" component={DashboardPage} />
+            {/* <ProtectedRoute path={routes.PAGES} component={AddPageRoutes} /> */}
             <ProtectedRoute path={routes.USERS} component={UsersPage} />
          </Switch>
       </Suspense>

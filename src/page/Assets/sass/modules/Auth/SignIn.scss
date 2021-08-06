@@ -1,0 +1,148 @@
+.login {
+   background-color: $login-back-color !important;
+}
+
+.login-aside {
+   .aside-top {
+      margin-top: 65px;
+      text-align: center;
+   }
+
+   .aside-logo {
+      width: 98px;
+      height: 69px;
+      object-fit: contain;
+      background-position: center;
+      background-size: cover;
+   }
+
+   .aside-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 23px;
+      text-align: center;
+      letter-spacing: -0.03em;
+      color: $login-aside-color;
+      margin-top: 12px;
+   }
+
+   .aside-pic {
+      object-fit: contain;
+      background-size: cover;
+      background-position: center;
+   }
+}
+
+@media only screen and (max-width: 990px) {
+   .login-aside {
+      display: block !important;
+   }
+   .auth-main {
+      margin-top: 5px !important;
+   }
+}
+
+.login-form {
+   h3 {
+      color: $login-title;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 25px;
+      // line-height: 47px;
+      letter-spacing: -0.02em;
+   }
+   p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      // line-height: 28px;
+      a {
+         margin-left: 4px;
+      }
+   }
+   input {
+      background-color: $login-input-back !important;
+      border-radius: 12px;
+   }
+   input.password-input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 12px !important;
+      border-bottom-left-radius: 12px !important;
+
+      border-color: #fff !important;
+      &:focus {
+         border-color: #fff !important;
+      }
+   }
+   .showPass {
+      background-color: $login-input-back !important;
+      border: none !important;
+      border-radius: 0;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+
+      cursor: pointer;
+      width: 45px;
+   }
+   label {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+   }
+
+   label.remember-me {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      color: $login-remember-me-color;
+      margin-right: 5px;
+   }
+
+   button.fullWidth {
+      width: 100%;
+   }
+
+   .forget-pass {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 22px;
+      user-select: none;
+   }
+
+   button[type="button"] {
+      background-color: $login-with-google-back;
+      img {
+         width: 25px;
+         height: 25px;
+         background-position: center;
+         background-size: cover;
+         object-fit: contain;
+         margin-left: 5px;
+         margin-right: 5px;
+      }
+      &:hover {
+         background-color: $login-with-google-back-hover;
+      }
+   }
+
+   button.login-with-google {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: center;
+      color: $login-with-google-color;
+   }
+
+   button#kt_login_signin_submit {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 28px;
+      color: $login-submit-button-color;
+   }
+}
