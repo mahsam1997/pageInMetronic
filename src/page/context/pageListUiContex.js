@@ -30,15 +30,13 @@ export function PagesListUIProvider({pageListUIEvents, children }) {
       });
    }, []);
 
-   const initUser = {
+   const initPage = {
       _id: undefined,
-      profile: {
-         fullName: "",
-      },
-      email: "",
-      mobile: "",
-      role: "",
+      title: "",
+      language: "",
+      key:"",
       status: "",
+      content:"",
    };
 
    const value = {
@@ -52,8 +50,9 @@ export function PagesListUIProvider({pageListUIEvents, children }) {
       ids,
       setIds,
       setQueryParams,
-      initUser,
-      openEditPageModal:pageListUIEvents.openEditPageModal,
+      initPage,
+      openCreatePage:pageListUIEvents.openCreatePage,
+      openEditPage:pageListUIEvents.openEditPage,
       openDeletePageModal: pageListUIEvents.openDeletePageModal,
       openDeletePagesModal: pageListUIEvents.openDeletePagesModal,
    };

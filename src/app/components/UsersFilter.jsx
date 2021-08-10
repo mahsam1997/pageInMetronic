@@ -16,6 +16,7 @@ import {
 
 const prepareFilter = (queryParams, values) => {
    const { status, role, searchText, searchBy } = values;
+   console.log(values);
    const newQueryParams = { ...queryParams };
    const filter = {};
    // Filter by status

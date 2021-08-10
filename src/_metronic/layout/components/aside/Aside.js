@@ -213,7 +213,7 @@ export function Aside() {
                         data-placement="rigth"
                         data-container="body"
                         data-boundary="window"
-                        title={t("messages.DEFAULT.ADD_USER")}
+                        title="صفحات"
                      >
                         <OverlayTrigger
                            placement={placement}
@@ -222,7 +222,9 @@ export function Aside() {
                                  id="latest-reports"
                                  style={{ fontFamily: "Vazir" }}
                               >
-                                 {t("messages.DEFAULT.ADD_USER")}
+                                 {/* {t("messages.DEFAULT.ADD_page")} */}
+                                 {"اضافه کردن پیج"}
+
                               </Tooltip>
                            }
                         >
@@ -236,7 +238,7 @@ export function Aside() {
                               <span className="svg-icon svg-icon-lg">
                                  <SVG
                                     src={toAbsoluteUrl(
-                                       "/media/svg/icons/Communication/Add-user.svg"
+                                       "/media/svg/icons/Home/Book-open.svg"
                                     )}
                                  />
                               </span>

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { usePageListUIContext } from "../context/pageListUiContex";
-import { ModalProgressBar } from "../../../_metronic/_partials/controls";
+import { ModalProgressBar } from "../../_metronic/_partials/controls";
 
 import { useTranslation } from "react-i18next";
 import CustomButton from "../components/common/CustomButton";

@@ -12,11 +12,11 @@
    "USER_DELETE": "/user-management/:id/delete",
 
    "PAGES":"/pages",
-   "PAGE_CREAT":"pages/create",
-   "PAGE_ADD":"pages/add",
-   "PAGE_EDIT":"pages/:id/edit",
-   "PAGE_DELETE":"pages/:id/delete",
-   "PAGES_DELETE": "pages/totalDelet",
+   "PAGE_CREAT":"/pages/create",
+   "PAGE_ADD":"/pages/add",
+   "PAGE_EDIT":"/pages/:id/edit",
+   "PAGE_DELETE":"/pages/:id/delete",
+   "PAGES_DELETE": "/pages/totalDelet",
 
    
    "CONTACT": "/contact",

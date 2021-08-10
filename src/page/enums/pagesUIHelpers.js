@@ -11,9 +11,8 @@ export const sizePerPageList = [
 
 export const initialFilter = {
    filter: {
-      fullName: "",
-      email: "",
-      mobile: "",
+      key: "",
+      title: "",
    },
    sortOrder: "asc", // asc||desc
    sortField: "_id",

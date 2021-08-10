@@ -33,7 +33,7 @@ function PagesGrouping() {
                   <div>
                      <CustomButton
                         title="messages.DEFAULT.DELETE_ALL"
-                        onClick={pagesUIProps.openDeleteUsersModal}
+                        onClick={pagesUIProps.openDeletePagesModal}
                         classNames="btn btn-danger font-weight-bolder font-size-sm"
                      >
                         <i className="fa fa-trash"></i>

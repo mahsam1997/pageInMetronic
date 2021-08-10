@@ -4,7 +4,7 @@ import {
    CardBody,
    CardHeader,
    //CardHeaderToolbar,
-} from "../../../_metronic/_partials/controls";
+} from "../../_metronic/_partials/controls";
 import PagesFilter from "./pagesFilter";
 import { PagesTable } from "./pagesTable";
 import PagesGrouping from "./pagesGrouping";
@@ -23,7 +23,7 @@ function PagesCard() {
 
    return (
       <Card>
-         <CardHeader title={t("messages.USERS.USERS_LIST")}></CardHeader>
+         <CardHeader title=" لیست صفحات"></CardHeader>
          <CardBody>
             <PagesFilter />
             {pagesUIProps.ids.length > 0 && <PagesGrouping />}

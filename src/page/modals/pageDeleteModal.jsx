@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { ModalProgressBar } from "../../../_metronic/_partials/controls";
+import { ModalProgressBar } from "../../_metronic/_partials/controls";
 import { deletePage } from "../services/pages.service";
 
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import {usePageListUIContext } from "../context/pageListUiContex";
 import CustomButton from "../components/common/CustomButton";
 
 function PageDeleteModal({ id, show, onHide }) {
+   console.log("component page delet");
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState("");
 

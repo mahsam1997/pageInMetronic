@@ -14,28 +14,41 @@ const statusPrefixOptions = [
       label: i18next.t("messages.USERS.COMMON.REMOVED"),
    },
 ];
-
-const rolePrefixOptions = [
-   { value: "", label: i18next.t("messages.DEFAULT.ALL") },
-   { value: "admin", label: i18next.t("messages.USERS.COMMON.ADMIN") },
-   { value: "user", label: i18next.t("messages.USERS.COMMON.USER") },
+const statusPrefixOptionsCreate = [
+   
+   {
+      value:"active",
+      label: i18next.t("messages.USERS.COMMON.ACTIVE"),
+   },
+   {
+      value: "removed",
+      label: i18next.t("messages.USERS.COMMON.REMOVED"),
+   },
 ];
-
+const languagePrefixOptions = [
+   { value:"" , label: i18next.t("messages.DEFAULT.ALL") },
+   { value: "en", label: " en" },
+   { value: "fa", label: " fa" },
+];
+const languagePrefixOptionsCreate = [
+   { value: "en", label: " en" },
+   { value: "fa", label: " fa" },
+];
 const fieldsIds = {
-   fullName: "messages.AUTH.INPUT.FULLNAME",
-   mobile: "messages.DEFAULT.MOBILE",
-   email: "messages.DEFAULT.EMAIL",
+   key: "کلید",
+   title: "عنوان",
 };
 
 const searchByPrefixOptions = [
-   { value: "fullName", label: i18next.t(fieldsIds.fullName) },
-   { value: "email", label: i18next.t(fieldsIds.email) },
-   { value: "mobile", label: i18next.t(fieldsIds.mobile) },
+   { value: "key", label: "کلید" },
+   { value: "title", label: "عنوان" },
 ];
 
 export {
    statusPrefixOptions,
-   rolePrefixOptions,
+   statusPrefixOptionsCreate,
+   languagePrefixOptionsCreate,
+   languagePrefixOptions,
    fieldsIds,
    searchByPrefixOptions,
 };

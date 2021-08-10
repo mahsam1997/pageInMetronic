@@ -3,24 +3,24 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import SVG from "react-inlinesvg";
-import { toAbsoluteUrl } from "../../../_metronic/_helpers";
+import { toAbsoluteUrl } from "../../_metronic/_helpers";
 
 import i18next from "i18next";
 
 function ActionsColumnFormatter(
-   users,
+   pages,
    cellContent,
    row,
    rowIndex,
-   { openEditUserModal, openDeleteUserModal }
+   { openEditPage , openDeletePageModal}
 ) {
-   const isRemoved = users[rowIndex].status === "removed";
+   const isRemoved = pages[rowIndex].status === "removed";
    return (
       <>
          <a
             title={i18next.t("messages.USERS.EDIT_USER")}
             className="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
-            onClick={() => openEditUserModal(row["_id"])}
+             onClick={() => openEditPage(row["_id"])}
          >
             <span className="svg-icon svg-icon-md svg-icon-primary">
                <SVG
@@ -31,12 +31,11 @@ function ActionsColumnFormatter(
             </span>
          </a>
          <> </>
-
          <a
             title={i18next.t("messages.USERS.DELETE_USER_SIMPLE.TITLE")}
             className={`btn btn-icon btn-light btn-hover-danger btn-sm ${isRemoved &&
                "disabled"}`}
-            onClick={() => openDeleteUserModal(row["_id"])}
+            onClick={() => openDeletePageModal(row["_id"])}
          >
             <span className="svg-icon svg-icon-md svg-icon-danger">
                <SVG src={toAbsoluteUrl("/media/svg/icons/General/Trash.svg")} />
